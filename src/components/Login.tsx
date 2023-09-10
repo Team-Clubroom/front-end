@@ -16,8 +16,8 @@ export const Login = () => {
                 <TextField placeholder="Password..." />
             </div>
             <div className="flex justify-evenly items-center">
-                <Button body="Log In" />
-                <Button body="Sign Up" />
+                <Button>Log In</Button>
+                <Button>Sign Up</Button>
             </div>
         </div>
     )
