@@ -1,7 +1,9 @@
+import { Login } from "./components/Login"
+
 export default function App() {
-  return (
-    <h1 className="text-3xl font-bold underline">
-      New feature goes here
-    </h1>
+  return (  
+    <div className="w-screen bg-gray-400 flex justify-center">
+      <Login />
+    </div>
   )
 }
