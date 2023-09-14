@@ -1,5 +1,5 @@
-import { Button } from "./Button"
-import { TextField } from "./TextField"
+import { Button } from "../Button"
+import { TextField } from "../TextField"
 
 export const Login = () => {
     return (
@@ -16,8 +16,8 @@ export const Login = () => {
                 <TextField placeholder="Password..." />
             </div>
             <div className="flex justify-evenly items-center">
-                <Button>Log In</Button>
                 <Button>Sign Up</Button>
+                <Button>Log In</Button>
             </div>
         </div>
     )
