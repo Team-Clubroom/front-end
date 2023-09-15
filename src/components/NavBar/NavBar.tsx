@@ -12,8 +12,8 @@ export const NavBar = () => {
                 <Link to="" className="text-gray-700">Employees</Link>
                 <Link to="" className="text-gray-700">About</Link>
                 {!isLoggedIn && <>
-                    <Link to="signup" className="text-gray-700">Sign Up</Link>
-                    <Link to="login" className="text-gray-700">Log In</Link>
+                    <Link to="/signup" className="text-gray-700">Sign Up</Link>
+                    <Link to="/login" className="text-gray-700">Log In</Link>
                 </>}
                 {isLoggedIn && <>
                     <Link to="" className="text-gray-700">Log Out</Link>

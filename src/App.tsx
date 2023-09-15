@@ -16,8 +16,8 @@ export default function App() {
           <div className="flex justify-center items-center">
             <Routes>
               <Route index />
-              <Route path="login" element={<Login />}/>
-              <Route path="signup" element={<Signup />} />
+              <Route path="/login" element={<Login />}/>
+              <Route path="/signup" element={<Signup />} />
             </Routes>
           </div>
         </div>

@@ -1,19 +1,20 @@
 import { Link } from "react-router-dom"
+import { styles } from "./Signup.styles"
 
 export const Signup = () => {
     return (
-        <form className="bg-red-500 w-96 h-auto">
-            <div className="mt-4 flex justify-center items-center">
-                <p className="text-3xl text-black">
-                    AR Tech Connections
-                </p>
+        <form className={styles.loginCardStyle}>
+            <div className={styles.companyHeaderStyle}>
+                AR Tech Connections
             </div>
-            <input type="email" placeholder="Email..."/>
-            <input type="password" placeholder="Password..."/>
-            <input type="password" placeholder="Confirm Password..."/>
-            <div className="flex justify-evenly items-center">
-                <Link to="../login"><button>Log In</button></Link>
-                <button type="submit">Sign Up</button>
+            {/* TODO style */}
+            <input type="email" placeholder="Email..." required className={styles.inputFieldStyle}/>
+            <input type="password" placeholder="Password..." required className={styles.inputFieldStyle}/>
+            <input type="password" placeholder="Confirm Password..." required className={styles.inputFieldStyle}/>
+            <div className={styles.formButtonsWrapperStyle}>
+                {/* Delete custom button component and replace with HTML Button */}
+                <Link to="/login" className="w-full"><button className={styles.formButtonStyle}>Log In</button></Link>
+                <button type="submit" className={styles.formButtonStyle}>Sign Up</button>
             </div>
         </form>
     )
