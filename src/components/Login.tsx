@@ -1,5 +1,5 @@
-import { Button } from "../Button"
-import { TextField } from "../TextField"
+import { Button } from "./Button"
+import { TextField } from "./TextField"
 
 export const Login = () => {
     return (
