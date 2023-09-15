@@ -1,9 +1,9 @@
 /* plugin imports */
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 /* component imports */
-import { Login } from "./components/Login"
-import { NavBar } from "./components/NavBar"
-import { Signup } from "./components/Signup"
+import { Login } from "./components/Login/Login"
+import { NavBar } from "./components/NavBar/NavBar"
+import { Signup } from "./components/Signup/Signup"
 
 export default function App() {
   return ( 

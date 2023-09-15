@@ -1,0 +1,1 @@
+export const loginCardStyle: string = "bg-red-500 w-96 h-auto";
