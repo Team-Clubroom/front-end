@@ -1,27 +1,37 @@
-# React + TypeScript + Vite
+# Project Name
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> {Write brief project description or tagline here.}
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This repository hosts the codebase for our CAPSTONE project. The project is intended for use by our team this semester, and future semesters of students will continue its development.
 
-## Expanding the ESLint configuration
+## Project Links
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Frontend Repository:** [Frontend Repository Name](https://github.com/Team-Clubroom/front-end)
+- **Backend Repository:** [Backend Repository Name](https://github.com/Team-Clubroom/backend-api)
 
-- Configure the top-level `parserOptions` property like this:
+## Getting Started with Frontend
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+To get started with the frontend of the project, follow these steps:
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+1. Clone the frontend repository:
+   ```bash
+   git clone link-to-frontend-repo
+   cd frontend-directory
+2. Install dependencies:
+   ```bash
+   npm install
+3. Run the application in development mode:
+   ```bash
+   npm run dev
+The frontend of the project should now be running locally.
+
+## Team Members and Roles
+* Mohamed Albeik: Full Stack DevOps
+* Brandon Huckaby: Backend Dev/Architect
+* Cory Eheart: Frontend Dev/Architect
+* Luka Woodson: Scrum Master & UI/UX Designer
+
+## Documentation
+For more detailed information about the project, its architecture, and development guidelines, please refer to our [Wiki](https://github.com/Team-Clubroom/front-end/wiki).
