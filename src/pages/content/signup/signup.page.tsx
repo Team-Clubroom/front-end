@@ -24,13 +24,15 @@ function SignupPage() {
                                 Name:
                             </label>
                             <div className={signUpStyles.inputContainer}>
-                                <div className={signUpStyles.inputIcon}>
-                                    <i className="fas fa-user text-blue-500"></i>
-                                </div>
+                                <span className={`material-symbols-outlined ${signUpStyles.inputIcon}`}
+                                      style={{display: 'flex'}}>
+                                    person
+                                </span>
                                 <input
                                     id="name"
                                     type="text"
                                     name="name"
+                                    required
                                     className={signUpStyles.input}
                                     placeholder="Enter your name"
                                 />
@@ -41,13 +43,15 @@ function SignupPage() {
                                 E-Mail Address:
                             </label>
                             <div className={signUpStyles.inputContainer}>
-                                <div className={signUpStyles.inputIcon}>
-                                    <i className="fas fa-at text-blue-500"></i>
-                                </div>
+                                <span className={`material-symbols-outlined ${signUpStyles.inputIcon}`}
+                                      style={{display: 'flex'}}>
+                                    mail
+                                </span>
                                 <input
                                     id="email"
                                     type="email"
                                     name="email"
+                                    required
                                     className={signUpStyles.input}
                                     placeholder="Enter your email"
                                 />
@@ -58,15 +62,15 @@ function SignupPage() {
                                 Enter Password:
                             </label>
                             <div className={signUpStyles.inputContainer}>
-                                <div className={signUpStyles.inputIcon}>
-                <span>
-                  <i className="fas fa-lock text-blue-500"></i>
-                </span>
-                                </div>
+                                <span className={`material-symbols-outlined ${signUpStyles.inputIcon}`}
+                                      style={{display: 'flex'}}>
+                                    lock
+                                </span>
                                 <input
                                     id="password"
                                     type="password"
                                     name="password"
+                                    required
                                     className={signUpStyles.input}
                                     placeholder="Enter your password"
                                 />
@@ -77,15 +81,15 @@ function SignupPage() {
                                 Re-Enter Password:
                             </label>
                             <div className={signUpStyles.inputContainer}>
-                                <div className={signUpStyles.inputIcon}>
-                                    <span>
-                                      <i className="fas fa-lock text-blue-500"></i>
-                                    </span>
-                                </div>
+                                <span className={`material-symbols-outlined ${signUpStyles.inputIcon}`}
+                                      style={{display: 'flex'}}>
+                                    lock
+                                </span>
                                 <input
                                     id="password-verify"
                                     type="password"
                                     name="password-verify"
+                                    required
                                     className={signUpStyles.input}
                                     placeholder="Enter your password"
                                 />
@@ -95,21 +99,9 @@ function SignupPage() {
                         <div className="flex w-full">
                             <button type="submit" className={signUpStyles.submitButton}>
                                 <span className={signUpStyles.signUpText}>Sign Up</span>
-                                <span>
-                                <svg
-                                    className={signUpStyles.signUpIcon}
-                                    fill="none"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                >
-                                  <path
-                                      d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                                  />
-                                </svg>
-                              </span>
+                                <span className={`material-symbols-outlined ${signUpStyles.signUpIcon}`}>
+                                    start
+                                </span>
                             </button>
                         </div>
                     </form>

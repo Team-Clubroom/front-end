@@ -26,9 +26,10 @@ function LoginPage() {
                                 E-Mail Address:
                             </label>
                             <div className={loginStyles.inputContainer}>
-                                <div className={loginStyles.inputIcon}>
-                                    <i className="fas fa-at text-blue-500"></i>
-                                </div>
+                                <span className={`material-symbols-outlined ${loginStyles.inputIcon}`}
+                                      style={{display: 'flex'}}>
+                                    mail
+                                </span>
                                 <input
                                     id="email"
                                     type="email"
@@ -44,11 +45,10 @@ function LoginPage() {
                                 Password:
                             </label>
                             <div className={loginStyles.inputContainer}>
-                                <div className={loginStyles.inputIcon}>
-                                  <span>
-                                    <i className="fas fa-lock text-blue-500"></i>
-                                  </span>
-                                </div>
+                                <span className={`material-symbols-outlined ${loginStyles.inputIcon}`}
+                                      style={{display: 'flex'}}>
+                                    lock
+                                </span>
                                 <input
                                     id="password"
                                     type="password"
@@ -63,20 +63,8 @@ function LoginPage() {
                         <div className="flex w-full">
                             <button type="submit" className={loginStyles.submitButton}>
                                 <span className={loginStyles.signInText}>Sign In</span>
-                                <span>
-                                  <svg
-                                      className={loginStyles.signInIcon}
-                                      fill="none"
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      strokeWidth="2"
-                                      viewBox="0 0 24 24"
-                                      stroke="currentColor"
-                                  >
-                                    <path
-                                        d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                                    />
-                                  </svg>
+                                <span className={`material-symbols-outlined ${loginStyles.signInIcon}`}>
+                                    login
                                 </span>
                             </button>
                         </div>
