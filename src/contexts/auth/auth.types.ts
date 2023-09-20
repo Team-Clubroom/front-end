@@ -2,6 +2,7 @@ import React from "react";
 import { SuccessResponse } from "../../models/api.types.ts";
 
 export interface RegistrationPayload {
+  name: string;
   email: string;
   password: string;
 }
