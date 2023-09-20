@@ -75,7 +75,7 @@ function LoginPage() {
                         <div className={loginStyles.registerLinkText}>
                             You don't have an account?
                             <span className={loginStyles.registerLinkTextBlue}>
-                              Sign Up now
+                              Sign up now
                             </span>
                         </div>
                     </NavLink>
