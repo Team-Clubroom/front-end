@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from "react";
-
-export interface AuthContextProps {
-  children: React.ReactNode;
-}
-
-interface UserAuth {
-  email: string;
-  token: string;
-}
-
-type AuthState = UserAuth | null;
+import {
+  AuthActionFuncs,
+  AuthContextProps,
+  AuthState,
+  LoginFunc,
+  RegisterFunc,
+} from "./auth.types.ts";
+import { SuccessResponse } from "../../models/api.types.ts";
 
 const AuthContext = React.createContext<AuthState>(null);
+export const useAuthContext = () => React.useContext(AuthContext);
+
+const AuthActionContext = React.createContext<AuthActionFuncs | null>(null);
+export const useAuthActionContext = () => React.useContext(AuthActionContext)!;
+
 const USER_STORAGE_KEY = "CELDV_USER_INFO";
+export const API_URL = `${import.meta.env.VITE_API_HOST}:${
+  import.meta.env.VITE_API_PORT
+}`;
 
 function AuthContextProvider({ children }: AuthContextProps) {
   const [userAuth, setUserAuth] = useState<AuthState>(null);
@@ -25,8 +30,36 @@ function AuthContextProvider({ children }: AuthContextProps) {
     setUserAuth(userObj);
   }, []);
 
+  const register: RegisterFunc = async (registration) => {
+    if (!registration.email || !registration.password) {
+      throw new Error("Missing required registration attributes");
+    }
+    const result = await fetch("/api/register", {
+      headers: {
+        "Content-type": "application/json",
+      },
+      method: "POST",
+      body: JSON.stringify(registration),
+    });
+
+    if (result.ok) {
+      const res = await result.json();
+      if ("error" in res) {
+        throw new Error(res.error);
+      } else return res as SuccessResponse;
+    } else {
+      throw Error(`Failed to register - error code ${result.status}`);
+    }
+  };
+
+  const login: LoginFunc = async () => {
+    console.log(login);
+  };
+
   return (
-    <AuthContext.Provider value={userAuth}>{children}</AuthContext.Provider>
+    <AuthActionContext.Provider value={{ register, login }}>
+      <AuthContext.Provider value={userAuth}>{children}</AuthContext.Provider>
+    </AuthActionContext.Provider>
   );
 }
 

@@ -1,13 +1,23 @@
-import { Navigate, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { signUpStyles } from "./signup.page.styles.tsx";
+import { useAuthActionContext } from "../../../contexts/auth/auth.context.tsx";
+import { FormEventHandler } from "react";
 
 function SignupPage() {
-  // TODO: Replace with actual auth state
-  const isLoggedIn = false;
+  const { register } = useAuthActionContext();
 
-  if (isLoggedIn) {
-    return <Navigate to="/appmain" />;
-  }
+  const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
+    try {
+      event.preventDefault();
+      const result = await register({
+        email: "example.albeik@gmail.com",
+        password: "hello-world",
+      });
+      console.log(result);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <div className={signUpStyles.container}>
@@ -18,7 +28,7 @@ function SignupPage() {
         </div>
 
         <div className={signUpStyles.form}>
-          <form action="#">
+          <form onSubmit={handleSubmit}>
             <div className={signUpStyles.formField}>
               <label htmlFor="name" className={signUpStyles.label}>
                 Name:
