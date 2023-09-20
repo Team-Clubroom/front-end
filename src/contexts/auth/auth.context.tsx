@@ -6,7 +6,7 @@ import {
   LoginFunc,
   RegisterFunc,
 } from "./auth.types.ts";
-import { SuccessResponse } from "../../models/api.types.ts";
+import { ApiRoutes, customFetch } from "../../utils/custom-fetch.ts";
 
 const AuthContext = React.createContext<AuthState>(null);
 export const useAuthContext = () => React.useContext(AuthContext);
@@ -31,25 +31,7 @@ function AuthContextProvider({ children }: AuthContextProps) {
   }, []);
 
   const register: RegisterFunc = async (registration) => {
-    if (!registration.email || !registration.password) {
-      throw new Error("Missing required registration attributes");
-    }
-    const result = await fetch("/api/register", {
-      headers: {
-        "Content-type": "application/json",
-      },
-      method: "POST",
-      body: JSON.stringify(registration),
-    });
-
-    if (result.ok) {
-      const res = await result.json();
-      if ("error" in res) {
-        throw new Error(res.error);
-      } else return res as SuccessResponse;
-    } else {
-      throw Error(`Failed to register - error code ${result.status}`);
-    }
+    return await customFetch(ApiRoutes.Register, "POST", registration);
   };
 
   const login: LoginFunc = async () => {
