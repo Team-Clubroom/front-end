@@ -1,20 +1,26 @@
 /* plugin imports */
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 /* component imports */
-import {Login} from "./components/Login/Login";
-import {Signup} from "./components/Signup/Signup";
-import {LandingPage} from "./pages/LandingPage/landing.page.tsx";
-import {ApplicationPage} from "./pages/Route/application.page.tsx";
+import LoginPage from "./pages/content/login/login.page.tsx";
+import ApplicationPage from "./pages/root/application.page.tsx";
+import LandingPage from "./pages/content/landing/landing.page.tsx";
+import SignupPage from "./pages/content/signup/signup.page.tsx";
+import AppMainPage from "./pages/content/app-main/app-main.page.tsx";
+import {NavbarComponent} from "./components/navbar/navbar.component.tsx";
+import FooterComponent from "./components/footer/footer.component.tsx";
 
 export default function App() {
     return (
         <BrowserRouter>
+            <NavbarComponent/>
             <Routes>
                 <Route path="/" element={<ApplicationPage/>}/>
-                <Route path="/home" element={<LandingPage/>}/>
-                <Route path="/login" element={<Login/>}/>
-                <Route path="/signup" element={<Signup/>}/>
+                <Route index element={<LandingPage/>}/>
+                <Route path="/login" element={<LoginPage/>}/>
+                <Route path="/signup" element={<SignupPage/>}/>
+                <Route path="/appmain" element={<AppMainPage/>}/>
             </Routes>
+            <FooterComponent page={'landing'}/>
         </BrowserRouter>
     );
 }
