@@ -15,11 +15,11 @@ export const signupEmptyForm: SignupFormValues = {
 export function validateSignupForm(formValues: SignupFormValues): string {
   const { name, email, password, passwordRepeat } = formValues;
 
-  if (!name) {
+  if (!name.trim()) {
     return "Please enter your name.";
   }
 
-  if (!email) {
+  if (!email.trim()) {
     return "Please enter your email address.";
   } else if (!/^\S+@\S+\.\S+$/.test(email)) {
     return "Please enter a valid email address.";
