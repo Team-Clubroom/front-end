@@ -25,10 +25,11 @@ function SignupPage() {
       });
       resetForm();
       // TODO: handle success case here
+      // TODO: reroute to a page saying something like 'verification email successful'
       console.log(result);
-    } catch (e: any) {
+    } catch (e) {
       console.log(e);
-      setError(e.message);
+      setError((e as Error).message);
     } finally {
       setIsLoading(false);
     }
