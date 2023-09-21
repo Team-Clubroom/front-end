@@ -1,5 +1,5 @@
 import { loginStyles } from "./login.page.styles.tsx";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import useForm from "../../../hooks/useForm.ts";
 import { emptyLoginForm, validateLoginForm } from "./login.helpers.ts";
 import React, { useState } from "react";
@@ -10,6 +10,7 @@ function LoginPage() {
   const [error, setError] = useState("");
   const { login } = useAuthActionContext();
   const [isLoading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const handleSubmit: React.FormEventHandler = async (e) => {
     try {
       e.preventDefault();
@@ -18,6 +19,9 @@ function LoginPage() {
       if (error) return;
       await login(formValues);
       resetForm();
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 0);
     } catch (e) {
       setError((e as Error).message);
       console.log(e);

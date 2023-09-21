@@ -9,7 +9,7 @@ import {
 import { ApiRoutes, customFetch } from "../../utils/custom-fetch.ts";
 
 const AuthContext = React.createContext<AuthState>(null);
-export const useAuthContext = () => React.useContext(AuthContext);
+export const useAuthContext = () => React.useContext(AuthContext)!;
 
 const AuthActionContext = React.createContext<AuthActionFuncs | null>(null);
 export const useAuthActionContext = () => React.useContext(AuthActionContext)!;
