@@ -1,10 +1,13 @@
 import React from "react";
 import { SuccessResponse } from "../../models/api.types.ts";
 
-export interface RegistrationPayload {
-  name: string;
+export interface LoginPayload extends Record<string, string> {
   email: string;
   password: string;
+}
+
+export interface RegistrationPayload extends LoginPayload {
+  name: string;
 }
 
 export interface AuthContextProps {
@@ -25,6 +28,6 @@ export type RegisterFunc = (
   registrationPayload: RegistrationPayload,
 ) => Promise<SuccessResponse>;
 
-export type LoginFunc = () => Promise<void>;
+export type LoginFunc = (loginPayload: LoginPayload) => Promise<void>;
 
 export type AuthState = UserAuth | null;

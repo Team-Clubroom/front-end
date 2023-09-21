@@ -14,6 +14,7 @@ export default function App() {
     <BrowserRouter>
       <NavbarComponent />
       <Routes>
+        {/*  TODO: create private routes here */}
         <Route path="/" element={<ApplicationPage />} />
         <Route index element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
