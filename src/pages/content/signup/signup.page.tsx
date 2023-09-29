@@ -1,13 +1,39 @@
-import { Navigate, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { signUpStyles } from "./signup.page.styles.tsx";
+import { useAuthActionContext } from "../../../contexts/auth/auth.context.tsx";
+import { FormEventHandler, useState } from "react";
+import useForm from "../../../hooks/useForm.ts";
+import { signupEmptyForm, validateSignupForm } from "./signup.helpers.ts";
 
 function SignupPage() {
-  // TODO: Replace with actual auth state
-  const isLoggedIn = false;
+  const { register } = useAuthActionContext();
+  const { registerField, formValues, resetForm } = useForm(signupEmptyForm);
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  if (isLoggedIn) {
-    return <Navigate to="/appmain" />;
-  }
+  const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
+    try {
+      event.preventDefault();
+      const error = validateSignupForm(formValues);
+      setError(error);
+      if (error) return;
+      setIsLoading(true);
+      const result = await register({
+        name: formValues.name,
+        email: formValues.email,
+        password: formValues.password,
+      });
+      resetForm();
+      // TODO: handle success case here
+      // TODO: reroute to a page saying something like 'verification email successful'
+      console.log(result);
+    } catch (e) {
+      console.log(e);
+      setError((e as Error).message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className={signUpStyles.container}>
@@ -18,7 +44,7 @@ function SignupPage() {
         </div>
 
         <div className={signUpStyles.form}>
-          <form action="#">
+          <form onSubmit={handleSubmit} noValidate={true}>
             <div className={signUpStyles.formField}>
               <label htmlFor="name" className={signUpStyles.label}>
                 Name:
@@ -33,10 +59,10 @@ function SignupPage() {
                 <input
                   id="name"
                   type="text"
-                  name="name"
                   required
                   className={signUpStyles.input}
                   placeholder="Enter your name"
+                  {...registerField("name")}
                 />
               </div>
             </div>
@@ -54,10 +80,10 @@ function SignupPage() {
                 <input
                   id="email"
                   type="email"
-                  name="email"
                   required
                   className={signUpStyles.input}
                   placeholder="Enter your email"
+                  {...registerField("email")}
                 />
               </div>
             </div>
@@ -75,10 +101,10 @@ function SignupPage() {
                 <input
                   id="password"
                   type="password"
-                  name="password"
                   required
                   className={signUpStyles.input}
                   placeholder="Enter your password"
+                  {...registerField("password")}
                 />
               </div>
             </div>
@@ -94,24 +120,32 @@ function SignupPage() {
                   lock
                 </span>
                 <input
-                  id="password-verify"
+                  id="password-repeat"
                   type="password"
-                  name="password-verify"
                   required
                   className={signUpStyles.input}
                   placeholder="Enter your password"
+                  {...registerField("passwordRepeat")}
                 />
               </div>
             </div>
-
+            {/* TODO: style error message here */}
+            <span>{error}</span>
             <div className="flex w-full">
               <button type="submit" className={signUpStyles.submitButton}>
-                <span className={signUpStyles.signUpText}>Sign Up</span>
-                <span
-                  className={`material-symbols-outlined ${signUpStyles.signUpIcon}`}
-                >
-                  start
-                </span>
+                {isLoading ? (
+                  // TODO: add spinner here
+                  <span>Loading...</span>
+                ) : (
+                  <>
+                    <span className={signUpStyles.signUpText}>Sign Up</span>
+                    <span
+                      className={`material-symbols-outlined ${signUpStyles.signUpIcon}`}
+                    >
+                      start
+                    </span>
+                  </>
+                )}
               </button>
             </div>
           </form>
