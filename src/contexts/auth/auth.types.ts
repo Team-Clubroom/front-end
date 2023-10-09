@@ -7,7 +7,8 @@ export interface LoginPayload extends Record<string, string> {
 }
 
 export interface RegistrationPayload extends LoginPayload {
-  name: string;
+  user_first_name: string;
+  user_last_name: string;
 }
 
 export interface AuthContextProps {

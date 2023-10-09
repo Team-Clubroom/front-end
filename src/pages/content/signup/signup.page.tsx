@@ -1,38 +1,29 @@
 import { NavLink } from "react-router-dom";
 import { signUpStyles } from "./signup.page.styles.tsx";
 import { useAuthActionContext } from "../../../contexts/auth/auth.context.tsx";
-import { FormEventHandler, useState } from "react";
 import useForm from "../../../hooks/useForm.ts";
-import { signupEmptyForm, validateSignupForm } from "./signup.helpers.ts";
+import {
+  signupEmptyForm,
+  SignupFormValues,
+  validateSignupForm,
+} from "./signup.helpers.ts";
 
 function SignupPage() {
   const { register } = useAuthActionContext();
-  const { registerField, formValues, resetForm } = useForm(signupEmptyForm);
-  const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const { registerField, onSubmit, isLoading, error } = useForm(
+    signupEmptyForm,
+    validateSignupForm,
+  );
 
-  const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
-    try {
-      event.preventDefault();
-      const error = validateSignupForm(formValues);
-      setError(error);
-      if (error) return;
-      setIsLoading(true);
-      const result = await register({
-        name: formValues.name,
-        email: formValues.email,
-        password: formValues.password,
-      });
-      resetForm();
-      // TODO: handle success case here
-      // TODO: reroute to a page saying something like 'verification email successful'
-      console.log(result);
-    } catch (e) {
-      console.log(e);
-      setError((e as Error).message);
-    } finally {
-      setIsLoading(false);
-    }
+  const handleSubmit = async (formValues: SignupFormValues) => {
+    const result = await register({
+      user_first_name: formValues.firstName,
+      user_last_name: formValues.lastName,
+      email: formValues.email,
+      password: formValues.password,
+    });
+    // TODO: handle success case
+    console.log(result);
   };
 
   return (
@@ -44,10 +35,10 @@ function SignupPage() {
         </div>
 
         <div className={signUpStyles.form}>
-          <form onSubmit={handleSubmit} noValidate={true}>
+          <form onSubmit={onSubmit(handleSubmit)} noValidate={true}>
             <div className={signUpStyles.formField}>
-              <label htmlFor="name" className={signUpStyles.label}>
-                Name:
+              <label htmlFor="first_name" className={signUpStyles.label}>
+                First name:
               </label>
               <div className={signUpStyles.inputContainer}>
                 <span
@@ -57,12 +48,33 @@ function SignupPage() {
                   person
                 </span>
                 <input
-                  id="name"
+                  id="first_name"
                   type="text"
                   required
                   className={signUpStyles.input}
-                  placeholder="Enter your name"
-                  {...registerField("name")}
+                  placeholder="Enter your first name"
+                  {...registerField("firstName")}
+                />
+              </div>
+            </div>
+            <div className={signUpStyles.formField}>
+              <label htmlFor="last_name" className={signUpStyles.label}>
+                Last name:
+              </label>
+              <div className={signUpStyles.inputContainer}>
+                <span
+                  className={`material-symbols-outlined ${signUpStyles.inputIcon}`}
+                  style={{ display: "flex" }}
+                >
+                  person
+                </span>
+                <input
+                  id="last_name"
+                  type="text"
+                  required
+                  className={signUpStyles.input}
+                  placeholder="Enter your last name"
+                  {...registerField("lastName")}
                 />
               </div>
             </div>
