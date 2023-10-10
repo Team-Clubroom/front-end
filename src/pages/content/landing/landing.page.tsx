@@ -3,7 +3,7 @@ import MaintenancePage from "../../misc/maintenance/maintenance.page.tsx";
 
 function LandingPage() {
   // TODO: Replace with actual auth state
-  const isLoggedIn = false;
+  const isLoggedIn = true;
 
   if (isLoggedIn) {
     return <Navigate to="/appmain" />;
