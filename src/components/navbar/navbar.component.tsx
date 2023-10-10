@@ -14,29 +14,21 @@ export const NavbarComponent = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
 
-  const myDivNormal: string = "#9CA3AF";
-  const myDivHovered: string = "#94A3B8";
-  const myDivClicked: string = "#334155";
+  const divNormal: string = "#9CA3AF";
+  const divHovered: string = "#94A3B8";
+  const divClicked: string = "#334155";
 
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
+  const handleMouseHover = () => {
+    setIsHovered(!isHovered);
   };
 
   const handleInputClick = () => {
-    setIsClicked(true);
-  };
-
-  const handleInputBlur = () => {
-    setIsClicked(false);
+    setIsClicked(!isClicked);
   };
 
   const divStyle = {
     backgroundColor: `${
-      isClicked ? myDivClicked : isHovered ? myDivHovered : myDivNormal
+      isClicked ? divClicked : isHovered ? divHovered : divNormal
     }`,
     transition: "background-color 0.3s",
     boxShadow: `${isHovered ? "0px 5px 5px 2px rgb(0, 0, 0, 0.1)" : ""}`,
@@ -60,8 +52,8 @@ export const NavbarComponent = () => {
         <div
           className={navbarStyles.searchContainer}
           style={divStyle}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
+          onMouseEnter={handleMouseHover}
+          onMouseLeave={handleMouseHover}
         >
           <label htmlFor="simple-search" className="sr-only">
             Search
@@ -77,7 +69,7 @@ export const NavbarComponent = () => {
               type="text"
               className={navbarStyles.searchInput}
               onClick={handleInputClick}
-              onBlur={handleInputBlur}
+              onBlur={handleInputClick}
               placeholder="Search company name..."
               required
             />
