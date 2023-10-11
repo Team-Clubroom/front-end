@@ -23,6 +23,7 @@ export interface UserAuth {
 export interface AuthActionFuncs {
   register: RegisterFunc;
   login: LoginFunc;
+  logout: () => void;
 }
 
 export type RegisterFunc = (
