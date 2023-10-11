@@ -1,4 +1,4 @@
-export interface LoginFormValues extends Record<string, string> {
+export interface LoginFormValues {
   email: string;
   password: string;
 }
