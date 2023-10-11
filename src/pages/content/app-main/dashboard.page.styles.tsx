@@ -8,10 +8,10 @@ export const dashboardStyles = {
   profile: "flex flex-col gap-2 mt-8 mb-8",
   profile_name: "font-medium text-xs md:text-sm text-center text-teal-500",
   access_level: "text-xs text-gray-500 text-center",
-  // searchInput:
-  //   "flex border-2 border-gray-200 rounded-md focus-within:ring-2 ring-teal-500",
   menu: "flex flex-col space-y-2",
   menuLink:
-    "text-sm font-medium text-gray-700 py-2 px-2 hover:bg-teal-500 hover:text-white hover:text-base rounded-md transition duration-150 ease-in-out",
+    "flex items-center text-sm font-medium text-gray-700 py-2 px-2 hover:bg-teal-500 hover:text-white hover:text-base rounded-md" +
+    " transition duration-150 ease-in-out",
+  svgLink: "w-6 h-6 fill-current mr-2",
   mainContent: "h-screen w-full flex",
 };
