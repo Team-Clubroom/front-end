@@ -9,7 +9,7 @@ export enum ApiRoutes {
 export const customFetch = async <T = undefined>(
   apiRoute: ApiRoutes,
   method: "GET" | "POST",
-  body?: Record<string, string>,
+  body?: unknown,
 ): Promise<SuccessResponse<T>> => {
   const response = await fetch(`/api/${apiRoute}`, {
     headers: {
