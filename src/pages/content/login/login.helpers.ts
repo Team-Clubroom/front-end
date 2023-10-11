@@ -10,10 +10,10 @@ export const emptyLoginForm: LoginFormValues = {
 
 export function validateLoginForm({ email, password }: LoginFormValues) {
   if (!email.trim()) {
-    return "Please enter your email address";
+    return "Please enter your email address.";
   } else if (!/^\S+@\S+\.\S+$/.test(email.trim())) {
     return "Please enter a valid email address.";
   } else if (!password) {
-    return "Please enter your password";
+    return "Please enter your password.";
   } else return "";
 }

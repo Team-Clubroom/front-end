@@ -20,7 +20,6 @@ export default function App() {
         </Route>
         {/*  public routes go here */}
         <Route index element={<LandingPage />} />
-        <Route path="/appmain" element={<DashboardPage width={window.innerWidth} height={window.innerHeight - 150} />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="*" element={<ErrorPage />} />
