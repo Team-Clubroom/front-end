@@ -1,5 +1,5 @@
 export const dashboardStyles = {
-  view: "w-screen flex flex-row",
+  view: "h-full w-screen flex flex-row",
   sidenavButton:
     "p-2 border-2 bg-white rounded-md border-gray-200 shadow-lg text-gray-500 focus:bg-teal-500 focus:outline-none focus:text-white absolute top-0 left-0 sm:hidden",
   sidebar:
@@ -13,5 +13,5 @@ export const dashboardStyles = {
     "flex items-center text-sm font-medium text-gray-700 py-2 px-2 hover:bg-teal-500 hover:text-white hover:text-base rounded-md" +
     " transition duration-150 ease-in-out",
   svgLink: "w-6 h-6 fill-current mr-2",
-  mainContent: "h-screen w-full flex",
+  mainContent: "flex h-full w-full",
 };
