@@ -1,4 +1,9 @@
 import { UserAuth } from "../../../contexts/auth/auth.types.ts";
+import TreeComponent from "../../../components/tree/tree.component.tsx";
+import ParentSize from "@visx/responsive/lib/components/ParentSize";
+import { useEffect, useState } from "react";
+import { Employer } from "../../../models/employer.types.ts";
+import { ApiRoutes, customFetch } from "../../../utils/custom-fetch.ts";
 
 interface DashboardTabProps {
   tab: string;
@@ -15,15 +20,39 @@ function DashboardTab({ tab, user }: DashboardTabProps) {
     );
   };
 
+  // TODO: Currently this is not working, need to fix (401 error - Unauthorized)
   const Employers = () => {
+    const [employers, setEmployers] = useState<Employer[]>([]);
+    useEffect(() => {
+      const fetchEmployees = async () => {
+        const response = await customFetch<Employer[]>(
+          ApiRoutes.Employers,
+          "GET",
+        );
+        return response.data;
+      };
+
+      fetchEmployees()
+        .then((employers) => {
+          setEmployers(employers);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    }, []);
+
     return (
       <div>
-        <h1>Employers</h1>
+        <span>Employers:</span>
+        {employers.map((employer) => {
+          return <div key={employer.id}>{employer.name}</div>;
+        })}
       </div>
     );
   };
 
   const Employees = () => {
+    // TODO: Add employees logic
     return (
       <div>
         <h1>Employees</h1>
@@ -33,9 +62,9 @@ function DashboardTab({ tab, user }: DashboardTabProps) {
 
   const Graph = () => {
     return (
-      <div>
-        <h1>Graph</h1>
-      </div>
+      <ParentSize>
+        {({ width, height }) => <TreeComponent width={width} height={height} />}
+      </ParentSize>
     );
   };
 

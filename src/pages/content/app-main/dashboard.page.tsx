@@ -1,6 +1,6 @@
 import { useAuthContext } from "../../../contexts/auth/auth.context.tsx";
-import { dashboardStyles } from "./dashboard.page.styles.tsx";
 import { useState } from "react";
+import { dashboardStyles } from "./dashboard.page.styles.tsx";
 import DashboardTab from "./dashboard.tabs.tsx";
 
 function DashboardPage() {
@@ -10,7 +10,6 @@ function DashboardPage() {
   const handleTabChange = (tab: string) => {
     setTab(tab);
   };
-
   return (
     <div className={dashboardStyles.view}>
       <div className={dashboardStyles.sidebar}>
@@ -87,41 +86,3 @@ function DashboardPage() {
 }
 
 export default DashboardPage;
-
-// // NOTE: Extra links if more are needed.
-//          <button className={dashboardStyles.menuLink}>
-//            <span
-//              className={`material-symbols-outlined ${dashboardStyles.svgLink}`}
-//              style={{ display: "flex" }}
-//            >
-//              dashboard
-//            </span>
-//            <span className="">Calendar</span>
-//          </button>
-//          <button className={dashboardStyles.menuLink}>
-//            <span
-//              className={`material-symbols-outlined ${dashboardStyles.svgLink}`}
-//              style={{ display: "flex" }}
-//            >
-//              dashboard
-//            </span>
-//            <span className="">Table</span>
-//          </button>
-//          <button className={dashboardStyles.menuLink}>
-//            <span
-//              className={`material-symbols-outlined ${dashboardStyles.svgLink}`}
-//              style={{ display: "flex" }}
-//            >
-//              dashboard
-//            </span>
-//            <span className="">UI Components</span>
-//          </button>
-//          <button className={dashboardStyles.menuLink}>
-//            <span
-//              className={`material-symbols-outlined ${dashboardStyles.svgLink}`}
-//              style={{ display: "flex" }}
-//            >
-//              dashboard
-//            </span>
-//            <span className="">Users</span>
-//          </button>

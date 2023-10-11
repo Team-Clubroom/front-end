@@ -15,7 +15,7 @@ export default function App() {
       <Routes>
         <Route element={<PrivateRouteComponent />}>
           {/*  private routes go here */}
-          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/dashboard" element={<DashboardPage width={window.innerWidth} height={window.innerHeight - 150} />} />
         </Route>
         {/*  public routes go here */}
         <Route index element={<LandingPage />} />
