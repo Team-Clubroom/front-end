@@ -1,8 +1,16 @@
 import { useAuthContext } from "../../../contexts/auth/auth.context.tsx";
 import { dashboardStyles } from "./dashboard.page.styles.tsx";
+import { useState } from "react";
+import DashboardTab from "./dashboard.tabs.tsx";
 
 function DashboardPage() {
   const user = useAuthContext();
+  const [tab, setTab] = useState("dashboard");
+
+  const handleTabChange = (tab: string) => {
+    setTab(tab);
+  };
+
   return (
     <div className={dashboardStyles.view}>
       <div className={dashboardStyles.sidebar}>
@@ -13,7 +21,12 @@ function DashboardPage() {
           <p className={dashboardStyles.access_level}>Administrator</p>
         </div>
         <div id="menu" className={dashboardStyles.menu}>
-          <a href="" className={dashboardStyles.menuLink}>
+          <button
+            className={dashboardStyles.menuLink}
+            onClick={() => {
+              handleTabChange("dashboard");
+            }}
+          >
             <span
               className={`material-symbols-outlined ${dashboardStyles.svgLink}`}
               style={{ display: "flex" }}
@@ -21,8 +34,13 @@ function DashboardPage() {
               dashboard
             </span>
             <span className="">Dashboard</span>
-          </a>
-          <a href="" className={dashboardStyles.menuLink}>
+          </button>
+          <button
+            className={dashboardStyles.menuLink}
+            onClick={() => {
+              handleTabChange("employers");
+            }}
+          >
             <span
               className={`material-symbols-outlined ${dashboardStyles.svgLink}`}
               style={{ display: "flex" }}
@@ -30,8 +48,13 @@ function DashboardPage() {
               apartment
             </span>
             <span className="">Employers</span>
-          </a>
-          <a href="" className={dashboardStyles.menuLink}>
+          </button>
+          <button
+            className={dashboardStyles.menuLink}
+            onClick={() => {
+              handleTabChange("employees");
+            }}
+          >
             <span
               className={`material-symbols-outlined ${dashboardStyles.svgLink}`}
               style={{ display: "flex" }}
@@ -39,15 +62,25 @@ function DashboardPage() {
               badge
             </span>
             <span className="">Employees</span>
-          </a>
+          </button>
+          <button
+            className={dashboardStyles.menuLink}
+            onClick={() => {
+              handleTabChange("graph");
+            }}
+          >
+            <span
+              className={`material-symbols-outlined ${dashboardStyles.svgLink}`}
+              style={{ display: "flex" }}
+            >
+              account_tree
+            </span>
+            <span className="">Graph</span>
+          </button>
         </div>
       </div>
       <div className={dashboardStyles.mainContent}>
-        {/*  // TODO: ------------------- PUT MAIN CONTENT HERE -------------------  */}
-        <div style={{ margin: "1rem" }}>
-          <h1>Private dashboard</h1>
-          <p>Welcome {user.email}</p>
-        </div>
+        <DashboardTab tab={tab} user={user} />
       </div>
     </div>
   );
@@ -56,16 +89,7 @@ function DashboardPage() {
 export default DashboardPage;
 
 // // NOTE: Extra links if more are needed.
-//          <a href="" className={dashboardStyles.menuLink}>
-//            <span
-//              className={`material-symbols-outlined ${dashboardStyles.svgLink}`}
-//              style={{ display: "flex" }}
-//            >
-//              dashboard
-//            </span>
-//            <span className="">Messages</span>
-//          </a>
-//          <a href="" className={dashboardStyles.menuLink}>
+//          <button className={dashboardStyles.menuLink}>
 //            <span
 //              className={`material-symbols-outlined ${dashboardStyles.svgLink}`}
 //              style={{ display: "flex" }}
@@ -73,8 +97,8 @@ export default DashboardPage;
 //              dashboard
 //            </span>
 //            <span className="">Calendar</span>
-//          </a>
-//          <a href="" className={dashboardStyles.menuLink}>
+//          </button>
+//          <button className={dashboardStyles.menuLink}>
 //            <span
 //              className={`material-symbols-outlined ${dashboardStyles.svgLink}`}
 //              style={{ display: "flex" }}
@@ -82,8 +106,8 @@ export default DashboardPage;
 //              dashboard
 //            </span>
 //            <span className="">Table</span>
-//          </a>
-//          <a href="" className={dashboardStyles.menuLink}>
+//          </button>
+//          <button className={dashboardStyles.menuLink}>
 //            <span
 //              className={`material-symbols-outlined ${dashboardStyles.svgLink}`}
 //              style={{ display: "flex" }}
@@ -91,8 +115,8 @@ export default DashboardPage;
 //              dashboard
 //            </span>
 //            <span className="">UI Components</span>
-//          </a>
-//          <a href="" className={dashboardStyles.menuLink}>
+//          </button>
+//          <button className={dashboardStyles.menuLink}>
 //            <span
 //              className={`material-symbols-outlined ${dashboardStyles.svgLink}`}
 //              style={{ display: "flex" }}
@@ -100,4 +124,4 @@ export default DashboardPage;
 //              dashboard
 //            </span>
 //            <span className="">Users</span>
-//          </a>
+//          </button>
