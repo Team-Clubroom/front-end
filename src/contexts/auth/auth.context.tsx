@@ -52,8 +52,13 @@ function AuthContextProvider({ children }: AuthContextProps) {
     setUserAuth({ email: loginPayload.email, token: result.data.jwt });
   };
 
+  const logout = async () => {
+    localStorage.removeItem(USER_STORAGE_KEY);
+    setUserAuth(null);
+  };
+
   return (
-    <AuthActionContext.Provider value={{ register, login }}>
+    <AuthActionContext.Provider value={{ register, login, logout }}>
       <AuthContext.Provider value={userAuth}>
         {/*TODO: add custom loader here*/}
         {isLoading ? <>Loading...</> : children}
