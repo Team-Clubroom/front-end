@@ -1,33 +1,26 @@
 import { loginStyles } from "./login.page.styles.tsx";
 import { NavLink, useNavigate } from "react-router-dom";
 import useForm from "../../../hooks/useForm.ts";
-import { emptyLoginForm, validateLoginForm } from "./login.helpers.ts";
-import React, { useState } from "react";
+import {
+  emptyLoginForm,
+  LoginFormValues,
+  validateLoginForm,
+} from "./login.helpers.ts";
 import { useAuthActionContext } from "../../../contexts/auth/auth.context.tsx";
 
 function LoginPage() {
-  const { registerField, resetForm, formValues } = useForm(emptyLoginForm);
-  const [error, setError] = useState("");
+  const { registerField, onSubmit, error, isLoading } = useForm(
+    emptyLoginForm,
+    validateLoginForm,
+  );
   const { login } = useAuthActionContext();
-  const [isLoading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const handleSubmit: React.FormEventHandler = async (e) => {
-    try {
-      e.preventDefault();
-      const error = validateLoginForm(formValues);
-      setError(error);
-      if (error) return;
-      await login(formValues);
-      resetForm();
-      setTimeout(() => {
-        navigate("/dashboard");
-      }, 0);
-    } catch (e) {
-      setError((e as Error).message);
-      console.log(e);
-    } finally {
-      setLoading(false);
-    }
+
+  const handleSubmit = async (formValues: LoginFormValues) => {
+    await login(formValues);
+    setTimeout(() => {
+      navigate("/dashboard");
+    }, 0);
   };
 
   return (
@@ -39,7 +32,7 @@ function LoginPage() {
         </div>
 
         <div className={loginStyles.form}>
-          <form noValidate={true} onSubmit={handleSubmit}>
+          <form noValidate={true} onSubmit={onSubmit(handleSubmit)}>
             <div className={loginStyles.formField}>
               <label htmlFor="email" className={loginStyles.label}>
                 E-Mail Address:

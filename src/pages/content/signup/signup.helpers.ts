@@ -1,22 +1,28 @@
-export interface SignupFormValues extends Record<string, string> {
-  name: string;
+export interface SignupFormValues {
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
   passwordRepeat: string;
 }
 
 export const signupEmptyForm: SignupFormValues = {
-  name: "",
+  firstName: "",
+  lastName: "",
   email: "",
   password: "",
   passwordRepeat: "",
 };
 
 export function validateSignupForm(formValues: SignupFormValues): string {
-  const { name, email, password, passwordRepeat } = formValues;
+  const { firstName, lastName, email, password, passwordRepeat } = formValues;
 
-  if (!name.trim()) {
-    return "Please enter your name.";
+  if (!firstName.trim()) {
+    return "Please enter your first name.";
+  }
+
+  if (!lastName.trim()) {
+    return "Please enter your last name.";
   }
 
   if (!email.trim()) {
