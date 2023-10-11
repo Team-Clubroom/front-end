@@ -44,7 +44,7 @@ function DashboardPage() {
       </div>
       <div className={dashboardStyles.mainContent}>
         {/*  // TODO: ------------------- PUT MAIN CONTENT HERE -------------------  */}
-        <div>
+        <div style={{ margin: "1rem" }}>
           <h1>Private dashboard</h1>
           <p>Welcome {user.email}</p>
         </div>
