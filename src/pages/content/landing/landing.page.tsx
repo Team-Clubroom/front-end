@@ -1,5 +1,6 @@
 import { Navigate } from "react-router-dom";
 import MaintenancePage from "../../misc/maintenance/maintenance.page.tsx";
+import FooterComponent from "../../../components/footer/footer.component.tsx";
 
 function LandingPage() {
   // TODO: Replace with actual auth state
@@ -10,7 +11,12 @@ function LandingPage() {
   }
 
   // TODO: Replace with actual landing page once discussed with team
-  return <MaintenancePage />;
+  return (
+    <>
+      <MaintenancePage />
+      <FooterComponent />
+    </>
+  );
 }
 
 export default LandingPage;

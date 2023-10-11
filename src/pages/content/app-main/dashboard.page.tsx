@@ -4,7 +4,6 @@ import { dashboardPageStrings } from "./dashboard.page.styles.tsx";
 function DashboardPage() {
   const user = useAuthContext();
   return (
-    // <div className={dashboardPageStrings.app_main}>
     <div className={dashboardPageStrings.view}>
       <button className={dashboardPageStrings.sidenavButton}>
         <svg
@@ -21,11 +20,12 @@ function DashboardPage() {
       </div>
       <div className={dashboardPageStrings.mainContent}>
         {/* Main content */}
-        <h1>Private dashboard</h1>
-        <p>Welcome {user.email}</p>
+        <div>
+          <h1>Private dashboard</h1>
+          <p>Welcome {user.email}</p>
+        </div>
       </div>
     </div>
-    // </div>
   );
 }
 

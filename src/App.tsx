@@ -5,7 +5,6 @@ import LandingPage from "./pages/content/landing/landing.page.tsx";
 import SignupPage from "./pages/content/signup/signup.page.tsx";
 import DashboardPage from "./pages/content/app-main/dashboard.page.tsx";
 import {NavbarComponent} from "./components/navbar/navbar.component.tsx";
-import FooterComponent from "./components/footer/footer.component.tsx";
 import ErrorPage from "./pages/misc/error/error.page.tsx";
 import PrivateRouteComponent from "./components/private-route/private-route.component.tsx";
 
@@ -24,7 +23,6 @@ export default function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
-      <FooterComponent page={"landing"} />
     </BrowserRouter>
   );
 }

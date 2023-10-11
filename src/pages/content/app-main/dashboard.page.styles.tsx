@@ -1,7 +1,5 @@
 export const dashboardPageStrings = {
-  app_main: "w-screen h-screen flex flex-col items-center justify-center",
   view: "w-screen flex flex-row",
-  //view: "w-full h-full flex flex-row items-center justify-center bg-cool-gray-100",
   sidenavButton:
     "p-2 border-2 bg-white rounded-md border-gray-200 shadow-lg text-gray-500 focus:bg-teal-500 focus:outline-none focus:text-white absolute top-0 left-0 sm:hidden",
   sidebar:
