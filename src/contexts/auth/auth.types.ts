@@ -1,7 +1,7 @@
 import React from "react";
 import { SuccessResponse } from "../../models/api.types.ts";
 
-export interface LoginPayload extends Record<string, string> {
+export interface LoginPayload {
   email: string;
   password: string;
 }
