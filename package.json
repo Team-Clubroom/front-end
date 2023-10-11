@@ -10,6 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@visx/gradient": "^3.3.0",
+    "@visx/group": "^3.3.0",
+    "@visx/hierarchy": "^3.3.0",
+    "@visx/responsive": "^3.3.0",
+    "@visx/shape": "^3.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
