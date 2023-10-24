@@ -12,7 +12,7 @@ export const loginStyles = {
   inputIcon:
     "inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400",
   input:
-    "text-sm placeholder-gray-500 pl-10 pr-4 rounded-2xl border border-gray-400 w-full py-2" +
+    "text-sm placeholder-gray-500 pl-9 pr-4 rounded-2xl border border-gray-400 w-full py-2" +
     " focus:outline-none focus:border-blue-400",
   error:
     "text-red-500 text-sm italic flex justify-center font-bold",

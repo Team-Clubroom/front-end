@@ -45,7 +45,7 @@ export const NavbarComponent = () => {
     <nav className={navbarStyles.navbar}>
       <div className="inline-flex">
         <NavLink className={navbarStyles.logoLink} to="/">
-          AR Tech Tree
+          CELDV
         </NavLink>
       </div>
       <form className={navbarStyles.searchForm}>
