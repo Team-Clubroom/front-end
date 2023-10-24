@@ -1,15 +1,9 @@
 import { useAuthContext } from "../../../contexts/auth/auth.context.tsx";
-import { useState } from "react";
 import { dashboardStyles } from "./dashboard.page.styles.tsx";
-import DashboardTab from "./dashboard.tabs.tsx";
+import { NavLink, Outlet } from "react-router-dom";
 
 function DashboardPage() {
   const user = useAuthContext();
-  const [tab, setTab] = useState("dashboard");
-
-  const handleTabChange = (tab: string) => {
-    setTab(tab);
-  };
   return (
     <div className={dashboardStyles.view}>
       <div className={dashboardStyles.sidebar}>
@@ -20,12 +14,7 @@ function DashboardPage() {
           <p className={dashboardStyles.access_level}>Administrator</p>
         </div>
         <div id="menu" className={dashboardStyles.menu}>
-          <button
-            className={dashboardStyles.menuLink}
-            onClick={() => {
-              handleTabChange("dashboard");
-            }}
-          >
+          <NavLink to={"/dashboard/"} className={dashboardStyles.menuLink}>
             <span
               className={`material-symbols-outlined ${dashboardStyles.svgLink}`}
               style={{ display: "flex" }}
@@ -33,12 +22,10 @@ function DashboardPage() {
               dashboard
             </span>
             <span className="">Dashboard</span>
-          </button>
-          <button
+          </NavLink>
+          <NavLink
+            to={"/dashboard/employers"}
             className={dashboardStyles.menuLink}
-            onClick={() => {
-              handleTabChange("employers");
-            }}
           >
             <span
               className={`material-symbols-outlined ${dashboardStyles.svgLink}`}
@@ -47,12 +34,10 @@ function DashboardPage() {
               apartment
             </span>
             <span className="">Employers</span>
-          </button>
-          <button
+          </NavLink>
+          <NavLink
+            to={"/dashboard/employees"}
             className={dashboardStyles.menuLink}
-            onClick={() => {
-              handleTabChange("employees");
-            }}
           >
             <span
               className={`material-symbols-outlined ${dashboardStyles.svgLink}`}
@@ -61,13 +46,8 @@ function DashboardPage() {
               badge
             </span>
             <span className="">Employees</span>
-          </button>
-          <button
-            className={dashboardStyles.menuLink}
-            onClick={() => {
-              handleTabChange("graph");
-            }}
-          >
+          </NavLink>
+          <NavLink to={"/dashboard/graph"} className={dashboardStyles.menuLink}>
             <span
               className={`material-symbols-outlined ${dashboardStyles.svgLink}`}
               style={{ display: "flex" }}
@@ -75,11 +55,11 @@ function DashboardPage() {
               account_tree
             </span>
             <span className="">Graph</span>
-          </button>
+          </NavLink>
         </div>
       </div>
       <div className={dashboardStyles.mainContent}>
-        <DashboardTab tab={tab} user={user} />
+        <Outlet />
       </div>
     </div>
   );
