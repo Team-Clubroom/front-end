@@ -4,6 +4,7 @@ import { ApiRoutes, customFetch } from "../../../utils/custom-fetch.ts";
 import { Employer } from "../../../models/employer.types.ts";
 import ParentSize from "@visx/responsive/lib/components/ParentSize";
 import TreeComponent from "../../../components/tree/tree.component.tsx";
+import { Helmet } from 'react-helmet'
 
 function DashboardPage() {
   const user = useAuthContext();
@@ -36,9 +37,14 @@ function DashboardPage() {
     //     })}
     //   </div>
     // </div>
-    <ParentSize>
-      {({ width, height }) => <TreeComponent width={width} height={height} />}
-    </ParentSize>
+    <>
+      <Helmet>
+        <title>Dashboard - CELDV</title>
+      </Helmet>
+      <ParentSize>
+        {({ width, height }) => <TreeComponent width={width} height={height} />}
+      </ParentSize>
+    </>
   );
 }
 
