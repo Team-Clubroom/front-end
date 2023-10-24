@@ -29,7 +29,7 @@ function SignupPage() {
   return (
     <div className={signUpStyles.container}>
       <div className={signUpStyles.formContainer}>
-        <div className={signUpStyles.title}>Join us Now</div>
+        <div className={signUpStyles.title}>Join Us Now</div>
         <div className={signUpStyles.subtitle}>
           Enter your credentials to get access to your account
         </div>
