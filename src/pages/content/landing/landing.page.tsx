@@ -1,13 +1,13 @@
 import { Navigate } from "react-router-dom";
 import MaintenancePage from "../../misc/maintenance/maintenance.page.tsx";
 import FooterComponent from "../../../components/footer/footer.component.tsx";
+import { useAuthContext } from "../../../contexts/auth/auth.context.tsx";
 
 function LandingPage() {
-  // TODO: Replace with actual auth state
-  const isLoggedIn = true;
+  const user = useAuthContext();
 
-  if (isLoggedIn) {
-    return <Navigate to="/appmain" />;
+  if (user) {
+    return <Navigate to="/dashboard" />;
   }
 
   // TODO: Replace with actual landing page once discussed with team

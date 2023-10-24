@@ -9,20 +9,20 @@ import ErrorPage from "./pages/misc/error/error.page.tsx";
 import PrivateRouteComponent from "./components/private-route/private-route.component.tsx";
 
 export default function App() {
-  return (
-    <BrowserRouter>
-      <NavbarComponent />
-      <Routes>
-        <Route element={<PrivateRouteComponent />}>
-          {/*  private routes go here */}
-          <Route path="/dashboard" element={<DashboardPage width={window.innerWidth} height={window.innerHeight - 150} />} />
-        </Route>
-        {/*  public routes go here */}
-        <Route index element={<LandingPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignupPage />} />
-        <Route path="*" element={<ErrorPage />} />
-      </Routes>
-    </BrowserRouter>
-  );
+    return (
+        <BrowserRouter>
+            <NavbarComponent/>
+            <Routes>
+                <Route element={<PrivateRouteComponent/>}>
+                    {/*  private routes go here */}
+                    <Route path="/dashboard" element={<DashboardPage/>}/>
+                </Route>
+                {/*  public routes go here */}
+                <Route index element={<LandingPage/>}/>
+                <Route path="/login" element={<LoginPage/>}/>
+                <Route path="/signup" element={<SignupPage/>}/>
+                <Route path="*" element={<ErrorPage/>}/>
+            </Routes>
+        </BrowserRouter>
+    );
 }
