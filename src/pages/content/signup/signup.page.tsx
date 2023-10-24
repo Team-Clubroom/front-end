@@ -39,7 +39,7 @@ function SignupPage() {
             <div className="flex justify-center items-center">
               <div className={signUpStyles.formField + " pr-1"}>
                 <label htmlFor="first_name" className={signUpStyles.label}>
-                  First name:
+                  First Name:
                 </label>
                 <div className={signUpStyles.inputContainer}>
                   <span
@@ -53,14 +53,14 @@ function SignupPage() {
                     type="text"
                     required
                     className={signUpStyles.input}
-                    placeholder="Enter your first name"
+                    placeholder="John"
                     {...registerField("firstName")}
                   />
                 </div>
               </div>
               <div className={signUpStyles.formField + " pl-1"}>
                 <label htmlFor="last_name" className={signUpStyles.label}>
-                  Last name:
+                  Last Name:
                 </label>
                 <div className={signUpStyles.inputContainer}>
                   <span
@@ -74,7 +74,7 @@ function SignupPage() {
                     type="text"
                     required
                     className={signUpStyles.input}
-                    placeholder="Enter your last name"
+                    placeholder="Doe"
                     {...registerField("lastName")}
                   />
                 </div>
@@ -96,7 +96,7 @@ function SignupPage() {
                   type="email"
                   required
                   className={signUpStyles.input}
-                  placeholder="Enter your email"
+                  placeholder="johndoe@example.com"
                   {...registerField("email")}
                 />
               </div>
@@ -117,7 +117,7 @@ function SignupPage() {
                   type="password"
                   required
                   className={signUpStyles.input}
-                  placeholder="Enter your password"
+                  placeholder={'\u2022' + '\u2022' + '\u2022' + '\u2022' + '\u2022' + '\u2022' + '\u2022' + '\u2022'}
                   {...registerField("password")}
                 />
               </div>
@@ -138,7 +138,7 @@ function SignupPage() {
                   type="password"
                   required
                   className={signUpStyles.input}
-                  placeholder="Enter your password"
+                  placeholder={'\u2022' + '\u2022' + '\u2022' + '\u2022' + '\u2022' + '\u2022' + '\u2022' + '\u2022'}
                   {...registerField("passwordRepeat")}
                 />
               </div>
