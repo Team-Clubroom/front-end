@@ -1,21 +1,20 @@
 import { useAuthContext } from "../../../contexts/auth/auth.context.tsx";
 import { dashboardStyles } from "./dashboard.page.styles.tsx";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
-import { Helmet } from 'react-helmet';
+import { Helmet } from "react-helmet";
 
 function DashboardPage() {
   let title;
   const location = useLocation();
-  if (location.pathname === '/dashboard') {
+  if (location.pathname === "/dashboard") {
     title = "Dashboard - CELDV";
-  } else if (location.pathname === '/dashboard/employers') {
+  } else if (location.pathname === "/dashboard/employers") {
     title = "Employers - CELDV";
-  } else if (location.pathname === '/dashboard/employees') {
+  } else if (location.pathname === "/dashboard/employees") {
     title = "Employees - CELDV";
-  } else if (location.pathname === '/dashboard/graph') {
+  } else if (location.pathname === "/dashboard/graph") {
     title = "Graph - CELDV";
   }
-
 
   const user = useAuthContext();
   return (
@@ -65,7 +64,10 @@ function DashboardPage() {
               </span>
               <span className="">Employees</span>
             </NavLink>
-            <NavLink to={"/dashboard/graph"} className={dashboardStyles.menuLink}>
+            <NavLink
+              to={"/dashboard/graph"}
+              className={dashboardStyles.menuLink}
+            >
               <span
                 className={`material-symbols-outlined ${dashboardStyles.svgLink}`}
                 style={{ display: "flex" }}

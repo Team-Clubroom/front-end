@@ -1,6 +1,6 @@
 import { errorStyles } from "./error.page.styles.tsx";
 import { NavLink } from "react-router-dom";
-import { Helmet } from 'react-helmet';
+import { Helmet } from "react-helmet";
 
 function ErrorPage() {
   // TODO: get error number from state
