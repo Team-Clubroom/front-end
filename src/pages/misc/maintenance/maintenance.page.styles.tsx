@@ -12,4 +12,4 @@ export const maintenance = {
   boldTextClass: "font-bold",
   linkClass: "flex items-center space-x-1",
   svgClass: "h-4 w-4",
-}; 
+};

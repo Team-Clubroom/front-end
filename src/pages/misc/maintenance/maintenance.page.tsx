@@ -14,5 +14,5 @@ function MaintenancePage({}: MaintenancePageProps) {
     </div>
   );
 }
- 
+
 export default MaintenancePage;
