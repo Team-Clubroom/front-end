@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import { signUpStyles } from "./signup.page.styles.tsx";
 import { useAuthActionContext } from "../../../contexts/auth/auth.context.tsx";
 import useForm from "../../../hooks/useForm.ts";
+import FooterComponent from "../../../components/footer/footer.component.tsx";
 import {
   signupEmptyForm,
   SignupFormValues,
@@ -27,12 +28,13 @@ function SignupPage() {
   };
 
   return (
-    <div className={signUpStyles.container}>
-      <div className={signUpStyles.formContainer}>
-        <div className={signUpStyles.title}>Join us Now</div>
-        <div className={signUpStyles.subtitle}>
-          Enter your credentials to get access to your account
-        </div>
+    <>
+      <div className={signUpStyles.container}>
+        <div className={signUpStyles.formContainer}>
+          <div className={signUpStyles.title}>Join us Now</div>
+          <div className={signUpStyles.subtitle}>
+            Enter your credentials to get access to your account
+          </div>
 
         <div className={signUpStyles.form}>
           <form onSubmit={onSubmit(handleSubmit)} noValidate={true}>
@@ -180,6 +182,8 @@ function SignupPage() {
         </div>
       </div>
     </div>
+        <FooterComponent />
+    </>
   );
 }
 

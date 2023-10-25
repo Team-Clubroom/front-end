@@ -7,6 +7,7 @@ import {
   validateLoginForm,
 } from "./login.helpers.ts";
 import { useAuthActionContext } from "../../../contexts/auth/auth.context.tsx";
+import FooterComponent from "../../../components/footer/footer.component.tsx";
 
 function LoginPage() {
   const { registerField, onSubmit, error, isLoading } = useForm(
@@ -24,12 +25,13 @@ function LoginPage() {
   };
 
   return (
-    <div className={loginStyles.container}>
-      <div className={loginStyles.formContainer}>
-        <div className={loginStyles.title}>Welcome Back</div>
-        <div className={loginStyles.subtitle}>
-          Enter your credentials to access your account
-        </div>
+    <>
+      <div className={loginStyles.container}>
+        <div className={loginStyles.formContainer}>
+          <div className={loginStyles.title}>Welcome Back</div>
+          <div className={loginStyles.subtitle}>
+            Enter your credentials to access your account
+          </div>
 
         <div className={loginStyles.form}>
           <form noValidate={true} onSubmit={onSubmit(handleSubmit)}>
@@ -113,6 +115,8 @@ function LoginPage() {
         </div>
       </div>
     </div>
+        <FooterComponent />
+    </>
   );
 }
 
