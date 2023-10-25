@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import { signUpStyles } from "./signup.page.styles.tsx";
 import { useAuthActionContext } from "../../../contexts/auth/auth.context.tsx";
 import useForm from "../../../hooks/useForm.ts";
+import FooterComponent from "../../../components/footer/footer.component.tsx";
 import {
   signupEmptyForm,
   SignupFormValues,
@@ -27,55 +28,58 @@ function SignupPage() {
   };
 
   return (
-    <div className={signUpStyles.container}>
-      <div className={signUpStyles.formContainer}>
-        <div className={signUpStyles.title}>Join us Now</div>
-        <div className={signUpStyles.subtitle}>
-          Enter your credentials to get access to your account
-        </div>
+    <>
+      <div className={signUpStyles.container}>
+        <div className={signUpStyles.formContainer}>
+          <div className={signUpStyles.title}>Join us Now</div>
+          <div className={signUpStyles.subtitle}>
+            Enter your credentials to get access to your account
+          </div>
 
         <div className={signUpStyles.form}>
           <form onSubmit={onSubmit(handleSubmit)} noValidate={true}>
-            <div className={signUpStyles.formField}>
-              <label htmlFor="first_name" className={signUpStyles.label}>
-                First name:
-              </label>
-              <div className={signUpStyles.inputContainer}>
-                <span
-                  className={`material-symbols-outlined ${signUpStyles.inputIcon}`}
-                  style={{ display: "flex" }}
-                >
-                  person
-                </span>
-                <input
-                  id="first_name"
-                  type="text"
-                  required
-                  className={signUpStyles.input}
-                  placeholder="Enter your first name"
-                  {...registerField("firstName")}
-                />
+            <div className="flex justify-center items-center">
+              <div className={signUpStyles.formField + " pr-1"}>
+                <label htmlFor="first_name" className={signUpStyles.label}>
+                  First name:
+                </label>
+                <div className={signUpStyles.inputContainer}>
+                  <span
+                    className={`material-symbols-outlined ${signUpStyles.inputIcon}`}
+                    style={{ display: "flex" }}
+                  >
+                    person
+                  </span>
+                  <input
+                    id="first_name"
+                    type="text"
+                    required
+                    className={signUpStyles.input}
+                    placeholder="Enter your first name"
+                    {...registerField("firstName")}
+                  />
+                </div>
               </div>
-            </div>
-            <div className={signUpStyles.formField}>
-              <label htmlFor="last_name" className={signUpStyles.label}>
-                Last name:
-              </label>
-              <div className={signUpStyles.inputContainer}>
-                <span
-                  className={`material-symbols-outlined ${signUpStyles.inputIcon}`}
-                  style={{ display: "flex" }}
-                >
-                  person
-                </span>
-                <input
-                  id="last_name"
-                  type="text"
-                  required
-                  className={signUpStyles.input}
-                  placeholder="Enter your last name"
-                  {...registerField("lastName")}
-                />
+              <div className={signUpStyles.formField + " pl-1"}>
+                <label htmlFor="last_name" className={signUpStyles.label}>
+                  Last name:
+                </label>
+                <div className={signUpStyles.inputContainer}>
+                  <span
+                    className={`material-symbols-outlined ${signUpStyles.inputIcon}`}
+                    style={{ display: "flex" }}
+                  >
+                    person
+                  </span>
+                  <input
+                    id="last_name"
+                    type="text"
+                    required
+                    className={signUpStyles.input}
+                    placeholder="Enter your last name"
+                    {...registerField("lastName")}
+                  />
+                </div>
               </div>
             </div>
             <div className={signUpStyles.formField}>
@@ -178,6 +182,8 @@ function SignupPage() {
         </div>
       </div>
     </div>
+        <FooterComponent />
+    </>
   );
 }
 
