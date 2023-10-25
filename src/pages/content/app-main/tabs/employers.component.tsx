@@ -1,6 +1,6 @@
-import {ApiRoutes, customFetch} from "../../../../utils/custom-fetch.ts";
-import {useEffect, useState} from "react";
-import {Employer} from "../../../../models/employer.types.ts";
+import { ApiRoutes, customFetch } from "../../../../utils/custom-fetch.ts";
+import { useEffect, useState } from "react";
+import { Employer } from "../../../../models/employer.types.ts";
 
 // TODO: Currently this is not working, need to fix (401 error - Unauthorized)
 function Employers() {

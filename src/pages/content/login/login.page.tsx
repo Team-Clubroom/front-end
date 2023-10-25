@@ -13,7 +13,7 @@ import { Helmet } from "react-helmet";
 function LoginPage() {
   const { registerField, onSubmit, error, isLoading } = useForm(
     emptyLoginForm,
-    validateLoginForm
+    validateLoginForm,
   );
   const { login } = useAuthActionContext();
   const navigate = useNavigate();

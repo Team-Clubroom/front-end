@@ -16,4 +16,4 @@ export const dashboardStyles = {
   menuLinkButton: "flex items-center w-full",
   svgLink: "w-6 h-6 fill-current mr-2",
   mainContent: "flex h-full w-full",
-}; 
+};

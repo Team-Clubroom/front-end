@@ -14,7 +14,7 @@ function SignupPage() {
   const { register } = useAuthActionContext();
   const { registerField, onSubmit, isLoading, error } = useForm(
     signupEmptyForm,
-    validateSignupForm
+    validateSignupForm,
   );
 
   const handleSubmit = async (formValues: SignupFormValues) => {
