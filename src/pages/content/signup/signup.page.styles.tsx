@@ -29,6 +29,6 @@ export const signUpStyles = {
     "mr-2",
   spinner: 
     "inline w-5 h-5 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-gray-600 dark:fill-gray-300",
-  successWrapper: "flex flex-col text-center items-center justify-evenly w-100 py-5 px-4",
-  loginAfterSuccess: "p-2 text-lg text-blue-500 font-semibold",
+  successWrapper: "flex flex-col text-center items-center justify-evenly w-100 pt-5 px-4",
+  loginAfterSuccess: "pt-5 text-lg text-blue-500 font-semibold",
 }; 
