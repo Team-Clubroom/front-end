@@ -8,6 +8,7 @@ import {
 } from "./login.helpers.ts";
 import { useAuthActionContext } from "../../../contexts/auth/auth.context.tsx";
 import FooterComponent from "../../../components/footer/footer.component.tsx";
+import { Helmet } from 'react-helmet';
 
 function LoginPage() {
   const { registerField, onSubmit, error, isLoading } = useForm(
@@ -26,6 +27,9 @@ function LoginPage() {
 
   return (
     <>
+      <Helmet>
+        <title>Log In - CELDV</title>
+      </Helmet>
       <div className={loginStyles.container}>
         <div className={loginStyles.formContainer}>
           <div className={loginStyles.title}>Welcome Back</div>
