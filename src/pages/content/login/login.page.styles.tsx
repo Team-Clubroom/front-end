@@ -14,7 +14,7 @@ export const loginStyles = {
   input:
     "text-sm placeholder-gray-400 pl-9 pr-4 rounded-2xl border border-gray-400 w-full py-2" +
     " focus:outline-none focus:border-blue-400",
-  error: "text-red-500 text-sm italic flex justify-center font-bold",
+  error: "text-red-500 text-sm flex justify-center font-bold",
   submitButton:
     "flex mt-2 items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-blue-500 hover:bg-blue-600 rounded-2xl py-2 w-full transition duration-150 ease-in",
   signInText: "mr-2",

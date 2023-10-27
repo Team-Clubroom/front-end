@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import { signUpStyles } from "./signup.page.styles.tsx";
 import { useAuthActionContext } from "../../../contexts/auth/auth.context.tsx";
 import useForm from "../../../hooks/useForm.ts";
+import FooterComponent from "../../../components/footer/footer.component.tsx";
 import {
   signupEmptyForm,
   SignupFormValues,
@@ -10,26 +11,24 @@ import {
 
 function SignupPage() {
   const { register } = useAuthActionContext();
-  const { registerField, onSubmit, isLoading, error } = useForm(
+  const { registerField, onSubmit, isLoading, error, success } = useForm(
     signupEmptyForm,
     validateSignupForm,
   );
 
   const handleSubmit = async (formValues: SignupFormValues) => {
-    const result = await register({
+    await register({
       user_first_name: formValues.firstName,
       user_last_name: formValues.lastName,
       email: formValues.email,
       password: formValues.password,
     });
-    // TODO: handle success case
-    console.log(result);
   };
 
-  return (
-    <div className={signUpStyles.container}>
-      <div className={signUpStyles.formContainer}>
-        <div className={signUpStyles.title}>Join Us Now</div>
+  const RegistrationForm = () => {
+    return (
+      <>
+        <div className={signUpStyles.title}>Join us Now</div>
         <div className={signUpStyles.subtitle}>
           Enter your credentials to get access to your account
         </div>
@@ -161,12 +160,10 @@ function SignupPage() {
                 />
               </div>
             </div>
-            {/* TODO: style error message here */}
             <span className={signUpStyles.error}>{error}</span>
             <div className="flex w-full">
               <button type="submit" className={signUpStyles.submitButton}>
                 {isLoading ? (
-                  // TODO: add spinner here
                   <div className={signUpStyles.loadDiv}>
                     <span className={signUpStyles.loading}>Registering</span>
                     <svg
@@ -208,8 +205,47 @@ function SignupPage() {
             </div>
           </NavLink>
         </div>
+      </>
+    );
+  };
+
+  const SuccessPopup = () => {
+    return (
+      <div className={signUpStyles.successWrapper}>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="#4BB543"
+          className="w-24 h-24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+        <div className={signUpStyles.title}>Registration Successful</div>
+        <div style={{ color: "grey", marginTop: "0.5rem" }}>
+          Please check your email to verify your account
+        </div>
+        <NavLink to="/login" className={signUpStyles.loginAfterSuccess}>
+          Log In
+        </NavLink>
       </div>
-    </div>
+    );
+  };
+
+  return (
+    <>
+      <div className={signUpStyles.container}>
+        <div className={signUpStyles.formContainer}>
+          {success ? SuccessPopup() : RegistrationForm()}
+        </div>
+      </div>
+      <FooterComponent />
+    </>
   );
 }
 
