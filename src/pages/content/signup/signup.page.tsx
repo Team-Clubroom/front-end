@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import { signUpStyles } from "./signup.page.styles.tsx";
 import { useAuthActionContext } from "../../../contexts/auth/auth.context.tsx";
 import useForm from "../../../hooks/useForm.ts";
+import FooterComponent from "../../../components/footer/footer.component.tsx";
 import {
   signupEmptyForm,
   SignupFormValues,
@@ -219,11 +220,14 @@ function SignupPage() {
   };
 
   return (
-    <div className={signUpStyles.container}>
-      <div className={signUpStyles.formContainer}>
-        {success ? SuccessPopup() : RegistrationForm()}
+    <>
+      <div className={signUpStyles.container}>
+        <div className={signUpStyles.formContainer}>
+          {success ? SuccessPopup() : RegistrationForm()}
+        </div>
       </div>
-    </div>
+      <FooterComponent />
+    </>
   );
 }
 
