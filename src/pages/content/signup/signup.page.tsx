@@ -7,33 +7,24 @@ import {
   SignupFormValues,
   validateSignupForm,
 } from "./signup.helpers.ts";
-import { useState } from "react";
 
 function SignupPage() {
   const { register } = useAuthActionContext();
-  const { registerField, onSubmit, isLoading, error } = useForm(
+  const { registerField, onSubmit, isLoading, error, success } = useForm(
     signupEmptyForm,
     validateSignupForm,
   );
-  const [success, setSuccess] = useState(false);
-  const [serverError, setServerError] = useState("");
 
   const handleSubmit = async (formValues: SignupFormValues) => {
-    try {
-      const result = await register({
-        user_first_name: formValues.firstName,
-        user_last_name: formValues.lastName,
-        email: formValues.email,
-        password: formValues.password,
-      });
-      setSuccess(true);
-    } catch (e) {
-      console.log(e);
-      setServerError((e as Error).message);
-    }
+    await register({
+      user_first_name: formValues.firstName,
+      user_last_name: formValues.lastName,
+      email: formValues.email,
+      password: formValues.password,
+    });
   };
 
-  const registrationForm = () => {
+  const RegistrationForm = () => {
     return (
       <>
         <div className={signUpStyles.title}>Join us Now</div>
@@ -150,12 +141,10 @@ function SignupPage() {
                 />
               </div>
             </div>
-            {/* TODO: style error message here */}
-            <span className={signUpStyles.error}>{error || serverError}</span>
+            <span className={signUpStyles.error}>{error}</span>
             <div className="flex w-full">
               <button type="submit" className={signUpStyles.submitButton}>
                 {isLoading ? (
-                  // TODO: add spinner here
                   <div className={signUpStyles.loadDiv}>
                     <span className={signUpStyles.loading}>Registering</span>
                     <svg
@@ -201,39 +190,38 @@ function SignupPage() {
     );
   };
 
-  const successPopup = () => {
+  const SuccessPopup = () => {
     return (
-      <>
-        <div className={signUpStyles.successWrapper}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-24 h-24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
-          <div className={signUpStyles.title}>Registration Successful</div>
-          <div>Please check your email to verify your account.</div>
-          <NavLink to="/login" className={signUpStyles.loginAfterSuccess}>
-            Log In
-          </NavLink>
+      <div className={signUpStyles.successWrapper}>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="#4BB543"
+          className="w-24 h-24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+        <div className={signUpStyles.title}>Registration Successful</div>
+        <div style={{ color: "grey", marginTop: "0.5rem" }}>
+          Please check your email to verify your account
         </div>
-      </>
+        <NavLink to="/login" className={signUpStyles.loginAfterSuccess}>
+          Log In
+        </NavLink>
+      </div>
     );
   };
 
   return (
     <div className={signUpStyles.container}>
       <div className={signUpStyles.formContainer}>
-        {/*TODO: style popup and possibly extract form to individual component */}
-        {success ? successPopup() : registrationForm()}
+        {success ? SuccessPopup() : RegistrationForm()}
       </div>
     </div>
   );
