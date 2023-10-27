@@ -1,12 +1,15 @@
 import { loginStyles } from "./login.page.styles.tsx";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Navigate, NavLink, useNavigate } from "react-router-dom";
 import useForm from "../../../hooks/useForm.ts";
 import {
   emptyLoginForm,
   LoginFormValues,
   validateLoginForm,
 } from "./login.helpers.ts";
-import { useAuthActionContext } from "../../../contexts/auth/auth.context.tsx";
+import {
+  useAuthActionContext,
+  useAuthContext,
+} from "../../../contexts/auth/auth.context.tsx";
 import FooterComponent from "../../../components/footer/footer.component.tsx";
 import { Helmet } from "react-helmet";
 
@@ -16,7 +19,10 @@ function LoginPage() {
     validateLoginForm,
   );
   const { login } = useAuthActionContext();
+  const currentUser = useAuthContext();
   const navigate = useNavigate();
+
+  if (currentUser) return <Navigate to={"/dashboard"} />;
 
   const handleSubmit = async (formValues: LoginFormValues) => {
     await login(formValues);
