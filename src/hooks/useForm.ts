@@ -7,11 +7,13 @@ const useForm = <T extends Record<keyof T, string>>(
   const [formValues, setFormValues] = useState(initialValues);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     name: keyof T,
   ) => {
+    setError("");
     setFormValues({ ...formValues, [name]: e.target.value });
   };
   const registerField = (name: keyof T) => {
@@ -39,6 +41,7 @@ const useForm = <T extends Record<keyof T, string>>(
         if (errorMessage) return;
         setIsLoading(true);
         await callback(formValues);
+        setSuccess(true);
         resetForm();
       } catch (e) {
         console.log(e);
@@ -57,6 +60,7 @@ const useForm = <T extends Record<keyof T, string>>(
     isLoading,
     onSubmit,
     error,
+    success,
   } as const;
 };
 
