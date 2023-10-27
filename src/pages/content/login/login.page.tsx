@@ -57,7 +57,7 @@ function LoginPage() {
                   type="email"
                   required
                   className={loginStyles.input}
-                  placeholder="Enter your email"
+                  placeholder="johndoe@example.com"
                   {...registerField("email")}
                 />
               </div>
@@ -78,7 +78,16 @@ function LoginPage() {
                   type="password"
                   required
                   className={loginStyles.input}
-                  placeholder="Enter your password"
+                  placeholder={
+                    "\u2022" +
+                    "\u2022" +
+                    "\u2022" +
+                    "\u2022" +
+                    "\u2022" +
+                    "\u2022" +
+                    "\u2022" +
+                    "\u2022"
+                  }
                   {...registerField("password")}
                 />
               </div>
