@@ -17,25 +17,27 @@ import Dashboard from "./pages/content/app-main/tabs/dashboard.component.tsx";
 import SignupPage from "./pages/content/signup/signup.page.tsx";
 
 export default function App() {
-    return (
-        <BrowserRouter>
-            <NavbarComponent/>
-            <Routes>
-                <Route element={<PrivateRouteComponent/>}>                   {/*  private routes go here */}
-                    <Route path="/dashboard" element={<DashboardPage/>}>
-                        <Route index element={<Dashboard/>}/>
-                        <Route path={"/dashboard/employers"} element={<Employers/>}/>
-                        <Route path={"/dashboard/employees"} element={<Employees/>}/>
-                        <Route path={"/dashboard/graph"} element={<TreeGraph/>}/>
-                        <Route path={"*"} element={<ErrorPage/>}/>
-                    </Route>
-                </Route>
-                {/*  public routes go here */}
-                <Route index element={<LandingPage/>}/>
-                <Route path="/login" element={<LoginPage/>}/>
-                <Route path="/signup" element={<SignupPage/>}/>
-                <Route path="*" element={<ErrorPage/>}/>
-            </Routes>
-        </BrowserRouter>
-    );
+  return (
+    <BrowserRouter>
+      <NavbarComponent />
+      <Routes>
+        <Route element={<PrivateRouteComponent />}>
+          {" "}
+          {/*  private routes go here */}
+          <Route path="/dashboard" element={<DashboardPage />}>
+            <Route index element={<Dashboard />} />
+            <Route path={"/dashboard/employers"} element={<Employers />} />
+            <Route path={"/dashboard/employees"} element={<Employees />} />
+            <Route path={"/dashboard/graph"} element={<TreeGraph />} />
+            <Route path={"*"} element={<ErrorPage />} />
+          </Route>
+        </Route>
+        {/*  public routes go here */}
+        <Route index element={<LandingPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
+        <Route path="*" element={<ErrorPage />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }

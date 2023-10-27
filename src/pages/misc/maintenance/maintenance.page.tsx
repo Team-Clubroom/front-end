@@ -8,7 +8,7 @@ function MaintenancePage({}: MaintenancePageProps) {
   return (
     <>
       <Helmet>
-        <title>Under Maitenance - CELDV</title>
+        <title>Under Maintenance - CELDV</title>
       </Helmet>
       <div className={maintenance.maintenancePage}>
         <div className={maintenance.flexContainerClass}>

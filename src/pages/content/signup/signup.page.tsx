@@ -240,6 +240,9 @@ function SignupPage() {
 
   return (
     <>
+      <Helmet>
+        <title>Sign Up - CELDV</title>
+      </Helmet>
       <div className={signUpStyles.container}>
         <div className={signUpStyles.formContainer}>
           {success ? SuccessPopup() : RegistrationForm()}
