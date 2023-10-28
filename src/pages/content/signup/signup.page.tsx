@@ -8,6 +8,7 @@ import {
   SignupFormValues,
   validateSignupForm,
 } from "./signup.helpers.ts";
+import { Helmet } from "react-helmet";
 
 function SignupPage() {
   const { register } = useAuthActionContext();
@@ -239,6 +240,9 @@ function SignupPage() {
 
   return (
     <>
+      <Helmet>
+        <title>Sign Up - CELDV</title>
+      </Helmet>
       <div className={signUpStyles.container}>
         <div className={signUpStyles.formContainer}>
           {success ? SuccessPopup() : RegistrationForm()}
