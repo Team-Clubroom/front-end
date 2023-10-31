@@ -1,1 +1,2 @@
 /api/* http://capstone-api-env-01.eba-cp4z6h2m.us-east-2.elasticbeanstalk.com/:splat 200!
+/* /index.html 200
