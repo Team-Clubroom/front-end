@@ -6,12 +6,18 @@ export enum ApiRoutes {
   Employers = "employers",
 }
 
+const API_URL = import.meta.env.DEV
+  ? "/api"
+  : "http://capstone-api-env-01.eba-cp4z6h2m.us-east-2.elasticbeanstalk.com";
+
+console.log(API_URL);
+
 export const customFetch = async <T = undefined>(
   apiRoute: ApiRoutes,
   method: "GET" | "POST",
   body?: unknown,
 ): Promise<SuccessResponse<T>> => {
-  const response = await fetch(`/api/${apiRoute}`, {
+  const response = await fetch(`${API_URL}/${apiRoute}`, {
     headers: {
       "Content-type": "application/json",
     },
