@@ -20,7 +20,7 @@ type HierarchyNode = HierarchyPointNode<TreeNode>;
 function RootNode({ node }: { node: HierarchyNode }) {
   return (
     <Group top={node.x} left={node.y}>
-      <circle r={node.data.name.length * 3} fill="url('#lg')" />
+      <circle r={node.data.name.length * 2.5} fill="url('#lg')" />
       <text
         dy="-.3em"
         fontSize={9}
