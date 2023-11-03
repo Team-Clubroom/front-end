@@ -34,13 +34,14 @@ function AuthContextProvider({ children }: AuthContextProps) {
   }, []);
 
   const register: RegisterFunc = async (registration) => {
-    return await customFetch(ApiRoutes.Register, "POST", registration);
+    return await customFetch(ApiRoutes.Register, "POST", "", registration);
   };
 
   const login: LoginFunc = async (loginPayload) => {
     const result = await customFetch<{ jwt: string }>(
       ApiRoutes.Login,
       "POST",
+      "",
       loginPayload,
     );
 
@@ -49,7 +50,7 @@ function AuthContextProvider({ children }: AuthContextProps) {
       JSON.stringify({ email: loginPayload.email, jwt: result.data.jwt }),
     );
 
-    setUserAuth({ email: loginPayload.email, token: result.data.jwt });
+    setUserAuth({ email: loginPayload.email, jwt: result.data.jwt });
   };
 
   const logout = async () => {
