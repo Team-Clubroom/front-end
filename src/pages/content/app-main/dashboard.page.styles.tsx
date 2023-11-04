@@ -15,5 +15,5 @@ export const dashboardStyles = {
     " rounded-md transition duration-150 ease-in-out",
   menuLinkButton: "flex items-center w-full",
   svgLink: "w-6 h-6 fill-current mr-2",
-  mainContent: "flex h-full w-full",
+  mainContent: "flex flex-col h-full w-full",
 };
