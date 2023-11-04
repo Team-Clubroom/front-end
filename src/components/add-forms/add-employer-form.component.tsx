@@ -79,6 +79,7 @@ function AddEmployerForm({ isModalOpen }: EmployerFormProps) {
                       type="text"
                       required
                       className={dashboardRootStyles.input}
+                      style={{ width: "15rem" }}
                       placeholder="Employer Name"
                       {...registerField("employerName")}
                     />
@@ -154,6 +155,7 @@ function AddEmployerForm({ isModalOpen }: EmployerFormProps) {
                       type="text"
                       required
                       className={dashboardRootStyles.input}
+                      style={{ width: "15rem" }}
                       placeholder="Business Registration Number"
                       {...registerField("registrationNumber")}
                     />
@@ -185,9 +187,9 @@ function AddEmployerForm({ isModalOpen }: EmployerFormProps) {
                 </div>
               </div>
               <>
-                <div className={dashboardRootStyles.subtitle}>
+                <span className={dashboardRootStyles.subtitle}>
                   Contact Information
-                </div>
+                </span>
                 <div
                   className={
                     "border-b-gray-300 border-b-[1px] border-[solid] mt-1.5 mb-6 w-[96%]"
@@ -214,6 +216,7 @@ function AddEmployerForm({ isModalOpen }: EmployerFormProps) {
                       type="email"
                       required
                       className={dashboardRootStyles.input}
+                      style={{ width: "15rem" }}
                       placeholder="Employer E-Mail"
                       {...registerField("employerEmail")}
                     />
@@ -264,6 +267,7 @@ function AddEmployerForm({ isModalOpen }: EmployerFormProps) {
                       type="text"
                       required
                       className={dashboardRootStyles.input}
+                      style={{ width: "15rem" }}
                       placeholder="Employer Website"
                       {...registerField("employerWebsite")}
                     />

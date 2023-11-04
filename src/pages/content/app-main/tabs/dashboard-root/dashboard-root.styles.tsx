@@ -4,7 +4,7 @@ export const dashboardRootStyles = {
   formContainer:
     "flex flex-col bg-white shadow-md px-4 sm:px-6 md:px-8 lg:px-10 py-8 rounded-3xl w-50 max-w-lg",
   title: "font-medium text-xl sm:text-3xl text-gray-800",
-  subtitle: "mt-4 text-xl sm:text-sm text-gray-800",
+  subtitle: "mt-4 text-xl md:text-md text-gray-800",
   form: "mt-8",
   formField: "flex flex-col mb-5",
   label: "mb-1 text-xs tracking-wide text-gray-600 hidden",
