@@ -20,10 +20,10 @@ type HierarchyNode = HierarchyPointNode<TreeNode>;
 function RootNode({ node }: { node: HierarchyNode }) {
   return (
     <Group top={node.x} left={node.y}>
-      <circle r={node.data.name.length * 2.5} fill="url('#lg')" />
+      <circle r={node.data.name.length * 3} fill="url('#lg')" />
       <text
-        dy="-.3em"
-        fontSize={9}
+        dy="-.2em"
+        fontSize={11}
         fontFamily="Arial"
         textAnchor="middle"
         style={{ pointerEvents: "none" }}
@@ -45,7 +45,7 @@ function RootNode({ node }: { node: HierarchyNode }) {
 }
 
 function ParentNode({ node }: { node: HierarchyNode }) {
-  const width = node.data.name.length * 5;
+  const width = node.data.name.length * 6;
   const height = 40;
   const centerX = -width / 2;
   const centerY = -height / 2;
@@ -65,8 +65,8 @@ function ParentNode({ node }: { node: HierarchyNode }) {
         }}
       />
       <text
-        dy="-.8em"
-        fontSize={9}
+        dy="-.4em"
+        fontSize={11}
         fontFamily="Arial"
         textAnchor="middle"
         style={{ pointerEvents: "none" }}
@@ -88,7 +88,7 @@ function ParentNode({ node }: { node: HierarchyNode }) {
 
 /** Handles rendering Root, Parent, and other Nodes. */
 function Node({ node }: { node: HierarchyNode }) {
-  const width = node.data.name.length * 5;
+  const width = node.data.name.length * 6;
   const height = 40;
   const centerX = -width / 2;
   const centerY = -height / 2;
@@ -116,8 +116,8 @@ function Node({ node }: { node: HierarchyNode }) {
         }}
       />
       <text
-        dy="-.8em"
-        fontSize={9}
+        dy="-.4em"
+        fontSize={11}
         fontFamily="Arial"
         textAnchor="middle"
         fill={green}
