@@ -1,11 +1,12 @@
 import { useAuthContext } from "../../../../../contexts/auth/auth.context.tsx";
 import AddEmployerForm from "../../../../../components/add-forms/add-employer-form.component.tsx";
 import { useState } from "react";
+import { Modal } from "../../../../../components/modal/modal.component.tsx";
 
 function Dashboard() {
   const user = useAuthContext();
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [modalTest, setModalTest] = useState(true);
   const handleModalOpen = () => {
     setIsModalOpen(!isModalOpen);
   };
@@ -24,6 +25,9 @@ function Dashboard() {
         Add Employer
       </button>
       <AddEmployerForm isModalOpen={isModalOpen} />
+      <Modal close={() => setModalTest(false)} isOpen={modalTest}>
+        daijdsfjlkadfjl
+      </Modal>
     </>
   );
 }
