@@ -26,7 +26,8 @@ function SearchBoxComponent({
         placeholder={placeholder}
         onChange={onChange}
         className={
-          "outline-0 py-2.5 rounded-full border focus:bg-gray-800 bg-gray-500 text-white transition-colors w-80"
+          "outline-0 py-2.5 rounded-full border focus:bg-gray-700 hover:bg-gray-600 bg-gray-500 text-white" +
+          " transition-colors w-80"
         }
         style={{ paddingInline: "36px" }}
       />
