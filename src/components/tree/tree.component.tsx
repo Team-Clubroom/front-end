@@ -11,7 +11,6 @@ const pink = "#fe6e9e";
 const blue = "#03c0dc";
 const green = "#26deb0";
 const plum = "#71248e";
-const lightpurple = "#374469";
 const white = "#ffffff";
 export const background = "#272b4d";
 
@@ -155,7 +154,7 @@ function TreeComponent({ width, height, margin = defaultMargin }: TreeProps) {
   return width < 10 ? null : (
     <svg width={width} height={height}>
       <LinearGradient id="lg" from={peach} to={pink} />
-      <rect width={width} height={height} rx={14} fill={background} />
+      <rect width={width} height={height} rx={14} fill="#EEEEEE" />
       <Tree<TreeNode> root={data} size={[yMax, xMax]}>
         {(tree) => (
           <Group top={margin.top} left={margin.left}>
@@ -163,7 +162,7 @@ function TreeComponent({ width, height, margin = defaultMargin }: TreeProps) {
               <LinkHorizontal
                 key={`link-${i}`}
                 data={link}
-                stroke={lightpurple}
+                stroke="#000000"
                 strokeWidth="1"
                 fill="none"
               />
