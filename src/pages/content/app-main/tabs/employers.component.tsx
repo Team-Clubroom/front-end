@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Employer } from "../../../../models/employer.types.ts";
 import { useAuthContext } from "../../../../contexts/auth/auth.context.tsx";
 import { ApiRoutes, customFetch } from "../../../../utils/custom-fetch.ts";
+import { EmployerCard } from "../../../../components/employer-card/employer-card.component.tsx";
+import Grid from '@mui/material/Unstable_Grid2';
 
 function Employers() {
   const [employers, setEmployers] = useState<Employer[]>([]);
@@ -26,11 +28,14 @@ function Employers() {
   }, [user]);
 
   return (
-    <div>
+    <div className="h-full overflow-scroll">
       <span>Employers:</span>
-      {employers.map((employer) => {
-        return <div key={employer.id}>{employer.name}</div>;
-      })}
+      <Grid container rowSpacing={1} columnSpacing={1} maxHeight={100}>
+        {employers.map((employer) => {
+          return <EmployerCard employer={employer}/>
+        })}
+      </Grid>
+      
     </div>
   );
 }
