@@ -10,8 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@emotion/styled": "^11.11.0",
-    "@mui/material": "^5.14.17",
     "@visx/gradient": "^3.3.0",
     "@visx/group": "^3.3.0",
     "@visx/hierarchy": "^3.3.0",

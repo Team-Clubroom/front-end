@@ -3,7 +3,6 @@ import { Employer } from "../../../../models/employer.types.ts";
 import { useAuthContext } from "../../../../contexts/auth/auth.context.tsx";
 import { ApiRoutes, customFetch } from "../../../../utils/custom-fetch.ts";
 import { EmployerCard } from "../../../../components/employer-card/employer-card.component.tsx";
-import Grid from '@mui/material/Unstable_Grid2';
 
 function Employers() {
   const [employers, setEmployers] = useState<Employer[]>([]);
@@ -28,14 +27,13 @@ function Employers() {
   }, [user]);
 
   return (
-    <div className="h-full overflow-scroll">
+    <div className="h-full overflow-x-scroll overflow-y-scroll h-[calc(100vh-85px)] w-full">
       <span>Employers:</span>
-      <Grid container rowSpacing={1} columnSpacing={1} maxHeight={100}>
+      <div className="grid grid-cols-4 gap-2">
         {employers.map((employer) => {
-          return <EmployerCard employer={employer}/>
+          return <EmployerCard employer={employer} />;
         })}
-      </Grid>
-      
+      </div>
     </div>
   );
 }
