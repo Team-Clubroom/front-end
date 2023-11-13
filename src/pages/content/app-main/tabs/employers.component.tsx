@@ -27,7 +27,7 @@ function Employers() {
   }, [user]);
 
   return (
-    <div className="h-full overflow-x-scroll overflow-y-scroll h-[calc(100vh-85px)] w-full">
+    <div className="h-full overflow-x-scroll overflow-y-scroll h-[calc(100vh-80px)] w-full">
       <span>Employers:</span>
       <div className="grid grid-cols-4 gap-2">
         {employers.map((employer) => {
