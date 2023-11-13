@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { Employer } from "../../../../models/employer.types.ts";
 import { useAuthContext } from "../../../../contexts/auth/auth.context.tsx";
-import { ApiRoutes, customFetch } from "../../../../utils/custom-fetch.ts";
+import { ApiRoutes, useFetch } from "../../../../utils/custom-fetch.ts";
 
 function Employers() {
   const [employers, setEmployers] = useState<Employer[]>([]);
+  const { customFetch } = useFetch();
   const user = useAuthContext();
   useEffect(() => {
     const fetchEmployees = async () => {

@@ -6,10 +6,7 @@ import {
   LoginFormValues,
   validateLoginForm,
 } from "./login.helpers.ts";
-import {
-  useAuthActionContext,
-  useAuthContext,
-} from "../../../contexts/auth/auth.context.tsx";
+import { useAuthActionContext } from "../../../contexts/auth/auth.context.tsx";
 import FooterComponent from "../../../components/footer/footer.component.tsx";
 import { Helmet } from "react-helmet";
 
@@ -18,11 +15,13 @@ function LoginPage() {
     emptyLoginForm,
     validateLoginForm,
   );
-  const { login } = useAuthActionContext();
-  const currentUser = useAuthContext();
+  const { login, isLoggedIn } = useAuthActionContext();
   const navigate = useNavigate();
 
-  if (currentUser) return <Navigate to={"/dashboard"} />;
+  // if the user is logged in, don't let them access this page
+  if (isLoggedIn()) {
+    return <Navigate to={"/dashboard"} />;
+  }
 
   const handleSubmit = async (formValues: LoginFormValues) => {
     await login(formValues);

@@ -23,7 +23,8 @@ export interface UserAuth {
 export interface AuthActionFuncs {
   register: RegisterFunc;
   login: LoginFunc;
-  logout: () => void;
+  logout: (timeout?: true) => void;
+  isLoggedIn: () => boolean;
 }
 
 export type RegisterFunc = (
@@ -32,4 +33,4 @@ export type RegisterFunc = (
 
 export type LoginFunc = (loginPayload: LoginPayload) => Promise<void>;
 
-export type AuthState = UserAuth | null;
+export type AuthState = UserAuth | null | "timeout";

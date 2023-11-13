@@ -5,29 +5,31 @@ import {
   AuthState,
   LoginFunc,
   RegisterFunc,
+  UserAuth,
 } from "./auth.types.ts";
-import { ApiRoutes, customFetch } from "../../utils/custom-fetch.ts";
+import { ApiRoutes, useFetch } from "../../utils/custom-fetch.ts";
 
 const AuthContext = React.createContext<AuthState>(null);
-export const useAuthContext = () => React.useContext(AuthContext)!;
+/**
+ * Returns a UserAuth object, null, or "timeout"
+ */
+export const useAuthContext = () => React.useContext(AuthContext) as UserAuth;
 
 const AuthActionContext = React.createContext<AuthActionFuncs | null>(null);
 export const useAuthActionContext = () => React.useContext(AuthActionContext)!;
 
 const USER_STORAGE_KEY = "CELDV_USER_INFO";
-export const API_URL = `${import.meta.env.VITE_API_HOST}:${
-  import.meta.env.VITE_API_PORT
-}`;
 
 function AuthContextProvider({ children }: AuthContextProps) {
   const [userAuth, setUserAuth] = useState<AuthState>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const { customFetch } = useFetch();
 
   useEffect(() => {
     // check local storage for a user object
     const storedUser = localStorage.getItem(USER_STORAGE_KEY);
     if (storedUser) {
-      const userObj: AuthState = JSON.parse(storedUser);
+      const userObj: UserAuth = JSON.parse(storedUser);
       setUserAuth(userObj);
     }
     setIsLoading(false);
@@ -50,17 +52,24 @@ function AuthContextProvider({ children }: AuthContextProps) {
       JSON.stringify({ email: loginPayload.email, jwt: result.data.jwt }),
     );
 
-    setUserAuth({ email: loginPayload.email, jwt: result.data.jwt });
+    setUserAuth({
+      email: loginPayload.email,
+      jwt: result.data.jwt,
+    });
   };
 
-  const logout = async () => {
+  const isLoggedIn = () => {
+    return userAuth !== null && userAuth !== "timeout";
+  };
+
+  const logout = async (timeout?: true) => {
     localStorage.removeItem(USER_STORAGE_KEY);
-    setUserAuth(null);
+    setUserAuth(timeout ? "timeout" : null);
   };
 
   return (
-    <AuthActionContext.Provider value={{ register, login, logout }}>
-      <AuthContext.Provider value={userAuth}>
+    <AuthActionContext.Provider value={{ register, login, logout, isLoggedIn }}>
+      <AuthContext.Provider value={userAuth as UserAuth}>
         {/*TODO: add custom loader here*/}
         {isLoading ? <>Loading...</> : children}
       </AuthContext.Provider>

@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { navbarStyles } from "./navbar.styles.tsx";
 import {
   useAuthActionContext,
@@ -9,13 +9,9 @@ import SearchBoxComponent from "../search-box/search-box.component.tsx";
 export const NavbarComponent = () => {
   const { logout } = useAuthActionContext();
   const currentUser = useAuthContext();
-  const navigate = useNavigate();
 
-  const handleLogout = async () => {
+  const handleLogout = () => {
     logout();
-    setTimeout(() => {
-      navigate("/login");
-    }, 0);
   };
 
   return (
