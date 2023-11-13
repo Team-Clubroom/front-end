@@ -1,43 +1,46 @@
 import React from "react";
 import { createPortal } from "react-dom";
+import { dashboardRootStyles } from "../../pages/content/app-main/tabs/dashboard-root/dashboard-root.styles.tsx";
 
-interface ModalProps {
-  children: React.ReactNode;
+export interface ModalVisibilityProps {
   isOpen: boolean;
   close: () => void;
 }
 
-export function Modal({ children, isOpen, close }: ModalProps) {
+interface BaseModalProps extends ModalVisibilityProps {
+  title: string;
+  children: React.ReactNode;
+}
+
+export function Modal({ children, isOpen, close, title }: BaseModalProps) {
   if (!isOpen) return null;
   const modal = (
     <div
-      onClick={() => close()}
-      className={"fixed"}
-      style={{
-        width: "100vw",
-        height: "100vh",
-        zIndex: "100",
-        display: "grid",
-        placeItems: "center",
-        background: "rgba(0,0,0,0.2)",
-      }}
+      onClick={close}
+      className={
+        "fixed w-screen h-screen z-50 grid place-items-center bg-opacity-20 bg-black"
+      }
     >
       {/*  When clicking the modal body it should NOT close so we stop the event propagation */}
       <div
         onClick={(e) => e.stopPropagation()}
-        style={{
-          background: "white",
-          display: "flex",
-          flexDirection: "column",
-          borderRadius: "1rem",
-          padding: "1rem",
-        }}
+        className={dashboardRootStyles.formContainer}
       >
-        <div>
-          <button className={"float-right"} onClick={() => close()}>
-            X
+        <div className={"flex items-center justify-between"}>
+          <div className={dashboardRootStyles.title}>{title}</div>
+          <button
+            onClick={close}
+            type={"button"}
+            className={"rounded-full flex hover:bg-gray-300 opacity-50 p-1"}
+          >
+            <span className={`material-symbols-outlined`}>close</span>
           </button>
         </div>
+        <div
+          className={
+            "border-b-gray-300 border-b-2 border-[solid] mt-1.5 w-full"
+          }
+        ></div>
         {children}
       </div>
     </div>

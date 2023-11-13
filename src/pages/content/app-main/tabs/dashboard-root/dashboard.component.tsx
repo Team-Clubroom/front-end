@@ -1,15 +1,11 @@
 import { useAuthContext } from "../../../../../contexts/auth/auth.context.tsx";
 import AddEmployerForm from "../../../../../components/add-forms/add-employer-form.component.tsx";
-import { useState } from "react";
-import { Modal } from "../../../../../components/modal/modal.component.tsx";
+import { useModal } from "../../../../../hooks/useModal.ts";
 
 function Dashboard() {
   const user = useAuthContext();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalTest, setModalTest] = useState(true);
-  const handleModalOpen = () => {
-    setIsModalOpen(!isModalOpen);
-  };
+  const [isEmployerModalOpen, openEmployerModal, closeEmployerModal] =
+    useModal();
 
   return (
     <>
@@ -19,15 +15,15 @@ function Dashboard() {
       </div>
       <button
         type={"button"}
-        onClick={handleModalOpen}
+        onClick={openEmployerModal}
         className={"bg-blue-400 rounded-lg w-fit m-4 p-[0.65rem]"}
       >
         Add Employer
       </button>
-      <AddEmployerForm isModalOpen={isModalOpen} />
-      <Modal close={() => setModalTest(false)} isOpen={modalTest}>
-        daijdsfjlkadfjl
-      </Modal>
+      <AddEmployerForm
+        isOpen={isEmployerModalOpen}
+        close={closeEmployerModal}
+      />
     </>
   );
 }
