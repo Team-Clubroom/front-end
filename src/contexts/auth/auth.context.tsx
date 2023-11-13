@@ -36,14 +36,13 @@ function AuthContextProvider({ children }: AuthContextProps) {
   }, []);
 
   const register: RegisterFunc = async (registration) => {
-    return await customFetch(ApiRoutes.Register, "POST", "", registration);
+    return await customFetch(ApiRoutes.Register, "POST", registration);
   };
 
   const login: LoginFunc = async (loginPayload) => {
     const result = await customFetch<{ jwt: string }>(
       ApiRoutes.Login,
       "POST",
-      "",
       loginPayload,
     );
 

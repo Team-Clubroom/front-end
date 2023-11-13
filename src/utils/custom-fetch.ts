@@ -1,5 +1,8 @@
 import { SuccessResponse } from "../models/api.types.ts";
-import { useAuthActionContext } from "../contexts/auth/auth.context.tsx";
+import {
+  useAuthActionContext,
+  useAuthContext,
+} from "../contexts/auth/auth.context.tsx";
 
 export enum ApiRoutes {
   Register = "register",
@@ -9,17 +12,17 @@ export enum ApiRoutes {
 
 export const useFetch = () => {
   const authFunctions = useAuthActionContext();
+  const user = useAuthContext();
 
   const customFetch = async <T = undefined>(
     apiRoute: ApiRoutes,
     method: "GET" | "POST",
-    jwt: string,
     body?: unknown,
   ): Promise<SuccessResponse<T>> => {
     const requestInit: RequestInit = {
       headers: {
         "Content-type": "application/json",
-        Authorization: `Bearer ${jwt}`,
+        Authorization: `Bearer ${user?.jwt || ""}`,
       },
       method,
     };

@@ -12,7 +12,6 @@ function Employers() {
       const response = await customFetch<Employer[]>(
         ApiRoutes.Employers,
         "GET",
-        user.jwt,
       );
       return response.data;
     };
