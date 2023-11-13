@@ -1,5 +1,5 @@
 /* plugin imports */
-import {BrowserRouter, Link, Route, Routes,} from "react-router-dom"; /* component imports */
+import {BrowserRouter, Route, Routes,} from "react-router-dom"; /* component imports */
 import LoginPage from "./pages/content/login/login.page.tsx";
 import LandingPage from "./pages/content/landing/landing.page.tsx";
 import DashboardPage from "./pages/content/app-main/dashboard.page.tsx";
@@ -11,6 +11,7 @@ import Employees from "./pages/content/app-main/tabs/employees.component.tsx";
 import TreeGraph from "./pages/content/app-main/tabs/tree-graph.component.tsx";
 import Dashboard from "./pages/content/app-main/tabs/dashboard.component.tsx";
 import SignupPage from "./pages/content/signup/signup.page.tsx";
+import {SessionTimeout} from "./pages/misc/session-timeout/session-timeout.component.tsx";
 
 export default function App() {
   return (
@@ -31,14 +32,7 @@ export default function App() {
         <Route index element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
-        <Route
-          path="/timeout"
-          element={
-            <div>
-              Session timed out! Please login <Link to={"/login"}>Login</Link>
-            </div>
-          }
-        />
+        <Route path="/timeout" element={<SessionTimeout />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>
