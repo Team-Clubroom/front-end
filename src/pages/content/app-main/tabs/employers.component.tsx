@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Employer } from "../../../../models/employer.types.ts";
 import { useAuthContext } from "../../../../contexts/auth/auth.context.tsx";
 import { ApiRoutes, customFetch } from "../../../../utils/custom-fetch.ts";
+import SearchBoxComponent from "../../../../components/search-box/search-box.component.tsx";
 
 function Employers() {
   const [employers, setEmployers] = useState<Employer[]>([]);
@@ -26,7 +27,15 @@ function Employers() {
   }, [user]);
 
   return (
-    <div>
+    <div className={"w-full"}>
+      <div className={"w-[320px] m-auto"}>
+        <SearchBoxComponent
+          placeholder={"Search employers"}
+          onSearch={(value) => {
+            console.log(value);
+          }}
+        />
+      </div>
       <span>Employers:</span>
       {employers.map((employer) => {
         return <div key={employer.id}>{employer.name}</div>;
