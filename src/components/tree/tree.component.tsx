@@ -4,71 +4,25 @@ import { hierarchy, Tree } from "@visx/hierarchy";
 import { HierarchyPointNode } from "@visx/hierarchy/lib/types";
 import { LinkHorizontal } from "@visx/shape";
 import { LinearGradient } from "@visx/gradient";
+import { companyTree, TreeNode } from "./data/data.component";
 
 const peach = "#fd9b93";
 const pink = "#fe6e9e";
 const blue = "#03c0dc";
 const green = "#26deb0";
 const plum = "#71248e";
-const lightpurple = "#374469";
 const white = "#ffffff";
 export const background = "#272b4d";
 
-interface TreeNode {
-  name: string;
-  children?: this[];
-}
-
 type HierarchyNode = HierarchyPointNode<TreeNode>;
-
-const rawTree: TreeNode = {
-  name: "T",
-  children: [
-    {
-      name: "A",
-      children: [
-        { name: "A1" },
-        { name: "A2" },
-        { name: "A3" },
-        {
-          name: "C",
-          children: [
-            {
-              name: "C1",
-            },
-            {
-              name: "D",
-              children: [
-                {
-                  name: "D1",
-                },
-                {
-                  name: "D2",
-                },
-                {
-                  name: "D3",
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    },
-    { name: "Z" },
-    {
-      name: "B",
-      children: [{ name: "B1" }, { name: "B2" }, { name: "B3" }],
-    },
-  ],
-};
 
 function RootNode({ node }: { node: HierarchyNode }) {
   return (
     <Group top={node.x} left={node.y}>
-      <circle r={12} fill="url('#lg')" />
+      <circle r={node.data.name.length * 3} fill="url('#lg')" />
       <text
-        dy=".33em"
-        fontSize={9}
+        dy="-.2em"
+        fontSize={11}
         fontFamily="Arial"
         textAnchor="middle"
         style={{ pointerEvents: "none" }}
@@ -76,13 +30,22 @@ function RootNode({ node }: { node: HierarchyNode }) {
       >
         {node.data.name}
       </text>
+      <text
+        dy="1.7em"
+        fontSize={9}
+        fontFamily="Arial"
+        textAnchor="middle"
+        style={{ pointerEvents: "none" }}
+        fill={plum}>
+        {node.data.establishmentDate}
+      </text>
     </Group>
   );
 }
 
 function ParentNode({ node }: { node: HierarchyNode }) {
-  const width = 40;
-  const height = 20;
+  const width = node.data.name.length * 6;
+  const height = 40;
   const centerX = -width / 2;
   const centerY = -height / 2;
 
@@ -101,8 +64,8 @@ function ParentNode({ node }: { node: HierarchyNode }) {
         }}
       />
       <text
-        dy=".33em"
-        fontSize={9}
+        dy="-.4em"
+        fontSize={11}
         fontFamily="Arial"
         textAnchor="middle"
         style={{ pointerEvents: "none" }}
@@ -110,14 +73,22 @@ function ParentNode({ node }: { node: HierarchyNode }) {
       >
         {node.data.name}
       </text>
+      <text
+        dy="1.2em"
+        fontSize={9}
+        fontFamily="Arial"
+        textAnchor="middle"
+        style={{ pointerEvents: "none" }}
+        fill={white}
+      >{node.data.establishmentDate}</text>
     </Group>
   );
 }
 
 /** Handles rendering Root, Parent, and other Nodes. */
 function Node({ node }: { node: HierarchyNode }) {
-  const width = 40;
-  const height = 20;
+  const width = node.data.name.length * 6;
+  const height = 40;
   const centerX = -width / 2;
   const centerY = -height / 2;
   const isRoot = node.depth === 0;
@@ -144,14 +115,24 @@ function Node({ node }: { node: HierarchyNode }) {
         }}
       />
       <text
-        dy=".33em"
-        fontSize={9}
+        dy="-.4em"
+        fontSize={11}
         fontFamily="Arial"
         textAnchor="middle"
         fill={green}
         style={{ pointerEvents: "none" }}
       >
         {node.data.name}
+      </text>
+      <text
+        dy="1.2em"
+        fontSize={9}
+        fontFamily="Arial"
+        textAnchor="middle"
+        fill={green}
+        style={{ pointerEvents: "none" }}
+      >
+      {node.data.establishmentDate}
       </text>
     </Group>
   );
@@ -166,14 +147,14 @@ export type TreeProps = {
 };
 
 function TreeComponent({ width, height, margin = defaultMargin }: TreeProps) {
-  const data = useMemo(() => hierarchy(rawTree), []);
+  const data = useMemo(() => hierarchy(companyTree), []);
   const yMax = height - margin.top - margin.bottom;
   const xMax = width - margin.left - margin.right;
 
   return width < 10 ? null : (
     <svg width={width} height={height}>
       <LinearGradient id="lg" from={peach} to={pink} />
-      <rect width={width} height={height} rx={14} fill={background} />
+      <rect width={width} height={height} rx={14} fill="#EEEEEE" />
       <Tree<TreeNode> root={data} size={[yMax, xMax]}>
         {(tree) => (
           <Group top={margin.top} left={margin.left}>
@@ -181,7 +162,7 @@ function TreeComponent({ width, height, margin = defaultMargin }: TreeProps) {
               <LinkHorizontal
                 key={`link-${i}`}
                 data={link}
-                stroke={lightpurple}
+                stroke="#000000"
                 strokeWidth="1"
                 fill="none"
               />

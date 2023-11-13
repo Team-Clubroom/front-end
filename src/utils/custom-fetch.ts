@@ -9,15 +9,21 @@ export enum ApiRoutes {
 export const customFetch = async <T = undefined>(
   apiRoute: ApiRoutes,
   method: "GET" | "POST",
+  jwt: string,
   body?: unknown,
 ): Promise<SuccessResponse<T>> => {
-  const response = await fetch(`/api/${apiRoute}`, {
+  const requestInit: RequestInit = {
     headers: {
       "Content-type": "application/json",
+      Authorization: `Bearer ${jwt}`,
     },
     method,
-    ...(body ? { body: JSON.stringify(body) } : {}),
-  });
+  };
+
+  if (body) {
+    requestInit.body = JSON.stringify(body);
+  }
+  const response = await fetch(`/api/${apiRoute}`, requestInit);
 
   const result = await response.json();
   if (response.ok) {

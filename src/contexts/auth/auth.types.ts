@@ -17,7 +17,7 @@ export interface AuthContextProps {
 
 export interface UserAuth {
   email: string;
-  token: string;
+  jwt: string;
 }
 
 export interface AuthActionFuncs {
