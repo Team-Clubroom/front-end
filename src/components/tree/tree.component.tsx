@@ -36,7 +36,8 @@ function RootNode({ node }: { node: HierarchyNode }) {
         fontFamily="Arial"
         textAnchor="middle"
         style={{ pointerEvents: "none" }}
-        fill={plum}>
+        fill={plum}
+      >
         {node.data.establishmentDate}
       </text>
     </Group>
@@ -80,7 +81,9 @@ function ParentNode({ node }: { node: HierarchyNode }) {
         textAnchor="middle"
         style={{ pointerEvents: "none" }}
         fill={white}
-      >{node.data.establishmentDate}</text>
+      >
+        {node.data.establishmentDate}
+      </text>
     </Group>
   );
 }
@@ -132,7 +135,7 @@ function Node({ node }: { node: HierarchyNode }) {
         fill={green}
         style={{ pointerEvents: "none" }}
       >
-      {node.data.establishmentDate}
+        {node.data.establishmentDate}
       </text>
     </Group>
   );

@@ -5,6 +5,7 @@ import { ApiRoutes, customFetch } from "../../../../utils/custom-fetch.ts";
 import SearchBoxComponent from "../../../../components/search-box/search-box.component.tsx";
 
 function Employers() {
+  const [search, setSearch] = useState("");
   const [employers, setEmployers] = useState<Employer[]>([]);
   const user = useAuthContext();
   useEffect(() => {
@@ -31,14 +32,20 @@ function Employers() {
       <div className={"w-[320px] m-auto"}>
         <SearchBoxComponent
           placeholder={"Search employers"}
-          onSearch={(value) => {
-            console.log(value);
+          onChange={(value) => {
+            setSearch(value.target.value);
           }}
         />
       </div>
       <span>Employers:</span>
       {employers.map((employer) => {
-        return <div key={employer.id}>{employer.name}</div>;
+        if (search != "") {
+          if (employer.name.includes(search)) {
+            return <div key={employer.id}>{employer.name}</div>;
+          }
+        } else {
+          return <div key={employer.id}>{employer.name}</div>;
+        }
       })}
     </div>
   );
