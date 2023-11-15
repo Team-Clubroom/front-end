@@ -2,16 +2,16 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 interface SessionTimeoutProps {
-  redirectDurationMinutes?: number;
+  redirectDurationSeconds?: number;
 }
 
 export const SessionTimeout = ({
-  redirectDurationMinutes = 1,
+  redirectDurationSeconds = 60,
 }: SessionTimeoutProps) => {
   const navigate = useNavigate();
 
   const [secondsRemaining, setSecondsRemaining] = useState(
-    redirectDurationMinutes * 60,
+    redirectDurationSeconds,
   );
 
   useEffect(() => {
@@ -29,25 +29,24 @@ export const SessionTimeout = ({
     }
   }, [secondsRemaining, navigate]);
 
-  const minutes = Math.floor(secondsRemaining / 60);
-  const seconds = secondsRemaining % 60;
-
   return (
-    <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center p-8 bg-red-500 text-white rounded-3xl shadow-md">
-      <p className="text-2xl font-semibold mb-4">Session Timeout</p>
+    <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center p-8 bg-gray-400 text-white rounded-3xl shadow-md">
+      <p className="text-2xl font-semibold mb-4 text-gray-700">
+        Session Timed Out!
+      </p>
       <p className="text-lg my-4">
         You will be redirected in{" "}
         <span className="font-bold">
-          {String(minutes).padStart(2, "0")}:{String(seconds).padStart(2, "0")}
+          {String(secondsRemaining).padStart(2, "0")}
         </span>{" "}
-        minutes.
+        seconds
       </p>
       <p className="text-lg mt-8">
         Please{" "}
-        <Link to="/login" className="text-blue-300 underline">
+        <Link to="/login" className="text-blue-500 underline">
           log in
         </Link>{" "}
-        again.
+        again
       </p>
     </div>
   );
