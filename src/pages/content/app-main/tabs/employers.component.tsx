@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Employer } from "../../../../models/employer.types.ts";
 import { useAuthContext } from "../../../../contexts/auth/auth.context.tsx";
 import { ApiRoutes, customFetch } from "../../../../utils/custom-fetch.ts";
+import { EmployerCard } from "../../../../components/employer-card/employer-card.component.tsx";
 
 function Employers() {
   const [employers, setEmployers] = useState<Employer[]>([]);
@@ -26,11 +27,15 @@ function Employers() {
   }, [user]);
 
   return (
-    <div>
-      <span>Employers:</span>
-      {employers.map((employer) => {
-        return <div key={employer.id}>{employer.name}</div>;
-      })}
+    <div className="w-full h-full overflow-x-hidden overflow-y-scroll p-3">
+      <div
+        style={{ gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))" }}
+        className="grid gap-3"
+      >
+        {employers.map((employer) => {
+          return <EmployerCard employer={employer} key={employer.id} />;
+        })}
+      </div>
     </div>
   );
 }
