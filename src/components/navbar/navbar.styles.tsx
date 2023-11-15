@@ -1,6 +1,6 @@
 export const navbarStyles = {
   navbar:
-    "bg-gray-500 w-screen flex justify-between items-center mx-auto px-8 h-[85px] sticky top-0 z-50",
+    "bg-gray-500 w-screen flex justify-between items-center mx-auto px-8 h-[65px] sticky top-0 z-50",
   logoLink: "text-white hover:text-white cursor-pointer hover:scale-125",
   searchForm:
     "hidden sm:flex flex-shrink flex-grow-0 justify-start px-2 w-[25rem]",

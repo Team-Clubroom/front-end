@@ -1,5 +1,5 @@
 import { useAuthContext } from "../../../contexts/auth/auth.context.tsx";
-import { dashboardStyles } from "./dashboard.page.styles.tsx";
+import { dashboardStyles } from "./dashboard.page.styles.ts";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
@@ -22,8 +22,12 @@ function DashboardPage() {
       <Helmet>
         <title>{title}</title>
       </Helmet>
-      <div className={dashboardStyles.view}>
-        <div className={dashboardStyles.sidebar}>
+      <div
+        // subtract the height of the top bar
+        style={{ height: "calc(100vh - 65px)" }}
+        className={dashboardStyles.view}
+      >
+        <div className={dashboardStyles.sidebar} id={"side-menu"}>
           <div id="profile" className={dashboardStyles.profile}>
             {/*  // TODO: Change later to be name instead of email */}
             <h2 className={dashboardStyles.profile_name}>{user.email}</h2>
@@ -78,7 +82,7 @@ function DashboardPage() {
             </NavLink>
           </div>
         </div>
-        <div className={dashboardStyles.mainContent}>
+        <div className={dashboardStyles.mainContent} id={"main-content"}>
           <Outlet />
         </div>
       </div>

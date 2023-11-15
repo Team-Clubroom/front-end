@@ -27,11 +27,13 @@ function Employers() {
   }, [user]);
 
   return (
-    <div className="h-full overflow-x-scroll overflow-y-scroll h-[calc(100vh-80px)] w-full">
-      <span>Employers:</span>
-      <div className="grid grid-cols-4 gap-2">
+    <div className="w-full h-full overflow-x-hidden overflow-y-scroll p-3">
+      <div
+        style={{ gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))" }}
+        className="grid gap-3"
+      >
         {employers.map((employer) => {
-          return <EmployerCard employer={employer} />;
+          return <EmployerCard employer={employer} key={employer.id} />;
         })}
       </div>
     </div>

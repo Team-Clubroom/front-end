@@ -1,0 +1,28 @@
+.employer-card {
+    @apply flex flex-col gap-2 basis-52 grow shrink-0 bg-gray-200 p-4 justify-start rounded-2xl;
+}
+
+.employer-company-wrapper {
+    @apply flex flex-col gap-1;
+}
+
+
+.employer-sector {
+    width: 4rem;
+    text-align: center;
+    background-color: #7777a9;
+    color: white;
+    @apply text-white rounded-full text-base;
+}
+
+.employer-name {
+    @apply text-xl;
+}
+
+.employer-date-wrapper {
+    @apply flex text-sm gap-2;
+}
+
+.employer-address-wrapper {
+    @apply flex flex-col text-sm text-gray-500 mt-auto border-t border-gray-300 pt-2;
+}
