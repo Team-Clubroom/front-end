@@ -3,13 +3,13 @@ export interface Employer {
   name: string;
   address: {
     line1: string;
-    line2: string;
+    line2?: string;
     city: string;
     state: string;
     zipCode: string;
   };
   foundedDate: string;
-  dissolvedDate: string;
+  dissolvedDate?: string;
   bankruptcyDate: string;
   industrySectorCode: number;
   status: string;
