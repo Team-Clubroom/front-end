@@ -39,6 +39,8 @@ function Employers() {
     }
   }
 
+  const employerNodes = employers.map(compareSearch);
+
   return (
     <div className="w-full h-full overflow-x-hidden overflow-y-scroll p-3">
       <div className={"w-[320px] m-auto pb-3"}>
@@ -49,12 +51,20 @@ function Employers() {
           }}
         />
       </div>
-      <div
-        style={{ gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))" }}
-        className="grid gap-3"
-      >
-        {employers.map(compareSearch)}
-      </div>
+      {employerNodes.some((node) => node !== undefined) ? (
+        <div
+          style={{
+            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+          }}
+          className="grid gap-3"
+        >
+          {employerNodes}
+        </div>
+      ) : (
+        <div className={"text-center pt-72 text-gray-500"}>
+          No employers match the search
+        </div>
+      )}
     </div>
   );
 }
