@@ -40,7 +40,7 @@ function Employers() {
       <span>Employers:</span>
       {employers.map((employer) => {
         if (search != "") {
-          if (employer.name.includes(search)) {
+          if (employer.name.toLowerCase().includes(search.toLowerCase())) {
             return <div key={employer.id}>{employer.name}</div>;
           }
         } else {
