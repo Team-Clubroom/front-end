@@ -36,11 +36,7 @@ export function Modal({ children, isOpen, close, title }: BaseModalProps) {
             <span className={`material-symbols-outlined`}>close</span>
           </button>
         </div>
-        <div
-          className={
-            "border-b-gray-300 border-b-2 border-[solid] mt-1.5 w-full"
-          }
-        ></div>
+        <div className={"border-b-gray-300 border-b mt-1.5 w-full"}></div>
         {children}
       </div>
     </div>

@@ -7,6 +7,7 @@ import {
 import useForm from "../../hooks/useForm.ts";
 import { Modal, ModalVisibilityProps } from "../modal/modal.component.tsx";
 import { InputComponent } from "../input/input.component.tsx";
+import { MaterialIcon } from "../../utils/icons.ts";
 
 interface EmployerFormProps extends ModalVisibilityProps {}
 
@@ -27,7 +28,7 @@ function AddEmployerForm({ isOpen, close }: EmployerFormProps) {
         >
           <InputComponent
             fieldRegistration={registerField("employerName")}
-            iconName={"work"}
+            iconName={MaterialIcon.Work}
             placeholder={"Tesla"}
             id={"employer_name"}
             label={"Enter the employer name"}
@@ -35,21 +36,21 @@ function AddEmployerForm({ isOpen, close }: EmployerFormProps) {
           <div className={"form-row"}>
             <InputComponent
               fieldRegistration={registerField("establishmentDate")}
-              iconName={"event"}
+              iconName={MaterialIcon.Event}
               placeholder={"mm/dd/yyyy"}
               id={"est_date"}
               label={"Enter the est. date"}
             />
             <InputComponent
               fieldRegistration={registerField("dissolvedDate")}
-              iconName={"event"}
+              iconName={MaterialIcon.Event}
               placeholder={"mm/dd/yyyy"}
               id={"dis_date"}
               label={"Enter the dissolved date"}
             />
             <InputComponent
               fieldRegistration={registerField("bankruptcyDate")}
-              iconName={"event"}
+              iconName={MaterialIcon.Event}
               placeholder={"mm/dd/yyyy"}
               id={"bank_date"}
               label={"Enter the bankruptcy date"}
@@ -58,21 +59,21 @@ function AddEmployerForm({ isOpen, close }: EmployerFormProps) {
           <div className={"sector form-row"}>
             <InputComponent
               fieldRegistration={registerField("industrySectorName")}
-              iconName={"event"}
+              iconName={MaterialIcon.Action_Key}
               placeholder={"Food"}
               id={"sector_name"}
               label={"Select the sector name"}
             />
             <InputComponent
               fieldRegistration={registerField("legalStatus")}
-              iconName={"event"}
+              iconName={MaterialIcon.Balance}
               placeholder={"Active"}
               id={"legal_status"}
               label={"Enter the legal status"}
             />
             <InputComponent
               fieldRegistration={registerField("status")}
-              iconName={"event"}
+              iconName={MaterialIcon.Work_Update}
               placeholder={"LLC"}
               id={"status"}
               label={"Enter the status"}
@@ -88,14 +89,14 @@ function AddEmployerForm({ isOpen, close }: EmployerFormProps) {
           </div>
           <InputComponent
             fieldRegistration={registerField("addressLine1")}
-            iconName={"event"}
+            iconName={MaterialIcon.Map}
             placeholder={"1234 Cantrell Rd"}
             id={"line_1"}
             label={"Enter address line 1"}
           />
           <InputComponent
             fieldRegistration={registerField("addressLine2")}
-            iconName={"event"}
+            iconName={MaterialIcon.Map}
             placeholder={"Apt 206"}
             id={"line_2"}
             label={"Enter address line 2"}
@@ -103,21 +104,21 @@ function AddEmployerForm({ isOpen, close }: EmployerFormProps) {
           <div className={"form-row"}>
             <InputComponent
               fieldRegistration={registerField("state")}
-              iconName={"event"}
+              iconName={MaterialIcon.Flag}
               placeholder={"Arkansas"}
               id={"state"}
               label={"Select the state"}
             />
             <InputComponent
               fieldRegistration={registerField("city")}
-              iconName={"event"}
+              iconName={MaterialIcon.Location_City}
               placeholder={"Little Rock"}
               id={"city"}
               label={"Enter the city name"}
             />
             <InputComponent
               fieldRegistration={registerField("zipcode")}
-              iconName={"event"}
+              iconName={MaterialIcon.Location_On}
               placeholder={"72222"}
               id={"zip_code"}
               label={"Enter the ZIP code"}
