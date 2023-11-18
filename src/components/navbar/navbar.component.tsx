@@ -1,20 +1,16 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { navbarStyles } from "./navbar.styles.tsx";
 import {
   useAuthActionContext,
   useAuthContext,
 } from "../../contexts/auth/auth.context.tsx";
+import SearchBoxComponent from "../search-box/search-box.component.tsx";
 
 export const NavbarComponent = () => {
-  const { logout } = useAuthActionContext();
-  const currentUser = useAuthContext();
-  const navigate = useNavigate();
+  const { logout, isLoggedIn } = useAuthActionContext();
 
-  const handleLogout = async () => {
+  const handleLogout = () => {
     logout();
-    setTimeout(() => {
-      navigate("/login");
-    }, 0);
   };
 
   return (
@@ -26,7 +22,13 @@ export const NavbarComponent = () => {
       </div>
       <div className={navbarStyles.userSection}>
         <div className="flex justify-end items-center relative">
-          {!currentUser ? (
+          {isLoggedIn() ? (
+            <div className={navbarStyles.authButtons}>
+              <button className={navbarStyles.authLink} onClick={handleLogout}>
+                <div className={navbarStyles.linkText}>Log Out</div>
+              </button>
+            </div>
+          ) : (
             <div className={navbarStyles.authButtons}>
               <NavLink className={navbarStyles.authLink} to="/login">
                 <div className={navbarStyles.linkText}>Log In</div>
@@ -34,12 +36,6 @@ export const NavbarComponent = () => {
               <NavLink className={navbarStyles.authLink} to="/signup">
                 <div className={navbarStyles.linkText}>Sign Up</div>
               </NavLink>
-            </div>
-          ) : (
-            <div className={navbarStyles.authButtons}>
-              <button className={navbarStyles.authLink} onClick={handleLogout}>
-                <div className={navbarStyles.linkText}>Log Out</div>
-              </button>
             </div>
           )}
         </div>

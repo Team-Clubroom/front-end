@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
 import { Employer } from "../../../../models/employer.types.ts";
 import { useAuthContext } from "../../../../contexts/auth/auth.context.tsx";
-import { ApiRoutes, customFetch } from "../../../../utils/custom-fetch.ts";
 import { EmployerCard } from "../../../../components/employer-card/employer-card.component.tsx";
 import SearchBoxComponent from "../../../../components/search-box/search-box.component.tsx";
+import { ApiRoutes, useFetch } from "../../../../utils/custom-fetch.ts";
 
 function Employers() {
   const [search, setSearch] = useState("");
   const [employers, setEmployers] = useState<Employer[]>([]);
+  const { customFetch } = useFetch();
   const user = useAuthContext();
   useEffect(() => {
     const fetchEmployees = async () => {
       const response = await customFetch<Employer[]>(
         ApiRoutes.Employers,
         "GET",
-        user.jwt,
       );
       return response.data;
     };

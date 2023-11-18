@@ -3,7 +3,11 @@ import { Navigate, Outlet } from "react-router-dom";
 
 function PrivateRouteComponent() {
   const user = useAuthContext();
-  return user ? <Outlet /> : <Navigate to={"/login"} />;
+  if ((user as unknown as string) === "timeout") {
+    return <Navigate to={"/timeout"} />;
+  } else if (user === null) {
+    return <Navigate to={"/login"} />;
+  } else return <Outlet />;
 }
 
 export default PrivateRouteComponent;
