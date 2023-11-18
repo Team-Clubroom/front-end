@@ -2,17 +2,17 @@ export const dashboardRootStyles = {
   container:
     "w-full h-full flex flex-col items-center justify-center bg-cool-gray-100",
   formContainer:
-    "flex flex-col bg-white shadow-md px-4 sm:px-6 md:px-8 lg:px-10 py-8 rounded-3xl w-50 max-w-lg",
+    "flex flex-col bg-white shadow-md px-4 sm:px-6 md:px-8 lg:px-10 py-8 rounded-3xl max-w-xl",
   title: "font-medium text-xl sm:text-3xl text-gray-800",
   subtitle: "mt-4 text-xl md:text-md text-gray-800",
   form: "mt-8",
-  formField: "flex flex-col mb-5",
-  label: "mb-1 text-xs tracking-wide text-gray-600 hidden",
+  formField: "flex flex-col",
+  label: "mb-1 text-xs tracking-wide text-gray-600",
   inputContainer: "relative",
   inputIcon:
     "inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400",
   input:
-    "text-sm placeholder-gray-500 pl-9 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none" +
+    "text-sm placeholder-gray-400 pl-9 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none" +
     " focus:border-blue-400",
   error: "text-red-500 text-sm italic flex justify-center font-bold",
   submitButton:

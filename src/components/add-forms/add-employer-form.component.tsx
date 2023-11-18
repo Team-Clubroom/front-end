@@ -1,4 +1,5 @@
 import { dashboardRootStyles } from "../../pages/content/app-main/tabs/dashboard-root/dashboard-root.styles.tsx";
+import "./form.styles.css";
 import {
   addEmployerEmptyForm,
   validateAddEmployerForm,
@@ -16,262 +17,111 @@ function AddEmployerForm({ isOpen, close }: EmployerFormProps) {
     validateAddEmployerForm,
   );
 
-  // const handleSubmit = async (formValues: AddEmployerFormValues) => {
-  //   await register({
-  //     employerName: formValues.employerName,
-  //     establishmentDate: formValues.establishmentDate,
-  //     industry: formValues.industry,
-  //     registrationNumber: formValues.registrationNumber,
-  //     address: formValues.address,
-  //     employerEmail: formValues.employerEmail,
-  //     employerPhone: formValues.employerPhone,
-  //     employerWebsite: formValues.employerWebsite,
-  //     ownershipStructure: formValues.ownershipStructure,
-  //   });
-  // };
-
   return (
     <Modal close={close} isOpen={isOpen} title={"Create New Employer"}>
       <div className={dashboardRootStyles.form}>
         <form
           // onSubmit={onSubmit(handleSubmit)}
           noValidate={true}
+          className={"flex flex-col gap-2"}
         >
-          <div className="flex justify-center items-center">
+          <InputComponent
+            fieldRegistration={registerField("employerName")}
+            iconName={"work"}
+            placeholder={"Tesla"}
+            id={"employer_name"}
+            label={"Enter the employer name"}
+          />
+          <div className={"form-row"}>
             <InputComponent
-              fieldRegistration={registerField("employerName")}
-              iconName={"work"}
-              placeholder={"Employer name"}
-              id={"employer_name"}
+              fieldRegistration={registerField("establishmentDate")}
+              iconName={"event"}
+              placeholder={"mm/dd/yyyy"}
+              id={"est_date"}
+              label={"Enter the est. date"}
             />
-            {/*<div className={dashboardRootStyles.formField + " pr-1"}>*/}
-            {/*  <label*/}
-            {/*    htmlFor="employer_name"*/}
-            {/*    className={dashboardRootStyles.label}*/}
-            {/*  >*/}
-            {/*    Employer Name:*/}
-            {/*  </label>*/}
-            {/*  <div className={dashboardRootStyles.inputContainer}>*/}
-            {/*    <span*/}
-            {/*      className={`material-symbols-outlined ${dashboardRootStyles.inputIcon}`}*/}
-            {/*      style={{ display: "flex" }}*/}
-            {/*    >*/}
-            {/*      work*/}
-            {/*    </span>*/}
-            {/*    <input*/}
-            {/*      id="employer_name"*/}
-            {/*      type="text"*/}
-            {/*      required*/}
-            {/*      className={dashboardRootStyles.input}*/}
-            {/*      style={{ width: "15rem" }}*/}
-            {/*      placeholder="Employer Name"*/}
-            {/*      {...registerField("employerName")}*/}
-            {/*    />*/}
-            {/*  </div>*/}
-            {/*</div>*/}
-            <div className={dashboardRootStyles.formField + " pl-1"}>
-              <label htmlFor="est_date" className={dashboardRootStyles.label}>
-                Establishment Date:
-              </label>
-              <div className={dashboardRootStyles.inputContainer}>
-                <span
-                  className={`material-symbols-outlined ${dashboardRootStyles.inputIcon}`}
-                  style={{ display: "flex" }}
-                >
-                  event
-                </span>
-                <input
-                  id="est_date"
-                  type="text"
-                  required
-                  className={dashboardRootStyles.input}
-                  placeholder="Establishment Date"
-                  {...registerField("establishmentDate")}
-                />
-              </div>
-            </div>
+            <InputComponent
+              fieldRegistration={registerField("dissolvedDate")}
+              iconName={"event"}
+              placeholder={"mm/dd/yyyy"}
+              id={"dis_date"}
+              label={"Enter the dissolved date"}
+            />
+            <InputComponent
+              fieldRegistration={registerField("bankruptcyDate")}
+              iconName={"event"}
+              placeholder={"mm/dd/yyyy"}
+              id={"bank_date"}
+              label={"Enter the bankruptcy date"}
+            />
+          </div>
+          <div className={"sector form-row"}>
+            <InputComponent
+              fieldRegistration={registerField("industrySectorName")}
+              iconName={"event"}
+              placeholder={"Food"}
+              id={"sector_name"}
+              label={"Select the sector name"}
+            />
+            <InputComponent
+              fieldRegistration={registerField("legalStatus")}
+              iconName={"event"}
+              placeholder={"Active"}
+              id={"legal_status"}
+              label={"Enter the legal status"}
+            />
+            <InputComponent
+              fieldRegistration={registerField("status")}
+              iconName={"event"}
+              placeholder={"LLC"}
+              id={"status"}
+              label={"Enter the status"}
+            />
           </div>
 
-          <div className="flex justify-center items-center">
-            <div className={dashboardRootStyles.formField + " pr-1"}>
-              <label htmlFor="industry" className={dashboardRootStyles.label}>
-                Business Industry:
-              </label>
-              <div className={dashboardRootStyles.inputContainer}>
-                <span
-                  className={`material-symbols-outlined ${dashboardRootStyles.inputIcon}`}
-                  style={{ display: "flex" }}
-                >
-                  merge
-                </span>
-                <input
-                  id="industry"
-                  type="text"
-                  required
-                  className={dashboardRootStyles.input}
-                  placeholder="Business Industry"
-                  {...registerField("industry")}
-                />
-              </div>
-            </div>
-            <div className={dashboardRootStyles.formField + " pl-1"}>
-              <label htmlFor="reg_number" className={dashboardRootStyles.label}>
-                Business Registration Number:
-              </label>
-              <div className={dashboardRootStyles.inputContainer}>
-                <span
-                  className={`material-symbols-outlined ${dashboardRootStyles.inputIcon}`}
-                  style={{ display: "flex" }}
-                >
-                  domain
-                </span>
-                <input
-                  id="reg_number"
-                  type="text"
-                  required
-                  className={dashboardRootStyles.input}
-                  style={{ width: "15rem" }}
-                  placeholder="Business Registration Number"
-                  {...registerField("registrationNumber")}
-                />
-              </div>
-            </div>
-          </div>
-          <div className={dashboardRootStyles.formField + " pr-1"}>
-            <label
-              htmlFor="employer_address"
-              className={dashboardRootStyles.label}
-            >
-              Employer Address:
-            </label>
-            <div className={dashboardRootStyles.inputContainer}>
-              <span
-                className={`material-symbols-outlined ${dashboardRootStyles.inputIcon}`}
-                style={{ display: "flex" }}
-              >
-                map
-              </span>
-              <input
-                id="employer_address"
-                type="text"
-                required
-                className={dashboardRootStyles.input}
-                placeholder="Address"
-                {...registerField("address")}
-              />
-            </div>
-          </div>
-          <>
-            <span className={dashboardRootStyles.subtitle}>
-              Contact Information
+          <div className="relative flex py-2 items-center">
+            <div className="flex-grow border-t border-gray-500"></div>
+            <span className="flex-shrink mx-4 text-gray-500 text-sm">
+              Company address
             </span>
-            <div
-              className={
-                "border-b-gray-300 border-b-[1px] border-[solid] mt-1.5 mb-6 w-[96%]"
-              }
-            ></div>
-          </>
-          <div className="flex justify-center items-center">
-            <div className={dashboardRootStyles.formField}>
-              <label
-                htmlFor="employer_email"
-                className={dashboardRootStyles.label}
-              >
-                Employer E-Mail:
-              </label>
-              <div className={dashboardRootStyles.inputContainer}>
-                <span
-                  className={`material-symbols-outlined ${dashboardRootStyles.inputIcon}`}
-                  style={{ display: "flex" }}
-                >
-                  mail
-                </span>
-                <input
-                  id="employer_email"
-                  type="email"
-                  required
-                  className={dashboardRootStyles.input}
-                  style={{ width: "15rem" }}
-                  placeholder="Employer E-Mail"
-                  {...registerField("employerEmail")}
-                />
-              </div>
-            </div>
-            <div className={dashboardRootStyles.formField + " pl-1"}>
-              <label
-                htmlFor="employer_phone"
-                className={dashboardRootStyles.label}
-              >
-                Employer Phone:
-              </label>
-              <div className={dashboardRootStyles.inputContainer}>
-                <span
-                  className={`material-symbols-outlined ${dashboardRootStyles.inputIcon}`}
-                  style={{ display: "flex" }}
-                >
-                  call
-                </span>
-                <input
-                  id="employer_phone"
-                  type="text"
-                  required
-                  className={dashboardRootStyles.input}
-                  placeholder="Employer Phone"
-                  {...registerField("employerPhone")}
-                />
-              </div>
-            </div>
+            <div className="flex-grow border-t border-gray-500"></div>
           </div>
-          <div className="flex justify-center items-center">
-            <div className={dashboardRootStyles.formField + " pr-1"}>
-              <label
-                htmlFor="employer_website"
-                className={dashboardRootStyles.label}
-              >
-                Employer Website:
-              </label>
-              <div className={dashboardRootStyles.inputContainer}>
-                <span
-                  className={`material-symbols-outlined ${dashboardRootStyles.inputIcon}`}
-                  style={{ display: "flex" }}
-                >
-                  link
-                </span>
-                <input
-                  id="employer_website"
-                  type="text"
-                  required
-                  className={dashboardRootStyles.input}
-                  style={{ width: "15rem" }}
-                  placeholder="Employer Website"
-                  {...registerField("employerWebsite")}
-                />
-              </div>
-            </div>
-            <div className={dashboardRootStyles.formField + " pl-1"}>
-              <label
-                htmlFor="own_structure"
-                className={dashboardRootStyles.label}
-              >
-                Ownership Structure:
-              </label>
-              <div className={dashboardRootStyles.inputContainer}>
-                <span
-                  className={`material-symbols-outlined ${dashboardRootStyles.inputIcon}`}
-                  style={{ display: "flex" }}
-                >
-                  store
-                </span>
-                <input
-                  id="own_structure"
-                  type="text"
-                  required
-                  className={dashboardRootStyles.input}
-                  placeholder="Ownership Structure"
-                  {...registerField("ownershipStructure")}
-                />
-              </div>
-            </div>
+          <InputComponent
+            fieldRegistration={registerField("addressLine1")}
+            iconName={"event"}
+            placeholder={"1234 Cantrell Rd"}
+            id={"line_1"}
+            label={"Enter address line 1"}
+          />
+          <InputComponent
+            fieldRegistration={registerField("addressLine2")}
+            iconName={"event"}
+            placeholder={"Apt 206"}
+            id={"line_2"}
+            label={"Enter address line 2"}
+          />
+          <div className={"form-row"}>
+            <InputComponent
+              fieldRegistration={registerField("state")}
+              iconName={"event"}
+              placeholder={"Arkansas"}
+              id={"state"}
+              label={"Select the state"}
+            />
+            <InputComponent
+              fieldRegistration={registerField("city")}
+              iconName={"event"}
+              placeholder={"Little Rock"}
+              id={"city"}
+              label={"Enter the city name"}
+            />
+            <InputComponent
+              fieldRegistration={registerField("zipcode")}
+              iconName={"event"}
+              placeholder={"72222"}
+              id={"zip_code"}
+              label={"Enter the ZIP code"}
+            />
           </div>
 
           {/*<span className={dashboardRootStyles.error}>{error}</span>*/}
@@ -298,7 +148,9 @@ function AddEmployerForm({ isOpen, close }: EmployerFormProps) {
                   </svg>
                 </div>
               ) : (
-                <span className={dashboardRootStyles.createText}>Create</span>
+                <span className={dashboardRootStyles.createText}>
+                  Create Employer
+                </span>
               )}
             </button>
           </div>

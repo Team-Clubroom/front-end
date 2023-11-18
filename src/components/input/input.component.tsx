@@ -5,6 +5,7 @@ interface InputProps {
   fieldRegistration: FieldRegistration;
   iconName: string;
   placeholder: string;
+  label: string;
   id: string;
 }
 
@@ -12,17 +13,18 @@ export const InputComponent = ({
   fieldRegistration,
   iconName,
   placeholder,
+  label,
   id,
 }: InputProps) => {
   return (
     <div className={dashboardRootStyles.formField + " pr-1"}>
       <label htmlFor={id} className={dashboardRootStyles.label}>
-        {placeholder}
+        {label}
       </label>
       <div className={dashboardRootStyles.inputContainer}>
         <span
           className={`material-symbols-outlined ${dashboardRootStyles.inputIcon}`}
-          style={{ display: "flex" }}
+          style={{ display: "flex", fontSize: "20px" }}
         >
           {iconName}
         </span>
@@ -31,7 +33,6 @@ export const InputComponent = ({
           type="text"
           required
           className={dashboardRootStyles.input}
-          style={{ width: "15rem" }}
           placeholder={placeholder}
           {...fieldRegistration}
         />
