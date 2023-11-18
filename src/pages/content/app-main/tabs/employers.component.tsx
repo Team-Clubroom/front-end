@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { Employer } from "../../../../models/employer.types.ts";
 import { useAuthContext } from "../../../../contexts/auth/auth.context.tsx";
-import { EmployerCard } from "../../../../components/employer-card/employer-card.component.tsx";
 import SearchBoxComponent from "../../../../components/search-box/search-box.component.tsx";
 import { ApiRoutes, useFetch } from "../../../../utils/custom-fetch.ts";
+import { EmployerCard } from "../../../../components/employer-card/employer-card.component.tsx";
 
 function Employers() {
   const [search, setSearch] = useState("");

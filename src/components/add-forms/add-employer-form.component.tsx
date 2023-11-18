@@ -5,6 +5,7 @@ import {
 } from "../../pages/content/app-main/tabs/dashboard-root/dashboard-root.helpers.ts";
 import useForm from "../../hooks/useForm.ts";
 import { Modal, ModalVisibilityProps } from "../modal/modal.component.tsx";
+import { InputComponent } from "../input/input.component.tsx";
 
 interface EmployerFormProps extends ModalVisibilityProps {}
 
@@ -37,31 +38,37 @@ function AddEmployerForm({ isOpen, close }: EmployerFormProps) {
           noValidate={true}
         >
           <div className="flex justify-center items-center">
-            <div className={dashboardRootStyles.formField + " pr-1"}>
-              <label
-                htmlFor="employer_name"
-                className={dashboardRootStyles.label}
-              >
-                Employer Name:
-              </label>
-              <div className={dashboardRootStyles.inputContainer}>
-                <span
-                  className={`material-symbols-outlined ${dashboardRootStyles.inputIcon}`}
-                  style={{ display: "flex" }}
-                >
-                  work
-                </span>
-                <input
-                  id="employer_name"
-                  type="text"
-                  required
-                  className={dashboardRootStyles.input}
-                  style={{ width: "15rem" }}
-                  placeholder="Employer Name"
-                  {...registerField("employerName")}
-                />
-              </div>
-            </div>
+            <InputComponent
+              fieldRegistration={registerField("employerName")}
+              iconName={"work"}
+              placeholder={"Employer name"}
+              id={"employer_name"}
+            />
+            {/*<div className={dashboardRootStyles.formField + " pr-1"}>*/}
+            {/*  <label*/}
+            {/*    htmlFor="employer_name"*/}
+            {/*    className={dashboardRootStyles.label}*/}
+            {/*  >*/}
+            {/*    Employer Name:*/}
+            {/*  </label>*/}
+            {/*  <div className={dashboardRootStyles.inputContainer}>*/}
+            {/*    <span*/}
+            {/*      className={`material-symbols-outlined ${dashboardRootStyles.inputIcon}`}*/}
+            {/*      style={{ display: "flex" }}*/}
+            {/*    >*/}
+            {/*      work*/}
+            {/*    </span>*/}
+            {/*    <input*/}
+            {/*      id="employer_name"*/}
+            {/*      type="text"*/}
+            {/*      required*/}
+            {/*      className={dashboardRootStyles.input}*/}
+            {/*      style={{ width: "15rem" }}*/}
+            {/*      placeholder="Employer Name"*/}
+            {/*      {...registerField("employerName")}*/}
+            {/*    />*/}
+            {/*  </div>*/}
+            {/*</div>*/}
             <div className={dashboardRootStyles.formField + " pl-1"}>
               <label htmlFor="est_date" className={dashboardRootStyles.label}>
                 Establishment Date:

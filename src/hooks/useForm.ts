@@ -1,5 +1,10 @@
 import React, { useState } from "react";
 
+export interface FieldRegistration {
+  onChange: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
+  value: string;
+}
+
 const useForm = <T extends Record<keyof T, string>>(
   initialValues: T,
   validateForm: (formValues: T) => string,
@@ -16,7 +21,7 @@ const useForm = <T extends Record<keyof T, string>>(
     setError("");
     setFormValues({ ...formValues, [name]: e.target.value });
   };
-  const registerField = (name: keyof T) => {
+  const registerField = (name: keyof T): FieldRegistration => {
     return {
       onChange: (
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
