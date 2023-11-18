@@ -1,6 +1,9 @@
 import { NavLink } from "react-router-dom";
 import { navbarStyles } from "./navbar.styles.tsx";
-import { useAuthActionContext } from "../../contexts/auth/auth.context.tsx";
+import {
+  useAuthActionContext,
+  useAuthContext,
+} from "../../contexts/auth/auth.context.tsx";
 import SearchBoxComponent from "../search-box/search-box.component.tsx";
 
 export const NavbarComponent = () => {
@@ -17,13 +20,6 @@ export const NavbarComponent = () => {
           CELDV
         </NavLink>
       </div>
-      <SearchBoxComponent
-        placeholder={"Search employers"}
-        onSearch={(value) => {
-          console.log(value);
-        }}
-      />
-
       <div className={navbarStyles.userSection}>
         <div className="flex justify-end items-center relative">
           {isLoggedIn() ? (
