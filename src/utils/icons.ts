@@ -8,4 +8,7 @@ export enum MaterialIcon {
   Flag = "flag",
   Location_City = "location_city",
   Location_On = "location_on",
+  Person = "person",
+  Mail = "mail",
+  Lock = "lock",
 }

@@ -1,7 +1,4 @@
-import {
-  Validate,
-  ValidationCriteria,
-} from "../../../../../hooks/Validator.ts";
+import { Validate, ValidationCriteria } from "../../hooks/Validator.ts";
 
 export interface AddEmployerFormValues {
   employerName: string;
@@ -46,7 +43,3 @@ export const addEmployerValidationCriteria: ValidationCriteria<AddEmployerFormVa
     state: [Validate.Required],
     zipcode: [Validate.Required, Validate.ZipCode],
   };
-
-export const validateAddEmployerForm = (formValues: AddEmployerFormValues) => {
-  return formValues ? "" : "";
-};

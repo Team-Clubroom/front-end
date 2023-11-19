@@ -8,6 +8,7 @@ interface InputProps {
   placeholder: string;
   label: string;
   id: string;
+  type?: "password" | "email" | "text";
   error?: string;
 }
 
@@ -16,6 +17,7 @@ export const InputComponent = ({
   iconName,
   placeholder,
   label,
+  type = "text",
   id,
 }: InputProps) => {
   return (
@@ -32,7 +34,7 @@ export const InputComponent = ({
         </span>
         <input
           id={id}
-          type="text"
+          type={type}
           required
           className={dashboardRootStyles.input}
           placeholder={placeholder}

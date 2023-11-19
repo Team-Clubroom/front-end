@@ -1,3 +1,5 @@
+import { Validate, ValidationCriteria } from "../../../hooks/Validator.ts";
+
 export interface SignupFormValues {
   firstName: string;
   lastName: string;
@@ -14,34 +16,12 @@ export const signupEmptyForm: SignupFormValues = {
   passwordRepeat: "",
 };
 
-export function validateSignupForm(formValues: SignupFormValues): string {
-  const { firstName, lastName, email, password, passwordRepeat } = formValues;
-
-  if (!firstName.trim()) {
-    return "Please enter your first name.";
-  }
-
-  if (!lastName.trim()) {
-    return "Please enter your last name.";
-  }
-
-  if (!email.trim()) {
-    return "Please enter your email address.";
-  } else if (!/^\S+@\S+\.\S+$/.test(email)) {
-    return "Please enter a valid email address.";
-  }
-
-  if (!password) {
-    return "Please enter a password.";
-  } else if (password.length < 8) {
-    return "Password must be at least 8 characters long.";
-  }
-
-  if (!passwordRepeat) {
-    return "Please repeat your password.";
-  } else if (password !== passwordRepeat) {
-    return "Passwords do not match.";
-  }
-
-  return "";
-}
+export const signupValidationCriteria: ValidationCriteria<SignupFormValues> = {
+  // TODO: figure out a criteria for repeat password
+  // TODO: add min length on password
+  firstName: [Validate.Required],
+  lastName: [Validate.Required],
+  email: [Validate.Required, Validate.Email],
+  password: [Validate.Required],
+  passwordRepeat: [Validate.Required],
+};

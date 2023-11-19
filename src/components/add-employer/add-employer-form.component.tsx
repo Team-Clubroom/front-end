@@ -4,7 +4,7 @@ import {
   addEmployerEmptyForm,
   AddEmployerFormValues,
   addEmployerValidationCriteria,
-} from "../../pages/content/app-main/tabs/dashboard-root/dashboard-root.helpers.ts";
+} from "./add-employer-form.helpers.ts";
 import useForm from "../../hooks/useForm.ts";
 import { Modal, ModalVisibilityProps } from "../modal/modal.component.tsx";
 import { InputComponent } from "../input/input.component.tsx";
