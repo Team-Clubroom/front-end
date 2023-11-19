@@ -21,6 +21,11 @@ export class Validate {
     return (_: string, formValues: T) =>
       formValues[name1] === formValues[name2] ? "" : "Fields must be identical";
   }
+
+  static Min(minLength: number) {
+    return (input: string) =>
+      input.trim().length < minLength ? `Field must be ${minLength} long` : "";
+  }
 }
 
 export type ValidatorFunctions<T> = Array<
