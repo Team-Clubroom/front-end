@@ -1,24 +1,30 @@
 import React, { useState } from "react";
+import { ValidationCriteria, ValidatorFunctions } from "./Validator.ts";
 
 export interface FieldRegistration {
   onChange: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
   value: string;
+  error: string | null;
 }
+
+type FieldError<T> = { message: string; fieldName: keyof T | null } | null;
 
 const useForm = <T extends Record<keyof T, string>>(
   initialValues: T,
-  validateForm: (formValues: T) => string,
+  validationCriteria: ValidationCriteria<T>,
 ) => {
   const [formValues, setFormValues] = useState(initialValues);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
+  const [fieldError, setFieldError] = useState<FieldError<T>>(null);
+  const [formError, setFormError] = useState<string>("");
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     name: keyof T,
   ) => {
-    setError("");
+    setFieldError(null);
+    setFormError("");
     setFormValues({ ...formValues, [name]: e.target.value });
   };
   const registerField = (name: keyof T): FieldRegistration => {
@@ -27,7 +33,20 @@ const useForm = <T extends Record<keyof T, string>>(
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
       ) => handleChange(e, name),
       value: formValues[name],
+      error: getFieldError(name),
     };
+  };
+
+  const validateFormFields = (formValues: T): FieldError<T> => {
+    for (const [field, validators] of Object.entries(validationCriteria)) {
+      const fieldName = field as keyof T;
+      const value = formValues[fieldName];
+      for (const validator of validators as ValidatorFunctions) {
+        const fieldErrorMessage = validator(value);
+        if (fieldErrorMessage) return { message: fieldErrorMessage, fieldName };
+      }
+    }
+    return null;
   };
 
   /**
@@ -41,16 +60,16 @@ const useForm = <T extends Record<keyof T, string>>(
         // prevent form from submitting and refreshing the page
         event.preventDefault();
         // get the form error if any
-        const errorMessage = validateForm(formValues);
-        setError(errorMessage);
-        if (errorMessage) return;
+        const fieldError = validateFormFields(formValues);
+        setFieldError(fieldError);
+        if (fieldError) return;
         setIsLoading(true);
         await callback(formValues);
         setSuccess(true);
         resetForm();
       } catch (e) {
         console.log(e);
-        setError((e as Error).message);
+        setFormError((e as Error).message);
       } finally {
         setIsLoading(false);
       }
@@ -58,14 +77,18 @@ const useForm = <T extends Record<keyof T, string>>(
 
   const resetForm = () => setFormValues(initialValues);
 
+  const getFieldError = (name: keyof T) => {
+    return fieldError?.fieldName === name ? fieldError.message : null;
+  };
+
   return {
     registerField,
     formValues,
     resetForm,
     isLoading,
     onSubmit,
-    error,
     success,
+    formError,
   } as const;
 };
 

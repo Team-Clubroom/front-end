@@ -8,6 +8,7 @@ interface InputProps {
   placeholder: string;
   label: string;
   id: string;
+  error?: string;
 }
 
 export const InputComponent = ({
@@ -35,9 +36,11 @@ export const InputComponent = ({
           required
           className={dashboardRootStyles.input}
           placeholder={placeholder}
-          {...fieldRegistration}
+          value={fieldRegistration.value}
+          onChange={fieldRegistration.onChange}
         />
       </div>
+      <span className={"text-xs text-red-500"}>{fieldRegistration.error}</span>
     </div>
   );
 };

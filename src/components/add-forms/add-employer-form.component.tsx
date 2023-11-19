@@ -2,7 +2,8 @@ import { dashboardRootStyles } from "../../pages/content/app-main/tabs/dashboard
 import "./form.styles.css";
 import {
   addEmployerEmptyForm,
-  validateAddEmployerForm,
+  AddEmployerFormValues,
+  addEmployerValidationCriteria,
 } from "../../pages/content/app-main/tabs/dashboard-root/dashboard-root.helpers.ts";
 import useForm from "../../hooks/useForm.ts";
 import { Modal, ModalVisibilityProps } from "../modal/modal.component.tsx";
@@ -12,17 +13,20 @@ import { MaterialIcon } from "../../utils/icons.ts";
 interface EmployerFormProps extends ModalVisibilityProps {}
 
 function AddEmployerForm({ isOpen, close }: EmployerFormProps) {
-  // const { register } = useAuthActionContext();
-  const { registerField, onSubmit, isLoading, error, success } = useForm(
+  const { registerField, onSubmit, isLoading, formError } = useForm(
     addEmployerEmptyForm,
-    validateAddEmployerForm,
+    addEmployerValidationCriteria,
   );
+
+  async function handleSubmit(formValues: AddEmployerFormValues) {
+    console.log(formValues);
+  }
 
   return (
     <Modal close={close} isOpen={isOpen} title={"Create New Employer"}>
       <div className={dashboardRootStyles.form}>
         <form
-          // onSubmit={onSubmit(handleSubmit)}
+          onSubmit={onSubmit(handleSubmit)}
           noValidate={true}
           className={"flex flex-col gap-2"}
         >
@@ -125,7 +129,7 @@ function AddEmployerForm({ isOpen, close }: EmployerFormProps) {
             />
           </div>
 
-          {/*<span className={dashboardRootStyles.error}>{error}</span>*/}
+          <span className={dashboardRootStyles.error}>{formError}</span>
           <div className="flex w-full justify-end">
             <button type="submit" className={dashboardRootStyles.submitButton}>
               {isLoading ? (

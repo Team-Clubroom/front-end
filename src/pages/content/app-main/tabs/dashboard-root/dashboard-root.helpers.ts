@@ -1,3 +1,8 @@
+import {
+  Validate,
+  ValidationCriteria,
+} from "../../../../../hooks/Validator.ts";
+
 export interface AddEmployerFormValues {
   employerName: string;
   establishmentDate: string;
@@ -28,8 +33,20 @@ export const addEmployerEmptyForm: AddEmployerFormValues = {
   zipcode: "",
 };
 
-export function validateAddEmployerForm(
-  formValues: AddEmployerFormValues,
-): string {
-  return "";
-}
+export const addEmployerValidationCriteria: ValidationCriteria<AddEmployerFormValues> =
+  {
+    employerName: [Validate.Required],
+    establishmentDate: [Validate.Required],
+    industrySectorName: [Validate.Required],
+    status: [Validate.Required],
+    legalStatus: [Validate.Required],
+    addressLine1: [Validate.Required],
+    addressLine2: [Validate.Required],
+    city: [Validate.Required],
+    state: [Validate.Required],
+    zipcode: [Validate.Required, Validate.ZipCode],
+  };
+
+export const validateAddEmployerForm = (formValues: AddEmployerFormValues) => {
+  return formValues ? "" : "";
+};
