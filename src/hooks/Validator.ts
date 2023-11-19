@@ -16,9 +16,16 @@ export class Validate {
     const zipCodeRegex = /^\d{5,}$/;
     return zipCodeRegex.test(input) ? "" : "Invalid ZIP code";
   }
+
+  static AreSame<T>(name1: keyof T, name2: keyof T) {
+    return (_: string, formValues: T) =>
+      formValues[name1] === formValues[name2] ? "" : "Fields must be identical";
+  }
 }
 
-export type ValidatorFunctions = Array<(input: string) => string>;
+export type ValidatorFunctions<T> = Array<
+  (input: string, formValues: T) => string
+>;
 export type ValidationCriteria<T> = Partial<
-  Record<keyof T, ValidatorFunctions>
+  Record<keyof T, ValidatorFunctions<T>>
 >;

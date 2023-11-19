@@ -41,8 +41,8 @@ const useForm = <T extends Record<keyof T, string>>(
     for (const [field, validators] of Object.entries(validationCriteria)) {
       const fieldName = field as keyof T;
       const value = formValues[fieldName];
-      for (const validator of validators as ValidatorFunctions) {
-        const fieldErrorMessage = validator(value);
+      for (const validator of validators as ValidatorFunctions<T>) {
+        const fieldErrorMessage = validator(value, formValues);
         if (fieldErrorMessage) return { message: fieldErrorMessage, fieldName };
       }
     }

@@ -17,11 +17,13 @@ export const signupEmptyForm: SignupFormValues = {
 };
 
 export const signupValidationCriteria: ValidationCriteria<SignupFormValues> = {
-  // TODO: figure out a criteria for repeat password
   // TODO: add min length on password
   firstName: [Validate.Required],
   lastName: [Validate.Required],
   email: [Validate.Required, Validate.Email],
   password: [Validate.Required],
-  passwordRepeat: [Validate.Required],
+  passwordRepeat: [
+    Validate.Required,
+    Validate.AreSame<SignupFormValues>("password", "passwordRepeat"),
+  ],
 };
