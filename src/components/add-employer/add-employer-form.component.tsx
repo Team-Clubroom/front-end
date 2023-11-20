@@ -16,7 +16,7 @@ import { ApiRoutes } from "../../models/api.types.ts";
 interface EmployerFormProps extends ModalVisibilityProps {}
 
 function AddEmployerForm({ isOpen, close }: EmployerFormProps) {
-  const { registerField, onSubmit, isLoading, formError } = useForm(
+  const { registerField, onSubmit, isLoading, formError, resetForm } = useForm(
     addEmployerEmptyForm,
     addEmployerValidationCriteria,
   );
@@ -57,7 +57,12 @@ function AddEmployerForm({ isOpen, close }: EmployerFormProps) {
   }
 
   return (
-    <Modal close={close} isOpen={isOpen} title={"Create New Employer"}>
+    <Modal
+      close={close}
+      isOpen={isOpen}
+      onClose={resetForm}
+      title={"Create New Employer"}
+    >
       <div className={dashboardRootStyles.form}>
         <form
           onSubmit={onSubmit(handleSubmit)}

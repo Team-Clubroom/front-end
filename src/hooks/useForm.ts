@@ -92,7 +92,11 @@ const useForm = <T extends Record<keyof T, string>>(
       }
     };
 
-  const resetForm = () => setFormValues(initialValues);
+  const resetForm = () => {
+    setFormValues(initialValues);
+    setFieldsErrors(initialValues);
+    setFormError("");
+  };
 
   return {
     registerField,

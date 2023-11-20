@@ -1,6 +1,7 @@
 import React from "react";
 import { createPortal } from "react-dom";
 import { dashboardRootStyles } from "../../pages/content/app-main/tabs/dashboard-root/dashboard-root.styles.tsx";
+import { MaterialIcon } from "../../utils/icons.ts";
 
 export interface ModalVisibilityProps {
   isOpen: boolean;
@@ -10,13 +11,25 @@ export interface ModalVisibilityProps {
 interface BaseModalProps extends ModalVisibilityProps {
   title: string;
   children: React.ReactNode;
+  onClose?: () => void;
 }
 
-export function Modal({ children, isOpen, close, title }: BaseModalProps) {
+export function Modal({
+  children,
+  isOpen,
+  close,
+  title,
+  onClose,
+}: BaseModalProps) {
   if (!isOpen) return null;
+
+  const handleClose = () => {
+    onClose && onClose();
+    close();
+  };
   const modal = (
     <div
-      onClick={close}
+      onClick={handleClose}
       className={
         "fixed w-screen h-screen z-50 grid place-items-center bg-opacity-20 bg-black"
       }
@@ -29,11 +42,13 @@ export function Modal({ children, isOpen, close, title }: BaseModalProps) {
         <div className={"flex items-center justify-between"}>
           <div className={dashboardRootStyles.title}>{title}</div>
           <button
-            onClick={close}
+            onClick={handleClose}
             type={"button"}
             className={"rounded-full flex hover:bg-gray-300 opacity-50 p-1"}
           >
-            <span className={`material-symbols-outlined`}>close</span>
+            <span className={`material-symbols-outlined`}>
+              {MaterialIcon.Close}
+            </span>
           </button>
         </div>
         <div className={"border-b-gray-300 border-b mt-1.5 w-full"}></div>
