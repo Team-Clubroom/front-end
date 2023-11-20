@@ -43,7 +43,9 @@ export const SelectComponent = ({
           onChange={onChange}
         >
           {options.map((option) => (
-            <option value={option.value}>{option.text}</option>
+            <option key={option.value} value={option.value}>
+              {option.text}
+            </option>
           ))}
         </select>
       </div>

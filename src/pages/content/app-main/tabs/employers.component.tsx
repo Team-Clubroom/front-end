@@ -30,7 +30,7 @@ function Employers() {
   }, [user]);
 
   function compareSearch(employer: Employer) {
-    if (search != "") {
+    if (search.trim() !== "") {
       if (employer.name.toLowerCase().includes(search.toLowerCase())) {
         return <EmployerCard employer={employer} key={employer.id} />;
       }

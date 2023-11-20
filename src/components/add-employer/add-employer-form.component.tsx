@@ -70,7 +70,7 @@ function AddEmployerForm({ isOpen, close }: EmployerFormProps) {
         <form
           onSubmit={onSubmit(handleSubmit)}
           noValidate={true}
-          className={"flex flex-col gap-2"}
+          className={"flex flex-col gap-2 max-h-96 overflow-y-scroll pr-2"}
         >
           <InputComponent
             fieldRegistration={registerField("employerName")}
@@ -109,7 +109,7 @@ function AddEmployerForm({ isOpen, close }: EmployerFormProps) {
             id={"sector_name"}
             options={Object.keys(INDUSTRY_SECTOR_CODES)
               .map((code) => ({
-                text: INDUSTRY_SECTOR_CODES[code],
+                text: INDUSTRY_SECTOR_CODES[code].name,
                 value: code,
               }))
               .sort((a, b) => a.text.localeCompare(b.text))}

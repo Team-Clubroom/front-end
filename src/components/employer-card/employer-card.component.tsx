@@ -1,17 +1,22 @@
 import { Employer } from "../../models/employer.types";
 import "./employer-card-styles.css";
+import { INDUSTRY_SECTOR_CODES } from "../../data/naics-codes.ts";
 
 interface EmployerCardProps {
   employer: Employer;
 }
 
 export const EmployerCard = ({ employer }: EmployerCardProps) => {
+  const { shortName, color } =
+    INDUSTRY_SECTOR_CODES[employer.industrySectorCode];
   return (
     <div className={"employer-card"}>
       <div className={"employer-company-wrapper"}>
         <h3 className={"employer-name"}>{employer.name}</h3>
-        <div className={"flex gap-2"}>
-          <p className={"employer-sector"}>{employer.industrySectorCode}</p>
+        <div className={"flex gap-2 items-center"}>
+          <p className={"employer-sector"} style={{ backgroundColor: color }}>
+            {shortName}
+          </p>
           <span className={"text-gray-600 italic text-sm"}>
             {employer.status}
           </span>
