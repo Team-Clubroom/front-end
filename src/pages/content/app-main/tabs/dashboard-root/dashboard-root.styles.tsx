@@ -10,10 +10,11 @@ export const dashboardRootStyles = {
   label: "mb-1 text-xs tracking-wide text-gray-600",
   inputContainer: "relative",
   inputIcon:
-    "inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400",
+    "material-symbols-outlined inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400",
   input:
     "text-sm placeholder-gray-300 pl-9 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none" +
     " focus:border-blue-400",
+  inputError: "border-red-500 focus:border-red-500",
   error: "text-red-500 text-sm italic flex justify-center font-bold",
   submitButton:
     "flex mt-2 items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-blue-500" +

@@ -1,6 +1,7 @@
 import { dashboardRootStyles } from "../../pages/content/app-main/tabs/dashboard-root/dashboard-root.styles.tsx";
 import { FieldRegistration } from "../../hooks/useForm.ts";
 import { MaterialIcon } from "../../utils/icons.ts";
+import { classIf } from "../../utils/tailwind.utils.ts";
 
 interface InputProps {
   fieldRegistration: FieldRegistration;
@@ -28,7 +29,10 @@ export const InputComponent = ({
       </label>
       <div className={dashboardRootStyles.inputContainer}>
         <span
-          className={`material-symbols-outlined ${dashboardRootStyles.inputIcon}`}
+          className={`${dashboardRootStyles.inputIcon} ${classIf(
+            error,
+            "text-red-500",
+          )}`}
           style={{ display: "flex", fontSize: "20px" }}
         >
           {iconName}
@@ -36,8 +40,10 @@ export const InputComponent = ({
         <input
           id={id}
           type={type}
-          required
-          className={dashboardRootStyles.input}
+          className={
+            dashboardRootStyles.input +
+            ` ${classIf(error, dashboardRootStyles.inputError)}`
+          }
           placeholder={placeholder}
           value={value}
           onChange={onChange}
