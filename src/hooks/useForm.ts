@@ -12,7 +12,7 @@ export interface FieldRegistration {
   required: boolean;
 }
 
-type FieldError<T> = { message: string; fieldName: keyof T | null } | null;
+type FieldsErrors<T> = Record<keyof T, string>;
 
 const useForm = <T extends Record<keyof T, string>>(
   initialValues: T,
@@ -21,14 +21,15 @@ const useForm = <T extends Record<keyof T, string>>(
   const [formValues, setFormValues] = useState(initialValues);
   const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [fieldError, setFieldError] = useState<FieldError<T>>(null);
   const [formError, setFormError] = useState<string>("");
+  const [fieldsErrors, setFieldsErrors] =
+    useState<FieldsErrors<T>>(initialValues);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     name: keyof T,
   ) => {
-    setFieldError(null);
+    setFieldsErrors({ ...fieldsErrors, [name]: "" });
     setFormError("");
     setFormValues({ ...formValues, [name]: e.target.value });
   };
@@ -38,7 +39,7 @@ const useForm = <T extends Record<keyof T, string>>(
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
       ) => handleChange(e, name),
       value: formValues[name],
-      error: getFieldError(name),
+      error: fieldsErrors[name],
       required:
         validationCriteria[name] &&
         (validationCriteria[name] as ValidatorFunctions<T>).some(
@@ -47,16 +48,23 @@ const useForm = <T extends Record<keyof T, string>>(
     };
   };
 
-  const validateFormFields = (formValues: T): FieldError<T> => {
+  const validateFormFields = (formValues: T): boolean => {
+    let formHasAnError = false;
+    const errorsUpdate = { ...fieldsErrors };
     for (const [field, validators] of Object.entries(validationCriteria)) {
       const fieldName = field as keyof T;
       const value = formValues[fieldName];
       for (const validator of validators as ValidatorFunctions<T>) {
         const fieldErrorMessage = validator(value, formValues);
-        if (fieldErrorMessage) return { message: fieldErrorMessage, fieldName };
+        if (fieldErrorMessage) {
+          formHasAnError = true;
+          errorsUpdate[fieldName] = fieldErrorMessage;
+          break;
+        }
       }
     }
-    return null;
+    setFieldsErrors(errorsUpdate);
+    return formHasAnError;
   };
 
   /**
@@ -70,9 +78,8 @@ const useForm = <T extends Record<keyof T, string>>(
         // prevent form from submitting and refreshing the page
         event.preventDefault();
         // get the form error if any
-        const fieldError = validateFormFields(formValues);
-        setFieldError(fieldError);
-        if (fieldError) return;
+        const anyErrorsInForm = validateFormFields(formValues);
+        if (anyErrorsInForm) return;
         setIsLoading(true);
         await callback(formValues);
         setSuccess(true);
@@ -86,10 +93,6 @@ const useForm = <T extends Record<keyof T, string>>(
     };
 
   const resetForm = () => setFormValues(initialValues);
-
-  const getFieldError = (name: keyof T) => {
-    return fieldError?.fieldName === name ? fieldError.message : null;
-  };
 
   return {
     registerField,
