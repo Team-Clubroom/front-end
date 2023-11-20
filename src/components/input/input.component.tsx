@@ -13,7 +13,7 @@ interface InputProps {
 }
 
 export const InputComponent = ({
-  fieldRegistration,
+  fieldRegistration: { onChange, required, error, value },
   iconName,
   placeholder,
   label,
@@ -24,6 +24,7 @@ export const InputComponent = ({
     <div className={dashboardRootStyles.formField + " pr-1"}>
       <label htmlFor={id} className={dashboardRootStyles.label}>
         {label}
+        {required && "*"}
       </label>
       <div className={dashboardRootStyles.inputContainer}>
         <span
@@ -38,11 +39,11 @@ export const InputComponent = ({
           required
           className={dashboardRootStyles.input}
           placeholder={placeholder}
-          value={fieldRegistration.value}
-          onChange={fieldRegistration.onChange}
+          value={value}
+          onChange={onChange}
         />
       </div>
-      <span className={"text-xs text-red-500"}>{fieldRegistration.error}</span>
+      <span className={"text-xs text-red-500"}>{error}</span>
     </div>
   );
 };

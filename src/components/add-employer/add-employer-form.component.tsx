@@ -69,7 +69,7 @@ function AddEmployerForm({ isOpen, close }: EmployerFormProps) {
             iconName={MaterialIcon.Work}
             placeholder={"Tesla"}
             id={"employer_name"}
-            label={"Enter the employer name"}
+            label={"Enter the Employer Name"}
           />
           <div className={"form-row"}>
             <InputComponent
@@ -77,21 +77,21 @@ function AddEmployerForm({ isOpen, close }: EmployerFormProps) {
               iconName={MaterialIcon.Event}
               placeholder={"mm/dd/yyyy"}
               id={"est_date"}
-              label={"Enter the est. date"}
+              label={"Enter the Est. Date"}
             />
             <InputComponent
               fieldRegistration={registerField("dissolvedDate")}
               iconName={MaterialIcon.Event}
               placeholder={"mm/dd/yyyy"}
               id={"dis_date"}
-              label={"Enter the dissolved date"}
+              label={"Enter the Dissolved Date"}
             />
             <InputComponent
               fieldRegistration={registerField("bankruptcyDate")}
               iconName={MaterialIcon.Event}
               placeholder={"mm/dd/yyyy"}
               id={"bank_date"}
-              label={"Enter the bankruptcy date"}
+              label={"Enter the Bankruptcy Date"}
             />
           </div>
           <div className={"sector form-row"}>
@@ -100,21 +100,21 @@ function AddEmployerForm({ isOpen, close }: EmployerFormProps) {
               iconName={MaterialIcon.Action_Key}
               placeholder={"Food"}
               id={"sector_name"}
-              label={"Select the sector name"}
+              label={"Select the Sector Name"}
             />
             <InputComponent
               fieldRegistration={registerField("legalStatus")}
               iconName={MaterialIcon.Balance}
               placeholder={"LLC"}
               id={"legal_status"}
-              label={"Enter the legal status"}
+              label={"Enter the Legal Status"}
             />
             <InputComponent
               fieldRegistration={registerField("status")}
               iconName={MaterialIcon.Work_Update}
               placeholder={"Active"}
               id={"status"}
-              label={"Enter the status"}
+              label={"Enter the Status"}
             />
           </div>
 
@@ -130,14 +130,14 @@ function AddEmployerForm({ isOpen, close }: EmployerFormProps) {
             iconName={MaterialIcon.Map}
             placeholder={"1234 Cantrell Rd"}
             id={"line_1"}
-            label={"Enter address line 1"}
+            label={"Enter Address Line 1"}
           />
           <InputComponent
             fieldRegistration={registerField("addressLine2")}
             iconName={MaterialIcon.Map}
             placeholder={"Apt 206"}
             id={"line_2"}
-            label={"Enter address line 2"}
+            label={"Enter Address Line 2"}
           />
           <div className={"form-row"}>
             <InputComponent
@@ -145,21 +145,21 @@ function AddEmployerForm({ isOpen, close }: EmployerFormProps) {
               iconName={MaterialIcon.Flag}
               placeholder={"Arkansas"}
               id={"state"}
-              label={"Select the state"}
+              label={"Select the State"}
             />
             <InputComponent
               fieldRegistration={registerField("city")}
               iconName={MaterialIcon.Location_City}
               placeholder={"Little Rock"}
               id={"city"}
-              label={"Enter the city name"}
+              label={"Enter the City Name"}
             />
             <InputComponent
               fieldRegistration={registerField("zipcode")}
               iconName={MaterialIcon.Location_On}
               placeholder={"72222"}
               id={"zip_code"}
-              label={"Enter the ZIP code"}
+              label={"Enter the ZIP Code"}
             />
           </div>
 

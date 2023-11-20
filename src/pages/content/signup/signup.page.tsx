@@ -48,7 +48,7 @@ function SignupPage() {
                 iconName={MaterialIcon.Person}
                 placeholder={"John"}
                 id={"first_name"}
-                label={"First Name:"}
+                label={"Enter Your First Name"}
               />
 
               <InputComponent
@@ -56,7 +56,7 @@ function SignupPage() {
                 iconName={MaterialIcon.Person}
                 placeholder={"Doe"}
                 id={"last_name"}
-                label={"Last Name:"}
+                label={"Enter Your Last Name"}
               />
             </div>
 
@@ -65,7 +65,7 @@ function SignupPage() {
               iconName={MaterialIcon.Mail}
               placeholder={"johndoe@example.com"}
               id={"email"}
-              label={"E-Mail Address:"}
+              label={"Enter Your E-Mail Address"}
             />
 
             <InputComponent
@@ -82,7 +82,7 @@ function SignupPage() {
                 "\u2022"
               }
               id={"password"}
-              label={"Enter Password:"}
+              label={"Enter a Password"}
               type="password"
             />
 
@@ -100,7 +100,7 @@ function SignupPage() {
                 "\u2022"
               }
               id={"password-repeat"}
-              label={"Re-Enter Password:"}
+              label={"Repeat the Password"}
               type="password"
             />
 

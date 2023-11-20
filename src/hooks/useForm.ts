@@ -1,10 +1,15 @@
 import React, { useState } from "react";
-import { ValidationCriteria, ValidatorFunctions } from "./Validator.ts";
+import {
+  Validate,
+  ValidationCriteria,
+  ValidatorFunctions,
+} from "./Validator.ts";
 
 export interface FieldRegistration {
   onChange: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
   value: string;
   error: string | null;
+  required: boolean;
 }
 
 type FieldError<T> = { message: string; fieldName: keyof T | null } | null;
@@ -34,6 +39,11 @@ const useForm = <T extends Record<keyof T, string>>(
       ) => handleChange(e, name),
       value: formValues[name],
       error: getFieldError(name),
+      required:
+        validationCriteria[name] &&
+        (validationCriteria[name] as ValidatorFunctions<T>).some(
+          (func) => func === Validate.Required,
+        ),
     };
   };
 

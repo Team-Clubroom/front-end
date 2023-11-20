@@ -55,7 +55,7 @@ function LoginPage() {
                 iconName={MaterialIcon.Mail}
                 placeholder={"johndoe@email.com"}
                 id={"email"}
-                label={"E-Mail Address:"}
+                label={"Enter Your E-Mail Address"}
               />
 
               <InputComponent
@@ -72,7 +72,7 @@ function LoginPage() {
                   "\u2022"
                 }
                 id={"password"}
-                label={"Password:"}
+                label={"Enter Your Password"}
                 type="password"
               />
 
