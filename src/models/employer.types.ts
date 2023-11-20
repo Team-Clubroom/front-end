@@ -15,3 +15,18 @@ export interface Employer {
   status: string;
   legalStatus: string;
 }
+
+export interface NewEmployerRequest {
+  employer_name: string;
+  employer_founded_date: string;
+  employer_dissolved_date?: string;
+  employer_bankruptcy_date?: string;
+  employer_industry_sector_code: number;
+  employer_status: string;
+  employer_legal_status: string;
+  employer_addr_line_1: string;
+  employer_addr_line_2?: string;
+  employer_addr_city: string;
+  employer_addr_state: string;
+  employer_addr_zip_code: string;
+}

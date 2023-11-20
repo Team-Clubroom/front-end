@@ -38,7 +38,6 @@ export const addEmployerValidationCriteria: ValidationCriteria<AddEmployerFormVa
     status: [Validate.Required],
     legalStatus: [Validate.Required],
     addressLine1: [Validate.Required],
-    addressLine2: [Validate.Required],
     city: [Validate.Required],
     state: [Validate.Required],
     zipcode: [Validate.Required, Validate.ZipCode],

@@ -1,14 +1,8 @@
-import { SuccessResponse } from "../models/api.types.ts";
+import { ApiRoutes, SuccessResponse } from "./api.types.ts";
 import {
   useAuthActionContext,
   useAuthContext,
 } from "../contexts/auth/auth.context.tsx";
-
-export enum ApiRoutes {
-  Register = "register",
-  Login = "login",
-  Employers = "employers",
-}
 
 export const useFetch = () => {
   const authFunctions = useAuthActionContext();
