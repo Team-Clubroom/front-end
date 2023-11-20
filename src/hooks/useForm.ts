@@ -6,7 +6,9 @@ import {
 } from "./Validator.ts";
 
 export interface FieldRegistration {
-  onChange: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
+  onChange: React.ChangeEventHandler<
+    HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+  >;
   value: string;
   error: string | null;
   required: boolean;
@@ -26,7 +28,9 @@ const useForm = <T extends Record<keyof T, string>>(
     useState<FieldsErrors<T>>(initialValues);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
     name: keyof T,
   ) => {
     setFieldsErrors({ ...fieldsErrors, [name]: "" });
@@ -35,9 +39,7 @@ const useForm = <T extends Record<keyof T, string>>(
   };
   const registerField = (name: keyof T): FieldRegistration => {
     return {
-      onChange: (
-        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-      ) => handleChange(e, name),
+      onChange: (e) => handleChange(e, name),
       value: formValues[name],
       error: fieldsErrors[name],
       required:

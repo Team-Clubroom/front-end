@@ -12,6 +12,8 @@ import { MaterialIcon } from "../../utils/icons.ts";
 import { NewEmployerRequest } from "../../models/employer.types.ts";
 import { useFetch } from "../../models/useFetch.ts";
 import { ApiRoutes } from "../../models/api.types.ts";
+import { SelectComponent } from "../select/select.component.tsx";
+import { INDUSTRY_SECTOR_CODES } from "../../data/naics-codes.ts";
 
 interface EmployerFormProps extends ModalVisibilityProps {}
 
@@ -99,14 +101,17 @@ function AddEmployerForm({ isOpen, close }: EmployerFormProps) {
               label={"Enter the Bankruptcy Date"}
             />
           </div>
+          <SelectComponent
+            fieldRegistration={registerField("industrySectorName")}
+            iconName={MaterialIcon.Action_Key}
+            label={"Select the Industry Sector Name"}
+            id={"sector_name"}
+            options={Object.keys(INDUSTRY_SECTOR_CODES).map((code) => ({
+              text: INDUSTRY_SECTOR_CODES[code],
+              value: code,
+            }))}
+          />
           <div className={"sector form-row"}>
-            <InputComponent
-              fieldRegistration={registerField("industrySectorName")}
-              iconName={MaterialIcon.Action_Key}
-              placeholder={"Food"}
-              id={"sector_name"}
-              label={"Select the Sector Name"}
-            />
             <InputComponent
               fieldRegistration={registerField("legalStatus")}
               iconName={MaterialIcon.Balance}
