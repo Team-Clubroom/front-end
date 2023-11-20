@@ -14,6 +14,7 @@ import { useFetch } from "../../models/useFetch.ts";
 import { ApiRoutes } from "../../models/api.types.ts";
 import { SelectComponent } from "../select/select.component.tsx";
 import { INDUSTRY_SECTOR_CODES } from "../../data/naics-codes.ts";
+import { US_STATES } from "../../data/states.ts";
 
 interface EmployerFormProps extends ModalVisibilityProps {}
 
@@ -106,10 +107,12 @@ function AddEmployerForm({ isOpen, close }: EmployerFormProps) {
             iconName={MaterialIcon.Action_Key}
             label={"Select the Industry Sector Name"}
             id={"sector_name"}
-            options={Object.keys(INDUSTRY_SECTOR_CODES).map((code) => ({
-              text: INDUSTRY_SECTOR_CODES[code],
-              value: code,
-            }))}
+            options={Object.keys(INDUSTRY_SECTOR_CODES)
+              .map((code) => ({
+                text: INDUSTRY_SECTOR_CODES[code],
+                value: code,
+              }))
+              .sort((a, b) => a.text.localeCompare(b.text))}
           />
           <div className={"sector form-row"}>
             <InputComponent
@@ -150,12 +153,15 @@ function AddEmployerForm({ isOpen, close }: EmployerFormProps) {
             label={"Enter Address Line 2"}
           />
           <div className={"form-row"}>
-            <InputComponent
+            <SelectComponent
               fieldRegistration={registerField("state")}
               iconName={MaterialIcon.Flag}
-              placeholder={"Arkansas"}
-              id={"state"}
               label={"Select the State"}
+              id={"state"}
+              options={US_STATES.map((state) => ({
+                text: state,
+                value: state,
+              }))}
             />
             <InputComponent
               fieldRegistration={registerField("city")}
