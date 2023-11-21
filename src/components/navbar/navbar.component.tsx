@@ -1,10 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { navbarStyles } from "./navbar.styles.tsx";
-import {
-  useAuthActionContext,
-  useAuthContext,
-} from "../../contexts/auth/auth.context.tsx";
-import SearchBoxComponent from "../search-box/search-box.component.tsx";
+import { useAuthActionContext } from "../../contexts/auth/auth.context.tsx";
 
 export const NavbarComponent = () => {
   const { logout, isLoggedIn } = useAuthActionContext();

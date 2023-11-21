@@ -3,17 +3,19 @@ import { Navigate, NavLink, useNavigate } from "react-router-dom";
 import useForm from "../../../hooks/useForm.ts";
 import {
   emptyLoginForm,
+  loginFormCriteria,
   LoginFormValues,
-  validateLoginForm,
 } from "./login.helpers.ts";
 import { useAuthActionContext } from "../../../contexts/auth/auth.context.tsx";
 import FooterComponent from "../../../components/footer/footer.component.tsx";
 import { Helmet } from "react-helmet";
+import { MaterialIcon } from "../../../utils/icons.ts";
+import { InputComponent } from "../../../components/input/input.component.tsx";
 
 function LoginPage() {
-  const { registerField, onSubmit, error, isLoading } = useForm(
+  const { registerField, onSubmit, formError, isLoading } = useForm(
     emptyLoginForm,
-    validateLoginForm,
+    loginFormCriteria,
   );
   const { login, isLoggedIn } = useAuthActionContext();
   const navigate = useNavigate();
@@ -43,59 +45,38 @@ function LoginPage() {
           </div>
 
           <div className={loginStyles.form}>
-            <form noValidate={true} onSubmit={onSubmit(handleSubmit)}>
-              <div className={loginStyles.formField}>
-                <label htmlFor="email" className={loginStyles.label}>
-                  E-Mail Address:
-                </label>
-                <div className={loginStyles.inputContainer}>
-                  <span
-                    className={`material-symbols-outlined ${loginStyles.inputIcon}`}
-                    style={{ display: "flex" }}
-                  >
-                    mail
-                  </span>
-                  <input
-                    id="email"
-                    type="email"
-                    required
-                    className={loginStyles.input}
-                    placeholder="johndoe@email.com"
-                    {...registerField("email")}
-                  />
-                </div>
-              </div>
-              <div className={loginStyles.formField}>
-                <label htmlFor="password" className={loginStyles.label}>
-                  Password:
-                </label>
-                <div className={loginStyles.inputContainer}>
-                  <span
-                    className={`material-symbols-outlined ${loginStyles.inputIcon}`}
-                    style={{ display: "flex" }}
-                  >
-                    lock
-                  </span>
-                  <input
-                    id="password"
-                    type="password"
-                    required
-                    className={loginStyles.input}
-                    placeholder={
-                      "\u2022" +
-                      "\u2022" +
-                      "\u2022" +
-                      "\u2022" +
-                      "\u2022" +
-                      "\u2022" +
-                      "\u2022" +
-                      "\u2022"
-                    }
-                    {...registerField("password")}
-                  />
-                </div>
-              </div>
-              <span className={loginStyles.error}>{error}</span>
+            <form
+              noValidate={true}
+              onSubmit={onSubmit(handleSubmit)}
+              className={"flex flex-col gap-2"}
+            >
+              <InputComponent
+                fieldRegistration={registerField("email")}
+                iconName={MaterialIcon.Mail}
+                placeholder={"johndoe@email.com"}
+                id={"email"}
+                label={"Enter Your E-Mail Address"}
+              />
+
+              <InputComponent
+                fieldRegistration={registerField("password")}
+                iconName={MaterialIcon.Lock}
+                placeholder={
+                  "\u2022" +
+                  "\u2022" +
+                  "\u2022" +
+                  "\u2022" +
+                  "\u2022" +
+                  "\u2022" +
+                  "\u2022" +
+                  "\u2022"
+                }
+                id={"password"}
+                label={"Enter Your Password"}
+                type="password"
+              />
+
+              <span className={loginStyles.error}>{formError}</span>
               <div className="flex w-full">
                 <button type="submit" className={loginStyles.submitButton}>
                   {isLoading ? (

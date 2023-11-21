@@ -13,7 +13,7 @@ import PrivateRouteComponent from "./components/private-route/private-route.comp
 import Employers from "./pages/content/app-main/tabs/employers.component.tsx";
 import Employees from "./pages/content/app-main/tabs/employees.component.tsx";
 import TreeGraph from "./pages/content/app-main/tabs/tree-graph.component.tsx";
-import Dashboard from "./pages/content/app-main/tabs/dashboard.component.tsx";
+import Dashboard from "./pages/content/app-main/tabs/dashboard-root/dashboard.component.tsx";
 import SignupPage from "./pages/content/signup/signup.page.tsx";
 import { SessionTimeout } from "./pages/misc/session-timeout/session-timeout.component.tsx";
 

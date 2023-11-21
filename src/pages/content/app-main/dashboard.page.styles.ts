@@ -20,5 +20,5 @@ export const dashboardStyles = {
     " bg-gray-300",
   menuLinkButton: "flex items-center w-full",
   svgLink: "material-symbols-outlined w-6 h-6 fill-current mr-2",
-  mainContent: "flex h-full w-full",
+  mainContent: "flex flex-col h-full w-full",
 };
