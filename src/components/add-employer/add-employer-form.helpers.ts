@@ -28,7 +28,7 @@ export const addEmployerEmptyForm: AddEmployerFormValues = {
   addressLine1: "",
   addressLine2: "",
   city: "",
-  state: US_STATES[0],
+  state: US_STATES[0].abbreviation,
   zipcode: "",
 };
 
