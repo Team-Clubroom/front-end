@@ -11,6 +11,7 @@ import Employees from "./pages/content/app-main/tabs/employees.component.tsx";
 import TreeGraph from "./pages/content/app-main/tabs/tree-graph.component.tsx";
 import Dashboard from "./pages/content/app-main/tabs/dashboard.component.tsx";
 import SignupPage from "./pages/content/signup/signup.page.tsx";
+import {ReactFlowGraphComponent} from "./pages/content/app-main/tabs/react-flow/react-flow-graph.component.tsx";
 import {SessionTimeout} from "./pages/misc/session-timeout/session-timeout.component.tsx";
 
 export default function App() {
@@ -25,6 +26,10 @@ export default function App() {
             <Route path={"/dashboard/employers"} element={<Employers />} />
             <Route path={"/dashboard/employees"} element={<Employees />} />
             <Route path={"/dashboard/graph"} element={<TreeGraph />} />
+            <Route
+              path={"/dashboard/react-flow"}
+              element={<ReactFlowGraphComponent />}
+            />
             <Route path={"*"} element={<ErrorPage />} />
           </Route>
         </Route>

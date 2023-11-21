@@ -80,6 +80,18 @@ function DashboardPage() {
               </span>
               <span className="">Graph</span>
             </NavLink>
+            <NavLink
+              to={"/dashboard/react-flow"}
+              className={dashboardStyles.menuLink}
+            >
+              <span
+                className={`material-symbols-outlined ${dashboardStyles.svgLink}`}
+                style={{ display: "flex" }}
+              >
+                account_tree
+              </span>
+              <span className="">React Flow</span>
+            </NavLink>
           </div>
         </div>
         <div className={dashboardStyles.mainContent} id={"main-content"}>
