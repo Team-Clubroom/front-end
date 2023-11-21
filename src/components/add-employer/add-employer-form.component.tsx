@@ -51,6 +51,7 @@ function AddEmployerForm({ isOpen, close }: EmployerFormProps) {
       newEmployerRequest.employer_bankruptcy_date = bankruptcyDate;
     }
 
+    console.log(newEmployerRequest);
     const response = await customFetch<{ employer_id: string }>(
       ApiRoutes.Employer,
       "POST",

@@ -24,8 +24,9 @@ const useForm = <T extends Record<keyof T, string>>(
   const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [formError, setFormError] = useState<string>("");
-  const [fieldsErrors, setFieldsErrors] =
-    useState<FieldsErrors<T>>(initialValues);
+  const [fieldsErrors, setFieldsErrors] = useState<FieldsErrors<T>>(
+    getClearedErrors(),
+  );
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -94,9 +95,17 @@ const useForm = <T extends Record<keyof T, string>>(
       }
     };
 
+  function getClearedErrors(): Record<keyof T, string> {
+    const clearedErrors: Record<keyof T, string> = { ...initialValues };
+    (Object.keys(clearedErrors) as Array<keyof T>).forEach((key) => {
+      clearedErrors[key] = "";
+    });
+    return clearedErrors;
+  }
+
   const resetForm = () => {
     setFormValues(initialValues);
-    setFieldsErrors(initialValues);
+    setFieldsErrors(getClearedErrors());
     setFormError("");
   };
 
