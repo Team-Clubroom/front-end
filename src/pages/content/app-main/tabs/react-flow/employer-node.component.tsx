@@ -1,15 +1,11 @@
 import { Handle, Position } from "reactflow";
-
-export type EmployerNode = {
-  name: string;
-  estDate: string;
-};
+import { EmployerNode } from "./graph.types.ts";
 
 interface EmployerNodeProps {
   data: EmployerNode;
 }
 
-export function EmployerNode({ data }: EmployerNodeProps) {
+export function EmployerNodeComponent({ data }: EmployerNodeProps) {
   return (
     <div className="px-4 py-2 shadow-md rounded-md bg-white border-2 border-stone-400">
       <div className="flex">
@@ -26,13 +22,13 @@ export function EmployerNode({ data }: EmployerNodeProps) {
         isConnectable={false}
         type="target"
         position={Position.Left}
-        className="!bg-teal-500 round-full"
+        className="!bg-teal-500 rounded-full"
       />
       <Handle
         isConnectable={false}
         type="source"
         position={Position.Right}
-        className="!bg-teal-500 round-full"
+        className="!bg-teal-500 rounded-full"
       />
     </div>
   );

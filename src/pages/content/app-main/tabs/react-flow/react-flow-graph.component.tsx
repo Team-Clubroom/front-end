@@ -10,67 +10,27 @@ import ReactFlow, {
 } from "reactflow";
 
 import "reactflow/dist/base.css";
-
-import { EmployerNode } from "./employer-node.component.tsx";
+import { EmployerNodeComponent } from "./employer-node.component.tsx";
+import { FAKE_EMPLOYERS_EDGES, FAKE_EMPLOYERS_NODES } from "./fake-graph.ts";
+import { BaseEmployerNode, GraphEdge } from "./graph.types.ts";
 
 const nodeTypes = {
-  custom: EmployerNode,
+  custom: EmployerNodeComponent,
 };
 
-const initNodes: Array<{
-  id: string;
-  type: "custom";
-  data: EmployerNode;
-  position: { x: number; y: number };
-}> = [
-  {
-    id: "1",
-    type: "custom",
-    data: { name: "Jane Doe", estDate: "12/12/2023" },
-    position: { x: 0, y: 50 },
-  },
-  {
-    id: "2",
-    type: "custom",
-    data: { name: "Tyler Weary", estDate: "12/12/2023" },
-    position: { x: -200, y: 200 },
-  },
-  {
-    id: "3",
-    type: "custom",
-    data: { name: "Kristi Price", estDate: "12/12/2023" },
-    position: { x: 200, y: 200 },
-  },
-  {
-    id: "4",
-    type: "custom",
-    data: { name: "New One", estDate: "12/12/2023" },
-    position: { x: 400, y: 300 },
-  },
-];
+const initEdges: GraphEdge[] = FAKE_EMPLOYERS_EDGES;
 
-const initEdges = [
-  {
-    id: "e1-2",
-    source: "1",
-    target: "2",
+const initNodes: BaseEmployerNode[] = Object.keys(
+  FAKE_EMPLOYERS_NODES,
+).map<BaseEmployerNode>((nodeId, index) => ({
+  id: nodeId,
+  type: "custom",
+  position: { x: index * 100, y: index * 100 },
+  data: {
+    estDate: FAKE_EMPLOYERS_NODES[nodeId].estDate,
+    name: FAKE_EMPLOYERS_NODES[nodeId].name,
   },
-  {
-    id: "e1-3",
-    source: "1",
-    target: "3",
-  },
-  {
-    id: "e1-4",
-    source: "3",
-    target: "4",
-  },
-  {
-    id: "e1-5",
-    source: "2",
-    target: "4",
-  },
-];
+}));
 
 export const ReactFlowGraphComponent = () => {
   const [nodes, setNodes, onNodesChange] = useNodesState(initNodes);
