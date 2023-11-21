@@ -35,111 +35,54 @@ function DashboardPage() {
             <p className={dashboardStyles.access_level}>Administrator</p>
           </div>
           <div id="menu" className={dashboardStyles.menu}>
-            {location.pathname == "/dashboard" ? (
-              <NavLink
-                to={"/dashboard"}
-                className={dashboardStyles.menuLinkHighlight}
+            <NavLink to={"/dashboard"} className={({ isActive }) => isActive ? dashboardStyles.menuLinkHighlight : dashboardStyles.menuLink} end>
+              <span
+                className={`material-symbols-outlined ${dashboardStyles.svgLink}`}
+                style={{ display: "flex" }}
               >
-                <span
-                  className={`material-symbols-outlined ${dashboardStyles.svgLink}`}
-                  style={{ display: "flex" }}
-                >
-                  dashboard
-                </span>
-                <span className="">Dashboard</span>
-              </NavLink>
-            ) : (
-              <NavLink to={"/dashboard"} className={dashboardStyles.menuLink}>
-                <span
-                  className={`material-symbols-outlined ${dashboardStyles.svgLink}`}
-                  style={{ display: "flex" }}
-                >
-                  dashboard
-                </span>
-                <span className="">Dashboard</span>
-              </NavLink>
-            )}
-            {location.pathname == "/dashboard/employers" ? (
-              <NavLink
-                to={"/dashboard/employers"}
-                className={dashboardStyles.menuLinkHighlight}
+                dashboard
+              </span>
+              <span className="">Dashboard</span>
+            </NavLink>
+            <NavLink
+              to={"/dashboard/employers"}
+              className={({ isActive }) => isActive ? dashboardStyles.menuLinkHighlight : dashboardStyles.menuLink} 
+              end
+            >
+              <span
+                className={`material-symbols-outlined ${dashboardStyles.svgLink}`}
+                style={{ display: "flex" }}
               >
-                <span
-                  className={`material-symbols-outlined ${dashboardStyles.svgLink}`}
-                  style={{ display: "flex" }}
-                >
-                  apartment
-                </span>
-                <span className="">Employers</span>
-              </NavLink>
-            ) : (
-              <NavLink
-                to={"/dashboard/employers"}
-                className={dashboardStyles.menuLink}
+                apartment
+              </span>
+              <span className="">Employers</span>
+            </NavLink>
+            <NavLink
+              to={"/dashboard/employees"}
+              className={({ isActive }) => isActive ? dashboardStyles.menuLinkHighlight : dashboardStyles.menuLink} 
+              end
+            >
+              <span
+                className={`material-symbols-outlined ${dashboardStyles.svgLink}`}
+                style={{ display: "flex" }}
               >
-                <span
-                  className={`material-symbols-outlined ${dashboardStyles.svgLink}`}
-                  style={{ display: "flex" }}
-                >
-                  apartment
-                </span>
-                <span className="">Employers</span>
-              </NavLink>
-            )}
-            {location.pathname == "/dashboard/employees" ? (
-              <NavLink
-                to={"/dashboard/employees"}
-                className={dashboardStyles.menuLinkHighlight}
+                badge
+              </span>
+              <span className="">Employees</span>
+            </NavLink>
+            <NavLink
+              to={"/dashboard/graph"}
+              className={({ isActive }) => isActive ? dashboardStyles.menuLinkHighlight : dashboardStyles.menuLink} 
+              end
+            >
+              <span
+                className={`material-symbols-outlined ${dashboardStyles.svgLink}`}
+                style={{ display: "flex" }}
               >
-                <span
-                  className={`material-symbols-outlined ${dashboardStyles.svgLink}`}
-                  style={{ display: "flex" }}
-                >
-                  badge
-                </span>
-                <span className="">Employees</span>
-              </NavLink>
-            ) : (
-              <NavLink
-                to={"/dashboard/employees"}
-                className={dashboardStyles.menuLink}
-              >
-                <span
-                  className={`material-symbols-outlined ${dashboardStyles.svgLink}`}
-                  style={{ display: "flex" }}
-                >
-                  badge
-                </span>
-                <span className="">Employees</span>
-              </NavLink>
-            )}
-            {location.pathname == "/dashboard/graph" ? (
-              <NavLink
-                to={"/dashboard/graph"}
-                className={dashboardStyles.menuLinkHighlight}
-              >
-                <span
-                  className={`material-symbols-outlined ${dashboardStyles.svgLink}`}
-                  style={{ display: "flex" }}
-                >
-                  account_tree
-                </span>
-                <span className="">Graph</span>
-              </NavLink>
-            ) : (
-              <NavLink
-                to={"/dashboard/graph"}
-                className={dashboardStyles.menuLink}
-              >
-                <span
-                  className={`material-symbols-outlined ${dashboardStyles.svgLink}`}
-                  style={{ display: "flex" }}
-                >
-                  account_tree
-                </span>
-                <span className="">Graph</span>
-              </NavLink>
-            )}
+                account_tree
+              </span>
+              <span className="">Graph</span>
+            </NavLink>
           </div>
         </div>
         <div className={dashboardStyles.mainContent} id={"main-content"}>
