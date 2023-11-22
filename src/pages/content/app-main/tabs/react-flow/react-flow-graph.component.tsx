@@ -25,7 +25,7 @@ const initNodes: BaseEmployerNode[] = Object.keys(
 ).map<BaseEmployerNode>((nodeId, index) => ({
   id: nodeId,
   type: "custom",
-  position: { x: index * 100, y: index * 100 },
+  position: { x: index * 200, y: index * 100 },
   data: {
     estDate: FAKE_EMPLOYERS_NODES[nodeId].estDate,
     name: FAKE_EMPLOYERS_NODES[nodeId].name,

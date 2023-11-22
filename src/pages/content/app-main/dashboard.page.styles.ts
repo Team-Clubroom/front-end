@@ -13,7 +13,12 @@ export const dashboardStyles = {
     "flex items-center text-sm font-medium text-gray-700 py-2 px-2 hover:bg-[#334155] hover:text-white" +
     " hover:text-base" +
     " rounded-md transition duration-150 ease-in-out",
+  menuLinkHighlight:
+    "flex items-center text-sm font-medium text-gray-700 py-2 px-2 hover:bg-[#334155] hover:text-white" +
+    " hover:text-base" +
+    " rounded-md transition duration-150 ease-in-out" +
+    " bg-gray-300",
   menuLinkButton: "flex items-center w-full",
-  svgLink: "w-6 h-6 fill-current mr-2",
-  mainContent: "flex h-full w-full",
+  svgLink: "material-symbols-outlined w-6 h-6 fill-current mr-2",
+  mainContent: "flex flex-col h-full w-full",
 };

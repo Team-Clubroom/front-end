@@ -6,15 +6,17 @@ import FooterComponent from "../../../components/footer/footer.component.tsx";
 import {
   signupEmptyForm,
   SignupFormValues,
-  validateSignupForm,
+  signupValidationCriteria,
 } from "./signup.helpers.ts";
 import { Helmet } from "react-helmet";
+import { InputComponent } from "../../../components/input/input.component.tsx";
+import { MaterialIcon } from "../../../utils/icons.ts";
 
 function SignupPage() {
   const { register } = useAuthActionContext();
-  const { registerField, onSubmit, isLoading, error, success } = useForm(
+  const { registerField, onSubmit, isLoading, formError, success } = useForm(
     signupEmptyForm,
-    validateSignupForm,
+    signupValidationCriteria,
   );
 
   const handleSubmit = async (formValues: SignupFormValues) => {
@@ -35,133 +37,74 @@ function SignupPage() {
         </div>
 
         <div className={signUpStyles.form}>
-          <form onSubmit={onSubmit(handleSubmit)} noValidate={true}>
-            <div className="flex justify-center items-center">
-              <div className={signUpStyles.formField + " pr-1"}>
-                <label htmlFor="first_name" className={signUpStyles.label}>
-                  First Name:
-                </label>
-                <div className={signUpStyles.inputContainer}>
-                  <span
-                    className={`material-symbols-outlined ${signUpStyles.inputIcon}`}
-                    style={{ display: "flex" }}
-                  >
-                    person
-                  </span>
-                  <input
-                    id="first_name"
-                    type="text"
-                    required
-                    className={signUpStyles.input}
-                    placeholder="John"
-                    {...registerField("firstName")}
-                  />
-                </div>
-              </div>
-              <div className={signUpStyles.formField + " pl-1"}>
-                <label htmlFor="last_name" className={signUpStyles.label}>
-                  Last Name:
-                </label>
-                <div className={signUpStyles.inputContainer}>
-                  <span
-                    className={`material-symbols-outlined ${signUpStyles.inputIcon}`}
-                    style={{ display: "flex" }}
-                  >
-                    person
-                  </span>
-                  <input
-                    id="last_name"
-                    type="text"
-                    required
-                    className={signUpStyles.input}
-                    placeholder="Doe"
-                    {...registerField("lastName")}
-                  />
-                </div>
-              </div>
+          <form
+            onSubmit={onSubmit(handleSubmit)}
+            noValidate={true}
+            className={"flex flex-col gap-2"}
+          >
+            <div className="flex justify-center">
+              <InputComponent
+                fieldRegistration={registerField("firstName")}
+                iconName={MaterialIcon.Person}
+                placeholder={"John"}
+                id={"first_name"}
+                label={"Enter Your First Name"}
+              />
+
+              <InputComponent
+                fieldRegistration={registerField("lastName")}
+                iconName={MaterialIcon.Person}
+                placeholder={"Doe"}
+                id={"last_name"}
+                label={"Enter Your Last Name"}
+              />
             </div>
-            <div className={signUpStyles.formField}>
-              <label htmlFor="email" className={signUpStyles.label}>
-                E-Mail Address:
-              </label>
-              <div className={signUpStyles.inputContainer}>
-                <span
-                  className={`material-symbols-outlined ${signUpStyles.inputIcon}`}
-                  style={{ display: "flex" }}
-                >
-                  mail
-                </span>
-                <input
-                  id="email"
-                  type="email"
-                  required
-                  className={signUpStyles.input}
-                  placeholder="johndoe@example.com"
-                  {...registerField("email")}
-                />
-              </div>
-            </div>
-            <div className={signUpStyles.formField}>
-              <label htmlFor="password" className={signUpStyles.label}>
-                Enter Password:
-              </label>
-              <div className={signUpStyles.inputContainer}>
-                <span
-                  className={`material-symbols-outlined ${signUpStyles.inputIcon}`}
-                  style={{ display: "flex" }}
-                >
-                  lock
-                </span>
-                <input
-                  id="password"
-                  type="password"
-                  required
-                  className={signUpStyles.input}
-                  placeholder={
-                    "\u2022" +
-                    "\u2022" +
-                    "\u2022" +
-                    "\u2022" +
-                    "\u2022" +
-                    "\u2022" +
-                    "\u2022" +
-                    "\u2022"
-                  }
-                  {...registerField("password")}
-                />
-              </div>
-            </div>
-            <div className={signUpStyles.formField}>
-              <label htmlFor="password" className={signUpStyles.label}>
-                Re-Enter Password:
-              </label>
-              <div className={signUpStyles.inputContainer}>
-                <span
-                  className={`material-symbols-outlined ${signUpStyles.inputIcon}`}
-                  style={{ display: "flex" }}
-                >
-                  lock
-                </span>
-                <input
-                  id="password-repeat"
-                  type="password"
-                  required
-                  className={signUpStyles.input}
-                  placeholder={
-                    "\u2022" +
-                    "\u2022" +
-                    "\u2022" +
-                    "\u2022" +
-                    "\u2022" +
-                    "\u2022" +
-                    "\u2022" +
-                    "\u2022"
-                  }
-                  {...registerField("passwordRepeat")}
-                />
-              </div>
-            </div>
-            <span className={signUpStyles.error}>{error}</span>
+
+            <InputComponent
+              fieldRegistration={registerField("email")}
+              iconName={MaterialIcon.Mail}
+              placeholder={"johndoe@example.com"}
+              id={"email"}
+              label={"Enter Your E-Mail Address"}
+            />
+
+            <InputComponent
+              fieldRegistration={registerField("password")}
+              iconName={MaterialIcon.Lock}
+              placeholder={
+                "\u2022" +
+                "\u2022" +
+                "\u2022" +
+                "\u2022" +
+                "\u2022" +
+                "\u2022" +
+                "\u2022" +
+                "\u2022"
+              }
+              id={"password"}
+              label={"Enter a Password"}
+              type="password"
+            />
+
+            <InputComponent
+              fieldRegistration={registerField("passwordRepeat")}
+              iconName={MaterialIcon.Lock}
+              placeholder={
+                "\u2022" +
+                "\u2022" +
+                "\u2022" +
+                "\u2022" +
+                "\u2022" +
+                "\u2022" +
+                "\u2022" +
+                "\u2022"
+              }
+              id={"password-repeat"}
+              label={"Repeat the Password"}
+              type="password"
+            />
+
+            <span className={signUpStyles.error}>{formError}</span>
             <div className="flex w-full">
               <button type="submit" className={signUpStyles.submitButton}>
                 {isLoading ? (

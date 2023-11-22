@@ -7,7 +7,8 @@ import {
   RegisterFunc,
   UserAuth,
 } from "./auth.types.ts";
-import { ApiRoutes, useFetch } from "../../utils/custom-fetch.ts";
+import { useFetch } from "../../models/useFetch.ts";
+import { ApiRoutes } from "../../models/api.types.ts";
 
 const AuthContext = React.createContext<AuthState>(null);
 /**

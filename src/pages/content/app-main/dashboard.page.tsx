@@ -2,6 +2,7 @@ import { useAuthContext } from "../../../contexts/auth/auth.context.tsx";
 import { dashboardStyles } from "./dashboard.page.styles.ts";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import { SIDE_MENU_NAV_LINKS } from "./side-menu-nav-links.ts";
 
 function DashboardPage() {
   let title;
@@ -35,63 +36,26 @@ function DashboardPage() {
             <p className={dashboardStyles.access_level}>Administrator</p>
           </div>
           <div id="menu" className={dashboardStyles.menu}>
-            <NavLink to={"/dashboard"} className={dashboardStyles.menuLink}>
-              <span
-                className={`material-symbols-outlined ${dashboardStyles.svgLink}`}
-                style={{ display: "flex" }}
+            {SIDE_MENU_NAV_LINKS.map((link, index) => (
+              <NavLink
+                key={index}
+                to={link.to}
+                className={({ isActive }) =>
+                  isActive
+                    ? dashboardStyles.menuLinkHighlight
+                    : dashboardStyles.menuLink
+                }
+                end
               >
-                dashboard
-              </span>
-              <span className="">Dashboard</span>
-            </NavLink>
-            <NavLink
-              to={"/dashboard/employers"}
-              className={dashboardStyles.menuLink}
-            >
-              <span
-                className={`material-symbols-outlined ${dashboardStyles.svgLink}`}
-                style={{ display: "flex" }}
-              >
-                apartment
-              </span>
-              <span className="">Employers</span>
-            </NavLink>
-            <NavLink
-              to={"/dashboard/employees"}
-              className={dashboardStyles.menuLink}
-            >
-              <span
-                className={`material-symbols-outlined ${dashboardStyles.svgLink}`}
-                style={{ display: "flex" }}
-              >
-                badge
-              </span>
-              <span className="">Employees</span>
-            </NavLink>
-            <NavLink
-              to={"/dashboard/graph"}
-              className={dashboardStyles.menuLink}
-            >
-              <span
-                className={`material-symbols-outlined ${dashboardStyles.svgLink}`}
-                style={{ display: "flex" }}
-              >
-                account_tree
-              </span>
-              <span className="">Graph</span>
-            </NavLink>
-            <NavLink
-              to={"/dashboard/react-flow"}
-              className={dashboardStyles.menuLink}
-            >
-              <span
-                className={`material-symbols-outlined ${dashboardStyles.svgLink}`}
-                style={{ display: "flex" }}
-              >
-                account_tree
-              </span>
-              <span className="">React Flow</span>
-            </NavLink>
+                <span
+                  className={dashboardStyles.svgLink}
+                  style={{ display: "flex" }}
+                >
+                  {link.icon}
+                </span>
+                <span className="">{link.text}</span>
+              </NavLink>
+            ))}
           </div>
         </div>
         <div className={dashboardStyles.mainContent} id={"main-content"}>

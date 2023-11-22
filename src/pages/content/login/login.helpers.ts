@@ -1,3 +1,5 @@
+import { Validate, ValidationCriteria } from "../../../hooks/Validator.ts";
+
 export interface LoginFormValues {
   email: string;
   password: string;
@@ -8,12 +10,8 @@ export const emptyLoginForm: LoginFormValues = {
   password: "",
 };
 
-export function validateLoginForm({ email, password }: LoginFormValues) {
-  if (!email.trim()) {
-    return "Please enter your email address.";
-  } else if (!/^\S+@\S+\.\S+$/.test(email.trim())) {
-    return "Please enter a valid email address.";
-  } else if (!password) {
-    return "Please enter your password.";
-  } else return "";
-}
+export const loginFormCriteria: ValidationCriteria<LoginFormValues> = {
+  email: [Validate.Required, Validate.Email],
+  // TODO: add password min length
+  password: [Validate.Required],
+};
