@@ -12,4 +12,5 @@ export enum MaterialIcon {
   Mail = "mail",
   Lock = "lock",
   Close = "close",
+  Edit = "edit",
 }

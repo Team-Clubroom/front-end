@@ -1,18 +1,27 @@
 import { Employer } from "../../models/employer.types";
 import "./employer-card-styles.css";
 import { INDUSTRY_SECTOR_CODES } from "../../data/naics-codes.ts";
+import { useModal } from "../../hooks/useModal.ts";
+import NameChangeForm from "../name-change/name-change-form.component.tsx";
+import { dashboardRootStyles } from "../../pages/content/app-main/tabs/dashboard-root/dashboard-root.styles.tsx";
+import { MaterialIcon } from "../../utils/icons.ts";
 
 interface EmployerCardProps {
   employer: Employer;
 }
 
 export const EmployerCard = ({ employer }: EmployerCardProps) => {
+  const [isChangeModalOpen, openChangeModal, closeChangeModal] = useModal();
+
   const { shortName, color } =
     INDUSTRY_SECTOR_CODES[employer.industrySectorCode];
   return (
     <div className={"employer-card"}>
       <div className={"employer-company-wrapper"}>
-        <h3 className={"employer-name"}>{employer.name}</h3>
+        <div className={"flex"}>
+          <h3 className={"employer-name"}>{employer.name}</h3>
+          <span className={"material-symbols-outlined mt-0.5 ml-2 hover:cursor-pointer"} onClick={openChangeModal}>{MaterialIcon.Edit}</span>
+        </div>
         <div className={"flex gap-2 items-center"}>
           <p className={"employer-sector"} style={{ backgroundColor: color }}>
             {shortName}
@@ -49,6 +58,11 @@ export const EmployerCard = ({ employer }: EmployerCardProps) => {
           {employer.address.zipCode}
         </p>
       </div>
+      <NameChangeForm 
+        isOpen={isChangeModalOpen}
+        close={closeChangeModal}
+        company={employer.name}
+      />
     </div>
   );
 };
