@@ -32,18 +32,27 @@ function NameChangeForm({ isOpen, close, company }: ChangeFormProps) {
                 noValidate={true}
                 className={"flex flex-col gap-2 max-h-96 pr-2"}
                 >
-                    {/* make custom company component here */}
-                    <CompanyComponent
-                        iconName={MaterialIcon.Work}
-                        label={"Old Company Name"}
-                        value={company}
-                    />
+                    <div className={"flex justify-around items-center"}>
+                        <CompanyComponent
+                            fieldRegistration={registerField("employerName")}
+                            iconName={MaterialIcon.Work}
+                            label={"Old Company Name"}
+                            name={company}
+                        />
+                        <InputComponent
+                            fieldRegistration={registerField("newEmployerName")}
+                            iconName={MaterialIcon.Work}
+                            placeholder={"Tesla"}
+                            id={"new_employer_name"}
+                            label={"Enter the New Employer Name"}
+                        />
+                    </div>
                     <InputComponent
-                        fieldRegistration={registerField("employerName")}
-                        iconName={MaterialIcon.Work}
-                        placeholder={"Tesla"}
-                        id={"new_employer_name"}
-                        label={"Enter the New Employer Name"}
+                        fieldRegistration={registerField("changeDate")}
+                        iconName={MaterialIcon.Event}
+                        placeholder={"mm/dd/yyyy"}
+                        id={"change_date"}
+                        label={"Enter the Name Change Date"}
                     />
                     <span className={dashboardRootStyles.error}>{formError}</span>
                     <div className="flex w-full justify-end">

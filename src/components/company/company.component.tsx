@@ -1,16 +1,20 @@
 import { dashboardRootStyles } from "../../pages/content/app-main/tabs/dashboard-root/dashboard-root.styles.tsx";
 import { MaterialIcon } from "../../utils/icons.ts";
+import { FieldRegistration } from "../../hooks/useForm.ts";
+import { classIf } from "../../utils/tailwind.utils.ts";
 
 interface CompanyProps {
+    fieldRegistration: FieldRegistration;
     iconName: MaterialIcon;
     label: string;
-    value: string;
+    name: string;
 }
 
 export const CompanyComponent = ({
+    fieldRegistration: { onChange, required, error, value },
     iconName,
     label,
-    value
+    name
 }: CompanyProps) => {
     return (
         <div className={dashboardRootStyles.formField + " pr-1"}>
@@ -29,7 +33,8 @@ export const CompanyComponent = ({
                     dashboardRootStyles.input
                 }
                 readOnly={true}
-                value={value}
+                value={name}
+                onChange={onChange}
                 />
             </div>
         </div>
