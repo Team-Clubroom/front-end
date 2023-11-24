@@ -9,6 +9,7 @@ import { InputComponent } from "../input/input.component.tsx";
 import { MaterialIcon } from "../../utils/icons.ts";
 import { dashboardRootStyles } from "../../pages/content/app-main/tabs/dashboard-root/dashboard-root.styles.tsx";
 import { CompanyComponent } from "../company/company.component.tsx";
+import { useFetch } from "../../models/useFetch.ts";
 
 interface ChangeFormProps extends ModalVisibilityProps {
     company: string;
@@ -19,6 +20,11 @@ function NameChangeForm({ isOpen, close, company }: ChangeFormProps) {
         addChangeEmptyForm,
         addChangeValidationCriteria,
       );
+    const { customFetch } = useFetch();
+
+    async function handleSubmit(formValue: AddChangeFormValues) {
+        
+    }
 
     return (
         <Modal
