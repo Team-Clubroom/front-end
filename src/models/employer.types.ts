@@ -32,8 +32,7 @@ export interface NewEmployerRequest {
 }
 
 export interface NameChangeRequest {
-  employer_name: string;
+  old_employer_name: string;
   new_employer_name: string;
-  employer_relation_type: string;
-  employer_relation_start_date: string;
+  name_change_effective_date: string;
 }

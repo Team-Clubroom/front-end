@@ -26,14 +26,13 @@ function NameChangeForm({ isOpen, close, company }: ChangeFormProps) {
 
   async function handleSubmit(formValues: nameChangeFormValues) {
     const nameChangeRequest: NameChangeRequest = {
-      employer_name: formValues.employerName.trim(),
+      old_employer_name: formValues.employerName.trim(),
       new_employer_name: formValues.newEmployerName.trim(),
-      employer_relation_type: "Rebrand",
-      employer_relation_start_date: formValues.changeDate.trim(),
+      name_change_effective_date: formValues.changeDate.trim(),
     };
 
     const response = await customFetch<{ employer_id: string }>(
-      ApiRoutes.Employer,
+      ApiRoutes.Name_Change,
       "POST",
       nameChangeRequest,
     );
@@ -80,7 +79,7 @@ function NameChangeForm({ isOpen, close, company }: ChangeFormProps) {
             <button type="submit" className={dashboardRootStyles.submitButton}>
               {isLoading ? (
                 <div className={dashboardRootStyles.loadDiv}>
-                  <span className={dashboardRootStyles.loading}>Creating</span>
+                  <span className={dashboardRootStyles.loading}>Changing</span>
                   <svg
                     aria-hidden="true"
                     className={dashboardRootStyles.spinner}
