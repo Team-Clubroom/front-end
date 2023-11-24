@@ -1,18 +1,18 @@
 import { Validate, ValidationCriteria } from "../../hooks/Validator.ts";
 
-export interface AddChangeFormValues {
-    employerName: string,
-    newEmployerName: string,
-    changeDate: string,
+export interface nameChangeFormValues {
+  employerName: string;
+  newEmployerName: string;
+  changeDate: string;
 }
 
-export const addChangeEmptyForm: AddChangeFormValues = {
-    employerName: "",
-    newEmployerName: "",
-    changeDate: "",
+export const nameChangeEmptyForm: nameChangeFormValues = {
+  employerName: "",
+  newEmployerName: "",
+  changeDate: "",
 };
 
-export const addChangeValidationCriteria: ValidationCriteria<AddChangeFormValues> =
+export const nameChangeValidationCriteria: ValidationCriteria<nameChangeFormValues> =
   {
     employerName: [Validate.Required],
     newEmployerName: [Validate.Required],

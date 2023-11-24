@@ -16,7 +16,7 @@ function Employers() {
   const showNameChangeModal = (company_name: string) => {
     name = company_name;
     openChangeModal();
-  }
+  };
 
   const [search, setSearch] = useState("");
   const [employers, setEmployers] = useState<Employer[]>([]);
@@ -43,11 +43,23 @@ function Employers() {
   function compareSearch(employer: Employer) {
     if (search.trim() !== "") {
       if (employer.name.toLowerCase().includes(search.toLowerCase())) {
-        return <EmployerCard employer={employer} key={employer.id} showNameChangeModal={() => showNameChangeModal(employer.name)}/>;
+        return (
+          <EmployerCard
+            employer={employer}
+            key={employer.id}
+            showNameChangeModal={() => showNameChangeModal(employer.name)}
+          />
+        );
       }
       // TODO: add other search filters when needed
     } else {
-      return <EmployerCard employer={employer} key={employer.id} showNameChangeModal={() => showNameChangeModal(employer.name)}/>;
+      return (
+        <EmployerCard
+          employer={employer}
+          key={employer.id}
+          showNameChangeModal={() => showNameChangeModal(employer.name)}
+        />
+      );
     }
   }
 

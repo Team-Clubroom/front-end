@@ -8,7 +8,10 @@ interface EmployerCardProps {
   showNameChangeModal: (company_name: string) => void;
 }
 
-export const EmployerCard = ({ employer, showNameChangeModal }: EmployerCardProps) => {
+export const EmployerCard = ({
+  employer,
+  showNameChangeModal,
+}: EmployerCardProps) => {
   const { shortName, color } =
     INDUSTRY_SECTOR_CODES[employer.industrySectorCode];
   return (
@@ -16,7 +19,14 @@ export const EmployerCard = ({ employer, showNameChangeModal }: EmployerCardProp
       <div className={"employer-company-wrapper"}>
         <div className={"flex"}>
           <h3 className={"employer-name"}>{employer.name}</h3>
-          <span className={"material-symbols-outlined mt-0.5 ml-2 hover:cursor-pointer"} onClick={() => showNameChangeModal(employer.name)}>{MaterialIcon.Edit}</span>
+          <span
+            className={
+              "material-symbols-outlined mt-0.5 ml-2 hover:cursor-pointer"
+            }
+            onClick={() => showNameChangeModal(employer.name)}
+          >
+            {MaterialIcon.Edit}
+          </span>
         </div>
         <div className={"flex gap-2 items-center"}>
           <p className={"employer-sector"} style={{ backgroundColor: color }}>

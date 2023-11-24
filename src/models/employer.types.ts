@@ -30,3 +30,10 @@ export interface NewEmployerRequest {
   employer_addr_state: string;
   employer_addr_zip_code: string;
 }
+
+export interface NameChangeRequest {
+  employer_name: string;
+  new_employer_name: string;
+  employer_relation_type: string;
+  employer_relation_start_date: string;
+}
