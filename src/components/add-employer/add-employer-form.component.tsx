@@ -1,5 +1,5 @@
 import { dashboardRootStyles } from "../../pages/content/app-main/tabs/dashboard-root/dashboard-root.styles.tsx";
-import "./form.styles.css";
+import "../../sharedStyles/form.styles.css";
 import {
   addEmployerEmptyForm,
   AddEmployerFormValues,

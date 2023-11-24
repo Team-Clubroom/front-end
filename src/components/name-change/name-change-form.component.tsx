@@ -2,7 +2,7 @@ import { Modal, ModalVisibilityProps } from "../modal/modal.component.tsx";
 import useForm from "../../hooks/useForm.ts";
 import {
   nameChangeEmptyForm,
-  nameChangeFormValues,
+  NameChangeFormValues,
   nameChangeValidationCriteria,
 } from "./name-change-form.helpers.ts";
 import { InputComponent } from "../input/input.component.tsx";
@@ -12,6 +12,7 @@ import { CompanyComponent } from "../company/company.component.tsx";
 import { useFetch } from "../../models/useFetch.ts";
 import { NameChangeRequest } from "../../models/employer.types.ts";
 import { ApiRoutes } from "../../models/api.types.ts";
+import "../../sharedStyles/form.styles.css";
 
 interface ChangeFormProps extends ModalVisibilityProps {
   company: string;
@@ -24,19 +25,19 @@ function NameChangeForm({ isOpen, close, company }: ChangeFormProps) {
   );
   const { customFetch } = useFetch();
 
-  async function handleSubmit(formValues: nameChangeFormValues) {
+  async function handleSubmit(formValues: NameChangeFormValues) {
     const nameChangeRequest: NameChangeRequest = {
-      old_employer_name: formValues.employerName.trim(),
+      old_employer_name: company.trim(),
       new_employer_name: formValues.newEmployerName.trim(),
       name_change_effective_date: formValues.changeDate.trim(),
     };
 
     const response = await customFetch<{ employer_id: string }>(
-      ApiRoutes.Name_Change,
+      ApiRoutes.NameChange,
       "POST",
       nameChangeRequest,
     );
-    console.log(response.data.employer_id);
+    console.log(response);
   }
 
   return (
@@ -52,9 +53,8 @@ function NameChangeForm({ isOpen, close, company }: ChangeFormProps) {
           noValidate={true}
           className={"flex flex-col gap-2 max-h-96 pr-2"}
         >
-          <div className={"flex justify-around items-center"}>
+          <div className={"form-row"}>
             <CompanyComponent
-              fieldRegistration={registerField("employerName")}
               iconName={MaterialIcon.Work}
               label={"Old Company Name"}
               name={company}
