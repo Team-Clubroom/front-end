@@ -5,7 +5,7 @@ import { MaterialIcon } from "../../utils/icons.ts";
 
 interface EmployerCardProps {
   employer: Employer;
-  showNameChangeModal: (company_name: string) => void;
+  showNameChangeModal: () => void;
 }
 
 export const EmployerCard = ({
@@ -23,7 +23,7 @@ export const EmployerCard = ({
             className={
               "material-symbols-outlined mt-0.5 ml-2 hover:cursor-pointer"
             }
-            onClick={() => showNameChangeModal(employer.name)}
+            onClick={showNameChangeModal}
           >
             {MaterialIcon.Edit}
           </span>

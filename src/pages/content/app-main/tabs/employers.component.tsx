@@ -6,16 +6,18 @@ import { useFetch } from "../../../../models/useFetch.ts";
 import { EmployerCard } from "../../../../components/employer-card/employer-card.component.tsx";
 import { ApiRoutes } from "../../../../models/api.types.ts";
 import { useModal } from "../../../../hooks/useModal.ts";
-import NameChangeForm from "../../../../components/name-change/name-change-form.component.tsx";
-
-let name = "";
+import NameChangeModal from "../../../../components/name-change/name-change-form.component.tsx";
 
 function Employers() {
-  const [isChangeModalOpen, openChangeModal, closeChangeModal] = useModal();
+  const [
+    isChangeModalOpen,
+    openChangeModal,
+    closeChangeModal,
+    nameChangeModalData,
+  ] = useModal<{ companyName: string }>();
 
-  const showNameChangeModal = (company_name: string) => {
-    name = company_name;
-    openChangeModal();
+  const showNameChangeModal = (companyName: string) => {
+    openChangeModal({ companyName });
   };
 
   const [search, setSearch] = useState("");
@@ -89,10 +91,10 @@ function Employers() {
           No employers match the search
         </div>
       )}
-      <NameChangeForm
+      <NameChangeModal
         isOpen={isChangeModalOpen}
         close={closeChangeModal}
-        company={name}
+        companyName={nameChangeModalData?.companyName || ""}
       />
     </div>
   );

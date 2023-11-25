@@ -15,10 +15,10 @@ import { ApiRoutes } from "../../models/api.types.ts";
 import "../../sharedStyles/form.styles.css";
 
 interface ChangeFormProps extends ModalVisibilityProps {
-  company: string;
+  companyName: string;
 }
 
-function NameChangeForm({ isOpen, close, company }: ChangeFormProps) {
+function NameChangeForm({ isOpen, close, companyName }: ChangeFormProps) {
   const { registerField, onSubmit, isLoading, formError, resetForm } = useForm(
     nameChangeEmptyForm,
     nameChangeValidationCriteria,
@@ -27,17 +27,16 @@ function NameChangeForm({ isOpen, close, company }: ChangeFormProps) {
 
   async function handleSubmit(formValues: NameChangeFormValues) {
     const nameChangeRequest: NameChangeRequest = {
-      old_employer_name: company.trim(),
+      old_employer_name: companyName.trim(),
       new_employer_name: formValues.newEmployerName.trim(),
       name_change_effective_date: formValues.changeDate.trim(),
     };
 
-    const response = await customFetch<{ employer_id: string }>(
+    await customFetch<undefined>(
       ApiRoutes.NameChange,
       "POST",
       nameChangeRequest,
     );
-    console.log(response);
   }
 
   return (
@@ -57,7 +56,7 @@ function NameChangeForm({ isOpen, close, company }: ChangeFormProps) {
             <CompanyComponent
               iconName={MaterialIcon.Work}
               label={"Old Company Name"}
-              name={company}
+              name={companyName}
             />
             <InputComponent
               fieldRegistration={registerField("newEmployerName")}
