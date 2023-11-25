@@ -57,11 +57,11 @@ export function SplitEmployerModal({
         >
           <div className={"form-row"}>
             <InputComponent
-              fieldRegistration={registerField("firstCompanyName")}
               iconName={MaterialIcon.Split}
               placeholder={"Tesla"}
               id={"new_employer_name"}
               label={"Company Name to be Split"}
+              value={companyName}
             />
             <InputComponent
               fieldRegistration={registerField("relationStartDate")}
