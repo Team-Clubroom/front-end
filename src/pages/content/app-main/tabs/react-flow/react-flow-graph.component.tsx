@@ -11,14 +11,15 @@ import ReactFlow, {
 
 import "reactflow/dist/base.css";
 import { EmployerNodeComponent } from "./employer-node.component.tsx";
-import { FAKE_EMPLOYERS_EDGES, FAKE_EMPLOYERS_NODES } from "./fake-graph.ts";
-import { BaseEmployerNode, GraphEdge } from "./graph.types.ts";
+import { FAKE_EMPLOYERS_EDGES, FAKE_EMPLOYERS_NODES } from "./fake-graph.tsx";
+import { BaseEmployerNode } from "./graph.types.ts";
+import CustomEdge from "./custom-edge/custom-edge.component.tsx";
 
 const nodeTypes = {
   custom: EmployerNodeComponent,
 };
 
-const initEdges: GraphEdge[] = FAKE_EMPLOYERS_EDGES;
+const initEdges = FAKE_EMPLOYERS_EDGES;
 
 const initNodes: BaseEmployerNode[] = Object.keys(
   FAKE_EMPLOYERS_NODES,
@@ -32,6 +33,10 @@ const initNodes: BaseEmployerNode[] = Object.keys(
   },
 }));
 
+const edgeTypes = {
+  custom: CustomEdge,
+};
+
 export const ReactFlowGraphComponent = () => {
   const [nodes, setNodes, onNodesChange] = useNodesState(initNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initEdges);
@@ -43,6 +48,7 @@ export const ReactFlowGraphComponent = () => {
 
   return (
     <ReactFlow
+      edgeTypes={edgeTypes}
       nodes={nodes}
       edges={edges}
       onNodesChange={onNodesChange}

@@ -14,5 +14,5 @@ export type GraphEdge = {
   id: string;
   target: string;
   source: string;
-  relationType: string;
+  label: string;
 };
