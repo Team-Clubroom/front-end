@@ -12,6 +12,8 @@ import {
   SplitFormValues,
 } from "./split-employer.helpers.ts";
 import { LoadButtonComponent } from "../../load-button/load-button.component.tsx";
+import { SplitRelationRequest } from "../../../models/employer.types.ts";
+import { ApiRoutes } from "../../../models/api.types.ts";
 
 interface ChangeFormProps extends ModalVisibilityProps {
   companyName: string;
@@ -29,17 +31,18 @@ export function SplitEmployerModal({
   const { customFetch } = useFetch();
 
   async function handleSubmit(formValues: SplitFormValues) {
-    // const nameChangeRequest: NameChangeRequest = {
-    //   old_employer_name: companyName.trim(),
-    //   new_employer_name: formValues.newEmployerName.trim(),
-    //   name_change_effective_date: formValues.changeDate.trim(),
-    // };
-    //
-    // await customFetch<undefined>(
-    //   ApiRoutes.NameChange,
-    //   "POST",
-    //   nameChangeRequest,
-    // );
+    const splitRelationRequest: SplitRelationRequest = {
+      company_a_name: companyName.trim(),
+      company_b_name: formValues.firstCompanyName.trim(),
+      company_c_name: formValues.secondCompanyName.trim(),
+      employer_relation_start_date: formValues.relationStartDate.trim(),
+    };
+
+    await customFetch<undefined>(
+      ApiRoutes.SplitRelation,
+      "POST",
+      splitRelationRequest,
+    );
   }
 
   return (
