@@ -1,7 +1,13 @@
+import { MaterialIcon } from "../../../utils/icons.ts";
+
 export const SIDE_MENU_NAV_LINKS = [
-  { to: "/dashboard", icon: "dashboard", text: "Dashboard" },
-  { to: "/dashboard/employers", icon: "apartment", text: "Employers" },
-  { to: "/dashboard/employees", icon: "badge", text: "Employees" },
-  { to: "/dashboard/graph", icon: "account_tree", text: "Graph" },
-  { to: "/dashboard/react-flow", icon: "account_tree", text: "React flow" },
+  { to: "/dashboard", icon: MaterialIcon.Dashboard, text: "Dashboard" },
+  {
+    to: "/dashboard/employers",
+    icon: MaterialIcon.Apartment,
+    text: "Employers",
+  },
+  { to: "/dashboard/employees", icon: MaterialIcon.Badge, text: "Employees" },
+  { to: "/dashboard/graph", icon: MaterialIcon.Account_Tree, text: "Graph" },
+  { to: "/dashboard/react-flow", icon: MaterialIcon.Network, text: "React flow" },
 ];
