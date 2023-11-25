@@ -8,6 +8,4 @@ export const SIDE_MENU_NAV_LINKS = [
     text: "Employers",
   },
   { to: "/dashboard/employees", icon: MaterialIcon.Badge, text: "Employees" },
-  { to: "/dashboard/graph", icon: MaterialIcon.Account_Tree, text: "Graph" },
-  { to: "/dashboard/react-flow", icon: MaterialIcon.Network, text: "React flow" },
 ];

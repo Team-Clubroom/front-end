@@ -15,6 +15,7 @@ import { API_Employer_Graph, BaseEmployerNode } from "./graph.types.ts";
 import CustomEdge from "./custom-edge/custom-edge.component.tsx";
 import { useFetch } from "../../../../../models/useFetch.ts";
 import { ApiRoutes } from "../../../../../models/api.types.ts";
+import { useParams } from "react-router-dom";
 
 const edgeTypes = {
   custom: CustomEdge,
@@ -29,6 +30,7 @@ export const ReactFlowGraphComponent = () => {
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const { customFetch } = useFetch();
   const [error, setError] = useState("");
+  const { employerId } = useParams();
 
   const onConnect = useCallback(
     (params: Connection | Edge) => setEdges((eds) => addEdge(params, eds)),
@@ -46,7 +48,7 @@ export const ReactFlowGraphComponent = () => {
         return {
           id,
           position,
-          data: { id, name, estDate },
+          data: { id, name, estDate, isMainNode: employerId === id },
           type: "custom",
         };
       }),
@@ -66,7 +68,9 @@ export const ReactFlowGraphComponent = () => {
 
   useEffect(() => {
     // TODO: update ApiRoute when backend route is ready
-    customFetch<API_Employer_Graph>(ApiRoutes.EmployersGraph, "GET")
+    customFetch<API_Employer_Graph>(ApiRoutes.EmployersGraph, "POST", {
+      employer_id: employerId,
+    })
       .then((response) => handleSuccess(response.data))
       .catch((request_error) => {
         setError((request_error as Error).message);

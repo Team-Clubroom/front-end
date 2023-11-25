@@ -1,13 +1,19 @@
 import { Handle, Position } from "reactflow";
-import { API_Employer_Node } from "./graph.types.ts";
 
-interface EmployerNodeProps {
-  data: API_Employer_Node;
+export interface EmployerNodeProps {
+  id: string;
+  name: string;
+  estDate: string;
+  isMainNode: boolean;
 }
 
-export function EmployerNodeComponent({ data }: EmployerNodeProps) {
+export function EmployerNodeComponent({ data }: { data: EmployerNodeProps }) {
   return (
-    <div className="px-4 py-2 shadow-md rounded-md bg-white border-2 border-stone-400">
+    <div
+      className={`px-4 py-2 shadow-md rounded-md border-2 border-stone-400 ${
+        data.isMainNode ? "bg-yellow-200" : "bg-white"
+      }`}
+    >
       <div className="flex">
         <div className="ml-2">
           <div className="text-lg font-bold">{data.name}</div>
