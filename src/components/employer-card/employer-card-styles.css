@@ -1,25 +1,35 @@
 .employer-card {
-  @apply flex flex-col gap-2 basis-52 grow shrink-0 bg-gray-200 p-4 justify-start rounded-2xl;
+    @apply flex flex-col gap-2 basis-52 grow shrink-0 bg-gray-200 p-4 justify-start rounded-2xl;
+}
+
+.employer-header-icons {
+    opacity: 0;
+    display: flex;
+    transition: opacity 100ms;
+}
+
+.employer-card:hover .employer-header-icons {
+    opacity: 1;
 }
 
 .employer-company-wrapper {
-  @apply flex flex-col gap-1;
+    @apply flex flex-col gap-1;
 }
 
 .employer-sector {
-  text-align: center;
-  color: white;
-  @apply text-white rounded-full text-base px-4 py-1;
+    text-align: center;
+    color: white;
+    @apply text-white rounded-full text-base px-4 py-1;
 }
 
 .employer-name {
-  @apply text-xl;
+    @apply text-xl;
 }
 
 .employer-date-wrapper {
-  @apply flex text-sm gap-2;
+    @apply flex text-sm gap-2;
 }
 
 .employer-address-wrapper {
-  @apply flex flex-col text-sm text-gray-500 mt-auto border-t border-gray-300 pt-2;
+    @apply flex flex-col text-sm text-gray-500 mt-auto border-t border-gray-300 pt-2;
 }

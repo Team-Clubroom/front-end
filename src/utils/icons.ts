@@ -17,4 +17,9 @@ export enum MaterialIcon {
   Merge = "call_merge",
   Split = "call_split",
   Delete = "delete",
+  Dashboard = "dashboard",
+  Apartment = "apartment",
+  Badge = "badge",
+  Account_Tree = "account_tree",
+  Network = "network_node",
 }

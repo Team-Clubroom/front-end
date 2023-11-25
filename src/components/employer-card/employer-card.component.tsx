@@ -63,11 +63,18 @@ export const EmployerCard = ({
         <div className={"flex justify-between items-center"}>
           <h3 className={"employer-name"}>{employer.name}</h3>
           <div className={"flex gap-1"}>
-            <Icon
-              name={MaterialIcon.Edit}
-              onClick={handleEdit}
-              className={"text-gray-600"}
-            />
+            <div className={"employer-header-icons"}>
+              <Icon
+                name={MaterialIcon.Edit}
+                onClick={handleEdit}
+                className={"text-gray-600"}
+              />
+              <Icon
+                name={MaterialIcon.Network}
+                to={"/dashboard/graph"}
+                className={"text-gray-600"}
+              />
+            </div>
             <Icon
               name={MaterialIcon.More_Vert}
               onClick={handleClick}
