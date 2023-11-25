@@ -8,4 +8,5 @@ export enum ApiRoutes {
   Login = "login",
   Employers = "employers",
   Employer = "employer",
+  NameChange = "/employer/name-change",
 }

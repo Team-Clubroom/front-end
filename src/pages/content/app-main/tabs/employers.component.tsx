@@ -5,8 +5,21 @@ import SearchBoxComponent from "../../../../components/search-box/search-box.com
 import { useFetch } from "../../../../models/useFetch.ts";
 import { EmployerCard } from "../../../../components/employer-card/employer-card.component.tsx";
 import { ApiRoutes } from "../../../../models/api.types.ts";
+import { useModal } from "../../../../hooks/useModal.ts";
+import NameChangeModal from "../../../../components/name-change/name-change-form.component.tsx";
 
 function Employers() {
+  const [
+    isChangeModalOpen,
+    openChangeModal,
+    closeChangeModal,
+    nameChangeModalData,
+  ] = useModal<{ companyName: string }>();
+
+  const showNameChangeModal = (companyName: string) => {
+    openChangeModal({ companyName });
+  };
+
   const [search, setSearch] = useState("");
   const [employers, setEmployers] = useState<Employer[]>([]);
   const { customFetch } = useFetch();
@@ -32,11 +45,23 @@ function Employers() {
   function compareSearch(employer: Employer) {
     if (search.trim() !== "") {
       if (employer.name.toLowerCase().includes(search.toLowerCase())) {
-        return <EmployerCard employer={employer} key={employer.id} />;
+        return (
+          <EmployerCard
+            employer={employer}
+            key={employer.id}
+            showNameChangeModal={() => showNameChangeModal(employer.name)}
+          />
+        );
       }
       // TODO: add other search filters when needed
     } else {
-      return <EmployerCard employer={employer} key={employer.id} />;
+      return (
+        <EmployerCard
+          employer={employer}
+          key={employer.id}
+          showNameChangeModal={() => showNameChangeModal(employer.name)}
+        />
+      );
     }
   }
 
@@ -66,6 +91,11 @@ function Employers() {
           No employers match the search
         </div>
       )}
+      <NameChangeModal
+        isOpen={isChangeModalOpen}
+        close={closeChangeModal}
+        companyName={nameChangeModalData?.companyName || ""}
+      />
     </div>
   );
 }

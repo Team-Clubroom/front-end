@@ -8,9 +8,13 @@ import { Icon } from "../icon.component.tsx";
 
 interface EmployerCardProps {
   employer: Employer;
+  showNameChangeModal: () => void;
 }
 
-export const EmployerCard = ({ employer }: EmployerCardProps) => {
+export const EmployerCard = ({
+  employer,
+  showNameChangeModal,
+}: EmployerCardProps) => {
   const { shortName, color } =
     INDUSTRY_SECTOR_CODES[employer.industrySectorCode];
   const showContextMenu = useMenuContext();
@@ -36,9 +40,7 @@ export const EmployerCard = ({ employer }: EmployerCardProps) => {
         {
           text: "Change Name",
           icon: MaterialIcon.Person,
-          onClick: () => {
-            console.log("name change");
-          },
+          onClick: showNameChangeModal,
         },
         {
           text: "Delete",
