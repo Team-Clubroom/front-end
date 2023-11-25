@@ -1,6 +1,8 @@
 import { Employer } from "../../models/employer.types";
 import "./employer-card-styles.css";
 import { INDUSTRY_SECTOR_CODES } from "../../data/naics-codes.ts";
+import { useMenuContext } from "../../contexts/context-menu/context-menu.context.tsx";
+import React from "react";
 
 interface EmployerCardProps {
   employer: Employer;
@@ -9,10 +11,29 @@ interface EmployerCardProps {
 export const EmployerCard = ({ employer }: EmployerCardProps) => {
   const { shortName, color } =
     INDUSTRY_SECTOR_CODES[employer.industrySectorCode];
+  const showContextMenu = useMenuContext();
+
+  function handleClick(event: React.MouseEvent<HTMLButtonElement>) {
+    showContextMenu({
+      event,
+      menu: [
+        {
+          text: "Delete",
+          onClick: () => {
+            console.log("delete");
+          },
+        },
+      ],
+    });
+  }
+
   return (
     <div className={"employer-card"}>
       <div className={"employer-company-wrapper"}>
-        <h3 className={"employer-name"}>{employer.name}</h3>
+        <div className={"flex justify-between"}>
+          <h3 className={"employer-name"}>{employer.name}</h3>
+          <button onClick={handleClick}>Edit</button>
+        </div>
         <div className={"flex gap-2 items-center"}>
           <p className={"employer-sector"} style={{ backgroundColor: color }}>
             {shortName}
