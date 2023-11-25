@@ -13,4 +13,8 @@ export enum MaterialIcon {
   Lock = "lock",
   Close = "close",
   Edit = "edit",
+  More_Vert = "more_vert",
+  Merge = "call_merge",
+  Split = "call_split",
+  Delete = "delete",
 }

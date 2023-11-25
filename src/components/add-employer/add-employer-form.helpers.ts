@@ -1,4 +1,6 @@
 import { Validate, ValidationCriteria } from "../../hooks/Validator.ts";
+import { US_STATES } from "../../data/states.ts";
+import { INDUSTRY_SECTOR_CODES } from "../../data/naics-codes.ts";
 
 export interface AddEmployerFormValues {
   employerName: string;
@@ -20,13 +22,13 @@ export const addEmployerEmptyForm: AddEmployerFormValues = {
   establishmentDate: "",
   dissolvedDate: "",
   bankruptcyDate: "",
-  industrySectorName: "",
+  industrySectorName: Object.keys(INDUSTRY_SECTOR_CODES)[0],
   status: "",
   legalStatus: "",
   addressLine1: "",
   addressLine2: "",
   city: "",
-  state: "",
+  state: US_STATES[0].abbreviation,
   zipcode: "",
 };
 
