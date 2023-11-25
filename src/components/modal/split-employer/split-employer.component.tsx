@@ -1,42 +1,44 @@
-import { Modal, ModalVisibilityProps } from "../modal/modal.component.tsx";
-import useForm from "../../hooks/useForm.ts";
+import { Modal, ModalVisibilityProps } from "../modal.component.tsx";
+import useForm from "../../../hooks/useForm.ts";
+
+import { InputComponent } from "../../input/input.component.tsx";
+import { MaterialIcon } from "../../../utils/icons.ts";
+import { dashboardRootStyles } from "../../../pages/content/app-main/tabs/dashboard-root/dashboard-root.styles.tsx";
+import { useFetch } from "../../../models/useFetch.ts";
+import "../../../sharedStyles/form.styles.css";
 import {
-  nameChangeEmptyForm,
-  NameChangeFormValues,
-  nameChangeValidationCriteria,
-} from "./name-change-form.helpers.ts";
-import { InputComponent } from "../input/input.component.tsx";
-import { MaterialIcon } from "../../utils/icons.ts";
-import { dashboardRootStyles } from "../../pages/content/app-main/tabs/dashboard-root/dashboard-root.styles.tsx";
-import { CompanyComponent } from "../company/company.component.tsx";
-import { useFetch } from "../../models/useFetch.ts";
-import { NameChangeRequest } from "../../models/employer.types.ts";
-import { ApiRoutes } from "../../models/api.types.ts";
-import "../../sharedStyles/form.styles.css";
+  splitFormEmptyForm,
+  splitFormValidationCriteria,
+  SplitFormValues,
+} from "./split-employer.helpers.ts";
 
 interface ChangeFormProps extends ModalVisibilityProps {
   companyName: string;
 }
 
-function NameChangeForm({ isOpen, close, companyName }: ChangeFormProps) {
+export function SplitEmployerModal({
+  isOpen,
+  close,
+  companyName,
+}: ChangeFormProps) {
   const { registerField, onSubmit, isLoading, formError, resetForm } = useForm(
-    nameChangeEmptyForm,
-    nameChangeValidationCriteria,
+    splitFormEmptyForm,
+    splitFormValidationCriteria,
   );
   const { customFetch } = useFetch();
 
-  async function handleSubmit(formValues: NameChangeFormValues) {
-    const nameChangeRequest: NameChangeRequest = {
-      old_employer_name: companyName.trim(),
-      new_employer_name: formValues.newEmployerName.trim(),
-      name_change_effective_date: formValues.changeDate.trim(),
-    };
-
-    await customFetch<undefined>(
-      ApiRoutes.NameChange,
-      "POST",
-      nameChangeRequest,
-    );
+  async function handleSubmit(formValues: SplitFormValues) {
+    // const nameChangeRequest: NameChangeRequest = {
+    //   old_employer_name: companyName.trim(),
+    //   new_employer_name: formValues.newEmployerName.trim(),
+    //   name_change_effective_date: formValues.changeDate.trim(),
+    // };
+    //
+    // await customFetch<undefined>(
+    //   ApiRoutes.NameChange,
+    //   "POST",
+    //   nameChangeRequest,
+    // );
   }
 
   return (
@@ -44,7 +46,7 @@ function NameChangeForm({ isOpen, close, companyName }: ChangeFormProps) {
       close={close}
       isOpen={isOpen}
       onClose={resetForm}
-      title={"Change Employer Name"}
+      title={"Create Split Relation"}
     >
       <div className={dashboardRootStyles.form}>
         <form
@@ -53,26 +55,37 @@ function NameChangeForm({ isOpen, close, companyName }: ChangeFormProps) {
           className={"flex flex-col gap-2 max-h-96 pr-2"}
         >
           <div className={"form-row"}>
-            <CompanyComponent
-              iconName={MaterialIcon.Work}
-              label={"Old Company Name"}
-              name={companyName}
-            />
             <InputComponent
-              fieldRegistration={registerField("newEmployerName")}
-              iconName={MaterialIcon.Work}
+              fieldRegistration={registerField("firstCompanyName")}
+              iconName={MaterialIcon.Split}
               placeholder={"Tesla"}
               id={"new_employer_name"}
-              label={"Enter the New Employer Name"}
+              label={"Company Name to be Split"}
+            />
+            <InputComponent
+              fieldRegistration={registerField("relationStartDate")}
+              iconName={MaterialIcon.Event}
+              placeholder={"mm/dd/yyyy"}
+              id={"new_employer_name"}
+              label={"Enter the Relation's Start Date"}
             />
           </div>
-          <InputComponent
-            fieldRegistration={registerField("changeDate")}
-            iconName={MaterialIcon.Event}
-            placeholder={"mm/dd/yyyy"}
-            id={"change_date"}
-            label={"Enter the Name Change Date"}
-          />
+          <div className={"form-row"}>
+            <InputComponent
+              fieldRegistration={registerField("firstCompanyName")}
+              iconName={MaterialIcon.Work}
+              placeholder={"Tesla"}
+              id={"change_date"}
+              label={"Enter the First Company Name"}
+            />
+            <InputComponent
+              fieldRegistration={registerField("secondCompanyName")}
+              iconName={MaterialIcon.Work}
+              placeholder={"Ford"}
+              id={"change_date"}
+              label={"Enter the Second Company Name"}
+            />
+          </div>
           <span className={dashboardRootStyles.error}>{formError}</span>
           <div className="flex w-full justify-end">
             <button type="submit" className={dashboardRootStyles.submitButton}>
@@ -98,7 +111,7 @@ function NameChangeForm({ isOpen, close, companyName }: ChangeFormProps) {
                 </div>
               ) : (
                 <span className={dashboardRootStyles.createText}>
-                  Change Name
+                  Split Company
                 </span>
               )}
             </button>
@@ -108,5 +121,3 @@ function NameChangeForm({ isOpen, close, companyName }: ChangeFormProps) {
     </Modal>
   );
 }
-
-export default NameChangeForm;

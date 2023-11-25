@@ -6,7 +6,8 @@ import { useFetch } from "../../../../models/useFetch.ts";
 import { EmployerCard } from "../../../../components/employer-card/employer-card.component.tsx";
 import { ApiRoutes } from "../../../../models/api.types.ts";
 import { useModal } from "../../../../hooks/useModal.ts";
-import NameChangeModal from "../../../../components/name-change/name-change-form.component.tsx";
+import NameChangeModal from "../../../../components/modal/name-change/name-change-form.component.tsx";
+import { SplitEmployerModal } from "../../../../components/modal/split-employer/split-employer.component.tsx";
 
 function Employers() {
   const [
@@ -14,6 +15,12 @@ function Employers() {
     openChangeModal,
     closeChangeModal,
     nameChangeModalData,
+  ] = useModal<{ companyName: string }>();
+  const [
+    isSplitModalOpen,
+    openSplitModal,
+    closeSplitModal,
+    nameSplitModalData,
   ] = useModal<{ companyName: string }>();
 
   const showNameChangeModal = (companyName: string) => {
@@ -95,6 +102,11 @@ function Employers() {
         isOpen={isChangeModalOpen}
         close={closeChangeModal}
         companyName={nameChangeModalData?.companyName || ""}
+      />
+      <SplitEmployerModal
+        companyName={nameChangeModalData?.companyName || ""}
+        isOpen={true}
+        close={() => {}}
       />
     </div>
   );

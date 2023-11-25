@@ -1,6 +1,6 @@
 import { useAuthContext } from "../../../../../contexts/auth/auth.context.tsx";
 import { useModal } from "../../../../../hooks/useModal.ts";
-import AddEmployerForm from "../../../../../components/add-employer/add-employer-form.component.tsx";
+import AddEmployerForm from "../../../../../components/modal/add-employer/add-employer-form.component.tsx";
 
 function Dashboard() {
   const user = useAuthContext();

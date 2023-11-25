@@ -1,6 +1,6 @@
-import { Validate, ValidationCriteria } from "../../hooks/Validator.ts";
-import { US_STATES } from "../../data/states.ts";
-import { INDUSTRY_SECTOR_CODES } from "../../data/naics-codes.ts";
+import { Validate, ValidationCriteria } from "../../../hooks/Validator.ts";
+import { US_STATES } from "../../../data/states.ts";
+import { INDUSTRY_SECTOR_CODES } from "../../../data/naics-codes.ts";
 
 export interface AddEmployerFormValues {
   employerName: string;

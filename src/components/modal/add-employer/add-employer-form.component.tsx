@@ -1,20 +1,20 @@
-import { dashboardRootStyles } from "../../pages/content/app-main/tabs/dashboard-root/dashboard-root.styles.tsx";
-import "../../sharedStyles/form.styles.css";
+import { dashboardRootStyles } from "../../../pages/content/app-main/tabs/dashboard-root/dashboard-root.styles.tsx";
+import "../../../sharedStyles/form.styles.css";
 import {
   addEmployerEmptyForm,
   AddEmployerFormValues,
   addEmployerValidationCriteria,
 } from "./add-employer-form.helpers.ts";
-import useForm from "../../hooks/useForm.ts";
-import { Modal, ModalVisibilityProps } from "../modal/modal.component.tsx";
-import { InputComponent } from "../input/input.component.tsx";
-import { MaterialIcon } from "../../utils/icons.ts";
-import { NewEmployerRequest } from "../../models/employer.types.ts";
-import { useFetch } from "../../models/useFetch.ts";
-import { ApiRoutes } from "../../models/api.types.ts";
-import { SelectComponent } from "../select/select.component.tsx";
-import { INDUSTRY_SECTOR_CODES } from "../../data/naics-codes.ts";
-import { US_STATES } from "../../data/states.ts";
+import useForm from "../../../hooks/useForm.ts";
+import { Modal, ModalVisibilityProps } from "../modal.component.tsx";
+import { InputComponent } from "../../input/input.component.tsx";
+import { MaterialIcon } from "../../../utils/icons.ts";
+import { NewEmployerRequest } from "../../../models/employer.types.ts";
+import { useFetch } from "../../../models/useFetch.ts";
+import { ApiRoutes } from "../../../models/api.types.ts";
+import { SelectComponent } from "../../select/select.component.tsx";
+import { INDUSTRY_SECTOR_CODES } from "../../../data/naics-codes.ts";
+import { US_STATES } from "../../../data/states.ts";
 
 interface EmployerFormProps extends ModalVisibilityProps {}
 
