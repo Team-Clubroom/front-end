@@ -16,4 +16,5 @@ export enum MaterialIcon {
   Merge = "call_merge",
   Split = "call_split",
   Delete = "delete",
+  Edit = "edit",
 }

@@ -51,12 +51,27 @@ export const EmployerCard = ({ employer }: EmployerCardProps) => {
     });
   }
 
+  const handleEdit: React.MouseEventHandler = () => {
+    console.log("edit");
+  };
+
   return (
     <div className={"employer-card"}>
       <div className={"employer-company-wrapper"}>
         <div className={"flex justify-between items-center"}>
           <h3 className={"employer-name"}>{employer.name}</h3>
-          <Icon name={MaterialIcon.More_Vert} onClick={handleClick} />
+          <div className={"flex gap-1"}>
+            <Icon
+              name={MaterialIcon.Edit}
+              onClick={handleEdit}
+              className={"text-gray-600"}
+            />
+            <Icon
+              name={MaterialIcon.More_Vert}
+              onClick={handleClick}
+              className={"text-gray-600"}
+            />
+          </div>
         </div>
         <div className={"flex gap-2 items-center"}>
           <p className={"employer-sector"} style={{ backgroundColor: color }}>
