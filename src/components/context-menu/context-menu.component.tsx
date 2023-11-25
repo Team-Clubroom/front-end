@@ -1,6 +1,7 @@
 import React, { forwardRef, useLayoutEffect, useState } from "react";
 import { ContextMenuState } from "../../contexts/context-menu/context-menu.types.ts";
 import "./context-menu.styles.css";
+import { Icon } from "../icon.component.tsx";
 
 interface ContextMenuProps extends ContextMenuState {}
 
@@ -86,7 +87,7 @@ function _ContextMenuComponent(
       {menu.map(({ text, icon, onClick }) => {
         return (
           <button key={text} onClick={onClick}>
-            {icon && icon}
+            {icon && <Icon name={icon} />}
             {text}
           </button>
         );

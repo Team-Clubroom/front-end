@@ -3,6 +3,8 @@ import "./employer-card-styles.css";
 import { INDUSTRY_SECTOR_CODES } from "../../data/naics-codes.ts";
 import { useMenuContext } from "../../contexts/context-menu/context-menu.context.tsx";
 import React from "react";
+import { MaterialIcon } from "../../utils/icons.ts";
+import { Icon } from "../icon.component.tsx";
 
 interface EmployerCardProps {
   employer: Employer;
@@ -18,7 +20,29 @@ export const EmployerCard = ({ employer }: EmployerCardProps) => {
       event,
       menu: [
         {
+          text: "Merge Employer",
+          icon: MaterialIcon.Merge,
+          onClick: () => {
+            console.log("merge");
+          },
+        },
+        {
+          text: "Split Employer",
+          icon: MaterialIcon.Split,
+          onClick: () => {
+            console.log("split");
+          },
+        },
+        {
+          text: "Change Name",
+          icon: MaterialIcon.Person,
+          onClick: () => {
+            console.log("name change");
+          },
+        },
+        {
           text: "Delete",
+          icon: MaterialIcon.Delete,
           onClick: () => {
             console.log("delete");
           },
@@ -30,9 +54,9 @@ export const EmployerCard = ({ employer }: EmployerCardProps) => {
   return (
     <div className={"employer-card"}>
       <div className={"employer-company-wrapper"}>
-        <div className={"flex justify-between"}>
+        <div className={"flex justify-between items-center"}>
           <h3 className={"employer-name"}>{employer.name}</h3>
-          <button onClick={handleClick}>Edit</button>
+          <Icon name={MaterialIcon.More_Vert} onClick={handleClick} />
         </div>
         <div className={"flex gap-2 items-center"}>
           <p className={"employer-sector"} style={{ backgroundColor: color }}>

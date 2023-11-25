@@ -1,8 +1,9 @@
 import React from "react";
+import { MaterialIcon } from "../../utils/icons.ts";
 
 export interface ContextMenuItem {
   text: string;
-  icon?: React.ReactNode;
+  icon?: MaterialIcon;
   onClick: () => void;
 }
 
