@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import ReactFlow, {
   addEdge,
   Connection,
@@ -11,42 +11,71 @@ import ReactFlow, {
 
 import "reactflow/dist/base.css";
 import { EmployerNodeComponent } from "./employer-node.component.tsx";
-import { FAKE_EMPLOYERS_EDGES, FAKE_EMPLOYERS_NODES } from "./fake-graph.tsx";
-import { BaseEmployerNode } from "./graph.types.ts";
+import { API_Employer_Graph, BaseEmployerNode } from "./graph.types.ts";
 import CustomEdge from "./custom-edge/custom-edge.component.tsx";
-
-const nodeTypes = {
-  custom: EmployerNodeComponent,
-};
-
-const initEdges = FAKE_EMPLOYERS_EDGES;
-
-const initNodes: BaseEmployerNode[] = Object.keys(
-  FAKE_EMPLOYERS_NODES,
-).map<BaseEmployerNode>((nodeId, index) => ({
-  id: nodeId,
-  type: "custom",
-  position: { x: index * 200, y: index * 100 },
-  data: {
-    estDate: FAKE_EMPLOYERS_NODES[nodeId].estDate,
-    name: FAKE_EMPLOYERS_NODES[nodeId].name,
-  },
-}));
+import { useFetch } from "../../../../../models/useFetch.ts";
+import { ApiRoutes } from "../../../../../models/api.types.ts";
 
 const edgeTypes = {
   custom: CustomEdge,
 };
 
+const nodeTypes = {
+  custom: EmployerNodeComponent,
+};
+
 export const ReactFlowGraphComponent = () => {
-  const [nodes, setNodes, onNodesChange] = useNodesState(initNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initEdges);
+  const [nodes, setNodes, onNodesChange] = useNodesState([]);
+  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+  const { customFetch } = useFetch();
+  const [error, setError] = useState("");
 
   const onConnect = useCallback(
     (params: Connection | Edge) => setEdges((eds) => addEdge(params, eds)),
     [],
   );
 
-  return (
+  function handleSuccess({
+    nodes: api_nodes,
+    edges: api_edges,
+  }: API_Employer_Graph) {
+    // set the nodes from the api
+    setNodes(
+      api_nodes.map<BaseEmployerNode>((api_node) => {
+        const { name, id, position, estDate } = api_node;
+        return {
+          id,
+          position,
+          data: { id, name, estDate },
+          type: "custom",
+        };
+      }),
+    );
+    // set the edges from the api
+    setEdges(
+      api_edges.map<Edge>((api_edge) => {
+        const { relationType, ...rest } = api_edge;
+        return {
+          ...rest,
+          type: "custom",
+          label: relationType,
+        };
+      }),
+    );
+  }
+
+  useEffect(() => {
+    // TODO: update ApiRoute when backend route is ready
+    customFetch<API_Employer_Graph>(ApiRoutes.EmployersGraph, "GET")
+      .then((response) => handleSuccess(response.data))
+      .catch((request_error) => {
+        setError((request_error as Error).message);
+      });
+  }, []);
+
+  return error ? (
+    <div className={"m-auto text-red-500"}>{error}</div>
+  ) : (
     <ReactFlow
       edgeTypes={edgeTypes}
       nodes={nodes}

@@ -1,7 +1,7 @@
-import { EmployerNode } from "./graph.types.ts";
+import { API_Employer_Node } from "./graph.types.ts";
 import { Edge } from "reactflow";
 
-export const FAKE_EMPLOYERS_NODES: Record<string, EmployerNode> = {
+export const FAKE_EMPLOYERS_NODES: Record<string, API_Employer_Node> = {
   13: { name: "Ultra-Mart", estDate: "1988-09-21" },
   14: { name: "Ultra-Rx", estDate: "1993-11-11" },
   15: { name: "Mega-Mart", estDate: "1999-03-16" },

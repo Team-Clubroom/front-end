@@ -9,4 +9,5 @@ export enum ApiRoutes {
   Employers = "employers",
   Employer = "employer",
   NameChange = "/employer/name-change",
+  EmployersGraph = "dev/employers-graph",
 }

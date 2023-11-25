@@ -1,8 +1,8 @@
 import { Handle, Position } from "reactflow";
-import { EmployerNode } from "./graph.types.ts";
+import { API_Employer_Node } from "./graph.types.ts";
 
 interface EmployerNodeProps {
-  data: EmployerNode;
+  data: API_Employer_Node;
 }
 
 export function EmployerNodeComponent({ data }: EmployerNodeProps) {
