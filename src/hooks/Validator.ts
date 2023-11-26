@@ -19,12 +19,27 @@ export class Validate {
 
   static AreSame<T>(name1: keyof T, name2: keyof T) {
     return (_: string, formValues: T) =>
-      formValues[name1] === formValues[name2] ? "" : "Fields must be identical";
+      (formValues[name1] as string).trim() ===
+      (formValues[name2] as string).trim()
+        ? ""
+        : "Must be identical";
+  }
+
+  static AreDifferent<T>(
+    name1: keyof T,
+    name2: keyof T,
+    firstFieldNiceName: string,
+  ) {
+    return (_: string, formValues: T) =>
+      (formValues[name1] as string).trim() !==
+      (formValues[name2] as string).trim()
+        ? ""
+        : `Must be different than ${firstFieldNiceName}`;
   }
 
   static Min(minLength: number) {
     return (input: string) =>
-      input.trim().length < minLength ? `Field must be ${minLength} long` : "";
+      input.trim().length < minLength ? `Must be ${minLength} long` : "";
   }
 }
 

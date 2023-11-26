@@ -64,7 +64,8 @@ export function SplitEmployerModal({
               placeholder={"Tesla"}
               id={"new_employer_name"}
               label={"Company Name to be Split"}
-              value={companyName}
+              fieldRegistration={registerField("employerToBeSplitName")}
+              constantValue={companyName}
             />
             <InputComponent
               fieldRegistration={registerField("relationStartDate")}
@@ -73,6 +74,13 @@ export function SplitEmployerModal({
               id={"new_employer_name"}
               label={"Enter the Relation's Start Date"}
             />
+          </div>
+          <div className="relative flex py-2 items-center">
+            <div className="flex-grow border-t border-gray-500"></div>
+            <span className="flex-shrink mx-4 text-gray-500 text-sm">
+              Resulting companies information
+            </span>
+            <div className="flex-grow border-t border-gray-500"></div>
           </div>
           <div className={"form-row"}>
             <InputComponent
