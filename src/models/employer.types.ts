@@ -48,5 +48,5 @@ export interface MergeRelationRequest {
   company_a_name: string;
   company_b_name: string;
   company_c_name: string;
-  employer_relationship_start_date: string;
+  employer_relation_start_date: string;
 }

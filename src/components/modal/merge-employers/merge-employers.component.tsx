@@ -32,7 +32,18 @@ export function MergeEmployersModal({
   const { customFetch } = useFetch();
 
   async function handleSubmit(formValues: MergeFormValues) {
-    console.log("submit");
+    const mergeRelationRequest: MergeRelationRequest = {
+      company_a_name: companyName.trim(),
+      company_b_name: formValues.secondEmployer.trim(),
+      company_c_name: formValues.mergedEmployer.trim(),
+      employer_relation_start_date: formValues.relationStartDate.trim(),
+    };
+
+    await customFetch<undefined>(
+      ApiRoutes.MergeRelation,
+      "POST",
+      mergeRelationRequest,
+    );
   }
 
   return (
