@@ -11,4 +11,5 @@ export enum ApiRoutes {
   NameChange = "/employer/name-change",
   SplitRelation = "employer/split",
   EmployersGraph = "employers-graph",
+  MergeRelation = "employer/merge",
 }
