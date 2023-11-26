@@ -36,5 +36,8 @@ export const mergeFormValidationCriteria: ValidationCriteria<MergeFormValues> = 
             "mergedEmployer",
             "the merged company",
         )
+    ],
+    mergedEmployer: [
+        Validate.Required,
     ]
 }

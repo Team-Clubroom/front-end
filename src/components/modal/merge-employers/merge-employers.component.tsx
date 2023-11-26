@@ -15,3 +15,89 @@ import { LoadButtonComponent } from "../../load-button/load-button.component.tsx
 import { MergeRelationRequest } from "../../../models/employer.types.ts";
 import { ApiRoutes } from "../../../models/api.types.ts";
 
+interface MergeFormProps extends ModalVisibilityProps {
+  companyName: string;
+}
+
+export function MergeEmployersModal({
+  isOpen,
+  close,
+  companyName
+}: MergeFormProps) {
+  const { registerField, onSubmit, isLoading, formError, resetForm } = useForm(
+    mergeFormEmptyForm,
+    mergeFormValidationCriteria,
+  );
+
+  const { customFetch } = useFetch();
+
+  async function handleSubmit(formValues: MergeFormValues) {
+    console.log("submit");
+  }
+
+  return (
+    <Modal
+      close={close}
+      isOpen={isOpen}
+      onClose={resetForm}
+      title={"Create Merge Relation"}
+    >
+      <div className={dashboardRootStyles.form}>
+        <form
+          onSubmit={onSubmit(handleSubmit)}
+          noValidate={true}
+          className={"flex flex-col gap-2 max-h-96 pr-2"}
+        >
+          <div className={"form-row"}>
+            <InputComponent
+              iconName={MaterialIcon.Work}
+              placeholder={"Tesla"}
+              id={"first_company"}
+              label={"First Company to be Merged"}
+              fieldRegistration={registerField("firstEmployer")}
+              constantValue={companyName}
+            />
+            <InputComponent
+              iconName={MaterialIcon.Work}
+              placeholder={"Tesla"}
+              id={"second_company"}
+              label={"Second Company to be Merged"}
+              fieldRegistration={registerField("secondEmployer")}
+            />
+          </div>
+          <div className="relative flex py-2 items-center">
+            <div className="flex-grow border-t border-gray-500"></div>
+            <span className="flex-shrink mx-4 text-gray-500 text-sm">
+              Resulting company's information
+            </span>
+            <div className="flex-grow border-t border-gray-500"></div>
+          </div>
+          <div className={"form-row"}>
+            <InputComponent
+              iconName={MaterialIcon.Merge}
+              placeholder={"Tesla"}
+              id={"merged_company"}
+              label={"Company Name After Merge"}
+              fieldRegistration={registerField("mergedEmployer")}
+            />
+            <InputComponent
+              iconName={MaterialIcon.Event}
+              placeholder={"mm/dd/yyyy"}
+              id={"relation_start_date"}
+              label={"Enter the Relation's Start Date"}
+              fieldRegistration={registerField("relationStartDate")}
+            />
+          </div>
+          <div className="flex w-full justify-end">
+            <LoadButtonComponent
+              isLoading={isLoading}
+              loadingText={"Splitting"}
+            >
+              Split Company
+            </LoadButtonComponent>
+          </div>
+        </form>
+      </div>
+    </Modal>
+  )
+}
