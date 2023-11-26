@@ -36,3 +36,10 @@ export interface NameChangeRequest {
   new_employer_name: string;
   name_change_effective_date: string;
 }
+
+export interface SplitRelationRequest {
+  company_a_name: string;
+  company_b_name: string;
+  company_c_name: string;
+  employer_relation_start_date: string;
+}

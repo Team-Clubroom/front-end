@@ -9,6 +9,7 @@ export interface FieldRegistration {
   onChange: React.ChangeEventHandler<
     HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
   >;
+  forceUpdate: (value: string) => void;
   value: string;
   error: string | null;
   required: boolean;
@@ -28,19 +29,15 @@ const useForm = <T extends Record<keyof T, string>>(
     getClearedErrors(),
   );
 
-  const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >,
-    name: keyof T,
-  ) => {
+  const handleChange = (name: keyof T, value: string) => {
     setFieldsErrors({ ...fieldsErrors, [name]: "" });
     setFormError("");
-    setFormValues({ ...formValues, [name]: e.target.value });
+    setFormValues({ ...formValues, [name]: value });
   };
   const registerField = (name: keyof T): FieldRegistration => {
     return {
-      onChange: (e) => handleChange(e, name),
+      onChange: (e) => handleChange(name, e.target.value),
+      forceUpdate: (value: string) => handleChange(name, value),
       value: formValues[name],
       error: fieldsErrors[name],
       required:

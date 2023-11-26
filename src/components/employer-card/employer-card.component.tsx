@@ -5,15 +5,16 @@ import { useMenuContext } from "../../contexts/context-menu/context-menu.context
 import React from "react";
 import { MaterialIcon } from "../../utils/icons.ts";
 import { Icon } from "../icon.component.tsx";
+import { ModalNames } from "../../hooks/useMultiModal.ts";
 
 interface EmployerCardProps {
   employer: Employer;
-  showNameChangeModal: () => void;
+  openModalByName: (modalName: ModalNames, companyName: string) => void;
 }
 
 export const EmployerCard = ({
   employer,
-  showNameChangeModal,
+  openModalByName,
 }: EmployerCardProps) => {
   const { shortName, color } =
     INDUSTRY_SECTOR_CODES[employer.industrySectorCode];
@@ -33,14 +34,12 @@ export const EmployerCard = ({
         {
           text: "Split Employer",
           icon: MaterialIcon.Split,
-          onClick: () => {
-            console.log("split");
-          },
+          onClick: () => openModalByName(ModalNames.Split, employer.name),
         },
         {
           text: "Change Name",
           icon: MaterialIcon.Person,
-          onClick: showNameChangeModal,
+          onClick: () => openModalByName(ModalNames.NameChange, employer.name),
         },
         {
           text: "Delete",

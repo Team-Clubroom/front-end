@@ -1,6 +1,7 @@
 import { MaterialIcon } from "../utils/icons.ts";
 import React from "react";
 import { Link } from "react-router-dom";
+import { classIf } from "../utils/tailwind.utils.ts";
 
 export const Icon = ({
   name,
@@ -14,7 +15,10 @@ export const Icon = ({
   onClick?: React.MouseEventHandler;
 }) => {
   const props = {
-    className: `material-symbols-outlined hover:bg-gray-200 ${className ?? ""}`,
+    className: `material-symbols-outlined ${classIf(
+      Boolean(onClick),
+      "hover:bg-gray-200",
+    )} ${className ?? ""}`,
     style: { fontSize: "20px" },
   };
 
