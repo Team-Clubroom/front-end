@@ -22,7 +22,7 @@ interface MergeFormProps extends ModalVisibilityProps {
 export function MergeEmployersModal({
   isOpen,
   close,
-  companyName
+  companyName,
 }: MergeFormProps) {
   const { registerField, onSubmit, isLoading, formError, resetForm } = useForm(
     mergeFormEmptyForm,
@@ -110,5 +110,5 @@ export function MergeEmployersModal({
         </form>
       </div>
     </Modal>
-  )
+  );
 }
