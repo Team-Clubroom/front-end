@@ -22,4 +22,6 @@ export enum MaterialIcon {
   Badge = "badge",
   Account_Tree = "account_tree",
   Network = "network_node",
+  Login = "login",
+  Start = "start",
 }

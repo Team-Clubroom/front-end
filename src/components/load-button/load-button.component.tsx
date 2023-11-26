@@ -1,22 +1,25 @@
 import { dashboardRootStyles } from "../../pages/content/app-main/tabs/dashboard-root/dashboard-root.styles.tsx";
 import { ReactNode } from "react";
+import { MaterialIcon } from "../../utils/icons.ts";
+import { Icon } from "../icon.component.tsx";
 
 interface LoadButtonProps {
   isLoading: boolean;
   loadingText: string;
   children: ReactNode;
+  icon?: MaterialIcon;
 }
 
 export const LoadButtonComponent = ({
   isLoading,
+  icon,
   loadingText,
   children,
 }: LoadButtonProps) => {
   return (
     <button type="submit" className={dashboardRootStyles.submitButton}>
       {isLoading ? (
-        <div className={dashboardRootStyles.loadDiv}>
-          <span className={dashboardRootStyles.loading}>{loadingText}</span>
+        <>
           <svg
             aria-hidden="true"
             className={dashboardRootStyles.spinner}
@@ -33,9 +36,13 @@ export const LoadButtonComponent = ({
               fill="currentFill"
             />
           </svg>
-        </div>
+          <span className={dashboardRootStyles.loading}>{loadingText}</span>
+        </>
       ) : (
-        <span className={dashboardRootStyles.createText}>{children}</span>
+        <>
+          {icon && <Icon name={icon} />}
+          <span className={dashboardRootStyles.createText}>{children}</span>
+        </>
       )}
     </button>
   );
