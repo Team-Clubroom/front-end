@@ -8,7 +8,6 @@ import {
 import { InputComponent } from "../../input/input.component.tsx";
 import { MaterialIcon } from "../../../utils/icons.ts";
 import { dashboardRootStyles } from "../../../pages/content/app-main/tabs/dashboard-root/dashboard-root.styles.tsx";
-import { CompanyComponent } from "../../company/company.component.tsx";
 import { useFetch } from "../../../models/useFetch.ts";
 import { NameChangeRequest } from "../../../models/employer.types.ts";
 import { ApiRoutes } from "../../../models/api.types.ts";
@@ -54,10 +53,13 @@ function NameChangeForm({ isOpen, close, companyName }: ChangeFormProps) {
           className={"flex flex-col gap-2 max-h-96 pr-2"}
         >
           <div className={"form-row"}>
-            <CompanyComponent
+            <InputComponent
+              fieldRegistration={registerField("oldEmployerName")}
+              constantValue={companyName}
               iconName={MaterialIcon.Work}
-              label={"Old Company Name"}
-              name={companyName}
+              placeholder={"Tesla"}
+              id={"old_company_name"}
+              label={"Old Employer Name"}
             />
             <InputComponent
               fieldRegistration={registerField("newEmployerName")}
