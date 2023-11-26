@@ -41,21 +41,21 @@ function AuthContextProvider({ children }: AuthContextProps) {
   };
 
   const login: LoginFunc = async (loginPayload) => {
-    const result = await customFetch<{ jwt: string }>(
+    const response = await customFetch<{ jwt: string; isAdmin: boolean }>(
       ApiRoutes.Login,
       "POST",
       loginPayload,
     );
 
-    localStorage.setItem(
-      USER_STORAGE_KEY,
-      JSON.stringify({ email: loginPayload.email, jwt: result.data.jwt }),
-    );
-
-    setUserAuth({
+    const payload: AuthState = {
       email: loginPayload.email,
-      jwt: result.data.jwt,
-    });
+      jwt: response.data.jwt,
+      isAdmin: response.data.isAdmin,
+    };
+
+    localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(payload));
+
+    setUserAuth(payload);
   };
 
   const isLoggedIn = () => {
