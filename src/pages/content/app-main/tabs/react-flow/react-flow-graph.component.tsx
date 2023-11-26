@@ -67,7 +67,6 @@ export const ReactFlowGraphComponent = () => {
   }
 
   useEffect(() => {
-    // TODO: update ApiRoute when backend route is ready
     customFetch<API_Employer_Graph>(ApiRoutes.EmployersGraph, "POST", {
       employer_id: employerId,
     })
