@@ -71,7 +71,7 @@ export const EmployerCard = ({
               />
               <Icon
                 name={MaterialIcon.Network}
-                to={"/dashboard/graph"}
+                to={`/dashboard/react-flow/${employer.id}`}
                 className={"text-gray-600"}
               />
             </div>
