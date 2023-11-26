@@ -33,7 +33,9 @@ function DashboardPage() {
             {/*  // TODO: Change later to be name instead of email */}
             <h2 className={dashboardStyles.profile_name}>{user.email}</h2>
             {/*  // TODO: Change later to be actual access level */}
-            <p className={dashboardStyles.access_level}>Administrator</p>
+            <p className={dashboardStyles.access_level}>
+              {user.isAdmin ? "Administrator" : "Basic User"}
+            </p>
           </div>
           <div id="menu" className={dashboardStyles.menu}>
             {SIDE_MENU_NAV_LINKS.map((link, index) => (

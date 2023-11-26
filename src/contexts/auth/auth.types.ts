@@ -18,6 +18,7 @@ export interface AuthContextProps {
 export interface UserAuth {
   email: string;
   jwt: string;
+  isAdmin: boolean;
 }
 
 export interface AuthActionFuncs {
