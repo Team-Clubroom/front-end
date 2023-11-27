@@ -17,26 +17,25 @@ export const mergeFormEmptyForm: MergeFormValues = {
 export const mergeFormValidationCriteria: ValidationCriteria<MergeFormValues> =
   {
     relationStartDate: [Validate.Required],
-    firstEmployer: [
-      Validate.Required,
-      Validate.AreDifferent(
-        "firstEmployer",
-        "secondEmployer",
-        "than the other merging company",
-      ),
-      Validate.AreDifferent(
-        "firstEmployer",
-        "mergedEmployer",
-        "the merged company",
-      ),
-    ],
     secondEmployer: [
       Validate.Required,
       Validate.AreDifferent(
+        "firstEmployer",
         "secondEmployer",
-        "mergedEmployer",
-        "the merged company",
+        "the first company",
       ),
     ],
-    mergedEmployer: [Validate.Required],
+    mergedEmployer: [
+      Validate.Required,
+      Validate.AreDifferent(
+        "firstEmployer",
+        "mergedEmployer",
+        "the first company",
+      ),
+      Validate.AreDifferent(
+        "secondEmployer",
+        "mergedEmployer",
+        "the second company",
+      ),
+    ],
   };

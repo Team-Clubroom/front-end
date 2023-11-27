@@ -99,12 +99,10 @@ export function MergeEmployersModal({
               fieldRegistration={registerField("relationStartDate")}
             />
           </div>
+          <span className={dashboardRootStyles.error}>{formError}</span>
           <div className="flex w-full justify-end">
-            <LoadButtonComponent
-              isLoading={isLoading}
-              loadingText={"Splitting"}
-            >
-              Split Company
+            <LoadButtonComponent isLoading={isLoading} loadingText={"Merging"}>
+              Merge Companies
             </LoadButtonComponent>
           </div>
         </form>
