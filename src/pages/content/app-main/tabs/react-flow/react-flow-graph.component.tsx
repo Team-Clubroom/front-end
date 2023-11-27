@@ -7,8 +7,10 @@ import ReactFlow, {
   MiniMap,
   Panel,
   Position,
+  ReactFlowProvider,
   useEdgesState,
   useNodesState,
+  useReactFlow,
 } from "reactflow";
 
 import "reactflow/dist/base.css";
@@ -32,7 +34,8 @@ const nodeTypes = {
   custom: EmployerNodeComponent,
 };
 
-export const ReactFlowGraphComponent = () => {
+const FlowGraph = () => {
+  const { fitView } = useReactFlow();
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const { customFetch } = useFetch();
@@ -54,6 +57,9 @@ export const ReactFlowGraphComponent = () => {
 
       setNodes([...layoutNodes]);
       setEdges([...layoutEdges]);
+      window.requestAnimationFrame(() => {
+        fitView();
+      });
     },
     [nodes, edges],
   );
@@ -130,3 +136,9 @@ export const ReactFlowGraphComponent = () => {
     </ReactFlow>
   );
 };
+
+export const ReactFlowGraphComponent = () => (
+  <ReactFlowProvider>
+    <FlowGraph />
+  </ReactFlowProvider>
+);
