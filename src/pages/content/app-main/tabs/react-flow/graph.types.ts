@@ -1,4 +1,4 @@
-import { EmployerNodeProps } from "./employer-node.component.tsx";
+import { EmployerNodeProps } from "./custom-graph-components/employer-node.component.tsx";
 
 export type API_Employer_Node = {
   id: string;

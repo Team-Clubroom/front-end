@@ -5,7 +5,6 @@ import ReactFlow, {
   Controls,
   Edge,
   MiniMap,
-  Node,
   Panel,
   Position,
   useEdgesState,
@@ -13,17 +12,17 @@ import ReactFlow, {
 } from "reactflow";
 
 import "reactflow/dist/base.css";
-import { EmployerNodeComponent } from "./employer-node.component.tsx";
+import { EmployerNodeComponent } from "./custom-graph-components/employer-node.component.tsx";
 import {
   API_Employer_Graph,
   BaseEmployerNode,
   GraphDirection,
 } from "./graph.types.ts";
-import CustomEdge from "./custom-edge/custom-edge.component.tsx";
+import CustomEdge from "./custom-graph-components/custom-edge.component.tsx";
 import { useFetch } from "../../../../../models/useFetch.ts";
 import { ApiRoutes } from "../../../../../models/api.types.ts";
 import { useParams } from "react-router-dom";
-import dagre from "dagre";
+import { getLayoutElements } from "./dagre-functions.ts";
 
 const edgeTypes = {
   custom: CustomEdge,
@@ -31,52 +30,6 @@ const edgeTypes = {
 
 const nodeTypes = {
   custom: EmployerNodeComponent,
-};
-
-const dagreGraph = new dagre.graphlib.Graph();
-dagreGraph.setDefaultEdgeLabel(() => ({}));
-
-const nodeWidth = 150;
-const nodeHeight = 50;
-
-const getLayoutElements = (
-  nodes: Node[],
-  edges: Edge[],
-  direction: GraphDirection = "LR",
-) => {
-  const isHorizontal = direction === "LR";
-  dagreGraph.setGraph({ rankdir: direction });
-
-  nodes.forEach((node) => {
-    dagreGraph.setNode(node.id, { width: nodeWidth, height: nodeHeight });
-  });
-
-  edges.forEach((edge) => {
-    dagreGraph.setEdge(edge.source, edge.target);
-  });
-
-  dagre.layout(dagreGraph);
-
-  nodes.forEach((node) => {
-    const nodeWithPosition = dagreGraph.node(node.id);
-    node.targetPosition = isHorizontal ? Position.Left : Position.Top;
-    node.sourcePosition = isHorizontal ? Position.Right : Position.Bottom;
-
-    // We are shifting the dagre node position (anchor=center center) to the top left
-    // so it matches the React Flow node anchor point (top left).
-    node.position = {
-      x: nodeWithPosition.x - nodeWidth / 2,
-      y: nodeWithPosition.y - nodeHeight / 2,
-    };
-
-    // To create space between nodes
-    node.position.x *= 3;
-    node.position.y *= 1.5;
-
-    return node;
-  });
-
-  return { nodes, edges };
 };
 
 export const ReactFlowGraphComponent = () => {
@@ -115,7 +68,14 @@ export const ReactFlowGraphComponent = () => {
       return {
         id,
         position,
-        data: { id, name, estDate, isMainNode: employerId === id },
+        data: {
+          id,
+          name,
+          estDate,
+          isMainNode: employerId === id,
+          targetPosition: Position.Left,
+          sourcePosition: Position.Right,
+        },
         type: "custom",
       };
     });

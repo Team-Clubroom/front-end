@@ -5,6 +5,8 @@ export interface EmployerNodeProps {
   name: string;
   estDate: string;
   isMainNode: boolean;
+  targetPosition: Position;
+  sourcePosition: Position;
 }
 
 export function EmployerNodeComponent({ data }: { data: EmployerNodeProps }) {
@@ -27,13 +29,13 @@ export function EmployerNodeComponent({ data }: { data: EmployerNodeProps }) {
       <Handle
         isConnectable={false}
         type="target"
-        position={Position.Left}
+        position={data.targetPosition}
         className="!bg-teal-500 rounded-full"
       />
       <Handle
         isConnectable={false}
         type="source"
-        position={Position.Right}
+        position={data.sourcePosition}
         className="!bg-teal-500 rounded-full"
       />
     </div>
