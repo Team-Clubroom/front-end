@@ -135,6 +135,7 @@ const FlowGraph = () => {
       <Panel position="top-right">
         <div className="flex rounded bg-gray-300 overflow-clip shadow">
           <button
+            title={"Vertical layout"}
             className={`flex flex-grow p-2 transition-colors ${classIf(
               direction === "TB",
               "bg-gray-500",
@@ -144,6 +145,7 @@ const FlowGraph = () => {
             <Icon name={MaterialIcon.Network} />
           </button>
           <button
+            title={"Horizontal layout"}
             className={`flex flex-grow p-2 transition-colors ${classIf(
               direction === "LR",
               "bg-gray-500",
