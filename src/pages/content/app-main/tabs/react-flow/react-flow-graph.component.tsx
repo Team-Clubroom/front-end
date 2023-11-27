@@ -25,6 +25,9 @@ import { useFetch } from "../../../../../models/useFetch.ts";
 import { ApiRoutes } from "../../../../../models/api.types.ts";
 import { useParams } from "react-router-dom";
 import { getLayoutElements } from "./dagre-functions.ts";
+import { Icon } from "../../../../../components/icon.component.tsx";
+import { MaterialIcon } from "../../../../../utils/icons.ts";
+import { classIf } from "../../../../../utils/tailwind.utils.ts";
 
 const edgeTypes = {
   custom: CustomEdge,
@@ -41,6 +44,7 @@ const FlowGraph = () => {
   const { customFetch } = useFetch();
   const [error, setError] = useState("");
   const { employerId } = useParams();
+  const [direction, setDirection] = useState<GraphDirection>("LR");
 
   const onConnect = useCallback(
     (params: Connection | Edge) => setEdges((eds) => addEdge(params, eds)),
@@ -57,6 +61,7 @@ const FlowGraph = () => {
 
       setNodes([...layoutNodes]);
       setEdges([...layoutEdges]);
+      setDirection(direction);
       window.requestAnimationFrame(() => {
         fitView();
       });
@@ -128,8 +133,26 @@ const FlowGraph = () => {
       className="bg-teal-50"
     >
       <Panel position="top-right">
-        <button onClick={() => onLayout("TB")}>Vertical</button>
-        <button onClick={() => onLayout("LR")}>Horizontal</button>
+        <div className="flex rounded bg-gray-300 overflow-clip shadow">
+          <button
+            className={`flex flex-grow p-2 transition-colors ${classIf(
+              direction === "TB",
+              "bg-gray-500",
+            )}`}
+            onClick={() => onLayout("TB")}
+          >
+            <Icon name={MaterialIcon.Network} />
+          </button>
+          <button
+            className={`flex flex-grow p-2 transition-colors ${classIf(
+              direction === "LR",
+              "bg-gray-500",
+            )}`}
+            onClick={() => onLayout("LR")}
+          >
+            <Icon name={MaterialIcon.Account_Tree} />
+          </button>
+        </div>
       </Panel>
       <MiniMap />
       <Controls />

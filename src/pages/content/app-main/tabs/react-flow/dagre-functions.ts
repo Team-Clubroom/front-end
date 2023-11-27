@@ -44,7 +44,7 @@ export const getLayoutElements = (
     };
 
     // To create space between nodes depending on layout
-    node.position.x *= isHorizontal ? 2 : 1.5;
+    node.position.x *= isHorizontal ? 2 : 1.4;
     node.position.y *= isHorizontal ? 2 : 2;
 
     return node;
