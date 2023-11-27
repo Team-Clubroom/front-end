@@ -28,7 +28,7 @@ export const EmployerCard = ({
           text: "Merge Employer",
           icon: MaterialIcon.Merge,
           onClick: () => {
-            console.log("merge");
+            openModalByName(ModalNames.Merge, employer.name);
           },
         },
         {

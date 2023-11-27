@@ -8,6 +8,7 @@ import { ApiRoutes } from "../../../../models/api.types.ts";
 import NameChangeModal from "../../../../components/modal/name-change/name-change-form.component.tsx";
 import { SplitEmployerModal } from "../../../../components/modal/split-employer/split-employer.component.tsx";
 import { ModalNames, useMultiModal } from "../../../../hooks/useMultiModal.ts";
+import { MergeEmployersModal } from "../../../../components/modal/merge-employers/merge-employers.component.tsx";
 
 function Employers() {
   const [isModalOpen, openModal, closeModal, modalData] = useMultiModal<{
@@ -97,6 +98,11 @@ function Employers() {
       <SplitEmployerModal
         companyName={modalData?.companyName || ""}
         isOpen={isModalOpen(ModalNames.Split)}
+        close={closeModal}
+      />
+      <MergeEmployersModal
+        companyName={modalData?.companyName || ""}
+        isOpen={isModalOpen(ModalNames.Merge)}
         close={closeModal}
       />
     </div>
