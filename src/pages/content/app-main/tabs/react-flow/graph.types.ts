@@ -25,3 +25,5 @@ export interface BaseEmployerNode {
   data: EmployerNodeProps;
   position: { x: number; y: number };
 }
+
+export type GraphDirection = "LR" | "TB";
