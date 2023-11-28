@@ -9,55 +9,32 @@ import useForm from "../../../hooks/useForm.ts";
 import { Modal, ModalVisibilityProps } from "../modal.component.tsx";
 import { InputComponent } from "../../input/input.component.tsx";
 import { MaterialIcon } from "../../../utils/icons.ts";
-import { NewEmployerRequest } from "../../../models/employer.types.ts";
-import { useFetch } from "../../../models/useFetch.ts";
-import { ApiRoutes } from "../../../models/api.types.ts";
 import { SelectComponent } from "../../select/select.component.tsx";
 import { INDUSTRY_SECTOR_CODES } from "../../../data/naics-codes.ts";
 import { US_STATES } from "../../../data/states.ts";
 import { LoadButtonComponent } from "../../load-button/load-button.component.tsx";
+import { useEmployerActions } from "./useEmployerActions.ts";
 
-interface EmployerFormProps extends ModalVisibilityProps {}
+interface EmployerFormProps extends ModalVisibilityProps {
+  prePopulate?: {
+    employerForm: AddEmployerFormValues;
+    employerId: string;
+  };
+}
 
-function AddEmployerForm({ isOpen, close }: EmployerFormProps) {
+function AddEmployerForm({ isOpen, close, prePopulate }: EmployerFormProps) {
   const { registerField, onSubmit, isLoading, formError, resetForm } = useForm(
-    addEmployerEmptyForm,
+    prePopulate?.employerForm || addEmployerEmptyForm,
     addEmployerValidationCriteria,
   );
-  const { customFetch } = useFetch();
+  const employerActions = useEmployerActions();
 
   async function handleSubmit(formValues: AddEmployerFormValues) {
-    const newEmployerRequest: NewEmployerRequest = {
-      employer_name: formValues.employerName.trim(),
-      employer_founded_date: formValues.establishmentDate.trim(),
-      employer_industry_sector_code: parseInt(formValues.industrySectorName),
-      employer_status: formValues.status.trim(),
-      employer_legal_status: formValues.legalStatus.trim(),
-      employer_addr_line_1: formValues.addressLine1.trim(),
-      employer_addr_city: formValues.city.trim(),
-      employer_addr_state: formValues.state.trim(),
-      employer_addr_zip_code: formValues.zipcode.trim(),
-    };
-
-    const addressLine2 = formValues.addressLine2.trim();
-    if (addressLine2) {
-      newEmployerRequest.employer_addr_line_2 = addressLine2;
+    if (prePopulate) {
+      await employerActions.editEmployer(formValues);
+    } else {
+      await employerActions.createNewEmployer(formValues);
     }
-    const dissolvedDate = formValues.dissolvedDate.trim();
-    if (dissolvedDate) {
-      newEmployerRequest.employer_dissolved_date = dissolvedDate;
-    }
-    const bankruptcyDate = formValues.bankruptcyDate.trim();
-    if (bankruptcyDate) {
-      newEmployerRequest.employer_bankruptcy_date = bankruptcyDate;
-    }
-
-    const response = await customFetch<{ employer_id: string }>(
-      ApiRoutes.Employer,
-      "POST",
-      newEmployerRequest,
-    );
-    console.log(response.data.employer_id);
   }
 
   return (
