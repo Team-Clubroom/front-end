@@ -16,6 +16,7 @@ import { SelectComponent } from "../../select/select.component.tsx";
 import { INDUSTRY_SECTOR_CODES } from "../../../data/naics-codes.ts";
 import { US_STATES } from "../../../data/states.ts";
 import { LoadButtonComponent } from "../../load-button/load-button.component.tsx";
+import { DateComponent } from "../../input/date.component.tsx";
 
 interface EmployerFormProps extends ModalVisibilityProps {}
 
@@ -81,21 +82,21 @@ function AddEmployerForm({ isOpen, close }: EmployerFormProps) {
             label={"Enter the Employer Name"}
           />
           <div className={"form-row"}>
-            <InputComponent
+            <DateComponent
               fieldRegistration={registerField("establishmentDate")}
               iconName={MaterialIcon.Event}
               placeholder={"mm/dd/yyyy"}
               id={"est_date"}
               label={"Enter the Est. Date"}
             />
-            <InputComponent
+            <DateComponent
               fieldRegistration={registerField("dissolvedDate")}
               iconName={MaterialIcon.Event}
               placeholder={"mm/dd/yyyy"}
               id={"dis_date"}
               label={"Enter the Dissolved Date"}
             />
-            <InputComponent
+            <DateComponent
               fieldRegistration={registerField("bankruptcyDate")}
               iconName={MaterialIcon.Event}
               placeholder={"mm/dd/yyyy"}
