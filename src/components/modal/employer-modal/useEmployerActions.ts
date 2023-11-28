@@ -1,5 +1,8 @@
-import { AddEmployerFormValues } from "./add-employer-form.helpers.ts";
-import { NewEmployerRequest } from "../../../models/employer.types.ts";
+import { AddEmployerFormValues } from "./employer-modal.helpers.ts";
+import {
+  Employer,
+  NewEmployerRequest,
+} from "../../../models/employer.types.ts";
 import { ApiRoutes } from "../../../models/api.types.ts";
 import { useFetch } from "../../../models/useFetch.ts";
 
@@ -42,8 +45,30 @@ export const useEmployerActions = () => {
     console.log(formValues);
   };
 
+  const getEmployerFormInitValues = (
+    employer: Employer | undefined,
+    emptyForm: AddEmployerFormValues,
+  ): AddEmployerFormValues => {
+    if (employer === undefined) return emptyForm;
+    return {
+      employerName: employer.name,
+      establishmentDate: employer.foundedDate,
+      dissolvedDate: employer.dissolvedDate || "",
+      bankruptcyDate: employer.bankruptcyDate || "",
+      industrySectorName: employer.industrySectorCode.toString(),
+      status: employer.status,
+      legalStatus: employer.legalStatus,
+      addressLine1: employer.address.line1,
+      addressLine2: employer.address.line2 || "",
+      city: employer.address.city,
+      state: employer.address.state,
+      zipcode: employer.address.zipCode,
+    };
+  };
+
   return {
     createNewEmployer,
     editEmployer,
+    getEmployerFormInitValues,
   };
 };

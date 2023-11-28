@@ -4,7 +4,7 @@ import {
   addEmployerEmptyForm,
   AddEmployerFormValues,
   addEmployerValidationCriteria,
-} from "./add-employer-form.helpers.ts";
+} from "./employer-modal.helpers.ts";
 import useForm from "../../../hooks/useForm.ts";
 import { Modal, ModalVisibilityProps } from "../modal.component.tsx";
 import { InputComponent } from "../../input/input.component.tsx";
@@ -14,20 +14,21 @@ import { INDUSTRY_SECTOR_CODES } from "../../../data/naics-codes.ts";
 import { US_STATES } from "../../../data/states.ts";
 import { LoadButtonComponent } from "../../load-button/load-button.component.tsx";
 import { useEmployerActions } from "./useEmployerActions.ts";
+import { Employer } from "../../../models/employer.types.ts";
 
-interface EmployerFormProps extends ModalVisibilityProps {
-  prePopulate?: {
-    employerForm: AddEmployerFormValues;
-    employerId: string;
-  };
+interface EmployerModalProps extends ModalVisibilityProps {
+  prePopulate?: Employer;
 }
 
-function AddEmployerForm({ isOpen, close, prePopulate }: EmployerFormProps) {
+function EmployerModal({ isOpen, close, prePopulate }: EmployerModalProps) {
+  const employerActions = useEmployerActions();
   const { registerField, onSubmit, isLoading, formError, resetForm } = useForm(
-    prePopulate?.employerForm || addEmployerEmptyForm,
+    employerActions.getEmployerFormInitValues(
+      prePopulate,
+      addEmployerEmptyForm,
+    ),
     addEmployerValidationCriteria,
   );
-  const employerActions = useEmployerActions();
 
   async function handleSubmit(formValues: AddEmployerFormValues) {
     if (prePopulate) {
@@ -37,12 +38,24 @@ function AddEmployerForm({ isOpen, close, prePopulate }: EmployerFormProps) {
     }
   }
 
+  const content = prePopulate
+    ? {
+        title: "Edit Employer",
+        buttonText: "Edit Employer",
+        loadingText: "Editing",
+      }
+    : {
+        title: "Create New Employer",
+        buttonText: "Create Employer",
+        loadingText: "Creating",
+      };
+
   return (
     <Modal
       close={close}
       isOpen={isOpen}
       onClose={resetForm}
-      title={"Create New Employer"}
+      title={content.title}
     >
       <div className={dashboardRootStyles.form}>
         <form
@@ -159,8 +172,11 @@ function AddEmployerForm({ isOpen, close, prePopulate }: EmployerFormProps) {
 
           <span className={dashboardRootStyles.error}>{formError}</span>
           <div className="flex w-full justify-end">
-            <LoadButtonComponent isLoading={isLoading} loadingText={"Creating"}>
-              Create Employer
+            <LoadButtonComponent
+              isLoading={isLoading}
+              loadingText={content.loadingText}
+            >
+              {content.buttonText}
             </LoadButtonComponent>
           </div>
         </form>
@@ -169,4 +185,4 @@ function AddEmployerForm({ isOpen, close, prePopulate }: EmployerFormProps) {
   );
 }
 
-export default AddEmployerForm;
+export default EmployerModal;
