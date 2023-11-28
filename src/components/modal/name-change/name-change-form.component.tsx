@@ -13,6 +13,7 @@ import { NameChangeRequest } from "../../../models/employer.types.ts";
 import { ApiRoutes } from "../../../models/api.types.ts";
 import "../../../sharedStyles/form.styles.css";
 import { LoadButtonComponent } from "../../load-button/load-button.component.tsx";
+import { DateComponent } from "../../input/date.component.tsx";
 
 interface ChangeFormProps extends ModalVisibilityProps {
   companyName: string;
@@ -69,10 +70,8 @@ function NameChangeForm({ isOpen, close, companyName }: ChangeFormProps) {
               label={"Enter the New Employer Name"}
             />
           </div>
-          <InputComponent
+          <DateComponent
             fieldRegistration={registerField("changeDate")}
-            iconName={MaterialIcon.Event}
-            placeholder={"mm/dd/yyyy"}
             id={"change_date"}
             label={"Enter the Name Change Date"}
           />

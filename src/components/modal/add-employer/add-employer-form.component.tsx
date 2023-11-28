@@ -84,22 +84,16 @@ function AddEmployerForm({ isOpen, close }: EmployerFormProps) {
           <div className={"form-row"}>
             <DateComponent
               fieldRegistration={registerField("establishmentDate")}
-              iconName={MaterialIcon.Event}
-              placeholder={"mm/dd/yyyy"}
               id={"est_date"}
               label={"Enter the Est. Date"}
             />
             <DateComponent
               fieldRegistration={registerField("dissolvedDate")}
-              iconName={MaterialIcon.Event}
-              placeholder={"mm/dd/yyyy"}
               id={"dis_date"}
               label={"Enter the Dissolved Date"}
             />
             <DateComponent
               fieldRegistration={registerField("bankruptcyDate")}
-              iconName={MaterialIcon.Event}
-              placeholder={"mm/dd/yyyy"}
               id={"bank_date"}
               label={"Enter the Bankruptcy Date"}
             />

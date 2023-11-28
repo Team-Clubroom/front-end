@@ -14,6 +14,7 @@ import {
 import { LoadButtonComponent } from "../../load-button/load-button.component.tsx";
 import { MergeRelationRequest } from "../../../models/employer.types.ts";
 import { ApiRoutes } from "../../../models/api.types.ts";
+import { DateComponent } from "../../input/date.component.tsx";
 
 interface MergeFormProps extends ModalVisibilityProps {
   companyName: string;
@@ -91,9 +92,7 @@ export function MergeEmployersModal({
               label={"Company Name After Merge"}
               fieldRegistration={registerField("mergedEmployer")}
             />
-            <InputComponent
-              iconName={MaterialIcon.Event}
-              placeholder={"mm/dd/yyyy"}
+            <DateComponent
               id={"relation_start_date"}
               label={"Enter the Relation's Start Date"}
               fieldRegistration={registerField("relationStartDate")}

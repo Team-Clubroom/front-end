@@ -7,8 +7,6 @@ import { useEffect, useRef } from "react";
 type InputProps = {
   fieldRegistration: FieldRegistration;
   constantValue?: string;
-  iconName: MaterialIcon;
-  placeholder: string;
   label: string;
   id: string;
   error?: string;
@@ -17,9 +15,7 @@ type InputProps = {
 export const DateComponent = ({
   fieldRegistration,
   constantValue,
-  iconName,
   label,
-  placeholder,
   id,
 }: InputProps) => {
   useEffect(() => {
@@ -51,7 +47,7 @@ export const DateComponent = ({
           )}`}
           style={{ display: "flex", fontSize: "20px" }}
         >
-          {iconName}
+          {MaterialIcon.Event}
         </span>
         <input
           id={id}
