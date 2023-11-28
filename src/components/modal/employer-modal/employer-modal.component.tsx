@@ -57,12 +57,12 @@ function EmployerModal({ isOpen, close, prePopulate }: EmployerModalProps) {
       onClose={resetForm}
       title={content.title}
     >
-      <div className={dashboardRootStyles.form}>
-        <form
-          onSubmit={onSubmit(handleSubmit, !prePopulate)}
-          noValidate={true}
-          className={"flex flex-col gap-2 max-h-96 overflow-y-scroll pr-2"}
-        >
+      <form
+        onSubmit={onSubmit(handleSubmit, !prePopulate)}
+        noValidate={true}
+        className={"mt-4"}
+      >
+        <div className={"overflow-y-scroll flex flex-col gap-2 max-h-96 pr-2"}>
           <InputComponent
             fieldRegistration={registerField("employer_name")}
             iconName={MaterialIcon.Work}
@@ -169,18 +169,17 @@ function EmployerModal({ isOpen, close, prePopulate }: EmployerModalProps) {
               label={"Enter the ZIP Code"}
             />
           </div>
-
-          <span className={dashboardRootStyles.error}>{formError}</span>
-          <div className="flex w-full justify-end">
-            <LoadButtonComponent
-              isLoading={isLoading}
-              loadingText={content.loadingText}
-            >
-              {content.buttonText}
-            </LoadButtonComponent>
-          </div>
-        </form>
-      </div>
+        </div>
+        <span className={`${dashboardRootStyles.error} py-4`}>{formError}</span>
+        <div className="flex w-full justify-end pr-2">
+          <LoadButtonComponent
+            isLoading={isLoading}
+            loadingText={content.loadingText}
+          >
+            {content.buttonText}
+          </LoadButtonComponent>
+        </div>
+      </form>
     </Modal>
   );
 }
