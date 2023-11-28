@@ -44,7 +44,10 @@ export const useEmployerActions = () => {
     );
     console.log(response.data.employer_id);
   };
-  const editEmployer = (employer: Employer, formValues: EmployerFormFields) => {
+  const editEmployer = async (
+    employer: Employer,
+    formValues: EmployerFormFields,
+  ) => {
     const previousFormValues = _employerToForm(employer);
     const editRequest: EmployerEditRequest = { employer_id: employer.id };
 
@@ -59,8 +62,8 @@ export const useEmployerActions = () => {
         editRequest[key] = newValue as unknown as undefined;
       }
     });
-
     console.log(editRequest);
+    await customFetch(ApiRoutes.Employer, "PATCH", editRequest);
   };
 
   const _employerToForm = (employer: Employer): EmployerFormFields => ({
