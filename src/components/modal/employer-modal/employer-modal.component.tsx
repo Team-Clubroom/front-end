@@ -2,8 +2,8 @@ import { dashboardRootStyles } from "../../../pages/content/app-main/tabs/dashbo
 import "../../../sharedStyles/form.styles.css";
 import {
   addEmployerEmptyForm,
-  AddEmployerFormValues,
   addEmployerValidationCriteria,
+  EmployerFormFields,
 } from "./employer-modal.helpers.ts";
 import useForm from "../../../hooks/useForm.ts";
 import { Modal, ModalVisibilityProps } from "../modal.component.tsx";
@@ -30,9 +30,9 @@ function EmployerModal({ isOpen, close, prePopulate }: EmployerModalProps) {
     addEmployerValidationCriteria,
   );
 
-  async function handleSubmit(formValues: AddEmployerFormValues) {
+  async function handleSubmit(formValues: EmployerFormFields) {
     if (prePopulate) {
-      await employerActions.editEmployer(formValues);
+      await employerActions.editEmployer(prePopulate, formValues);
     } else {
       await employerActions.createNewEmployer(formValues);
     }
@@ -59,12 +59,12 @@ function EmployerModal({ isOpen, close, prePopulate }: EmployerModalProps) {
     >
       <div className={dashboardRootStyles.form}>
         <form
-          onSubmit={onSubmit(handleSubmit)}
+          onSubmit={onSubmit(handleSubmit, !prePopulate)}
           noValidate={true}
           className={"flex flex-col gap-2 max-h-96 overflow-y-scroll pr-2"}
         >
           <InputComponent
-            fieldRegistration={registerField("employerName")}
+            fieldRegistration={registerField("employer_name")}
             iconName={MaterialIcon.Work}
             placeholder={"Tesla"}
             id={"employer_name"}
@@ -72,21 +72,21 @@ function EmployerModal({ isOpen, close, prePopulate }: EmployerModalProps) {
           />
           <div className={"form-row"}>
             <InputComponent
-              fieldRegistration={registerField("establishmentDate")}
+              fieldRegistration={registerField("employer_founded_date")}
               iconName={MaterialIcon.Event}
               placeholder={"mm/dd/yyyy"}
               id={"est_date"}
               label={"Enter the Est. Date"}
             />
             <InputComponent
-              fieldRegistration={registerField("dissolvedDate")}
+              fieldRegistration={registerField("employer_dissolved_date")}
               iconName={MaterialIcon.Event}
               placeholder={"mm/dd/yyyy"}
               id={"dis_date"}
               label={"Enter the Dissolved Date"}
             />
             <InputComponent
-              fieldRegistration={registerField("bankruptcyDate")}
+              fieldRegistration={registerField("employer_bankruptcy_date")}
               iconName={MaterialIcon.Event}
               placeholder={"mm/dd/yyyy"}
               id={"bank_date"}
@@ -94,7 +94,7 @@ function EmployerModal({ isOpen, close, prePopulate }: EmployerModalProps) {
             />
           </div>
           <SelectComponent
-            fieldRegistration={registerField("industrySectorName")}
+            fieldRegistration={registerField("employer_industry_sector_code")}
             iconName={MaterialIcon.Action_Key}
             label={"Select the Industry Sector Name"}
             id={"sector_name"}
@@ -107,14 +107,14 @@ function EmployerModal({ isOpen, close, prePopulate }: EmployerModalProps) {
           />
           <div className={"sector form-row"}>
             <InputComponent
-              fieldRegistration={registerField("legalStatus")}
+              fieldRegistration={registerField("employer_legal_status")}
               iconName={MaterialIcon.Balance}
               placeholder={"LLC"}
               id={"legal_status"}
               label={"Enter the Legal Status"}
             />
             <InputComponent
-              fieldRegistration={registerField("status")}
+              fieldRegistration={registerField("employer_status")}
               iconName={MaterialIcon.Work_Update}
               placeholder={"Active"}
               id={"status"}
@@ -130,14 +130,14 @@ function EmployerModal({ isOpen, close, prePopulate }: EmployerModalProps) {
             <div className="flex-grow border-t border-gray-500"></div>
           </div>
           <InputComponent
-            fieldRegistration={registerField("addressLine1")}
+            fieldRegistration={registerField("employer_addr_line_1")}
             iconName={MaterialIcon.Map}
             placeholder={"1234 Cantrell Rd"}
             id={"line_1"}
             label={"Enter Address Line 1"}
           />
           <InputComponent
-            fieldRegistration={registerField("addressLine2")}
+            fieldRegistration={registerField("employer_addr_line_2")}
             iconName={MaterialIcon.Map}
             placeholder={"Apt 206"}
             id={"line_2"}
@@ -145,7 +145,7 @@ function EmployerModal({ isOpen, close, prePopulate }: EmployerModalProps) {
           />
           <div className={"form-row"}>
             <SelectComponent
-              fieldRegistration={registerField("state")}
+              fieldRegistration={registerField("employer_addr_state")}
               iconName={MaterialIcon.Flag}
               label={"Select the State"}
               id={"state"}
@@ -155,14 +155,14 @@ function EmployerModal({ isOpen, close, prePopulate }: EmployerModalProps) {
               }))}
             />
             <InputComponent
-              fieldRegistration={registerField("city")}
+              fieldRegistration={registerField("employer_addr_city")}
               iconName={MaterialIcon.Location_City}
               placeholder={"Little Rock"}
               id={"city"}
               label={"Enter the City Name"}
             />
             <InputComponent
-              fieldRegistration={registerField("zipcode")}
+              fieldRegistration={registerField("employer_addr_zip_code")}
               iconName={MaterialIcon.Location_On}
               placeholder={"72222"}
               id={"zip_code"}
