@@ -9,14 +9,17 @@ import NameChangeModal from "../../../../components/modal/name-change/name-chang
 import { SplitEmployerModal } from "../../../../components/modal/split-employer/split-employer.component.tsx";
 import { ModalNames, useMultiModal } from "../../../../hooks/useMultiModal.ts";
 import { MergeEmployersModal } from "../../../../components/modal/merge-employers/merge-employers.component.tsx";
+import EmployerModal from "../../../../components/modal/employer-modal/employer-modal.component.tsx";
 
 function Employers() {
   const [isModalOpen, openModal, closeModal, modalData] = useMultiModal<{
-    companyName: string;
+    employer: Employer;
   }>();
 
-  const openModalByName = (modalName: ModalNames, companyName: string) => {
-    openModal(modalName, { companyName });
+  const openModalByName = (modalName: ModalNames, employerId: number) => {
+    openModal(modalName, {
+      employer: employers.find(({ id }) => id === employerId)!,
+    });
   };
 
   const [search, setSearch] = useState("");
@@ -90,21 +93,30 @@ function Employers() {
           No employers match the search
         </div>
       )}
-      <NameChangeModal
-        isOpen={isModalOpen(ModalNames.NameChange)}
-        close={closeModal}
-        companyName={modalData?.companyName || ""}
-      />
-      <SplitEmployerModal
-        companyName={modalData?.companyName || ""}
-        isOpen={isModalOpen(ModalNames.Split)}
-        close={closeModal}
-      />
-      <MergeEmployersModal
-        companyName={modalData?.companyName || ""}
-        isOpen={isModalOpen(ModalNames.Merge)}
-        close={closeModal}
-      />
+      {modalData?.employer && (
+        <>
+          <EmployerModal
+            isOpen={isModalOpen(ModalNames.EditEmployer)}
+            close={closeModal}
+            prePopulate={modalData.employer}
+          />
+          <NameChangeModal
+            isOpen={isModalOpen(ModalNames.NameChange)}
+            close={closeModal}
+            companyName={modalData.employer.name}
+          />
+          <SplitEmployerModal
+            companyName={modalData.employer.name}
+            isOpen={isModalOpen(ModalNames.Split)}
+            close={closeModal}
+          />
+          <MergeEmployersModal
+            companyName={modalData.employer.name}
+            isOpen={isModalOpen(ModalNames.Merge)}
+            close={closeModal}
+          />
+        </>
+      )}
     </div>
   );
 }
