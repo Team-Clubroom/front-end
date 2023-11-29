@@ -21,7 +21,7 @@ export function YesNoModal({
         <Modal
             isOpen={isOpen}
             close={close}
-            title={"Confirm Delete"}
+            title={"Confirm Action"}
         >
             <div className={dashboardRootStyles.form}>
                 <form
@@ -29,7 +29,7 @@ export function YesNoModal({
                     noValidate={true}
                     className={"flex flex-col gap-2 max-h-96 pr-2"}
                 >
-                    <label>{bodyText}</label>
+                    <label className={"text-center"}>{bodyText}</label>
                     <div className={"flex w-full justify-end"}>
                         <button onClick={close} className={dashboardRootStyles.cancelButton}>Cancel</button>
                         <LoadButtonComponent

@@ -107,10 +107,10 @@ function Employers() {
         close={closeModal}
       />
       <YesNoModal
-        bodyText={"Are you sure you want to delete \'" + (modalData?.companyName || "") + "\'?"}
+        bodyText={"Are you sure you want to delete *" + (modalData?.companyName || "") + "*?"}
         isOpen={isModalOpen(ModalNames.Delete)}
         close={closeModal}
-        onConfirm={() => console.log("test")}
+        onConfirm={() => console.log("delete")}
       />
     </div>
   );

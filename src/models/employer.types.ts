@@ -50,3 +50,7 @@ export interface MergeRelationRequest {
   company_c_name: string;
   employer_relation_start_date: string;
 }
+
+export interface DeleteEmployerRequest {
+  company_name: string;
+}
