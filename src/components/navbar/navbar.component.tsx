@@ -1,13 +1,10 @@
 import { NavLink } from "react-router-dom";
 import { navbarStyles } from "./navbar.styles.tsx";
 import { useAuthActionContext } from "../../contexts/auth/auth.context.tsx";
+import { ProfileComponent } from "./profile/profile.component.tsx";
 
 export const NavbarComponent = () => {
-  const { logout, isLoggedIn } = useAuthActionContext();
-
-  const handleLogout = () => {
-    logout();
-  };
+  const { isLoggedIn } = useAuthActionContext();
 
   return (
     <nav className={navbarStyles.navbar}>
@@ -19,11 +16,7 @@ export const NavbarComponent = () => {
       <div className={navbarStyles.userSection}>
         <div className="flex justify-end items-center relative">
           {isLoggedIn() ? (
-            <div className={navbarStyles.authButtons}>
-              <button className={navbarStyles.authLink} onClick={handleLogout}>
-                <div className={navbarStyles.linkText}>Log Out</div>
-              </button>
-            </div>
+            <ProfileComponent />
           ) : (
             <div className={navbarStyles.authButtons}>
               <NavLink className={navbarStyles.authLink} to="/login">
