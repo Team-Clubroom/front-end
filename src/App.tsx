@@ -17,12 +17,12 @@ export default function App() {
       <Routes>
         <Route element={<PrivateRouteComponent />}>
           {/*  private routes go here */}
-          <Route index element={<Employers />} />
+          <Route path={"/employers"} element={<Employers />} />
           <Route
-            path={"react-flow/:employerId"}
+            path={"/graph/:employerId"}
             element={<ReactFlowGraphComponent />}
           />
-          <Route path={"*"} element={<ErrorPage />} />
+          {/*<Route path={"*"} element={<ErrorPage />} />*/}
         </Route>
         {/*  public routes go here */}
         <Route index element={<LandingPage />} />

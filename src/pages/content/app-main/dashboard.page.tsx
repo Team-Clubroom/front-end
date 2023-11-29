@@ -2,7 +2,7 @@ import { dashboardStyles } from "./dashboard.page.styles.ts";
 import { Outlet, useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
-function DashboardPage() {
+export const DashboardPage = () => {
   let title;
   const location = useLocation();
   if (location.pathname === "/dashboard") {
@@ -31,6 +31,4 @@ function DashboardPage() {
       </div>
     </>
   );
-}
-
-export default DashboardPage;
+};

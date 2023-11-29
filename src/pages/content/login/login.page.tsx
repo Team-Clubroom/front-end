@@ -23,13 +23,13 @@ function LoginPage() {
 
   // if the user is logged in, don't let them access this page
   if (isLoggedIn()) {
-    return <Navigate to={"/dashboard"} />;
+    return <Navigate to={"/employers"} />;
   }
 
   const handleSubmit = async (formValues: LoginFormValues) => {
     await login(formValues);
     setTimeout(() => {
-      navigate("/dashboard");
+      navigate("/employers");
     }, 0);
   };
 

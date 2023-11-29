@@ -7,7 +7,7 @@ function LandingPage() {
   const user = useAuthContext();
 
   if (user) {
-    return <Navigate to="/dashboard" />;
+    return <Navigate to="/employers" />;
   }
 
   // TODO: Replace with actual landing page once discussed with team
