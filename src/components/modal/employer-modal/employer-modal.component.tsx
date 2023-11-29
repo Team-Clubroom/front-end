@@ -15,6 +15,7 @@ import { US_STATES } from "../../../data/states.ts";
 import { LoadButtonComponent } from "../../load-button/load-button.component.tsx";
 import { useEmployerActions } from "./useEmployerActions.ts";
 import { Employer } from "../../../models/employer.types.ts";
+import { DateComponent } from "../../input/date.component.tsx";
 
 interface EmployerModalProps extends ModalVisibilityProps {
   prePopulate?: Employer;
@@ -71,24 +72,18 @@ function EmployerModal({ isOpen, close, prePopulate }: EmployerModalProps) {
             label={"Enter the Employer Name"}
           />
           <div className={"form-row"}>
-            <InputComponent
+            <DateComponent
               fieldRegistration={registerField("employer_founded_date")}
-              iconName={MaterialIcon.Event}
-              placeholder={"mm/dd/yyyy"}
               id={"est_date"}
               label={"Enter the Est. Date"}
             />
-            <InputComponent
+            <DateComponent
               fieldRegistration={registerField("employer_dissolved_date")}
-              iconName={MaterialIcon.Event}
-              placeholder={"mm/dd/yyyy"}
               id={"dis_date"}
               label={"Enter the Dissolved Date"}
             />
-            <InputComponent
+            <DateComponent
               fieldRegistration={registerField("employer_bankruptcy_date")}
-              iconName={MaterialIcon.Event}
-              placeholder={"mm/dd/yyyy"}
               id={"bank_date"}
               label={"Enter the Bankruptcy Date"}
             />
