@@ -9,6 +9,7 @@ import NameChangeModal from "../../../../components/modal/name-change/name-chang
 import { SplitEmployerModal } from "../../../../components/modal/split-employer/split-employer.component.tsx";
 import { ModalNames, useMultiModal } from "../../../../hooks/useMultiModal.ts";
 import { MergeEmployersModal } from "../../../../components/modal/merge-employers/merge-employers.component.tsx";
+import { YesNoModal } from "../../../../components/modal/yes-no/yes-no.component.tsx";
 
 function Employers() {
   const [isModalOpen, openModal, closeModal, modalData] = useMultiModal<{
@@ -104,6 +105,12 @@ function Employers() {
         companyName={modalData?.companyName || ""}
         isOpen={isModalOpen(ModalNames.Merge)}
         close={closeModal}
+      />
+      <YesNoModal
+        bodyText={"Are you sure you want to delete \'" + (modalData?.companyName || "") + "\'?"}
+        isOpen={isModalOpen(ModalNames.Delete)}
+        close={closeModal}
+        onConfirm={() => console.log("test")}
       />
     </div>
   );

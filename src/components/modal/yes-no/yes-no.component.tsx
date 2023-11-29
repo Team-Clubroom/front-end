@@ -1,35 +1,45 @@
 import { Modal, ModalVisibilityProps } from "../modal.component.tsx";
-import useForm from "../../../hooks/useForm.ts";
 import { dashboardRootStyles } from "../../../pages/content/app-main/tabs/dashboard-root/dashboard-root.styles.tsx";
 import "../../../sharedStyles/form.styles.css";
 import { LoadButtonComponent } from "../../load-button/load-button.component.tsx";
+import useForm from "../../../hooks/useForm.ts";
+
 
 interface YesNoFormProps extends ModalVisibilityProps {
-    func: Function;
+    onConfirm: React.FormEventHandler<HTMLFormElement>;
+    bodyText: string;
 }
 
 export function YesNoModal({
     isOpen,
     close,
-    func
+    onConfirm,
+    bodyText
 }: YesNoFormProps) {
 
     return (
         <Modal
             isOpen={isOpen}
             close={close}
-            title={"Confirm Action"}
+            title={"Confirm Delete"}
         >
             <div className={dashboardRootStyles.form}>
-                <div className={"form-row"}>
-                    <button>Cancel</button>
-                    <LoadButtonComponent
-                        isLoading={false}
-                        loadingText={"Confirming"}
-                    >
-                        Confirm
-                    </LoadButtonComponent>
-                </div>
+                <form
+                    onSubmit={onConfirm}
+                    noValidate={true}
+                    className={"flex flex-col gap-2 max-h-96 pr-2"}
+                >
+                    <label>{bodyText}</label>
+                    <div className={"flex w-full justify-end"}>
+                        <button onClick={close} className={dashboardRootStyles.cancelButton}>Cancel</button>
+                        <LoadButtonComponent
+                            isLoading={false}
+                            loadingText={"Confirming"}
+                        >
+                            Confirm
+                        </LoadButtonComponent>
+                    </div>
+                </form>
             </div>
         </Modal>
     )

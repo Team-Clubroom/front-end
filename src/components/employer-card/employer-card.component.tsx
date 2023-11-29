@@ -44,9 +44,7 @@ export const EmployerCard = ({
         {
           text: "Delete",
           icon: MaterialIcon.Delete,
-          onClick: () => {
-            console.log("delete");
-          },
+          onClick: () => openModalByName(ModalNames.Delete, employer.name),
         },
       ],
     });
