@@ -8,15 +8,5 @@ export const dashboardStyles = {
   profile: "flex flex-col gap-2 mt-8 mb-8",
   profile_name: "font-medium text-xs md:text-sm text-center text-[#334155]",
   access_level: "text-xs text-gray-500 text-center",
-  menu: "flex flex-col space-y-2",
-  menuLink:
-    "flex items-center text-sm font-medium text-gray-700 py-2 px-2 hover:bg-[#334155] hover:text-white" +
-    " rounded-md transition duration-150 ease-in-out",
-  menuLinkHighlight:
-    "flex items-center text-sm font-medium text-gray-700 py-2 px-2 hover:bg-[#334155] hover:text-white" +
-    " rounded-md transition duration-150 ease-in-out" +
-    " bg-gray-300",
-  menuLinkButton: "flex items-center w-full",
-  svgLink: "material-symbols-outlined w-6 h-6 fill-current mr-2",
   mainContent: "flex flex-col h-full w-full",
 };
