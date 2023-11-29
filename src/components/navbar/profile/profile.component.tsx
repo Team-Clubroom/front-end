@@ -1,4 +1,3 @@
-import { navbarStyles } from "../navbar.styles.tsx";
 import {
   useAuthActionContext,
   useAuthContext,
@@ -17,8 +16,12 @@ export const ProfileComponent = () => {
   };
 
   const renderProfile = () => (
-    <div className={"flex flex-col items-center px-5 py-2"}>
-      <Icon name={MaterialIcon.Person} size={"32px"} className={""} />
+    <div className={"flex flex-col items-center px-10 py-2"}>
+      <Icon
+        name={MaterialIcon.Person}
+        size={"64px"}
+        className={"text-white bg-gray-500 p-3"}
+      />
       <h2 className={"font-bold text-lg"}>
         <span>{user.firstName}</span> <span>{user.lastName}</span>
       </h2>
@@ -43,21 +46,20 @@ export const ProfileComponent = () => {
       width: "auto",
       height: "auto",
       alignToEdge: true,
+      marginTop: 10,
       children: renderProfile(),
       menu: [],
     });
   };
   return (
-    <div className={navbarStyles.authButtons}>
-      <button
-        onClick={handlePopupOpen}
-        className={
-          "bg-white font-bold hover:bg-gray-600 flex rounded-full p-2 transition-colors"
-        }
-      >
-        <span>{user.firstName[0]}</span>
-        <span>{user.lastName[0]}</span>
-      </button>
-    </div>
+    <button
+      onClick={handlePopupOpen}
+      className={
+        "text-white bg-gray-700 font-bold hover:bg-gray-600 flex rounded-full p-3 transition-colors"
+      }
+    >
+      <span>{user.firstName[0].toUpperCase()}</span>
+      <span>{user.lastName[0].toUpperCase()}</span>
+    </button>
   );
 };

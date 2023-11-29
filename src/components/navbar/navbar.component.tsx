@@ -8,22 +8,26 @@ export const NavbarComponent = () => {
 
   return (
     <nav className={navbarStyles.navbar}>
-      <div className="inline-flex">
-        <NavLink className={navbarStyles.logoLink} to="/">
-          CELDV
-        </NavLink>
-      </div>
+      <NavLink className={navbarStyles.logoLink} to="/">
+        CELDV
+      </NavLink>
       <div className={navbarStyles.userSection}>
         <div className="flex justify-end items-center relative">
           {isLoggedIn() ? (
             <ProfileComponent />
           ) : (
             <div className={navbarStyles.authButtons}>
-              <NavLink className={navbarStyles.authLink} to="/login">
-                <div className={navbarStyles.linkText}>Log In</div>
+              <NavLink
+                className={`${navbarStyles.authLink} hover:text-gray-200`}
+                to="/login"
+              >
+                Log In
               </NavLink>
-              <NavLink className={navbarStyles.authLink} to="/signup">
-                <div className={navbarStyles.linkText}>Sign Up</div>
+              <NavLink
+                className={`${navbarStyles.authLink} bg-blue-500 hover:bg-blue-600`}
+                to="/signup"
+              >
+                Sign Up
               </NavLink>
             </div>
           )}

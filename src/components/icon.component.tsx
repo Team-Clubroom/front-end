@@ -8,7 +8,7 @@ interface IconProps {
   to?: string;
   className?: string;
   onClick?: React.MouseEventHandler;
-  size?: "24px" | "28px" | "32px";
+  size?: "24px" | "28px" | "32px" | "48px" | "64px";
 }
 
 export const Icon = ({ name, onClick, to, className, size }: IconProps) => {
