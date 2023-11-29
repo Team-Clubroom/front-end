@@ -66,24 +66,30 @@ export const EmployerCard = ({
           <h3 className={"employer-name"}>{employer.name}</h3>
           <div className={"flex gap-1"}>
             <div className={"employer-header-icons"}>
-              {user.isAdmin ?
-              <Icon
-                name={MaterialIcon.Edit}
-                onClick={handleEdit}
-                className={"text-gray-600"}
-              /> : <></>}
+              {user.isAdmin ? (
+                <Icon
+                  name={MaterialIcon.Edit}
+                  onClick={handleEdit}
+                  className={"text-gray-600"}
+                />
+              ) : (
+                <></>
+              )}
               <Icon
                 name={MaterialIcon.Network}
                 to={`/dashboard/react-flow/${employer.id}`}
                 className={"text-gray-600"}
               />
             </div>
-            {user.isAdmin ?
-            <Icon
-              name={MaterialIcon.More_Vert}
-              onClick={handleClick}
-              className={"text-gray-600"}
-            /> : <></>}
+            {user.isAdmin ? (
+              <Icon
+                name={MaterialIcon.More_Vert}
+                onClick={handleClick}
+                className={"text-gray-600"}
+              />
+            ) : (
+              <></>
+            )}
           </div>
         </div>
         <div className={"flex gap-2 items-center"}>
