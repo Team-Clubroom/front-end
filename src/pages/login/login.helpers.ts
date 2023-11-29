@@ -1,4 +1,4 @@
-import { Validate, ValidationCriteria } from "../../../hooks/Validator.ts";
+import { Validate, ValidationCriteria } from "../../hooks/Validator.ts";
 
 export interface LoginFormValues {
   email: string;

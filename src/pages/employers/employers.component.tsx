@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import { Employer } from "../../../../models/employer.types.ts";
-import { useAuthContext } from "../../../../contexts/auth/auth.context.tsx";
-import SearchBoxComponent from "../../../../components/search-box/search-box.component.tsx";
-import { useFetch } from "../../../../models/useFetch.ts";
-import { EmployerCard } from "../../../../components/employer-card/employer-card.component.tsx";
-import { ApiRoutes } from "../../../../models/api.types.ts";
-import NameChangeModal from "../../../../components/modal/name-change/name-change-form.component.tsx";
-import { SplitEmployerModal } from "../../../../components/modal/split-employer/split-employer.component.tsx";
-import { ModalNames, useMultiModal } from "../../../../hooks/useMultiModal.ts";
-import { MergeEmployersModal } from "../../../../components/modal/merge-employers/merge-employers.component.tsx";
-import EmployerModal from "../../../../components/modal/employer-modal/employer-modal.component.tsx";
+import { Employer } from "../../models/employer.types.ts";
+import { useAuthContext } from "../../contexts/auth/auth.context.tsx";
+import SearchBoxComponent from "../../components/search-box/search-box.component.tsx";
+import { useFetch } from "../../models/useFetch.ts";
+import { EmployerCard } from "../../components/employer-card/employer-card.component.tsx";
+import { ApiRoutes } from "../../models/api.types.ts";
+import NameChangeModal from "../../components/modal/name-change/name-change-form.component.tsx";
+import { SplitEmployerModal } from "../../components/modal/split-employer/split-employer.component.tsx";
+import { ModalNames, useMultiModal } from "../../hooks/useMultiModal.ts";
+import { MergeEmployersModal } from "../../components/modal/merge-employers/merge-employers.component.tsx";
+import EmployerModal from "../../components/modal/employer-modal/employer-modal.component.tsx";
 
 function Employers() {
   const [isModalOpen, openModal, closeModal, modalData] = useMultiModal<{
