@@ -81,13 +81,15 @@ function Employers() {
             setSearch(event.target.value);
           }}
         />
-        <button
-          onClick={() => openModal(ModalNames.AddEmployer)}
-          className={"add-employer-btn"}
-        >
-          <Icon name={MaterialIcon.Add} />
-          New Employer
-        </button>
+        {user.isAdmin && (
+          <button
+            onClick={() => openModal(ModalNames.AddEmployer)}
+            className={"add-employer-btn"}
+          >
+            <Icon name={MaterialIcon.Add} />
+            New Employer
+          </button>
+        )}
       </div>
       {employerNodes.some((node) => node !== undefined) ? (
         <div
