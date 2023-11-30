@@ -12,6 +12,7 @@ import { MergeEmployersModal } from "../../components/modal/merge-employers/merg
 import EmployerModal from "../../components/modal/employer-modal/employer-modal.component.tsx";
 import { Icon } from "../../components/icon.component.tsx";
 import { MaterialIcon } from "../../utils/icons.ts";
+import "./employers.styles.css";
 
 function Employers() {
   const [isModalOpen, openModal, closeModal, modalData] = useMultiModal<{
@@ -81,9 +82,8 @@ function Employers() {
           }}
         />
         <button
-          className={
-            "transition-colors absolute right-2 bg-green-700 hover:bg-green-600 active:bg-green-500 text-white rounded border-0 outline-0 shadow flex items-center py-2 px-3 gap-1"
-          }
+          onClick={() => openModal(ModalNames.AddEmployer)}
+          className={"add-employer-btn"}
         >
           <Icon name={MaterialIcon.Add} />
           New Employer
@@ -103,6 +103,10 @@ function Employers() {
           No employers match the search
         </div>
       )}
+      <EmployerModal
+        isOpen={isModalOpen(ModalNames.AddEmployer)}
+        close={closeModal}
+      />
       {modalData?.employer && (
         <>
           <EmployerModal
