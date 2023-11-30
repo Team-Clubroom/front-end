@@ -2,109 +2,94 @@ import { dashboardRootStyles } from "../../../pages/content/app-main/tabs/dashbo
 import "../../../sharedStyles/form.styles.css";
 import {
   addEmployerEmptyForm,
-  AddEmployerFormValues,
   addEmployerValidationCriteria,
-} from "./add-employer-form.helpers.ts";
+  EmployerFormFields,
+} from "./employer-modal.helpers.ts";
 import useForm from "../../../hooks/useForm.ts";
 import { Modal, ModalVisibilityProps } from "../modal.component.tsx";
 import { InputComponent } from "../../input/input.component.tsx";
 import { MaterialIcon } from "../../../utils/icons.ts";
-import { NewEmployerRequest } from "../../../models/employer.types.ts";
-import { useFetch } from "../../../models/useFetch.ts";
-import { ApiRoutes } from "../../../models/api.types.ts";
 import { SelectComponent } from "../../select/select.component.tsx";
 import { INDUSTRY_SECTOR_CODES } from "../../../data/naics-codes.ts";
 import { US_STATES } from "../../../data/states.ts";
 import { LoadButtonComponent } from "../../load-button/load-button.component.tsx";
+import { useEmployerActions } from "./useEmployerActions.ts";
+import { Employer } from "../../../models/employer.types.ts";
+import { DateComponent } from "../../input/date.component.tsx";
 
-interface EmployerFormProps extends ModalVisibilityProps {}
+interface EmployerModalProps extends ModalVisibilityProps {
+  prePopulate?: Employer;
+}
 
-function AddEmployerForm({ isOpen, close }: EmployerFormProps) {
+function EmployerModal({ isOpen, close, prePopulate }: EmployerModalProps) {
+  const employerActions = useEmployerActions();
   const { registerField, onSubmit, isLoading, formError, resetForm } = useForm(
-    addEmployerEmptyForm,
+    employerActions.getEmployerFormInitValues(
+      prePopulate,
+      addEmployerEmptyForm,
+    ),
     addEmployerValidationCriteria,
   );
-  const { customFetch } = useFetch();
 
-  async function handleSubmit(formValues: AddEmployerFormValues) {
-    const newEmployerRequest: NewEmployerRequest = {
-      employer_name: formValues.employerName.trim(),
-      employer_founded_date: formValues.establishmentDate.trim(),
-      employer_industry_sector_code: parseInt(formValues.industrySectorName),
-      employer_status: formValues.status.trim(),
-      employer_legal_status: formValues.legalStatus.trim(),
-      employer_addr_line_1: formValues.addressLine1.trim(),
-      employer_addr_city: formValues.city.trim(),
-      employer_addr_state: formValues.state.trim(),
-      employer_addr_zip_code: formValues.zipcode.trim(),
-    };
-
-    const addressLine2 = formValues.addressLine2.trim();
-    if (addressLine2) {
-      newEmployerRequest.employer_addr_line_2 = addressLine2;
+  async function handleSubmit(formValues: EmployerFormFields) {
+    if (prePopulate) {
+      await employerActions.editEmployer(prePopulate, formValues);
+    } else {
+      await employerActions.createNewEmployer(formValues);
     }
-    const dissolvedDate = formValues.dissolvedDate.trim();
-    if (dissolvedDate) {
-      newEmployerRequest.employer_dissolved_date = dissolvedDate;
-    }
-    const bankruptcyDate = formValues.bankruptcyDate.trim();
-    if (bankruptcyDate) {
-      newEmployerRequest.employer_bankruptcy_date = bankruptcyDate;
-    }
-
-    const response = await customFetch<{ employer_id: string }>(
-      ApiRoutes.Employer,
-      "POST",
-      newEmployerRequest,
-    );
-    console.log(response.data.employer_id);
   }
+
+  const content = prePopulate
+    ? {
+        title: "Edit Employer",
+        buttonText: "Edit Employer",
+        loadingText: "Editing",
+      }
+    : {
+        title: "Create New Employer",
+        buttonText: "Create Employer",
+        loadingText: "Creating",
+      };
 
   return (
     <Modal
       close={close}
       isOpen={isOpen}
       onClose={resetForm}
-      title={"Create New Employer"}
+      title={content.title}
     >
-      <div className={dashboardRootStyles.form}>
-        <form
-          onSubmit={onSubmit(handleSubmit)}
-          noValidate={true}
-          className={"flex flex-col gap-2 max-h-96 overflow-y-scroll pr-2"}
-        >
+      <form
+        onSubmit={onSubmit(handleSubmit, !prePopulate)}
+        noValidate={true}
+        className={"mt-4"}
+      >
+        <div className={"overflow-y-scroll flex flex-col gap-2 max-h-96 pr-2"}>
           <InputComponent
-            fieldRegistration={registerField("employerName")}
+            fieldRegistration={registerField("employer_name")}
             iconName={MaterialIcon.Work}
             placeholder={"Tesla"}
             id={"employer_name"}
             label={"Enter the Employer Name"}
           />
           <div className={"form-row"}>
-            <InputComponent
-              fieldRegistration={registerField("establishmentDate")}
-              iconName={MaterialIcon.Event}
-              placeholder={"mm/dd/yyyy"}
+            <DateComponent
+              fieldRegistration={registerField("employer_founded_date")}
               id={"est_date"}
               label={"Enter the Est. Date"}
             />
-            <InputComponent
-              fieldRegistration={registerField("dissolvedDate")}
-              iconName={MaterialIcon.Event}
-              placeholder={"mm/dd/yyyy"}
+            <DateComponent
+              fieldRegistration={registerField("employer_dissolved_date")}
               id={"dis_date"}
               label={"Enter the Dissolved Date"}
             />
-            <InputComponent
-              fieldRegistration={registerField("bankruptcyDate")}
-              iconName={MaterialIcon.Event}
-              placeholder={"mm/dd/yyyy"}
+            <DateComponent
+              fieldRegistration={registerField("employer_bankruptcy_date")}
               id={"bank_date"}
               label={"Enter the Bankruptcy Date"}
             />
           </div>
           <SelectComponent
-            fieldRegistration={registerField("industrySectorName")}
+            fieldRegistration={registerField("employer_industry_sector_code")}
             iconName={MaterialIcon.Action_Key}
             label={"Select the Industry Sector Name"}
             id={"sector_name"}
@@ -117,14 +102,14 @@ function AddEmployerForm({ isOpen, close }: EmployerFormProps) {
           />
           <div className={"sector form-row"}>
             <InputComponent
-              fieldRegistration={registerField("legalStatus")}
+              fieldRegistration={registerField("employer_legal_status")}
               iconName={MaterialIcon.Balance}
               placeholder={"LLC"}
               id={"legal_status"}
               label={"Enter the Legal Status"}
             />
             <InputComponent
-              fieldRegistration={registerField("status")}
+              fieldRegistration={registerField("employer_status")}
               iconName={MaterialIcon.Work_Update}
               placeholder={"Active"}
               id={"status"}
@@ -140,14 +125,14 @@ function AddEmployerForm({ isOpen, close }: EmployerFormProps) {
             <div className="flex-grow border-t border-gray-500"></div>
           </div>
           <InputComponent
-            fieldRegistration={registerField("addressLine1")}
+            fieldRegistration={registerField("employer_addr_line_1")}
             iconName={MaterialIcon.Map}
             placeholder={"1234 Cantrell Rd"}
             id={"line_1"}
             label={"Enter Address Line 1"}
           />
           <InputComponent
-            fieldRegistration={registerField("addressLine2")}
+            fieldRegistration={registerField("employer_addr_line_2")}
             iconName={MaterialIcon.Map}
             placeholder={"Apt 206"}
             id={"line_2"}
@@ -155,7 +140,7 @@ function AddEmployerForm({ isOpen, close }: EmployerFormProps) {
           />
           <div className={"form-row"}>
             <SelectComponent
-              fieldRegistration={registerField("state")}
+              fieldRegistration={registerField("employer_addr_state")}
               iconName={MaterialIcon.Flag}
               label={"Select the State"}
               id={"state"}
@@ -165,31 +150,33 @@ function AddEmployerForm({ isOpen, close }: EmployerFormProps) {
               }))}
             />
             <InputComponent
-              fieldRegistration={registerField("city")}
+              fieldRegistration={registerField("employer_addr_city")}
               iconName={MaterialIcon.Location_City}
               placeholder={"Little Rock"}
               id={"city"}
               label={"Enter the City Name"}
             />
             <InputComponent
-              fieldRegistration={registerField("zipcode")}
+              fieldRegistration={registerField("employer_addr_zip_code")}
               iconName={MaterialIcon.Location_On}
               placeholder={"72222"}
               id={"zip_code"}
               label={"Enter the ZIP Code"}
             />
           </div>
-
-          <span className={dashboardRootStyles.error}>{formError}</span>
-          <div className="flex w-full justify-end">
-            <LoadButtonComponent isLoading={isLoading} loadingText={"Creating"}>
-              Create Employer
-            </LoadButtonComponent>
-          </div>
-        </form>
-      </div>
+        </div>
+        <span className={`${dashboardRootStyles.error} py-4`}>{formError}</span>
+        <div className="flex w-full justify-end pr-2">
+          <LoadButtonComponent
+            isLoading={isLoading}
+            loadingText={content.loadingText}
+          >
+            {content.buttonText}
+          </LoadButtonComponent>
+        </div>
+      </form>
     </Modal>
   );
 }
 
-export default AddEmployerForm;
+export default EmployerModal;

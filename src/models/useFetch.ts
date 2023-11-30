@@ -10,7 +10,7 @@ export const useFetch = () => {
 
   const customFetch = async <T = undefined>(
     apiRoute: ApiRoutes,
-    method: "GET" | "POST",
+    method: "GET" | "POST" | "PATCH" | "DELETE",
     body?: unknown,
   ): Promise<SuccessResponse<T>> => {
     const requestInit: RequestInit = {

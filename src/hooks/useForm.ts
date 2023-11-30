@@ -70,9 +70,13 @@ const useForm = <T extends Record<keyof T, string>>(
   /**
    * Returns a form event handler
    * @param callback - function to be invoked if the form has no validation errors
+   * @param reset
    */
   const onSubmit =
-    (callback: (formValues: T) => Promise<void>): React.FormEventHandler =>
+    (
+      callback: (formValues: T) => Promise<void>,
+      reset = true,
+    ): React.FormEventHandler =>
     async (event) => {
       try {
         // prevent form from submitting and refreshing the page
@@ -83,7 +87,7 @@ const useForm = <T extends Record<keyof T, string>>(
         setIsLoading(true);
         await callback(formValues);
         setSuccess(true);
-        resetForm();
+        reset && resetForm();
       } catch (e) {
         console.log(e);
         setFormError((e as Error).message);
