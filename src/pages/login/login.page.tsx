@@ -10,7 +10,7 @@ import { useAuthActionContext } from "../../contexts/auth/auth.context.tsx";
 import FooterComponent from "../../components/footer/footer.component.tsx";
 import { Helmet } from "react-helmet";
 import { MaterialIcon } from "../../utils/icons.ts";
-import { InputComponent } from "../../components/input/input.component.tsx";
+import { InputComponent } from "../../components/form/input/input.component.tsx";
 import { LoadButtonComponent } from "../../components/load-button/load-button.component.tsx";
 
 function LoginPage() {

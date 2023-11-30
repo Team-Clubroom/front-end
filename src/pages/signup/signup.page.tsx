@@ -9,7 +9,7 @@ import {
   signupValidationCriteria,
 } from "./signup.helpers.ts";
 import { Helmet } from "react-helmet";
-import { InputComponent } from "../../components/input/input.component.tsx";
+import { InputComponent } from "../../components/form/input/input.component.tsx";
 import { MaterialIcon } from "../../utils/icons.ts";
 import { LoadButtonComponent } from "../../components/load-button/load-button.component.tsx";
 

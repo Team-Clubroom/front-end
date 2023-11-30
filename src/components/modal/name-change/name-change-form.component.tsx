@@ -5,7 +5,7 @@ import {
   NameChangeFormValues,
   nameChangeValidationCriteria,
 } from "./name-change-form.helpers.ts";
-import { InputComponent } from "../../input/input.component.tsx";
+import { InputComponent } from "../../form/input/input.component.tsx";
 import { MaterialIcon } from "../../../utils/icons.ts";
 import { dashboardRootStyles } from "../../../sharedStyles/dashboard-root.styles.tsx";
 import { useFetch } from "../../../models/useFetch.ts";
@@ -13,7 +13,7 @@ import { NameChangeRequest } from "../../../models/employer.types.ts";
 import { ApiRoutes } from "../../../models/api.types.ts";
 import "../../../sharedStyles/form.styles.css";
 import { LoadButtonComponent } from "../../load-button/load-button.component.tsx";
-import { DateComponent } from "../../input/date.component.tsx";
+import { DateComponent } from "../../form/input/date.component.tsx";
 
 interface ChangeFormProps extends ModalVisibilityProps {
   companyName: string;

@@ -1,7 +1,7 @@
-import { dashboardRootStyles } from "../../sharedStyles/dashboard-root.styles.tsx";
-import { FieldRegistration } from "../../hooks/useForm.ts";
-import { MaterialIcon } from "../../utils/icons.ts";
-import { classIf } from "../../utils/tailwind.utils.ts";
+import { dashboardRootStyles } from "../../../sharedStyles/dashboard-root.styles.tsx";
+import { FieldRegistration } from "../../../hooks/useForm.ts";
+import { MaterialIcon } from "../../../utils/icons.ts";
+import { classIf } from "../../../utils/tailwind.utils.ts";
 import { useEffect, useRef } from "react";
 
 type InputProps = {
