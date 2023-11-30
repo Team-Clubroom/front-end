@@ -13,14 +13,21 @@ function Dashboard() {
         <h1>Private Dashboard</h1>
         <p>Welcome {user.email}</p>
       </div>
-      <button
-        type={"button"}
-        onClick={openEmployerModal}
-        className={"bg-blue-400 rounded-lg w-fit m-4 p-[0.65rem]"}
-      >
-        Add Employer
-      </button>
-      <EmployerModal isOpen={isEmployerModalOpen} close={closeEmployerModal} />
+      {user.isAdmin && (
+        <>
+          <button
+            type={"button"}
+            onClick={openEmployerModal}
+            className={"bg-blue-400 rounded-lg w-fit m-4 p-[0.65rem]"}
+          >
+            Add Employer
+          </button>
+          <EmployerModal
+            isOpen={isEmployerModalOpen}
+            close={closeEmployerModal}
+          />
+        </>
+      )}
     </>
   );
 }

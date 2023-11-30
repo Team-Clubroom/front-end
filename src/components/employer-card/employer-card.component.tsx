@@ -6,6 +6,7 @@ import React from "react";
 import { MaterialIcon } from "../../utils/icons.ts";
 import { Icon } from "../icon.component.tsx";
 import { ModalNames } from "../../hooks/useMultiModal.ts";
+import { useAuthContext } from "../../contexts/auth/auth.context.tsx";
 
 interface EmployerCardProps {
   employer: Employer;
@@ -16,6 +17,8 @@ export const EmployerCard = ({
   employer,
   openModalByName,
 }: EmployerCardProps) => {
+  const user = useAuthContext();
+
   const { shortName, color } =
     INDUSTRY_SECTOR_CODES[employer.industrySectorCode];
   const showContextMenu = useMenuContext();
@@ -63,22 +66,26 @@ export const EmployerCard = ({
           <h3 className={"employer-name"}>{employer.name}</h3>
           <div className={"flex gap-1"}>
             <div className={"employer-header-icons"}>
-              <Icon
-                name={MaterialIcon.Edit}
-                onClick={handleEdit}
-                className={"text-gray-600"}
-              />
+              {user.isAdmin && (
+                <Icon
+                  name={MaterialIcon.Edit}
+                  onClick={handleEdit}
+                  className={"text-gray-600"}
+                />
+              )}
               <Icon
                 name={MaterialIcon.Network}
                 to={`/dashboard/react-flow/${employer.id}`}
                 className={"text-gray-600"}
               />
             </div>
-            <Icon
-              name={MaterialIcon.More_Vert}
-              onClick={handleClick}
-              className={"text-gray-600"}
-            />
+            {user.isAdmin && (
+              <Icon
+                name={MaterialIcon.More_Vert}
+                onClick={handleClick}
+                className={"text-gray-600"}
+              />
+            )}
           </div>
         </div>
         <div className={"flex gap-2 items-center"}>
