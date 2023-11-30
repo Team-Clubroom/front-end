@@ -6,7 +6,7 @@ import {NavbarComponent} from "./components/navbar/navbar.component.tsx";
 import PrivateRouteComponent from "./components/private-route/private-route.component.tsx";
 import Employers from "./pages/employers/employers.component.tsx";
 import SignupPage from "./pages/signup/signup.page.tsx";
-import {ReactFlowGraphComponent} from "./pages/content/app-main/tabs/react-flow/react-flow-graph.component.tsx";
+import {ReactFlowGraphComponent} from "./pages/graph/react-flow-graph.component.tsx";
 import {SessionTimeout} from "./pages/session-timeout/session-timeout.component.tsx";
 import ErrorPage from "./pages/404/error.page.tsx";
 
@@ -23,6 +23,7 @@ export default function App() {
             element={<ReactFlowGraphComponent />}
           />
         </Route>
+
         {/*  public routes go here */}
         <Route index element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />

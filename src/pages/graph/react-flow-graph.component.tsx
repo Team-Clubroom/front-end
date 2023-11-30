@@ -21,13 +21,13 @@ import {
   GraphDirection,
 } from "./graph.types.ts";
 import CustomEdge from "./custom-graph-components/custom-edge.component.tsx";
-import { useFetch } from "../../../../../models/useFetch.ts";
-import { ApiRoutes } from "../../../../../models/api.types.ts";
+import { useFetch } from "../../models/useFetch.ts";
+import { ApiRoutes } from "../../models/api.types.ts";
 import { useParams } from "react-router-dom";
 import { getLayoutElements } from "./dagre-functions.ts";
-import { Icon } from "../../../../../components/icon.component.tsx";
-import { MaterialIcon } from "../../../../../utils/icons.ts";
-import { classIf } from "../../../../../utils/tailwind.utils.ts";
+import { Icon } from "../../components/icon.component.tsx";
+import { MaterialIcon } from "../../utils/icons.ts";
+import { classIf } from "../../utils/tailwind.utils.ts";
 
 const edgeTypes = {
   custom: CustomEdge,
@@ -163,7 +163,7 @@ const FlowGraph = () => {
 };
 
 export const ReactFlowGraphComponent = () => (
-  <ReactFlowProvider>
-    <FlowGraph />
-  </ReactFlowProvider>
+    <ReactFlowProvider>
+        <FlowGraph/>
+    </ReactFlowProvider>
 );

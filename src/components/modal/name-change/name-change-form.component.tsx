@@ -7,7 +7,7 @@ import {
 } from "./name-change-form.helpers.ts";
 import { InputComponent } from "../../input/input.component.tsx";
 import { MaterialIcon } from "../../../utils/icons.ts";
-import { dashboardRootStyles } from "../../../pages/content/app-main/tabs/dashboard-root/dashboard-root.styles.tsx";
+import { dashboardRootStyles } from "../../../sharedStyles/dashboard-root.styles.tsx";
 import { useFetch } from "../../../models/useFetch.ts";
 import { NameChangeRequest } from "../../../models/employer.types.ts";
 import { ApiRoutes } from "../../../models/api.types.ts";
