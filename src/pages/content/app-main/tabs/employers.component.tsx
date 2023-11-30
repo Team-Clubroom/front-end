@@ -11,6 +11,7 @@ import { ModalNames, useMultiModal } from "../../../../hooks/useMultiModal.ts";
 import { MergeEmployersModal } from "../../../../components/modal/merge-employers/merge-employers.component.tsx";
 import EmployerModal from "../../../../components/modal/employer-modal/employer-modal.component.tsx";
 import { YesNoModal } from "../../../../components/modal/yes-no/yes-no.component.tsx";
+import { useEmployerActions } from "../../../../components/modal/employer-modal/useEmployerActions.ts";
 
 function Employers() {
   const [isModalOpen, openModal, closeModal, modalData] = useMultiModal<{
