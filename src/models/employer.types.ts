@@ -31,6 +31,10 @@ export interface NewEmployerRequest {
   employer_addr_zip_code: string;
 }
 
+export type EmployerEditRequest = {
+  employer_id: number;
+} & Partial<NewEmployerRequest>;
+
 export interface NameChangeRequest {
   old_employer_name: string;
   new_employer_name: string;

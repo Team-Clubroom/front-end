@@ -14,6 +14,7 @@ import {
 import { LoadButtonComponent } from "../../load-button/load-button.component.tsx";
 import { SplitRelationRequest } from "../../../models/employer.types.ts";
 import { ApiRoutes } from "../../../models/api.types.ts";
+import { DateComponent } from "../../input/date.component.tsx";
 
 interface ChangeFormProps extends ModalVisibilityProps {
   companyName: string;
@@ -62,16 +63,14 @@ export function SplitEmployerModal({
             <InputComponent
               iconName={MaterialIcon.Split}
               placeholder={"Tesla"}
-              id={"new_employer_name"}
+              id={"company_name_to_be_split"}
               label={"Company Name to be Split"}
               fieldRegistration={registerField("employerToBeSplitName")}
               constantValue={companyName}
             />
-            <InputComponent
+            <DateComponent
               fieldRegistration={registerField("relationStartDate")}
-              iconName={MaterialIcon.Event}
-              placeholder={"mm/dd/yyyy"}
-              id={"new_employer_name"}
+              id={"split_relation_start_date"}
               label={"Enter the Relation's Start Date"}
             />
           </div>
@@ -87,14 +86,14 @@ export function SplitEmployerModal({
               fieldRegistration={registerField("firstCompanyName")}
               iconName={MaterialIcon.Work}
               placeholder={"Tesla"}
-              id={"change_date"}
+              id={"first_company_name"}
               label={"Enter the First Company Name"}
             />
             <InputComponent
               fieldRegistration={registerField("secondCompanyName")}
               iconName={MaterialIcon.Work}
               placeholder={"Ford"}
-              id={"change_date"}
+              id={"second_company_name"}
               label={"Enter the Second Company Name"}
             />
           </div>

@@ -10,7 +10,7 @@ import { useAuthContext } from "../../contexts/auth/auth.context.tsx";
 
 interface EmployerCardProps {
   employer: Employer;
-  openModalByName: (modalName: ModalNames, companyName: string) => void;
+  openModalByName: (modalName: ModalNames, employerId: number) => void;
 }
 
 export const EmployerCard = ({
@@ -31,18 +31,18 @@ export const EmployerCard = ({
           text: "Merge Employer",
           icon: MaterialIcon.Merge,
           onClick: () => {
-            openModalByName(ModalNames.Merge, employer.name);
+            openModalByName(ModalNames.Merge, employer.id);
           },
         },
         {
           text: "Split Employer",
           icon: MaterialIcon.Split,
-          onClick: () => openModalByName(ModalNames.Split, employer.name),
+          onClick: () => openModalByName(ModalNames.Split, employer.id),
         },
         {
           text: "Change Name",
           icon: MaterialIcon.Person,
-          onClick: () => openModalByName(ModalNames.NameChange, employer.name),
+          onClick: () => openModalByName(ModalNames.NameChange, employer.id),
         },
         {
           text: "Delete",
@@ -56,7 +56,7 @@ export const EmployerCard = ({
   }
 
   const handleEdit: React.MouseEventHandler = () => {
-    console.log("edit");
+    openModalByName(ModalNames.EditEmployer, employer.id);
   };
 
   return (

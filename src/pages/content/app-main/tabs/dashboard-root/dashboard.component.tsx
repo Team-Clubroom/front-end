@@ -1,6 +1,6 @@
 import { useAuthContext } from "../../../../../contexts/auth/auth.context.tsx";
 import { useModal } from "../../../../../hooks/useModal.ts";
-import AddEmployerForm from "../../../../../components/modal/add-employer/add-employer-form.component.tsx";
+import EmployerModal from "../../../../../components/modal/employer-modal/employer-modal.component.tsx";
 
 function Dashboard() {
   const user = useAuthContext();
@@ -14,18 +14,20 @@ function Dashboard() {
         <p>Welcome {user.email}</p>
       </div>
       {user.isAdmin && (
-        <button
-          type={"button"}
-          onClick={openEmployerModal}
-          className={"bg-blue-400 rounded-lg w-fit m-4 p-[0.65rem]"}
-        >
-          Add Employer
-        </button>
+        <>
+          <button
+            type={"button"}
+            onClick={openEmployerModal}
+            className={"bg-blue-400 rounded-lg w-fit m-4 p-[0.65rem]"}
+          >
+            Add Employer
+          </button>
+          <EmployerModal
+            isOpen={isEmployerModalOpen}
+            close={closeEmployerModal}
+          />
+        </>
       )}
-      <AddEmployerForm
-        isOpen={isEmployerModalOpen}
-        close={closeEmployerModal}
-      />
     </>
   );
 }
