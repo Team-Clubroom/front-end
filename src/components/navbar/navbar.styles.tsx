@@ -1,7 +1,7 @@
 export const navbarStyles = {
   navbar:
-    "bg-gray-500 w-screen flex justify-between items-center mx-auto px-8 h-[65px] sticky top-0 z-50",
-  logoLink: "text-white hover:text-white cursor-pointer hover:scale-125",
+    "bg-gray-500 w-screen flex justify-between items-center mx-auto px-4 h-[65px] sticky top-0 z-50",
+  logoLink: "text-white font-bold hover:text-white cursor-pointer",
   searchForm:
     "hidden sm:flex flex-shrink flex-grow-0 justify-start px-2 w-[25rem]",
   searchContainer:
@@ -16,10 +16,8 @@ export const navbarStyles = {
     "py-2.5 px-3 ml-2 text-sm h-12 font-medium text-white rounded-lg border before:border-[none]" +
     " hover:bg-gray-700 focus:outline-none",
   userSection: "flex-initial",
-  authButtons: "flex mr-4 items-center gap-2",
-  authLink:
-    "inline-block py-2.5 px-3.5 h-12 hover:bg-gray-700 rounded-full text-white hover:text-white",
-  linkText: "flex items-center relative cursor-pointer whitespace-nowrap",
+  authButtons: "flex items-center",
+  authLink: "py-2 px-4 rounded-full text-white transition-colors",
   loggedInSection: "block",
   userDropdownButton:
     "inline-flex items-center relative px-2 border rounded-full hover:shadow-lg",

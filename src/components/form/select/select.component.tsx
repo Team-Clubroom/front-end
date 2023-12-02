@@ -1,7 +1,7 @@
-import { FieldRegistration } from "../../hooks/useForm.ts";
-import { dashboardRootStyles } from "../../pages/content/app-main/tabs/dashboard-root/dashboard-root.styles.tsx";
-import { classIf } from "../../utils/tailwind.utils.ts";
-import { MaterialIcon } from "../../utils/icons.ts";
+import { FieldRegistration } from "../../../hooks/useForm.ts";
+import { dashboardRootStyles } from "../../../sharedStyles/dashboard-root.styles.tsx";
+import { classIf } from "../../../utils/tailwind.utils.ts";
+import { MaterialIcon } from "../../../utils/icons.ts";
 
 type SelectProps = {
   fieldRegistration: FieldRegistration;

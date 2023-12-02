@@ -61,19 +61,17 @@ function _ContextMenuComponent(
     }
   }
 
-  function getHorizontalPos({
-    clientWidth,
-    offsetLeft,
-  }: HTMLElement): HorizontalPosition {
+  function getHorizontalPos(clickedElement: HTMLElement): HorizontalPosition {
     const showOnRight = clientX < window.innerWidth / 2;
+    const { left, width } = clickedElement.getBoundingClientRect();
     if (alignToEdge) {
       return showOnRight
-        ? { left: offsetLeft, right: "" }
-        : { left: "", right: window.innerWidth - (offsetLeft + clientWidth) };
+        ? { left: left, right: "" }
+        : { left: "", right: window.innerWidth - (left + width) };
     } else {
       return showOnRight
-        ? { left: offsetLeft + clientWidth, right: "" }
-        : { left: "", right: window.innerWidth - offsetLeft };
+        ? { left: left + width, right: "" }
+        : { left: "", right: window.innerWidth - left };
     }
   }
 
@@ -86,7 +84,11 @@ function _ContextMenuComponent(
       {children}
       {menu.map(({ text, icon, onClick }) => {
         return (
-          <button key={text} onClick={onClick}>
+          <button
+            className={"context-menu-button"}
+            key={text}
+            onClick={onClick}
+          >
             {icon && <Icon name={icon} />}
             {text}
           </button>

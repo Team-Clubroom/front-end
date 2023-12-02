@@ -1,22 +1,14 @@
 /* plugin imports */
-import {
-  BrowserRouter,
-  Route,
-  Routes,
-} from "react-router-dom"; /* component imports */
-import LoginPage from "./pages/content/login/login.page.tsx";
-import LandingPage from "./pages/content/landing/landing.page.tsx";
-import DashboardPage from "./pages/content/app-main/dashboard.page.tsx";
-import { NavbarComponent } from "./components/navbar/navbar.component.tsx";
-import ErrorPage from "./pages/misc/error/error.page.tsx";
+import {BrowserRouter, Route, Routes,} from "react-router-dom"; /* component imports */
+import LoginPage from "./pages/login/login.page.tsx";
+import LandingPage from "./pages/landing/landing.page.tsx";
+import {NavbarComponent} from "./components/navbar/navbar.component.tsx";
 import PrivateRouteComponent from "./components/private-route/private-route.component.tsx";
-import Employers from "./pages/content/app-main/tabs/employers.component.tsx";
-import Employees from "./pages/content/app-main/tabs/employees.component.tsx";
-import TreeGraph from "./pages/content/app-main/tabs/tree-graph.component.tsx";
-import Dashboard from "./pages/content/app-main/tabs/dashboard-root/dashboard.component.tsx";
-import SignupPage from "./pages/content/signup/signup.page.tsx";
-import { ReactFlowGraphComponent } from "./pages/content/app-main/tabs/react-flow/react-flow-graph.component.tsx";
-import { SessionTimeout } from "./pages/misc/session-timeout/session-timeout.component.tsx";
+import Employers from "./pages/employers/employers.component.tsx";
+import SignupPage from "./pages/signup/signup.page.tsx";
+import {ReactFlowGraphComponent} from "./pages/graph/react-flow-graph.component.tsx";
+import {SessionTimeout} from "./pages/session-timeout/session-timeout.component.tsx";
+import ErrorPage from "./pages/404/error.page.tsx";
 
 export default function App() {
   return (
@@ -25,18 +17,13 @@ export default function App() {
       <Routes>
         <Route element={<PrivateRouteComponent />}>
           {/*  private routes go here */}
-          <Route path="/dashboard" element={<DashboardPage />}>
-            <Route index element={<Dashboard />} />
-            <Route path={"employers"} element={<Employers />} />
-            <Route path={"employees"} element={<Employees />} />
-            <Route path={"graph"} element={<TreeGraph />} />
-            <Route
-              path={"react-flow/:employerId"}
-              element={<ReactFlowGraphComponent />}
-            />
-            <Route path={"*"} element={<ErrorPage />} />
-          </Route>
+          <Route path={"/employers"} element={<Employers />} />
+          <Route
+            path={"/graph/:employerId"}
+            element={<ReactFlowGraphComponent />}
+          />
         </Route>
+
         {/*  public routes go here */}
         <Route index element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />

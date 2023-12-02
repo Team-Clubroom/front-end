@@ -1,17 +1,17 @@
 import { NavLink } from "react-router-dom";
 import { signUpStyles } from "./signup.page.styles.tsx";
-import { useAuthActionContext } from "../../../contexts/auth/auth.context.tsx";
-import useForm from "../../../hooks/useForm.ts";
-import FooterComponent from "../../../components/footer/footer.component.tsx";
+import { useAuthActionContext } from "../../contexts/auth/auth.context.tsx";
+import useForm from "../../hooks/useForm.ts";
+import FooterComponent from "../../components/footer/footer.component.tsx";
 import {
   signupEmptyForm,
   SignupFormValues,
   signupValidationCriteria,
 } from "./signup.helpers.ts";
 import { Helmet } from "react-helmet";
-import { InputComponent } from "../../../components/input/input.component.tsx";
-import { MaterialIcon } from "../../../utils/icons.ts";
-import { LoadButtonComponent } from "../../../components/load-button/load-button.component.tsx";
+import { InputComponent } from "../../components/form/input/input.component.tsx";
+import { MaterialIcon } from "../../utils/icons.ts";
+import { LoadButtonComponent } from "../../components/load-button/load-button.component.tsx";
 
 function SignupPage() {
   const { register } = useAuthActionContext();

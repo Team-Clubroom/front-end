@@ -1,9 +1,9 @@
 import { Modal, ModalVisibilityProps } from "../modal.component.tsx";
 import useForm from "../../../hooks/useForm.ts";
 
-import { InputComponent } from "../../input/input.component.tsx";
+import { InputComponent } from "../../form/input/input.component.tsx";
 import { MaterialIcon } from "../../../utils/icons.ts";
-import { dashboardRootStyles } from "../../../pages/content/app-main/tabs/dashboard-root/dashboard-root.styles.tsx";
+import { dashboardRootStyles } from "../../../sharedStyles/dashboard-root.styles.tsx";
 import { useFetch } from "../../../models/useFetch.ts";
 import "../../../sharedStyles/form.styles.css";
 import {
@@ -14,7 +14,7 @@ import {
 import { LoadButtonComponent } from "../../load-button/load-button.component.tsx";
 import { SplitRelationRequest } from "../../../models/employer.types.ts";
 import { ApiRoutes } from "../../../models/api.types.ts";
-import { DateComponent } from "../../input/date.component.tsx";
+import { DateComponent } from "../../form/input/date.component.tsx";
 
 interface ChangeFormProps extends ModalVisibilityProps {
   companyName: string;

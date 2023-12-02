@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
-import { Employer } from "../../../../models/employer.types.ts";
-import { useAuthContext } from "../../../../contexts/auth/auth.context.tsx";
-import SearchBoxComponent from "../../../../components/search-box/search-box.component.tsx";
-import { useFetch } from "../../../../models/useFetch.ts";
-import { EmployerCard } from "../../../../components/employer-card/employer-card.component.tsx";
-import { ApiRoutes } from "../../../../models/api.types.ts";
-import NameChangeModal from "../../../../components/modal/name-change/name-change-form.component.tsx";
-import { SplitEmployerModal } from "../../../../components/modal/split-employer/split-employer.component.tsx";
-import { ModalNames, useMultiModal } from "../../../../hooks/useMultiModal.ts";
-import { MergeEmployersModal } from "../../../../components/modal/merge-employers/merge-employers.component.tsx";
-import EmployerModal from "../../../../components/modal/employer-modal/employer-modal.component.tsx";
+import { Employer } from "../../models/employer.types.ts";
+import { useAuthContext } from "../../contexts/auth/auth.context.tsx";
+import SearchBoxComponent from "../../components/search-box/search-box.component.tsx";
+import { useFetch } from "../../models/useFetch.ts";
+import { EmployerCard } from "../../components/employer-card/employer-card.component.tsx";
+import { ApiRoutes } from "../../models/api.types.ts";
+import NameChangeModal from "../../components/modal/name-change/name-change-form.component.tsx";
+import { SplitEmployerModal } from "../../components/modal/split-employer/split-employer.component.tsx";
+import { ModalNames, useMultiModal } from "../../hooks/useMultiModal.ts";
+import { MergeEmployersModal } from "../../components/modal/merge-employers/merge-employers.component.tsx";
+import EmployerModal from "../../components/modal/employer-modal/employer-modal.component.tsx";
+import { Icon } from "../../components/icon.component.tsx";
+import { MaterialIcon } from "../../utils/icons.ts";
+import "./employers.styles.css";
 
 function Employers() {
   const [isModalOpen, openModal, closeModal, modalData] = useMultiModal<{
@@ -70,21 +73,30 @@ function Employers() {
   const employerNodes = employers.map(compareSearch);
 
   return (
-    <div className="w-full h-full overflow-x-hidden overflow-y-scroll p-3">
-      <div className={"w-[320px] m-auto pb-3"}>
+    <div className={"flex flex-col"} style={{ height: "calc(100% - 65px)" }}>
+      <div className={"bg-gray-400 px-3 py-2 flex justify-center relative"}>
         <SearchBoxComponent
           placeholder={"Search employers"}
           onChange={(event) => {
             setSearch(event.target.value);
           }}
         />
+        {user.isAdmin && (
+          <button
+            onClick={() => openModal(ModalNames.AddEmployer)}
+            className={"add-employer-btn"}
+          >
+            <Icon name={MaterialIcon.Add} />
+            New Employer
+          </button>
+        )}
       </div>
       {employerNodes.some((node) => node !== undefined) ? (
         <div
           style={{
             gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
           }}
-          className="grid gap-3"
+          className="grid gap-3 p-3 overflow-x-hidden overflow-y-scroll"
         >
           {employerNodes}
         </div>
@@ -93,6 +105,10 @@ function Employers() {
           No employers match the search
         </div>
       )}
+      <EmployerModal
+        isOpen={isModalOpen(ModalNames.AddEmployer)}
+        close={closeModal}
+      />
       {modalData?.employer && (
         <>
           <EmployerModal

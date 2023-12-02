@@ -19,6 +19,8 @@ export interface UserAuth {
   email: string;
   jwt: string;
   isAdmin: boolean;
+  firstName: string;
+  lastName: string;
 }
 
 export interface AuthActionFuncs {
