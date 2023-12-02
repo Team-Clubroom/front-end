@@ -33,10 +33,7 @@ export function YesNoModal({
   return (
     <Modal isOpen={isOpen} close={close} title={"Confirm Action"}>
       <div className={dashboardRootStyles.form}>
-        <form 
-            onSubmit={handleConfirm}
-            noValidate={true}
-            className={"flex flex-col gap-2 max-h-96 pr-2"}>
+        <div className={"flex flex-col gap-2 max-h-96 pr-2"}>
           <label className={"text-center"}>{bodyText}</label>
           <span className={dashboardRootStyles.error}>{error}</span>
           <div className={"flex w-full justify-end"}>
@@ -46,14 +43,14 @@ export function YesNoModal({
             >
               Cancel
             </button>
-            <LoadButtonComponent
-                isLoading={isLoading}
-                loadingText={"Confirming..."}
+            <button
+              onClick={onConfirm}
+              className={dashboardRootStyles.submitButton}
             >
-                Confirm
-            </LoadButtonComponent>
+              {isLoading ? "Confirming..." : "Confirm"}
+            </button>
           </div>
-        </form>
+        </div>
       </div>
     </Modal>
   );
