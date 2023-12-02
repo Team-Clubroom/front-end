@@ -5,21 +5,30 @@ import {
   NameChangeFormValues,
   nameChangeValidationCriteria,
 } from "./name-change-form.helpers.ts";
-import { InputComponent } from "../../form/input/input.component.tsx";
 import { MaterialIcon } from "../../../utils/icons.ts";
 import { dashboardRootStyles } from "../../../sharedStyles/dashboard-root.styles.tsx";
 import { useFetch } from "../../../models/useFetch.ts";
-import { NameChangeRequest } from "../../../models/employer.types.ts";
+import { Employer, NameChangeRequest } from "../../../models/employer.types.ts";
 import { ApiRoutes } from "../../../models/api.types.ts";
 import "../../../sharedStyles/form.styles.css";
 import { LoadButtonComponent } from "../../load-button/load-button.component.tsx";
 import { DateComponent } from "../../form/input/date.component.tsx";
+import {
+  SelectComponent,
+  SelectOptions,
+} from "../../form/select/select.component.tsx";
 
 interface ChangeFormProps extends ModalVisibilityProps {
-  companyName: string;
+  employersOptions: SelectOptions;
+  employer: Employer;
 }
 
-function NameChangeForm({ isOpen, close, companyName }: ChangeFormProps) {
+function NameChangeForm({
+  isOpen,
+  close,
+  employer,
+  employersOptions,
+}: ChangeFormProps) {
   const { registerField, onSubmit, isLoading, formError, resetForm } = useForm(
     nameChangeEmptyForm,
     nameChangeValidationCriteria,
@@ -28,8 +37,8 @@ function NameChangeForm({ isOpen, close, companyName }: ChangeFormProps) {
 
   async function handleSubmit(formValues: NameChangeFormValues) {
     const nameChangeRequest: NameChangeRequest = {
-      old_employer_name: companyName.trim(),
-      new_employer_name: formValues.newEmployerName.trim(),
+      old_employer_id: employer.id.toString(),
+      new_employer_id: formValues.newEmployerId,
       name_change_effective_date: formValues.changeDate.trim(),
     };
 
@@ -54,20 +63,22 @@ function NameChangeForm({ isOpen, close, companyName }: ChangeFormProps) {
           className={"flex flex-col gap-2 max-h-96 pr-2"}
         >
           <div className={"form-row"}>
-            <InputComponent
-              fieldRegistration={registerField("oldEmployerName")}
-              constantValue={companyName}
+            <SelectComponent
+              fieldRegistration={registerField("oldEmployerId")}
+              constantValue={employer.id.toString()}
               iconName={MaterialIcon.Work}
               placeholder={"Tesla"}
               id={"old_company_name"}
               label={"Old Employer Name"}
+              options={employersOptions}
             />
-            <InputComponent
-              fieldRegistration={registerField("newEmployerName")}
+            <SelectComponent
+              fieldRegistration={registerField("newEmployerId")}
               iconName={MaterialIcon.Work}
-              placeholder={"Tesla"}
+              placeholder={"Employer"}
               id={"new_employer_name"}
               label={"Enter the New Employer Name"}
+              options={employersOptions}
             />
           </div>
           <DateComponent

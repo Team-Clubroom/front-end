@@ -1,10 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Employer } from "../../models/employer.types.ts";
 import { useAuthContext } from "../../contexts/auth/auth.context.tsx";
 import SearchBoxComponent from "../../components/search-box/search-box.component.tsx";
-import { useFetch } from "../../models/useFetch.ts";
 import { EmployerCard } from "../../components/employer-card/employer-card.component.tsx";
-import { ApiRoutes } from "../../models/api.types.ts";
 import NameChangeModal from "../../components/modal/name-change/name-change-form.component.tsx";
 import { SplitEmployerModal } from "../../components/modal/split-employer/split-employer.component.tsx";
 import { ModalNames, useMultiModal } from "../../hooks/useMultiModal.ts";
@@ -13,6 +11,7 @@ import EmployerModal from "../../components/modal/employer-modal/employer-modal.
 import { Icon } from "../../components/icon.component.tsx";
 import { MaterialIcon } from "../../utils/icons.ts";
 import "./employers.styles.css";
+import { useEmployers } from "../../hooks/useEmployers.ts";
 
 function Employers() {
   const [isModalOpen, openModal, closeModal, modalData] = useMultiModal<{
@@ -26,40 +25,15 @@ function Employers() {
   };
 
   const [search, setSearch] = useState("");
-  const [employers, setEmployers] = useState<Employer[]>([]);
-  const { customFetch } = useFetch();
+  const { employers } = useEmployers();
   const user = useAuthContext();
-  useEffect(() => {
-    const fetchEmployees = async () => {
-      const response = await customFetch<Employer[]>(
-        ApiRoutes.Employers,
-        "GET",
-      );
-      return response.data;
-    };
-
-    fetchEmployees()
-      .then((employers) => {
-        setEmployers(employers);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, [user]);
 
   function compareSearch(employer: Employer) {
-    if (search.trim() !== "") {
-      if (employer.name.toLowerCase().includes(search.toLowerCase())) {
-        return (
-          <EmployerCard
-            employer={employer}
-            key={employer.id}
-            openModalByName={openModalByName}
-          />
-        );
-      }
-      // TODO: add other search filters when needed
-    } else {
+    const matchesSearch =
+      search.trim() === "" ||
+      employer.name.toLowerCase().includes(search.toLowerCase());
+
+    if (matchesSearch) {
       return (
         <EmployerCard
           employer={employer}
@@ -68,9 +42,16 @@ function Employers() {
         />
       );
     }
+
+    return undefined;
   }
 
   const employerNodes = employers.map(compareSearch);
+
+  const employerOptions = employers.map((employer) => ({
+    text: employer.name,
+    value: employer.id.toString(),
+  }));
 
   return (
     <div className={"flex flex-col"} style={{ height: "calc(100% - 65px)" }}>
@@ -119,17 +100,20 @@ function Employers() {
           <NameChangeModal
             isOpen={isModalOpen(ModalNames.NameChange)}
             close={closeModal}
-            companyName={modalData.employer.name}
+            employer={modalData.employer}
+            employersOptions={employerOptions}
           />
           <SplitEmployerModal
-            companyName={modalData.employer.name}
             isOpen={isModalOpen(ModalNames.Split)}
             close={closeModal}
+            employer={modalData.employer}
+            employersOptions={employerOptions}
           />
           <MergeEmployersModal
-            companyName={modalData.employer.name}
             isOpen={isModalOpen(ModalNames.Merge)}
             close={closeModal}
+            employer={modalData.employer}
+            employersOptions={employerOptions}
           />
         </>
       )}

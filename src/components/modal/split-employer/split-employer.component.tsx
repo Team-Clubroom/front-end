@@ -1,7 +1,5 @@
 import { Modal, ModalVisibilityProps } from "../modal.component.tsx";
 import useForm from "../../../hooks/useForm.ts";
-
-import { InputComponent } from "../../form/input/input.component.tsx";
 import { MaterialIcon } from "../../../utils/icons.ts";
 import { dashboardRootStyles } from "../../../sharedStyles/dashboard-root.styles.tsx";
 import { useFetch } from "../../../models/useFetch.ts";
@@ -12,18 +10,27 @@ import {
   SplitFormValues,
 } from "./split-employer.helpers.ts";
 import { LoadButtonComponent } from "../../load-button/load-button.component.tsx";
-import { SplitRelationRequest } from "../../../models/employer.types.ts";
+import {
+  Employer,
+  SplitRelationRequest,
+} from "../../../models/employer.types.ts";
 import { ApiRoutes } from "../../../models/api.types.ts";
 import { DateComponent } from "../../form/input/date.component.tsx";
+import {
+  SelectComponent,
+  SelectOptions,
+} from "../../form/select/select.component.tsx";
 
 interface ChangeFormProps extends ModalVisibilityProps {
-  companyName: string;
+  employersOptions: SelectOptions;
+  employer: Employer;
 }
 
 export function SplitEmployerModal({
   isOpen,
   close,
-  companyName,
+  employer,
+  employersOptions,
 }: ChangeFormProps) {
   const { registerField, onSubmit, isLoading, formError, resetForm } = useForm(
     splitFormEmptyForm,
@@ -33,9 +40,9 @@ export function SplitEmployerModal({
 
   async function handleSubmit(formValues: SplitFormValues) {
     const splitRelationRequest: SplitRelationRequest = {
-      company_a_name: companyName.trim(),
-      company_b_name: formValues.firstCompanyName.trim(),
-      company_c_name: formValues.secondCompanyName.trim(),
+      company_a_id: employer.id.toString(),
+      company_b_id: formValues.firstCompanyId,
+      company_c_id: formValues.secondCompanyId,
       employer_relation_start_date: formValues.relationStartDate.trim(),
     };
 
@@ -60,13 +67,14 @@ export function SplitEmployerModal({
           className={"flex flex-col gap-2 max-h-96 pr-2"}
         >
           <div className={"form-row"}>
-            <InputComponent
+            <SelectComponent
               iconName={MaterialIcon.Split}
               placeholder={"Tesla"}
               id={"company_name_to_be_split"}
               label={"Company Name to be Split"}
-              fieldRegistration={registerField("employerToBeSplitName")}
-              constantValue={companyName}
+              fieldRegistration={registerField("employerToBeSplitId")}
+              constantValue={employer.id.toString()}
+              options={employersOptions}
             />
             <DateComponent
               fieldRegistration={registerField("relationStartDate")}
@@ -82,19 +90,21 @@ export function SplitEmployerModal({
             <div className="flex-grow border-t border-gray-500"></div>
           </div>
           <div className={"form-row"}>
-            <InputComponent
-              fieldRegistration={registerField("firstCompanyName")}
+            <SelectComponent
+              fieldRegistration={registerField("firstCompanyId")}
               iconName={MaterialIcon.Work}
-              placeholder={"Tesla"}
+              placeholder={"Employer"}
               id={"first_company_name"}
               label={"Enter the First Company Name"}
+              options={employersOptions}
             />
-            <InputComponent
-              fieldRegistration={registerField("secondCompanyName")}
+            <SelectComponent
+              fieldRegistration={registerField("secondCompanyId")}
               iconName={MaterialIcon.Work}
-              placeholder={"Ford"}
+              placeholder={"Employer"}
               id={"second_company_name"}
               label={"Enter the Second Company Name"}
+              options={employersOptions}
             />
           </div>
           <span className={dashboardRootStyles.error}>{formError}</span>
