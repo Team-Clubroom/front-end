@@ -121,7 +121,7 @@ function Employers() {
           />
           <YesNoModal
             bodyText={
-              "Are you sure you want to remove " + modalData.employer.name + "?"
+              `Are you sure you want to remove ${modalData.employer.name}?`
             }
             isOpen={isModalOpen(ModalNames.YesNo)}
             close={closeModal}
