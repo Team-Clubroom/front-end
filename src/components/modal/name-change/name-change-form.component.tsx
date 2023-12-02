@@ -37,8 +37,8 @@ function NameChangeForm({
 
   async function handleSubmit(formValues: NameChangeFormValues) {
     const nameChangeRequest: NameChangeRequest = {
-      old_employer_name: employer.id.toString(),
-      new_employer_name: formValues.newEmployerId,
+      old_employer_id: employer.id.toString(),
+      new_employer_id: formValues.newEmployerId,
       name_change_effective_date: formValues.changeDate.trim(),
     };
 

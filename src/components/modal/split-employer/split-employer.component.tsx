@@ -40,9 +40,9 @@ export function SplitEmployerModal({
 
   async function handleSubmit(formValues: SplitFormValues) {
     const splitRelationRequest: SplitRelationRequest = {
-      company_a_name: employer.id.toString(),
-      company_b_name: formValues.firstCompanyId,
-      company_c_name: formValues.secondCompanyId,
+      company_a_id: employer.id.toString(),
+      company_b_id: formValues.firstCompanyId,
+      company_c_id: formValues.secondCompanyId,
       employer_relation_start_date: formValues.relationStartDate.trim(),
     };
 

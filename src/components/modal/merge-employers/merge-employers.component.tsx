@@ -8,7 +8,7 @@ import {
   mergeFormEmptyForm,
   mergeFormValidationCriteria,
   MergeFormValues,
-} from "./merge-employers.helper.ts";
+} from "./merge-employers.helpers.ts";
 import { LoadButtonComponent } from "../../load-button/load-button.component.tsx";
 import {
   Employer,
@@ -41,9 +41,9 @@ export function MergeEmployersModal({
 
   async function handleSubmit(formValues: MergeFormValues) {
     const mergeRelationRequest: MergeRelationRequest = {
-      company_a_name: employer.name.trim(),
-      company_b_name: formValues.secondEmployerId,
-      company_c_name: formValues.mergedEmployerId,
+      company_a_id: employer.name.trim(),
+      company_b_id: formValues.secondEmployerId,
+      company_c_id: formValues.mergedEmployerId,
       employer_relation_start_date: formValues.relationStartDate.trim(),
     };
 
