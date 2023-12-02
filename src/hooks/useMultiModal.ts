@@ -11,6 +11,7 @@ export const useMultiModal = <T>() => {
   const close = () => {
     setOpenedModal(null);
     setData(undefined);
+    console.log("hit close");
   };
 
   const isModalOpen = (modalName: ModalNames) => openedModal === modalName;
@@ -24,4 +25,5 @@ export enum ModalNames {
   NameChange = 2,
   EditEmployer = 3,
   AddEmployer = 4,
+  YesNo = 5,
 }

@@ -1,5 +1,6 @@
 import { EmployerFormFields } from "./employer-modal.helpers.ts";
 import {
+  DeleteEmployerRequest,
   Employer,
   EmployerEditRequest,
   NewEmployerRequest,
@@ -66,6 +67,14 @@ export const useEmployerActions = () => {
     await customFetch(ApiRoutes.Employer, "PATCH", editRequest);
   };
 
+  const deleteEmployer = async (employer: Employer) => {
+    console.log("delete hit");
+    const deleteRequest: DeleteEmployerRequest = {
+      company_name: employer.name,
+    };
+    await customFetch(ApiRoutes.DeleteEmployer, "DELETE", deleteRequest);
+  };
+
   const _employerToForm = (employer: Employer): EmployerFormFields => ({
     employer_name: employer.name,
     employer_founded_date: employer.foundedDate,
@@ -93,5 +102,6 @@ export const useEmployerActions = () => {
     createNewEmployer,
     editEmployer,
     getEmployerFormInitValues,
+    deleteEmployer,
   };
 };

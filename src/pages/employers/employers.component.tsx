@@ -12,6 +12,8 @@ import { Icon } from "../../components/icon.component.tsx";
 import { MaterialIcon } from "../../utils/icons.ts";
 import "./employers.styles.css";
 import { useEmployers } from "../../hooks/useEmployers.ts";
+import { useEmployerActions } from "../../components/modal/employer-modal/useEmployerActions.ts";
+import { YesNoModal } from "../../components/modal/yes-no/yes-no.component.tsx";
 
 function Employers() {
   const [isModalOpen, openModal, closeModal, modalData] = useMultiModal<{
@@ -23,6 +25,8 @@ function Employers() {
       employer: employers.find(({ id }) => id === employerId)!,
     });
   };
+
+  const {deleteEmployer} = useEmployerActions();
 
   const [search, setSearch] = useState("");
   const { employers } = useEmployers();
@@ -114,6 +118,15 @@ function Employers() {
             close={closeModal}
             employer={modalData.employer}
             employersOptions={employerOptions}
+          />
+          <YesNoModal
+            bodyText={`Are you sure you want to remove ${modalData.employer.name}?`}
+            isOpen={isModalOpen(ModalNames.YesNo)}
+            close={closeModal}
+            onConfirm={async () => {
+              await deleteEmployer(modalData.employer);
+              closeModal();
+            }}
           />
         </>
       )}

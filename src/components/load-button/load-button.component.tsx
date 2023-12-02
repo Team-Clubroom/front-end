@@ -1,5 +1,5 @@
 import { dashboardRootStyles } from "../../sharedStyles/dashboard-root.styles.tsx";
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
 import { MaterialIcon } from "../../utils/icons.ts";
 import { Icon } from "../icon.component.tsx";
 
@@ -8,6 +8,7 @@ interface LoadButtonProps {
   loadingText: string;
   children: ReactNode;
   icon?: MaterialIcon;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 export const LoadButtonComponent = ({
@@ -15,9 +16,14 @@ export const LoadButtonComponent = ({
   icon,
   loadingText,
   children,
+  onClick,
 }: LoadButtonProps) => {
   return (
-    <button type="submit" className={dashboardRootStyles.submitButton}>
+    <button
+      type="submit"
+      className={dashboardRootStyles.submitButton}
+      onClick={onClick}
+    >
       {isLoading ? (
         <>
           <svg
