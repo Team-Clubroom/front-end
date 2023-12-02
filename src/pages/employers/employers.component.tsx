@@ -1,10 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Employer } from "../../models/employer.types.ts";
 import { useAuthContext } from "../../contexts/auth/auth.context.tsx";
 import SearchBoxComponent from "../../components/search-box/search-box.component.tsx";
-import { useFetch } from "../../models/useFetch.ts";
 import { EmployerCard } from "../../components/employer-card/employer-card.component.tsx";
-import { ApiRoutes } from "../../models/api.types.ts";
 import NameChangeModal from "../../components/modal/name-change/name-change-form.component.tsx";
 import { SplitEmployerModal } from "../../components/modal/split-employer/split-employer.component.tsx";
 import { ModalNames, useMultiModal } from "../../hooks/useMultiModal.ts";
@@ -13,6 +11,7 @@ import EmployerModal from "../../components/modal/employer-modal/employer-modal.
 import { Icon } from "../../components/icon.component.tsx";
 import { MaterialIcon } from "../../utils/icons.ts";
 import "./employers.styles.css";
+import { useEmployers } from "../../hooks/useEmployers.ts";
 
 function Employers() {
   const [isModalOpen, openModal, closeModal, modalData] = useMultiModal<{
@@ -26,26 +25,8 @@ function Employers() {
   };
 
   const [search, setSearch] = useState("");
-  const [employers, setEmployers] = useState<Employer[]>([]);
-  const { customFetch } = useFetch();
+  const { employers } = useEmployers();
   const user = useAuthContext();
-  useEffect(() => {
-    const fetchEmployees = async () => {
-      const response = await customFetch<Employer[]>(
-        ApiRoutes.Employers,
-        "GET",
-      );
-      return response.data;
-    };
-
-    fetchEmployees()
-      .then((employers) => {
-        setEmployers(employers);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, [user]);
 
   function compareSearch(employer: Employer) {
     if (search.trim() !== "") {
