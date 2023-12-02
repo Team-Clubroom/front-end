@@ -2,6 +2,7 @@ import { Modal, ModalVisibilityProps } from "../modal.component.tsx";
 import { dashboardRootStyles } from "../../../sharedStyles/dashboard-root.styles.tsx";
 import "../../../sharedStyles/form.styles.css";
 import { useState } from "react";
+import { LoadButtonComponent } from "../../load-button/load-button.component.tsx";
 
 interface YesNoFormProps extends ModalVisibilityProps {
   onConfirm: () => Promise<void>;
@@ -42,12 +43,13 @@ export function YesNoModal({
             >
               Cancel
             </button>
-            <button
+            <LoadButtonComponent
+              isLoading={isLoading}
+              loadingText={"Confirming..."}
               onClick={handleConfirm}
-              className={dashboardRootStyles.submitButton}
             >
-              {isLoading ? "Confirming..." : "Confirm"}
-            </button>
+              Confirm
+            </LoadButtonComponent>
           </div>
         </div>
       </div>
