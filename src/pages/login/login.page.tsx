@@ -1,17 +1,17 @@
 import { loginStyles } from "./login.page.styles.tsx";
 import { Navigate, NavLink, useNavigate } from "react-router-dom";
-import useForm from "../../../hooks/useForm.ts";
+import useForm from "../../hooks/useForm.ts";
 import {
   emptyLoginForm,
   loginFormCriteria,
   LoginFormValues,
 } from "./login.helpers.ts";
-import { useAuthActionContext } from "../../../contexts/auth/auth.context.tsx";
-import FooterComponent from "../../../components/footer/footer.component.tsx";
+import { useAuthActionContext } from "../../contexts/auth/auth.context.tsx";
+import FooterComponent from "../../components/footer/footer.component.tsx";
 import { Helmet } from "react-helmet";
-import { MaterialIcon } from "../../../utils/icons.ts";
-import { InputComponent } from "../../../components/input/input.component.tsx";
-import { LoadButtonComponent } from "../../../components/load-button/load-button.component.tsx";
+import { MaterialIcon } from "../../utils/icons.ts";
+import { InputComponent } from "../../components/form/input/input.component.tsx";
+import { LoadButtonComponent } from "../../components/load-button/load-button.component.tsx";
 
 function LoginPage() {
   const { registerField, onSubmit, formError, isLoading } = useForm(
@@ -23,13 +23,13 @@ function LoginPage() {
 
   // if the user is logged in, don't let them access this page
   if (isLoggedIn()) {
-    return <Navigate to={"/dashboard"} />;
+    return <Navigate to={"/employers"} />;
   }
 
   const handleSubmit = async (formValues: LoginFormValues) => {
     await login(formValues);
     setTimeout(() => {
-      navigate("/dashboard");
+      navigate("/employers");
     }, 0);
   };
 

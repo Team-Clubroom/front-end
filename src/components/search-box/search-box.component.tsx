@@ -14,9 +14,9 @@ function SearchBoxComponent({
   const inputRef = useRef<HTMLInputElement>(null);
 
   return (
-    <div className={"relative"}>
+    <div className={"relative max-w-lg min-w-[20rem]"}>
       <span
-        className={`material-symbols-outlined absolute translate-y-1/2 bottom-1/2 pl-2 text-white`}
+        className={`material-symbols-outlined absolute translate-y-1/2 bottom-1/2 pl-2 text-gray-300`}
       >
         device_hub
       </span>
@@ -26,8 +26,7 @@ function SearchBoxComponent({
         placeholder={placeholder}
         onChange={onChange}
         className={
-          "outline-0 py-2.5 rounded-full border focus:bg-gray-700 hover:bg-gray-600 bg-gray-500 text-white" +
-          " transition-colors w-80"
+          "outline-0 py-2 rounded-full border border-gray-300 placeholder-gray-300 focus:bg-gray-700 hover:bg-gray-400 bg-gray-400 text-white w-full transition-colors"
         }
         style={{ paddingInline: "36px" }}
       />
@@ -37,7 +36,9 @@ function SearchBoxComponent({
           "absolute translate-y-1/2 bottom-1/2 right-0 pr-2 flex border-0 outline-0"
         }
       >
-        <span className={`material-symbols-outlined text-white`}>search</span>
+        <span className={`material-symbols-outlined text-gray-300`}>
+          search
+        </span>
       </button>
     </div>
   );

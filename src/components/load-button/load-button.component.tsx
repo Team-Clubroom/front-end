@@ -1,4 +1,4 @@
-import { dashboardRootStyles } from "../../pages/content/app-main/tabs/dashboard-root/dashboard-root.styles.tsx";
+import { dashboardRootStyles } from "../../sharedStyles/dashboard-root.styles.tsx";
 import { ReactNode } from "react";
 import { MaterialIcon } from "../../utils/icons.ts";
 import { Icon } from "../icon.component.tsx";

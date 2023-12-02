@@ -1,4 +1,4 @@
-import { dashboardRootStyles } from "../../../pages/content/app-main/tabs/dashboard-root/dashboard-root.styles.tsx";
+import { dashboardRootStyles } from "../../../sharedStyles/dashboard-root.styles.tsx";
 import "../../../sharedStyles/form.styles.css";
 import {
   addEmployerEmptyForm,
@@ -7,15 +7,15 @@ import {
 } from "./employer-modal.helpers.ts";
 import useForm from "../../../hooks/useForm.ts";
 import { Modal, ModalVisibilityProps } from "../modal.component.tsx";
-import { InputComponent } from "../../input/input.component.tsx";
+import { InputComponent } from "../../form/input/input.component.tsx";
 import { MaterialIcon } from "../../../utils/icons.ts";
-import { SelectComponent } from "../../select/select.component.tsx";
+import { SelectComponent } from "../../form/select/select.component.tsx";
 import { INDUSTRY_SECTOR_CODES } from "../../../data/naics-codes.ts";
 import { US_STATES } from "../../../data/states.ts";
 import { LoadButtonComponent } from "../../load-button/load-button.component.tsx";
 import { useEmployerActions } from "./useEmployerActions.ts";
 import { Employer } from "../../../models/employer.types.ts";
-import { DateComponent } from "../../input/date.component.tsx";
+import { DateComponent } from "../../form/input/date.component.tsx";
 
 interface EmployerModalProps extends ModalVisibilityProps {
   prePopulate?: Employer;
@@ -93,6 +93,7 @@ function EmployerModal({ isOpen, close, prePopulate }: EmployerModalProps) {
             iconName={MaterialIcon.Action_Key}
             label={"Select the Industry Sector Name"}
             id={"sector_name"}
+            placeholder={"Sector name"}
             options={Object.keys(INDUSTRY_SECTOR_CODES)
               .map((code) => ({
                 text: INDUSTRY_SECTOR_CODES[code].name,
@@ -143,6 +144,7 @@ function EmployerModal({ isOpen, close, prePopulate }: EmployerModalProps) {
               fieldRegistration={registerField("employer_addr_state")}
               iconName={MaterialIcon.Flag}
               label={"Select the State"}
+              placeholder={"State"}
               id={"state"}
               options={US_STATES.map((state) => ({
                 text: state.name,

@@ -36,22 +36,22 @@ export type EmployerEditRequest = {
 } & Partial<NewEmployerRequest>;
 
 export interface NameChangeRequest {
-  old_employer_name: string;
-  new_employer_name: string;
+  old_employer_id: string;
+  new_employer_id: string;
   name_change_effective_date: string;
 }
 
 export interface SplitRelationRequest {
-  company_a_name: string;
-  company_b_name: string;
-  company_c_name: string;
+  company_a_id: string;
+  company_b_id: string;
+  company_c_id: string;
   employer_relation_start_date: string;
 }
 
 export interface MergeRelationRequest {
-  company_a_name: string;
-  company_b_name: string;
-  company_c_name: string;
+  company_a_id: string;
+  company_b_id: string;
+  company_c_id: string;
   employer_relation_start_date: string;
 }
 

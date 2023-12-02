@@ -24,4 +24,5 @@ export enum MaterialIcon {
   Network = "network_node",
   Login = "login",
   Start = "start",
+  Add = "add",
 }

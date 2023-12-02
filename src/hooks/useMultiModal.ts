@@ -24,5 +24,6 @@ export enum ModalNames {
   Merge = 1,
   NameChange = 2,
   EditEmployer = 3,
-  YesNo = 4,
+  AddEmployer = 4,
+  YesNo = 5,
 }

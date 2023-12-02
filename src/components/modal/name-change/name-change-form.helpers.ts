@@ -1,24 +1,24 @@
 import { Validate, ValidationCriteria } from "../../../hooks/Validator.ts";
 
 export interface NameChangeFormValues {
-  oldEmployerName: string;
-  newEmployerName: string;
+  oldEmployerId: string;
+  newEmployerId: string;
   changeDate: string;
 }
 
 export const nameChangeEmptyForm: NameChangeFormValues = {
-  oldEmployerName: "",
-  newEmployerName: "",
+  oldEmployerId: "",
+  newEmployerId: "",
   changeDate: "",
 };
 
 export const nameChangeValidationCriteria: ValidationCriteria<NameChangeFormValues> =
   {
-    newEmployerName: [
+    newEmployerId: [
       Validate.Required,
       Validate.AreDifferent(
-        "oldEmployerName",
-        "newEmployerName",
+        "oldEmployerId",
+        "newEmployerId",
         "old employer name",
       ),
     ],
