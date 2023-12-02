@@ -68,7 +68,8 @@ export const useEmployerActions = () => {
   };
 
   const deleteEmployer = async (employer: Employer) => {
-    //const deleteRequest: EmployerEditRequest = { employer_name: employer.name};
+    const deleteRequest: DeleteEmployerRequest = { company_name: employer.name };
+    await customFetch(ApiRoutes.DeleteEmployer, "DELETE", deleteRequest);
   }
 
   const _employerToForm = (employer: Employer): EmployerFormFields => ({
@@ -98,5 +99,6 @@ export const useEmployerActions = () => {
     createNewEmployer,
     editEmployer,
     getEmployerFormInitValues,
+    deleteEmployer,
   };
 };

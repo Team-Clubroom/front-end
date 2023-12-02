@@ -10,8 +10,6 @@ import { SplitEmployerModal } from "../../../../components/modal/split-employer/
 import { ModalNames, useMultiModal } from "../../../../hooks/useMultiModal.ts";
 import { MergeEmployersModal } from "../../../../components/modal/merge-employers/merge-employers.component.tsx";
 import EmployerModal from "../../../../components/modal/employer-modal/employer-modal.component.tsx";
-import { YesNoModal } from "../../../../components/modal/yes-no/yes-no.component.tsx";
-import { useEmployerActions } from "../../../../components/modal/employer-modal/useEmployerActions.ts";
 
 function Employers() {
   const [isModalOpen, openModal, closeModal, modalData] = useMultiModal<{
@@ -54,6 +52,9 @@ function Employers() {
             employer={employer}
             key={employer.id}
             openModalByName={openModalByName}
+            closeModal={closeModal}
+            isModalOpen={isModalOpen}
+            modalData={modalData}
           />
         );
       }
@@ -64,6 +65,9 @@ function Employers() {
           employer={employer}
           key={employer.id}
           openModalByName={openModalByName}
+          closeModal={closeModal}
+          isModalOpen={isModalOpen}
+          modalData={modalData}
         />
       );
     }
@@ -116,12 +120,6 @@ function Employers() {
             companyName={modalData.employer.name}
             isOpen={isModalOpen(ModalNames.Merge)}
             close={closeModal}
-          />
-          <YesNoModal
-            bodyText={"Are you sure you wish to remove " + modalData.employer.name + "?"}
-            isOpen={isModalOpen(ModalNames.YesNo)}
-            close={closeModal}
-            onConfirm={() => console.log("delete")}
           />
         </>
       )}
