@@ -6,24 +6,17 @@ import React from "react";
 import { MaterialIcon } from "../../utils/icons.ts";
 import { Icon } from "../icon.component.tsx";
 import { ModalNames } from "../../hooks/useMultiModal.ts";
-import { YesNoModal } from "../modal/yes-no/yes-no.component.tsx";
-import { useEmployerActions}  from "../modal/employer-modal/useEmployerActions.ts";
 
 interface EmployerCardProps {
   employer: Employer;
   openModalByName: (modalName: ModalNames, employerId: number) => void;
-  closeModal: () => void;
-  isModalOpen: (modalName: ModalNames) => boolean;
-  modalData: { employer: Employer } | undefined;
 }
 
 export const EmployerCard = ({
   employer,
   openModalByName,
-  closeModal,
-  isModalOpen,
-  modalData,
 }: EmployerCardProps) => {
+
   const { shortName, color } =
     INDUSTRY_SECTOR_CODES[employer.industrySectorCode];
   const showContextMenu = useMenuContext();
@@ -123,12 +116,6 @@ export const EmployerCard = ({
           {employer.address.zipCode}
         </p>
       </div>
-      <YesNoModal
-          bodyText={"Are you sure you want to remove " + modalData?.employer.name + "?"}
-          isOpen={isModalOpen(ModalNames.YesNo)}
-          close={closeModal}
-          onConfirm={deleteEmployer(modalData?.employer.name)}
-      />
     </div>
   );
 };
