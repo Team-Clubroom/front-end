@@ -72,7 +72,7 @@ export const useEmployerActions = () => {
     console.log("delete hit");
     const deleteRequest: DeleteEmployerRequest = { company_name: employer.name };
     await customFetch(ApiRoutes.DeleteEmployer, "DELETE", deleteRequest);
-    closeModal;
+    closeModal();
   }
 
   const _employerToForm = (employer: Employer): EmployerFormFields => ({
