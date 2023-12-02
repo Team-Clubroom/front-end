@@ -14,7 +14,7 @@ import { YesNoModal } from "../../../../components/modal/yes-no/yes-no.component
 import { useEmployerActions } from "../../../../components/modal/employer-modal/useEmployerActions.ts";
 
 function Employers() {
-  const {deleteEmployer} = useEmployerActions();
+  const { deleteEmployer } = useEmployerActions();
 
   const [isModalOpen, openModal, closeModal, modalData] = useMultiModal<{
     employer: Employer;
@@ -120,10 +120,15 @@ function Employers() {
             close={closeModal}
           />
           <YesNoModal
-            bodyText={"Are you sure you want to remove " + modalData.employer.name + "?"}
+            bodyText={
+              "Are you sure you want to remove " + modalData.employer.name + "?"
+            }
             isOpen={isModalOpen(ModalNames.YesNo)}
             close={closeModal}
-            onConfirm={() => deleteEmployer(modalData.employer, closeModal)}
+            onConfirm={async () => {
+              await deleteEmployer(modalData.employer);
+              closeModal();
+            }}
           />
         </>
       )}

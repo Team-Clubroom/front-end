@@ -1,15 +1,14 @@
 import { EmployerFormFields } from "./employer-modal.helpers.ts";
 import {
+  DeleteEmployerRequest,
   Employer,
   EmployerEditRequest,
   NewEmployerRequest,
-  DeleteEmployerRequest,
 } from "../../../models/employer.types.ts";
 import { ApiRoutes } from "../../../models/api.types.ts";
 import { useFetch } from "../../../models/useFetch.ts";
 
 export const useEmployerActions = () => {
-
   const { customFetch } = useFetch();
   const createNewEmployer = async (formValues: EmployerFormFields) => {
     const newEmployerRequest: NewEmployerRequest = {
@@ -68,12 +67,13 @@ export const useEmployerActions = () => {
     await customFetch(ApiRoutes.Employer, "PATCH", editRequest);
   };
 
-  const deleteEmployer = async (employer: Employer, closeModal: () => void) => {
+  const deleteEmployer = async (employer: Employer) => {
     console.log("delete hit");
-    const deleteRequest: DeleteEmployerRequest = { company_name: employer.name };
+    const deleteRequest: DeleteEmployerRequest = {
+      company_name: employer.name,
+    };
     await customFetch(ApiRoutes.DeleteEmployer, "DELETE", deleteRequest);
-    closeModal();
-  }
+  };
 
   const _employerToForm = (employer: Employer): EmployerFormFields => ({
     employer_name: employer.name,
