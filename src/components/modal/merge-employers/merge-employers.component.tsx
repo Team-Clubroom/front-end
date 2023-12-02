@@ -83,6 +83,7 @@ export function MergeEmployersModal({
             <SelectComponent
               iconName={MaterialIcon.Work}
               id={"second_company"}
+              placeholder={"Employer"}
               label={"Second Company to be Merged"}
               fieldRegistration={registerField("secondEmployer")}
               options={employersOptions}
@@ -99,6 +100,7 @@ export function MergeEmployersModal({
             <SelectComponent
               iconName={MaterialIcon.Merge}
               id={"merged_company"}
+              placeholder={"Employer"}
               label={"Company Name After Merge"}
               fieldRegistration={registerField("mergedEmployer")}
               options={employersOptions}

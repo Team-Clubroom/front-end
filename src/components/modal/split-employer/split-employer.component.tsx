@@ -95,6 +95,7 @@ export function SplitEmployerModal({
             <SelectComponent
               fieldRegistration={registerField("firstCompanyName")}
               iconName={MaterialIcon.Work}
+              placeholder={"Employer"}
               id={"first_company_name"}
               label={"Enter the First Company Name"}
               options={employersOptions}
@@ -102,6 +103,7 @@ export function SplitEmployerModal({
             <SelectComponent
               fieldRegistration={registerField("secondCompanyName")}
               iconName={MaterialIcon.Work}
+              placeholder={"Employer"}
               id={"second_company_name"}
               label={"Enter the Second Company Name"}
               options={employersOptions}

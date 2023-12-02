@@ -11,11 +11,13 @@ type SelectProps = {
   label: string;
   id: string;
   options: SelectOptions;
+  placeholder: string;
 };
 export const SelectComponent = ({
   fieldRegistration: { value, onChange, error, required },
   iconName,
   options,
+  placeholder,
   label,
   id,
 }: SelectProps) => {
@@ -37,16 +39,20 @@ export const SelectComponent = ({
         </span>
         <select
           id={id}
-          className={
-            dashboardRootStyles.input +
-            ` ${classIf(error, dashboardRootStyles.inputError)}`
-          }
+          className={`${dashboardRootStyles.input} ${classIf(
+            !value,
+            "text-gray-300",
+          )} ${classIf(error, dashboardRootStyles.inputError)}`}
           value={value}
           onChange={onChange}
         >
           {/* add default empty option at the start */}
-          {[{ text: "", value: "" }, ...options].map((option) => (
-            <option key={option.value} value={option.value}>
+          {[{ text: placeholder, value: "" }, ...options].map((option) => (
+            <option
+              className={"text-gray-900"}
+              key={option.value}
+              value={option.value}
+            >
               {option.text}
             </option>
           ))}

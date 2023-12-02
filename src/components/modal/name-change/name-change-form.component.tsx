@@ -76,6 +76,7 @@ function NameChangeForm({
             <SelectComponent
               fieldRegistration={registerField("newEmployerName")}
               iconName={MaterialIcon.Work}
+              placeholder={"Employer"}
               id={"new_employer_name"}
               label={"Enter the New Employer Name"}
               options={employersOptions}

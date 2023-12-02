@@ -93,6 +93,7 @@ function EmployerModal({ isOpen, close, prePopulate }: EmployerModalProps) {
             iconName={MaterialIcon.Action_Key}
             label={"Select the Industry Sector Name"}
             id={"sector_name"}
+            placeholder={"Sector name"}
             options={Object.keys(INDUSTRY_SECTOR_CODES)
               .map((code) => ({
                 text: INDUSTRY_SECTOR_CODES[code].name,
@@ -143,6 +144,7 @@ function EmployerModal({ isOpen, close, prePopulate }: EmployerModalProps) {
               fieldRegistration={registerField("employer_addr_state")}
               iconName={MaterialIcon.Flag}
               label={"Select the State"}
+              placeholder={"State"}
               id={"state"}
               options={US_STATES.map((state) => ({
                 text: state.name,
