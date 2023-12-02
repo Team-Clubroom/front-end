@@ -100,19 +100,16 @@ function Employers() {
           <NameChangeModal
             isOpen={isModalOpen(ModalNames.NameChange)}
             close={closeModal}
-            companyName={modalData.employer.name}
             employer={modalData.employer}
             employersOptions={employerOptions}
           />
           <SplitEmployerModal
-            companyName={modalData.employer.name}
             isOpen={isModalOpen(ModalNames.Split)}
             close={closeModal}
             employer={modalData.employer}
             employersOptions={employerOptions}
           />
           <MergeEmployersModal
-            companyName={modalData.employer.name}
             isOpen={isModalOpen(ModalNames.Merge)}
             close={closeModal}
             employer={modalData.employer}

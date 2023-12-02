@@ -1,7 +1,5 @@
 import { Modal, ModalVisibilityProps } from "../modal.component.tsx";
 import useForm from "../../../hooks/useForm.ts";
-
-import { InputComponent } from "../../form/input/input.component.tsx";
 import { MaterialIcon } from "../../../utils/icons.ts";
 import { dashboardRootStyles } from "../../../sharedStyles/dashboard-root.styles.tsx";
 import { useFetch } from "../../../models/useFetch.ts";
@@ -24,7 +22,6 @@ import {
 } from "../../form/select/select.component.tsx";
 
 interface MergeFormProps extends ModalVisibilityProps {
-  companyName: string;
   employersOptions: SelectOptions;
   employer: Employer;
 }
@@ -32,7 +29,7 @@ interface MergeFormProps extends ModalVisibilityProps {
 export function MergeEmployersModal({
   isOpen,
   close,
-  companyName,
+  employer,
   employersOptions,
 }: MergeFormProps) {
   const { registerField, onSubmit, isLoading, formError, resetForm } = useForm(
@@ -44,9 +41,9 @@ export function MergeEmployersModal({
 
   async function handleSubmit(formValues: MergeFormValues) {
     const mergeRelationRequest: MergeRelationRequest = {
-      company_a_name: companyName.trim(),
-      company_b_name: formValues.secondEmployer.trim(),
-      company_c_name: formValues.mergedEmployer.trim(),
+      company_a_name: employer.name.trim(),
+      company_b_name: formValues.secondEmployerId,
+      company_c_name: formValues.mergedEmployerId,
       employer_relation_start_date: formValues.relationStartDate.trim(),
     };
 
@@ -71,13 +68,14 @@ export function MergeEmployersModal({
           className={"flex flex-col gap-2 max-h-96 pr-2"}
         >
           <div className={"form-row"}>
-            <InputComponent
+            <SelectComponent
               iconName={MaterialIcon.Work}
               placeholder={"Tesla"}
               id={"first_company"}
               label={"First Company to be Merged"}
-              fieldRegistration={registerField("firstEmployer")}
-              constantValue={companyName}
+              fieldRegistration={registerField("firstEmployerId")}
+              constantValue={employer.id.toString()}
+              options={employersOptions}
             />
 
             <SelectComponent
@@ -85,7 +83,7 @@ export function MergeEmployersModal({
               id={"second_company"}
               placeholder={"Employer"}
               label={"Second Company to be Merged"}
-              fieldRegistration={registerField("secondEmployer")}
+              fieldRegistration={registerField("secondEmployerId")}
               options={employersOptions}
             />
           </div>
@@ -102,7 +100,7 @@ export function MergeEmployersModal({
               id={"merged_company"}
               placeholder={"Employer"}
               label={"Company Name After Merge"}
-              fieldRegistration={registerField("mergedEmployer")}
+              fieldRegistration={registerField("mergedEmployerId")}
               options={employersOptions}
             />
             <DateComponent

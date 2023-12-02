@@ -5,7 +5,6 @@ import {
   NameChangeFormValues,
   nameChangeValidationCriteria,
 } from "./name-change-form.helpers.ts";
-import { InputComponent } from "../../form/input/input.component.tsx";
 import { MaterialIcon } from "../../../utils/icons.ts";
 import { dashboardRootStyles } from "../../../sharedStyles/dashboard-root.styles.tsx";
 import { useFetch } from "../../../models/useFetch.ts";
@@ -20,7 +19,6 @@ import {
 } from "../../form/select/select.component.tsx";
 
 interface ChangeFormProps extends ModalVisibilityProps {
-  companyName: string;
   employersOptions: SelectOptions;
   employer: Employer;
 }
@@ -28,7 +26,7 @@ interface ChangeFormProps extends ModalVisibilityProps {
 function NameChangeForm({
   isOpen,
   close,
-  companyName,
+  employer,
   employersOptions,
 }: ChangeFormProps) {
   const { registerField, onSubmit, isLoading, formError, resetForm } = useForm(
@@ -39,8 +37,8 @@ function NameChangeForm({
 
   async function handleSubmit(formValues: NameChangeFormValues) {
     const nameChangeRequest: NameChangeRequest = {
-      old_employer_name: companyName.trim(),
-      new_employer_name: formValues.newEmployerName.trim(),
+      old_employer_name: employer.id.toString(),
+      new_employer_name: formValues.newEmployerId,
       name_change_effective_date: formValues.changeDate.trim(),
     };
 
@@ -65,16 +63,17 @@ function NameChangeForm({
           className={"flex flex-col gap-2 max-h-96 pr-2"}
         >
           <div className={"form-row"}>
-            <InputComponent
-              fieldRegistration={registerField("oldEmployerName")}
-              constantValue={companyName}
+            <SelectComponent
+              fieldRegistration={registerField("oldEmployerId")}
+              constantValue={employer.id.toString()}
               iconName={MaterialIcon.Work}
               placeholder={"Tesla"}
               id={"old_company_name"}
               label={"Old Employer Name"}
+              options={employersOptions}
             />
             <SelectComponent
-              fieldRegistration={registerField("newEmployerName")}
+              fieldRegistration={registerField("newEmployerId")}
               iconName={MaterialIcon.Work}
               placeholder={"Employer"}
               id={"new_employer_name"}

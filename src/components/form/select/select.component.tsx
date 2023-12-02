@@ -2,6 +2,7 @@ import { FieldRegistration } from "../../../hooks/useForm.ts";
 import { dashboardRootStyles } from "../../../sharedStyles/dashboard-root.styles.tsx";
 import { classIf } from "../../../utils/tailwind.utils.ts";
 import { MaterialIcon } from "../../../utils/icons.ts";
+import { useEffect } from "react";
 
 export type SelectOptions = Array<{ text: string; value: string }>;
 
@@ -12,15 +13,21 @@ type SelectProps = {
   id: string;
   options: SelectOptions;
   placeholder: string;
+  constantValue?: string;
 };
 export const SelectComponent = ({
-  fieldRegistration: { value, onChange, error, required },
+  fieldRegistration: { value, onChange, error, required, forceUpdate },
   iconName,
   options,
   placeholder,
   label,
   id,
+  constantValue,
 }: SelectProps) => {
+  useEffect(() => {
+    if (constantValue) forceUpdate(constantValue);
+  }, []);
+
   return (
     <div className={dashboardRootStyles.formField + " pr-1"}>
       <label htmlFor={id} className={dashboardRootStyles.label}>
@@ -43,8 +50,9 @@ export const SelectComponent = ({
             !value,
             "text-gray-300",
           )} ${classIf(error, dashboardRootStyles.inputError)}`}
-          value={value}
+          value={constantValue ?? value}
           onChange={onChange}
+          disabled={constantValue !== undefined}
         >
           {/* add default empty option at the start */}
           {[{ text: placeholder, value: "" }, ...options].map((option) => (

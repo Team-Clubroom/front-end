@@ -1,40 +1,40 @@
 import { Validate, ValidationCriteria } from "../../../hooks/Validator.ts";
 
 export interface MergeFormValues {
-  firstEmployer: string;
-  secondEmployer: string;
-  mergedEmployer: string;
+  firstEmployerId: string;
+  secondEmployerId: string;
+  mergedEmployerId: string;
   relationStartDate: string;
 }
 
 export const mergeFormEmptyForm: MergeFormValues = {
-  firstEmployer: "",
-  secondEmployer: "",
-  mergedEmployer: "",
+  firstEmployerId: "",
+  secondEmployerId: "",
+  mergedEmployerId: "",
   relationStartDate: "",
 };
 
 export const mergeFormValidationCriteria: ValidationCriteria<MergeFormValues> =
   {
     relationStartDate: [Validate.Required],
-    secondEmployer: [
+    secondEmployerId: [
       Validate.Required,
       Validate.AreDifferent(
-        "firstEmployer",
-        "secondEmployer",
+        "firstEmployerId",
+        "secondEmployerId",
         "the first company",
       ),
     ],
-    mergedEmployer: [
+    mergedEmployerId: [
       Validate.Required,
       Validate.AreDifferent(
-        "firstEmployer",
-        "mergedEmployer",
+        "firstEmployerId",
+        "mergedEmployerId",
         "the first company",
       ),
       Validate.AreDifferent(
-        "secondEmployer",
-        "mergedEmployer",
+        "secondEmployerId",
+        "mergedEmployerId",
         "the second company",
       ),
     ],
