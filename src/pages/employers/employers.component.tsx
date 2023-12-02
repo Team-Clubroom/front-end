@@ -29,18 +29,11 @@ function Employers() {
   const user = useAuthContext();
 
   function compareSearch(employer: Employer) {
-    if (search.trim() !== "") {
-      if (employer.name.toLowerCase().includes(search.toLowerCase())) {
-        return (
-          <EmployerCard
-            employer={employer}
-            key={employer.id}
-            openModalByName={openModalByName}
-          />
-        );
-      }
-      // TODO: add other search filters when needed
-    } else {
+    const matchesSearch =
+      search.trim() === "" ||
+      employer.name.toLowerCase().includes(search.toLowerCase());
+
+    if (matchesSearch) {
       return (
         <EmployerCard
           employer={employer}
@@ -49,9 +42,16 @@ function Employers() {
         />
       );
     }
+
+    return undefined;
   }
 
   const employerNodes = employers.map(compareSearch);
+
+  const employerOptions = employers.map((employer) => ({
+    text: employer.name,
+    value: employer.id.toString(),
+  }));
 
   return (
     <div className={"flex flex-col"} style={{ height: "calc(100% - 65px)" }}>
@@ -101,16 +101,22 @@ function Employers() {
             isOpen={isModalOpen(ModalNames.NameChange)}
             close={closeModal}
             companyName={modalData.employer.name}
+            employer={modalData.employer}
+            employersOptions={employerOptions}
           />
           <SplitEmployerModal
             companyName={modalData.employer.name}
             isOpen={isModalOpen(ModalNames.Split)}
             close={closeModal}
+            employer={modalData.employer}
+            employersOptions={employerOptions}
           />
           <MergeEmployersModal
             companyName={modalData.employer.name}
             isOpen={isModalOpen(ModalNames.Merge)}
             close={closeModal}
+            employer={modalData.employer}
+            employersOptions={employerOptions}
           />
         </>
       )}

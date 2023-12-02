@@ -9,17 +9,28 @@ import { InputComponent } from "../../form/input/input.component.tsx";
 import { MaterialIcon } from "../../../utils/icons.ts";
 import { dashboardRootStyles } from "../../../sharedStyles/dashboard-root.styles.tsx";
 import { useFetch } from "../../../models/useFetch.ts";
-import { NameChangeRequest } from "../../../models/employer.types.ts";
+import { Employer, NameChangeRequest } from "../../../models/employer.types.ts";
 import { ApiRoutes } from "../../../models/api.types.ts";
 import "../../../sharedStyles/form.styles.css";
 import { LoadButtonComponent } from "../../load-button/load-button.component.tsx";
 import { DateComponent } from "../../form/input/date.component.tsx";
+import {
+  SelectComponent,
+  SelectOptions,
+} from "../../form/select/select.component.tsx";
 
 interface ChangeFormProps extends ModalVisibilityProps {
   companyName: string;
+  employersOptions: SelectOptions;
+  employer: Employer;
 }
 
-function NameChangeForm({ isOpen, close, companyName }: ChangeFormProps) {
+function NameChangeForm({
+  isOpen,
+  close,
+  companyName,
+  employersOptions,
+}: ChangeFormProps) {
   const { registerField, onSubmit, isLoading, formError, resetForm } = useForm(
     nameChangeEmptyForm,
     nameChangeValidationCriteria,
@@ -62,12 +73,12 @@ function NameChangeForm({ isOpen, close, companyName }: ChangeFormProps) {
               id={"old_company_name"}
               label={"Old Employer Name"}
             />
-            <InputComponent
+            <SelectComponent
               fieldRegistration={registerField("newEmployerName")}
               iconName={MaterialIcon.Work}
-              placeholder={"Tesla"}
               id={"new_employer_name"}
               label={"Enter the New Employer Name"}
+              options={employersOptions}
             />
           </div>
           <DateComponent

@@ -12,18 +12,28 @@ import {
   SplitFormValues,
 } from "./split-employer.helpers.ts";
 import { LoadButtonComponent } from "../../load-button/load-button.component.tsx";
-import { SplitRelationRequest } from "../../../models/employer.types.ts";
+import {
+  Employer,
+  SplitRelationRequest,
+} from "../../../models/employer.types.ts";
 import { ApiRoutes } from "../../../models/api.types.ts";
 import { DateComponent } from "../../form/input/date.component.tsx";
+import {
+  SelectComponent,
+  SelectOptions,
+} from "../../form/select/select.component.tsx";
 
 interface ChangeFormProps extends ModalVisibilityProps {
   companyName: string;
+  employersOptions: SelectOptions;
+  employer: Employer;
 }
 
 export function SplitEmployerModal({
   isOpen,
   close,
   companyName,
+  employersOptions,
 }: ChangeFormProps) {
   const { registerField, onSubmit, isLoading, formError, resetForm } = useForm(
     splitFormEmptyForm,
@@ -82,19 +92,19 @@ export function SplitEmployerModal({
             <div className="flex-grow border-t border-gray-500"></div>
           </div>
           <div className={"form-row"}>
-            <InputComponent
+            <SelectComponent
               fieldRegistration={registerField("firstCompanyName")}
               iconName={MaterialIcon.Work}
-              placeholder={"Tesla"}
               id={"first_company_name"}
               label={"Enter the First Company Name"}
+              options={employersOptions}
             />
-            <InputComponent
+            <SelectComponent
               fieldRegistration={registerField("secondCompanyName")}
               iconName={MaterialIcon.Work}
-              placeholder={"Ford"}
               id={"second_company_name"}
               label={"Enter the Second Company Name"}
+              options={employersOptions}
             />
           </div>
           <span className={dashboardRootStyles.error}>{formError}</span>

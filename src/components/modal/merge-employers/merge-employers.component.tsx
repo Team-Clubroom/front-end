@@ -12,18 +12,28 @@ import {
   MergeFormValues,
 } from "./merge-employers.helper.ts";
 import { LoadButtonComponent } from "../../load-button/load-button.component.tsx";
-import { MergeRelationRequest } from "../../../models/employer.types.ts";
+import {
+  Employer,
+  MergeRelationRequest,
+} from "../../../models/employer.types.ts";
 import { ApiRoutes } from "../../../models/api.types.ts";
 import { DateComponent } from "../../form/input/date.component.tsx";
+import {
+  SelectComponent,
+  SelectOptions,
+} from "../../form/select/select.component.tsx";
 
 interface MergeFormProps extends ModalVisibilityProps {
   companyName: string;
+  employersOptions: SelectOptions;
+  employer: Employer;
 }
 
 export function MergeEmployersModal({
   isOpen,
   close,
   companyName,
+  employersOptions,
 }: MergeFormProps) {
   const { registerField, onSubmit, isLoading, formError, resetForm } = useForm(
     mergeFormEmptyForm,
@@ -69,12 +79,13 @@ export function MergeEmployersModal({
               fieldRegistration={registerField("firstEmployer")}
               constantValue={companyName}
             />
-            <InputComponent
+
+            <SelectComponent
               iconName={MaterialIcon.Work}
-              placeholder={"Tesla"}
               id={"second_company"}
               label={"Second Company to be Merged"}
               fieldRegistration={registerField("secondEmployer")}
+              options={employersOptions}
             />
           </div>
           <div className="relative flex py-2 items-center">
@@ -85,12 +96,12 @@ export function MergeEmployersModal({
             <div className="flex-grow border-t border-gray-500"></div>
           </div>
           <div className={"form-row"}>
-            <InputComponent
+            <SelectComponent
               iconName={MaterialIcon.Merge}
-              placeholder={"Tesla"}
               id={"merged_company"}
               label={"Company Name After Merge"}
               fieldRegistration={registerField("mergedEmployer")}
+              options={employersOptions}
             />
             <DateComponent
               id={"relation_start_date"}

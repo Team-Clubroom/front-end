@@ -3,12 +3,14 @@ import { dashboardRootStyles } from "../../../sharedStyles/dashboard-root.styles
 import { classIf } from "../../../utils/tailwind.utils.ts";
 import { MaterialIcon } from "../../../utils/icons.ts";
 
+export type SelectOptions = Array<{ text: string; value: string }>;
+
 type SelectProps = {
   fieldRegistration: FieldRegistration;
   iconName: MaterialIcon;
   label: string;
   id: string;
-  options: Array<{ text: string; value: string }>;
+  options: SelectOptions;
 };
 export const SelectComponent = ({
   fieldRegistration: { value, onChange, error, required },
@@ -42,7 +44,8 @@ export const SelectComponent = ({
           value={value}
           onChange={onChange}
         >
-          {options.map((option) => (
+          {/* add default empty option at the start */}
+          {[{ text: "", value: "" }, ...options].map((option) => (
             <option key={option.value} value={option.value}>
               {option.text}
             </option>
