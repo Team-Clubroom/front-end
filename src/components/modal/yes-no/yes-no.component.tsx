@@ -43,7 +43,7 @@ export function YesNoModal({
               Cancel
             </button>
             <button
-              onClick={onConfirm}
+              onClick={handleConfirm}
               className={dashboardRootStyles.submitButton}
             >
               {isLoading ? "Confirming..." : "Confirm"}
