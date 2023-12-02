@@ -1,11 +1,9 @@
 import { Modal, ModalVisibilityProps } from "../modal.component.tsx";
 import { dashboardRootStyles } from "../../../pages/content/app-main/tabs/dashboard-root/dashboard-root.styles.tsx";
 import "../../../sharedStyles/form.styles.css";
-import { LoadButtonComponent } from "../../load-button/load-button.component.tsx";
-
 
 interface YesNoFormProps extends ModalVisibilityProps {
-    onConfirm: Promise<void>;
+    onConfirm: () => void;
     bodyText: string;
 }
 
@@ -29,7 +27,7 @@ export function YesNoModal({
                     <label className={"text-center"}>{bodyText}</label>
                     <div className={"flex w-full justify-end"}>
                         <button onClick={close} className={dashboardRootStyles.cancelButton}>Cancel</button>
-                        <button onClick={() => onConfirm} className={dashboardRootStyles.submitButton}>Confirm</button>
+                        <button onClick={onConfirm} className={dashboardRootStyles.submitButton}>Confirm</button>
                     </div>
                 </div>
             </div>

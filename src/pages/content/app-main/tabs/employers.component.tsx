@@ -123,7 +123,7 @@ function Employers() {
             bodyText={"Are you sure you want to remove " + modalData.employer.name + "?"}
             isOpen={isModalOpen(ModalNames.YesNo)}
             close={closeModal}
-            onConfirm={deleteEmployer(modalData.employer)}
+            onConfirm={() => deleteEmployer(modalData.employer, closeModal)}
           />
         </>
       )}

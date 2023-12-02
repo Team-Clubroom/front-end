@@ -9,6 +9,7 @@ import { ApiRoutes } from "../../../models/api.types.ts";
 import { useFetch } from "../../../models/useFetch.ts";
 
 export const useEmployerActions = () => {
+
   const { customFetch } = useFetch();
   const createNewEmployer = async (formValues: EmployerFormFields) => {
     const newEmployerRequest: NewEmployerRequest = {
@@ -67,9 +68,11 @@ export const useEmployerActions = () => {
     await customFetch(ApiRoutes.Employer, "PATCH", editRequest);
   };
 
-  const deleteEmployer = async (employer: Employer) => {
+  const deleteEmployer = async (employer: Employer, closeModal: () => void) => {
+    console.log("delete hit");
     const deleteRequest: DeleteEmployerRequest = { company_name: employer.name };
     await customFetch(ApiRoutes.DeleteEmployer, "DELETE", deleteRequest);
+    closeModal;
   }
 
   const _employerToForm = (employer: Employer): EmployerFormFields => ({
