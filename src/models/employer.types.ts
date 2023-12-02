@@ -37,7 +37,7 @@ export type EmployerEditRequest = {
 
 export interface NameChangeRequest {
   old_employer_id: string;
-  new_employer_id: string;
+  new_employer_name: string;
   name_change_effective_date: string;
 }
 

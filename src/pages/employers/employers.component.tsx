@@ -26,7 +26,7 @@ function Employers() {
     });
   };
 
-  const {deleteEmployer} = useEmployerActions();
+  const { deleteEmployer } = useEmployerActions();
 
   const [search, setSearch] = useState("");
   const { employers } = useEmployers();
@@ -105,7 +105,6 @@ function Employers() {
             isOpen={isModalOpen(ModalNames.NameChange)}
             close={closeModal}
             employer={modalData.employer}
-            employersOptions={employerOptions}
           />
           <SplitEmployerModal
             isOpen={isModalOpen(ModalNames.Split)}

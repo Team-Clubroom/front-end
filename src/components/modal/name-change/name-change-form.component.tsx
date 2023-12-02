@@ -13,22 +13,13 @@ import { ApiRoutes } from "../../../models/api.types.ts";
 import "../../../sharedStyles/form.styles.css";
 import { LoadButtonComponent } from "../../load-button/load-button.component.tsx";
 import { DateComponent } from "../../form/input/date.component.tsx";
-import {
-  SelectComponent,
-  SelectOptions,
-} from "../../form/select/select.component.tsx";
+import { InputComponent } from "../../form/input/input.component.tsx";
 
 interface ChangeFormProps extends ModalVisibilityProps {
-  employersOptions: SelectOptions;
   employer: Employer;
 }
 
-function NameChangeForm({
-  isOpen,
-  close,
-  employer,
-  employersOptions,
-}: ChangeFormProps) {
+function NameChangeForm({ isOpen, close, employer }: ChangeFormProps) {
   const { registerField, onSubmit, isLoading, formError, resetForm } = useForm(
     nameChangeEmptyForm,
     nameChangeValidationCriteria,
@@ -38,7 +29,7 @@ function NameChangeForm({
   async function handleSubmit(formValues: NameChangeFormValues) {
     const nameChangeRequest: NameChangeRequest = {
       old_employer_id: employer.id.toString(),
-      new_employer_id: formValues.newEmployerId,
+      new_employer_name: formValues.newEmployerName.trim(),
       name_change_effective_date: formValues.changeDate.trim(),
     };
 
@@ -63,22 +54,20 @@ function NameChangeForm({
           className={"flex flex-col gap-2 max-h-96 pr-2"}
         >
           <div className={"form-row"}>
-            <SelectComponent
-              fieldRegistration={registerField("oldEmployerId")}
-              constantValue={employer.id.toString()}
+            <InputComponent
+              fieldRegistration={registerField("oldEmployerName")}
+              constantValue={employer.name}
               iconName={MaterialIcon.Work}
               placeholder={"Tesla"}
               id={"old_company_name"}
               label={"Old Employer Name"}
-              options={employersOptions}
             />
-            <SelectComponent
-              fieldRegistration={registerField("newEmployerId")}
+            <InputComponent
+              fieldRegistration={registerField("newEmployerName")}
               iconName={MaterialIcon.Work}
-              placeholder={"Employer"}
+              placeholder={"Twitter"}
               id={"new_employer_name"}
               label={"Enter the New Employer Name"}
-              options={employersOptions}
             />
           </div>
           <DateComponent
