@@ -38,7 +38,7 @@ export function YesNoModal({
             noValidate={true}
             className={"flex flex-col gap-2 max-h-96 pr-2"}>
           <label className={"text-center"}>{bodyText}</label>
-          <p>{error}</p>
+          <span className={dashboardRootStyles.error}>{error}</span>
           <div className={"flex w-full justify-end"}>
             <button
               onClick={close}
@@ -46,7 +46,6 @@ export function YesNoModal({
             >
               Cancel
             </button>
-            
             <LoadButtonComponent
                 isLoading={isLoading}
                 loadingText={"Confirming..."}
