@@ -24,6 +24,7 @@ export const useFetch = () => {
     if (body) {
       requestInit.body = JSON.stringify(body);
     }
+
     const response = await fetch(`/api/${apiRoute}`, requestInit);
     if (response.status === 401) {
       authFunctions?.logout(true);

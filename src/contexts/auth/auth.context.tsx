@@ -6,6 +6,7 @@ import {
   LoginFunc,
   RegisterFunc,
   UserAuth,
+  UserLoginResponse,
 } from "./auth.types.ts";
 import { useFetch } from "../../models/useFetch.ts";
 import { ApiRoutes } from "../../models/api.types.ts";
@@ -20,6 +21,7 @@ const AuthActionContext = React.createContext<AuthActionFuncs | null>(null);
 export const useAuthActionContext = () => React.useContext(AuthActionContext)!;
 
 const USER_STORAGE_KEY = "CELDV_USER_INFO";
+const ADMIN_PENDING_KEY = "ADMIN_PENDING_KEY";
 
 function AuthContextProvider({ children }: AuthContextProps) {
   const [userAuth, setUserAuth] = useState<AuthState>(null);
@@ -29,9 +31,10 @@ function AuthContextProvider({ children }: AuthContextProps) {
   useEffect(() => {
     // check local storage for a user object
     const storedUser = localStorage.getItem(USER_STORAGE_KEY);
+    const adminPending = localStorage.getItem(ADMIN_PENDING_KEY) === "true";
     if (storedUser) {
-      const userObj: UserAuth = JSON.parse(storedUser);
-      setUserAuth(userObj);
+      const userObj: UserLoginResponse = JSON.parse(storedUser);
+      setUserAuth({ ...userObj, adminPending });
     }
     setIsLoading(false);
   }, []);
@@ -41,14 +44,26 @@ function AuthContextProvider({ children }: AuthContextProps) {
   };
 
   const login: LoginFunc = async (loginPayload) => {
-    const response = await customFetch<UserAuth>(
+    const response = await customFetch<UserLoginResponse>(
       ApiRoutes.Login,
       "POST",
       loginPayload,
     );
 
+    let adminPending = false;
+    if (response.data.isAdmin) {
+      localStorage.removeItem(ADMIN_PENDING_KEY);
+    } else {
+      adminPending = localStorage.getItem(ADMIN_PENDING_KEY) === "true";
+    }
+
+    const user: UserAuth = {
+      ...response.data,
+      adminPending,
+    };
+
     localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(response.data));
-    setUserAuth(response.data);
+    setUserAuth(user);
   };
 
   const isLoggedIn = () => {
@@ -60,8 +75,18 @@ function AuthContextProvider({ children }: AuthContextProps) {
     setUserAuth(timeout ? "timeout" : null);
   };
 
+  const setAdminPending = () => {
+    if (typeof userAuth !== "object" || userAuth === null) {
+      throw Error("Failed to grant admin permission");
+    }
+    localStorage.setItem(ADMIN_PENDING_KEY, "true");
+    setUserAuth({ ...userAuth, adminPending: true });
+  };
+
   return (
-    <AuthActionContext.Provider value={{ register, login, logout, isLoggedIn }}>
+    <AuthActionContext.Provider
+      value={{ register, login, logout, isLoggedIn, setAdminPending }}
+    >
       <AuthContext.Provider value={userAuth as UserAuth}>
         {/*TODO: add custom loader here*/}
         {isLoading ? <>Loading...</> : children}

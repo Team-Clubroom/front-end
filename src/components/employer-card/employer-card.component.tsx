@@ -21,7 +21,7 @@ export const EmployerCard = ({
 
   const { shortName, color } =
     INDUSTRY_SECTOR_CODES[employer.industrySectorCode];
-  const showContextMenu = useMenuContext();
+  const { showContextMenu } = useMenuContext();
 
   function handleClick(event: React.MouseEvent<HTMLButtonElement>) {
     showContextMenu({
