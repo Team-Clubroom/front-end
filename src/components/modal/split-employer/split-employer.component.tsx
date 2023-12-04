@@ -20,6 +20,7 @@ import {
   SelectComponent,
   SelectOptions,
 } from "../../form/select/select.component.tsx";
+import { useState, useEffect } from "react";
 
 interface ChangeFormProps extends ModalVisibilityProps {
   employersOptions: SelectOptions;
@@ -38,6 +39,17 @@ export function SplitEmployerModal({
   );
   const { customFetch } = useFetch();
 
+  const [ success, setSuccess ] = useState(false);
+
+  useEffect (() => {
+    if (success) {
+      let interval = setInterval(() => {
+        close();
+      }, 2000);
+      return () => clearInterval(interval);
+    }
+  }, [success]);
+
   async function handleSubmit(formValues: SplitFormValues) {
     const splitRelationRequest: SplitRelationRequest = {
       company_a_id: employer.id.toString(),
@@ -51,6 +63,7 @@ export function SplitEmployerModal({
       "POST",
       splitRelationRequest,
     );
+    setSuccess(true);
   }
 
   return (
@@ -112,7 +125,8 @@ export function SplitEmployerModal({
             <RequestButtonComponent
               isLoading={isLoading}
               loadingText={"Splitting"}
-              success={false}
+              success={success}
+              successText={"Companies Split"}
             >
               Split Company
             </RequestButtonComponent>

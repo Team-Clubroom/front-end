@@ -16,6 +16,7 @@ import { RequestButtonComponent } from "../../request-button/request-button.comp
 import { useEmployerActions } from "./useEmployerActions.ts";
 import { Employer } from "../../../models/employer.types.ts";
 import { DateComponent } from "../../form/input/date.component.tsx";
+import { useState, useEffect } from "react";
 
 interface EmployerModalProps extends ModalVisibilityProps {
   prePopulate?: Employer;
@@ -31,11 +32,24 @@ function EmployerModal({ isOpen, close, prePopulate }: EmployerModalProps) {
     addEmployerValidationCriteria,
   );
 
+  const [ success, setSuccess ] = useState(false);
+
+  useEffect (() => {
+    if (success) {
+      let interval = setInterval(() => {
+        close();
+      }, 2000);
+      return () => clearInterval(interval);
+    }
+  }, [success]);
+
   async function handleSubmit(formValues: EmployerFormFields) {
     if (prePopulate) {
       await employerActions.editEmployer(prePopulate, formValues);
+      setSuccess(true);
     } else {
       await employerActions.createNewEmployer(formValues);
+      setSuccess(true);
     }
   }
 
@@ -172,7 +186,8 @@ function EmployerModal({ isOpen, close, prePopulate }: EmployerModalProps) {
           <RequestButtonComponent
             isLoading={isLoading}
             loadingText={content.loadingText}
-            success={false}
+            success={success}
+            successText={"Employer Created"}
           >
             {content.buttonText}
           </RequestButtonComponent>

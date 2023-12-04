@@ -20,6 +20,7 @@ import {
   SelectComponent,
   SelectOptions,
 } from "../../form/select/select.component.tsx";
+import { useState, useEffect } from "react";
 
 interface MergeFormProps extends ModalVisibilityProps {
   employersOptions: SelectOptions;
@@ -37,6 +38,17 @@ export function MergeEmployersModal({
     mergeFormValidationCriteria,
   );
 
+  const [ success, setSuccess ] = useState(false);
+
+  useEffect (() => {
+    if (success) {
+      let interval = setInterval(() => {
+        close();
+      }, 2000);
+      return () => clearInterval(interval);
+    }
+  }, [success]);
+
   const { customFetch } = useFetch();
 
   async function handleSubmit(formValues: MergeFormValues) {
@@ -52,6 +64,7 @@ export function MergeEmployersModal({
       "POST",
       mergeRelationRequest,
     );
+    setSuccess(true)
   }
 
   return (
@@ -111,7 +124,7 @@ export function MergeEmployersModal({
           </div>
           <span className={dashboardRootStyles.error}>{formError}</span>
           <div className="flex w-full justify-end">
-            <RequestButtonComponent isLoading={isLoading} loadingText={"Merging"} success={false}>
+            <RequestButtonComponent isLoading={isLoading} loadingText={"Merging"} success={success} successText={"Companies Merged"}>
               Merge Companies
             </RequestButtonComponent>
           </div>

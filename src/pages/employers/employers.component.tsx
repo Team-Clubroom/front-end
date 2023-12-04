@@ -121,11 +121,12 @@ function Employers() {
           <YesNoModal
             bodyText={`Are you sure you want to remove ${modalData.employer.name}?`}
             isOpen={isModalOpen(ModalNames.YesNo)}
-            close={closeModal}
+            close={() => closeModal()}
             onConfirm={async () => {
               await deleteEmployer(modalData.employer);
-              closeModal();
+              //closeModal();
             }}
+            successText={"Removed"}
           />
         </>
       )}

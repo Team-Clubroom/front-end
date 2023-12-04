@@ -14,17 +14,29 @@ import "../../../sharedStyles/form.styles.css";
 import { RequestButtonComponent } from "../../request-button/request-button.component.tsx";
 import { DateComponent } from "../../form/input/date.component.tsx";
 import { InputComponent } from "../../form/input/input.component.tsx";
+import { useState, useEffect } from "react";
 
 interface ChangeFormProps extends ModalVisibilityProps {
   employer: Employer;
 }
 
 function NameChangeForm({ isOpen, close, employer }: ChangeFormProps) {
+  const [success, setSuccess] = useState(false);
+  
   const { registerField, onSubmit, isLoading, formError, resetForm } = useForm(
     nameChangeEmptyForm,
     nameChangeValidationCriteria,
   );
   const { customFetch } = useFetch();
+
+  useEffect (() => {
+    if (success) {
+      let interval = setInterval(() => {
+        close();
+      }, 2000);
+      return () => clearInterval(interval);
+    }
+  }, [success]);
 
   async function handleSubmit(formValues: NameChangeFormValues) {
     const nameChangeRequest: NameChangeRequest = {
@@ -38,7 +50,10 @@ function NameChangeForm({ isOpen, close, employer }: ChangeFormProps) {
       "POST",
       nameChangeRequest,
     );
+    setSuccess(true);
   }
+
+
 
   return (
     <Modal
@@ -77,7 +92,7 @@ function NameChangeForm({ isOpen, close, employer }: ChangeFormProps) {
           />
           <span className={dashboardRootStyles.error}>{formError}</span>
           <div className="flex w-full justify-end">
-            <RequestButtonComponent isLoading={isLoading} loadingText={"Changing"} success={false}>
+            <RequestButtonComponent isLoading={isLoading} loadingText={"Changing"} success={success} successText={"Name Changed"}>
               Change Name
             </RequestButtonComponent>
           </div>

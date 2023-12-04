@@ -19,6 +19,9 @@ export const dashboardRootStyles = {
   submitButton:
     "flex mt-2 items-center justify-center gap-2 focus:outline-none text-white text-sm sm:text-base bg-blue-500" +
     " hover:bg-blue-600 rounded-lg py-2 px-8 transition duration-150 ease-in",
+  confirmButton:
+    "flex mt-2 items-center justify-center gap-2 focus:outline-none text-white text-sm sm:text-base bg-[#4BB543]" +
+    " rounded-lg py-2 px-8 transition duration-150 ease-in",
   cancelButton: "mr-2 flex mt-2 items-center justify-center gap-2 focus:outline-none text-white text-sm sm:text-base bg-gray-500" +
   " hover:bg-gray-400 rounded-lg py-2 px-8 transition duration-150 ease-in",
   createText: "",

@@ -10,6 +10,7 @@ interface RequestButtonProps {
   icon?: MaterialIcon;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   success?: boolean;
+  successText?: string;
 }
 
 export const RequestButtonComponent = ({
@@ -19,6 +20,7 @@ export const RequestButtonComponent = ({
   children,
   onClick,
   success,
+  successText,
 }: RequestButtonProps) => {
   return (
     <>
@@ -53,17 +55,18 @@ export const RequestButtonComponent = ({
       <>
         <button
           type="submit"
-          className={dashboardRootStyles.submitButton + " bg-[#4BB543]"}
+          className={dashboardRootStyles.confirmButton}
           onClick={() => console.log()}
           disabled={true}
         >
+          <p>{successText}</p>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="#FFFFFF"
-            className="w-12 h-6"
+            className="w-6 h-6"
           >
             <path
               strokeLinecap="round"
