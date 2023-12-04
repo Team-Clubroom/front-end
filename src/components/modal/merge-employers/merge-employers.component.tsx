@@ -41,7 +41,7 @@ export function MergeEmployersModal({
 
   async function handleSubmit(formValues: MergeFormValues) {
     const mergeRelationRequest: MergeRelationRequest = {
-      company_a_id: employer.name.trim(),
+      company_a_id: employer.id.toString(),
       company_b_id: formValues.secondEmployerId,
       company_c_id: formValues.mergedEmployerId,
       employer_relation_start_date: formValues.relationStartDate.trim(),
