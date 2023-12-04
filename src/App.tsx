@@ -1,13 +1,17 @@
 /* plugin imports */
-import {BrowserRouter, Route, Routes,} from "react-router-dom"; /* component imports */
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+} from "react-router-dom"; /* component imports */
 import LoginPage from "./pages/login/login.page.tsx";
 import LandingPage from "./pages/landing/landing.page.tsx";
-import {NavbarComponent} from "./components/navbar/navbar.component.tsx";
+import { NavbarComponent } from "./components/navbar/navbar.component.tsx";
 import PrivateRouteComponent from "./components/private-route/private-route.component.tsx";
 import Employers from "./pages/employers/employers.component.tsx";
 import SignupPage from "./pages/signup/signup.page.tsx";
-import {ReactFlowGraphComponent} from "./pages/graph/react-flow-graph.component.tsx";
-import {SessionTimeout} from "./pages/session-timeout/session-timeout.component.tsx";
+import { ReactFlowGraphComponent } from "./pages/graph/react-flow-graph.component.tsx";
+import { SessionTimeout } from "./pages/session-timeout/session-timeout.component.tsx";
 import ErrorPage from "./pages/404/error.page.tsx";
 
 export default function App() {

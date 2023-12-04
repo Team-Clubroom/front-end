@@ -22,14 +22,14 @@ interface ChangeFormProps extends ModalVisibilityProps {
 
 function NameChangeForm({ isOpen, close, employer }: ChangeFormProps) {
   const [success, setSuccess] = useState(false);
-  
+
   const { registerField, onSubmit, isLoading, formError, resetForm } = useForm(
     nameChangeEmptyForm,
     nameChangeValidationCriteria,
   );
   const { customFetch } = useFetch();
 
-  useEffect (() => {
+  useEffect(() => {
     if (success) {
       let interval = setInterval(() => {
         close();
@@ -52,8 +52,6 @@ function NameChangeForm({ isOpen, close, employer }: ChangeFormProps) {
     );
     setSuccess(true);
   }
-
-
 
   return (
     <Modal
@@ -92,7 +90,12 @@ function NameChangeForm({ isOpen, close, employer }: ChangeFormProps) {
           />
           <span className={dashboardRootStyles.error}>{formError}</span>
           <div className="flex w-full justify-end">
-            <RequestButtonComponent isLoading={isLoading} loadingText={"Changing"} success={success} successText={"Name Changed"}>
+            <RequestButtonComponent
+              isLoading={isLoading}
+              loadingText={"Changing"}
+              success={success}
+              successText={"Name Changed"}
+            >
               Change Name
             </RequestButtonComponent>
           </div>

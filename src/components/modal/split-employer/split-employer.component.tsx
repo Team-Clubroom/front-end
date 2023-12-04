@@ -39,9 +39,9 @@ export function SplitEmployerModal({
   );
   const { customFetch } = useFetch();
 
-  const [ success, setSuccess ] = useState(false);
+  const [success, setSuccess] = useState(false);
 
-  useEffect (() => {
+  useEffect(() => {
     if (success) {
       let interval = setInterval(() => {
         close();

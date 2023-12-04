@@ -32,9 +32,9 @@ function EmployerModal({ isOpen, close, prePopulate }: EmployerModalProps) {
     addEmployerValidationCriteria,
   );
 
-  const [ success, setSuccess ] = useState(false);
+  const [success, setSuccess] = useState(false);
 
-  useEffect (() => {
+  useEffect(() => {
     if (success) {
       let interval = setInterval(() => {
         close();

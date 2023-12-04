@@ -22,7 +22,7 @@ export function YesNoModal({
 
   const [success, setSuccess] = useState(false);
 
-  useEffect (() => {
+  useEffect(() => {
     if (success) {
       let interval = setInterval(() => {
         close();

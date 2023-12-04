@@ -38,9 +38,9 @@ export function MergeEmployersModal({
     mergeFormValidationCriteria,
   );
 
-  const [ success, setSuccess ] = useState(false);
+  const [success, setSuccess] = useState(false);
 
-  useEffect (() => {
+  useEffect(() => {
     if (success) {
       let interval = setInterval(() => {
         close();
@@ -64,7 +64,7 @@ export function MergeEmployersModal({
       "POST",
       mergeRelationRequest,
     );
-    setSuccess(true)
+    setSuccess(true);
   }
 
   return (
@@ -124,7 +124,12 @@ export function MergeEmployersModal({
           </div>
           <span className={dashboardRootStyles.error}>{formError}</span>
           <div className="flex w-full justify-end">
-            <RequestButtonComponent isLoading={isLoading} loadingText={"Merging"} success={success} successText={"Companies Merged"}>
+            <RequestButtonComponent
+              isLoading={isLoading}
+              loadingText={"Merging"}
+              success={success}
+              successText={"Companies Merged"}
+            >
               Merge Companies
             </RequestButtonComponent>
           </div>
