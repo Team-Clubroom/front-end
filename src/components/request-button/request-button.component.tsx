@@ -3,29 +3,33 @@ import React, { ReactNode } from "react";
 import { MaterialIcon } from "../../utils/icons.ts";
 import { Icon } from "../icon.component.tsx";
 
-interface LoadButtonProps {
+interface RequestButtonProps {
   isLoading: boolean;
   loadingText: string;
   children: ReactNode;
   icon?: MaterialIcon;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  success?: boolean;
 }
 
-export const LoadButtonComponent = ({
+export const RequestButtonComponent = ({
   isLoading,
   icon,
   loadingText,
   children,
   onClick,
-}: LoadButtonProps) => {
+  success,
+}: RequestButtonProps) => {
   return (
-    <button
-      type="submit"
-      className={dashboardRootStyles.submitButton}
-      onClick={onClick}
-    >
-      {isLoading ? (
-        <>
+    <>
+    {isLoading ? (
+      <>
+        <button
+          type="submit"
+          className={dashboardRootStyles.submitButton}
+          onClick={() => console.log()}
+          disabled={true}
+        >
           <svg
             aria-hidden="true"
             className={dashboardRootStyles.spinner}
@@ -43,13 +47,42 @@ export const LoadButtonComponent = ({
             />
           </svg>
           <span className={dashboardRootStyles.loading}>{loadingText}</span>
-        </>
-      ) : (
-        <>
-          {icon && <Icon name={icon} />}
-          <span className={dashboardRootStyles.createText}>{children}</span>
-        </>
-      )}
-    </button>
+        </button>
+      </>
+    ) : success ? (
+      <>
+        <button
+          type="submit"
+          className={dashboardRootStyles.submitButton + " bg-[#4BB543]"}
+          onClick={() => console.log()}
+          disabled={true}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="#FFFFFF"
+            className="w-12 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+        </button>
+      </>
+    ) : (
+      <button
+        type="submit"
+        className={dashboardRootStyles.submitButton}
+        onClick={onClick}
+      >
+        {icon && <Icon name={icon} />}
+        <span className={dashboardRootStyles.createText}>{children}</span>
+      </button>
+    )}
+    </>
   );
 };

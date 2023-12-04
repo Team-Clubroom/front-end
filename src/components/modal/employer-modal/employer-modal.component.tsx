@@ -12,7 +12,7 @@ import { MaterialIcon } from "../../../utils/icons.ts";
 import { SelectComponent } from "../../form/select/select.component.tsx";
 import { INDUSTRY_SECTOR_CODES } from "../../../data/naics-codes.ts";
 import { US_STATES } from "../../../data/states.ts";
-import { LoadButtonComponent } from "../../load-button/load-button.component.tsx";
+import { RequestButtonComponent } from "../../request-button/request-button.component.tsx";
 import { useEmployerActions } from "./useEmployerActions.ts";
 import { Employer } from "../../../models/employer.types.ts";
 import { DateComponent } from "../../form/input/date.component.tsx";
@@ -169,12 +169,13 @@ function EmployerModal({ isOpen, close, prePopulate }: EmployerModalProps) {
         </div>
         <span className={`${dashboardRootStyles.error} py-4`}>{formError}</span>
         <div className="flex w-full justify-end pr-2">
-          <LoadButtonComponent
+          <RequestButtonComponent
             isLoading={isLoading}
             loadingText={content.loadingText}
+            success={false}
           >
             {content.buttonText}
-          </LoadButtonComponent>
+          </RequestButtonComponent>
         </div>
       </form>
     </Modal>

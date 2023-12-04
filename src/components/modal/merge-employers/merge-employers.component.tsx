@@ -9,7 +9,7 @@ import {
   mergeFormValidationCriteria,
   MergeFormValues,
 } from "./merge-employers.helpers.ts";
-import { LoadButtonComponent } from "../../load-button/load-button.component.tsx";
+import { RequestButtonComponent } from "../../request-button/request-button.component.tsx";
 import {
   Employer,
   MergeRelationRequest,
@@ -111,9 +111,9 @@ export function MergeEmployersModal({
           </div>
           <span className={dashboardRootStyles.error}>{formError}</span>
           <div className="flex w-full justify-end">
-            <LoadButtonComponent isLoading={isLoading} loadingText={"Merging"}>
+            <RequestButtonComponent isLoading={isLoading} loadingText={"Merging"} success={false}>
               Merge Companies
-            </LoadButtonComponent>
+            </RequestButtonComponent>
           </div>
         </form>
       </div>

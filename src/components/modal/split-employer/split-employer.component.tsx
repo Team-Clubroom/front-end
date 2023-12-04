@@ -9,7 +9,7 @@ import {
   splitFormValidationCriteria,
   SplitFormValues,
 } from "./split-employer.helpers.ts";
-import { LoadButtonComponent } from "../../load-button/load-button.component.tsx";
+import { RequestButtonComponent } from "../../request-button/request-button.component.tsx";
 import {
   Employer,
   SplitRelationRequest,
@@ -109,12 +109,13 @@ export function SplitEmployerModal({
           </div>
           <span className={dashboardRootStyles.error}>{formError}</span>
           <div className="flex w-full justify-end">
-            <LoadButtonComponent
+            <RequestButtonComponent
               isLoading={isLoading}
               loadingText={"Splitting"}
+              success={false}
             >
               Split Company
-            </LoadButtonComponent>
+            </RequestButtonComponent>
           </div>
         </form>
       </div>

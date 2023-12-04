@@ -11,7 +11,7 @@ import { useFetch } from "../../../models/useFetch.ts";
 import { Employer, NameChangeRequest } from "../../../models/employer.types.ts";
 import { ApiRoutes } from "../../../models/api.types.ts";
 import "../../../sharedStyles/form.styles.css";
-import { LoadButtonComponent } from "../../load-button/load-button.component.tsx";
+import { RequestButtonComponent } from "../../request-button/request-button.component.tsx";
 import { DateComponent } from "../../form/input/date.component.tsx";
 import { InputComponent } from "../../form/input/input.component.tsx";
 
@@ -77,9 +77,9 @@ function NameChangeForm({ isOpen, close, employer }: ChangeFormProps) {
           />
           <span className={dashboardRootStyles.error}>{formError}</span>
           <div className="flex w-full justify-end">
-            <LoadButtonComponent isLoading={isLoading} loadingText={"Changing"}>
+            <RequestButtonComponent isLoading={isLoading} loadingText={"Changing"} success={false}>
               Change Name
-            </LoadButtonComponent>
+            </RequestButtonComponent>
           </div>
         </form>
       </div>
