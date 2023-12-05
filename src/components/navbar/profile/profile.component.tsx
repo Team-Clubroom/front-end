@@ -30,6 +30,7 @@ export const ProfileComponent = () => {
   const handleAdminRequest = async (e: React.MouseEvent) => {
     e.stopPropagation();
     setIsLoading(true);
+    setError("");
     try {
       if (user.isAdmin) {
         return setError("You are already an admin");
