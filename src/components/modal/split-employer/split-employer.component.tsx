@@ -125,8 +125,7 @@ export function SplitEmployerModal({
             <RequestButtonComponent
               isLoading={isLoading}
               loadingText={"Splitting"}
-              success={success}
-              successText={"Companies Split"}
+              success={{ text: "Companies Split", isSuccessful: success }}
             >
               Split Company
             </RequestButtonComponent>

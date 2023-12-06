@@ -87,6 +87,7 @@ const useForm = <T extends Record<keyof T, string>>(
         setIsLoading(true);
         await callback(formValues);
         setSuccess(true);
+        setTimeout(() => setSuccess(false), 2300);
         reset && resetForm();
       } catch (e) {
         console.log(e);

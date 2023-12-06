@@ -16,7 +16,6 @@ import { RequestButtonComponent } from "../../request-button/request-button.comp
 import { useEmployerActions } from "./useEmployerActions.ts";
 import { Employer } from "../../../models/employer.types.ts";
 import { DateComponent } from "../../form/input/date.component.tsx";
-import { useState, useEffect } from "react";
 
 interface EmployerModalProps extends ModalVisibilityProps {
   prePopulate?: Employer;
@@ -24,32 +23,26 @@ interface EmployerModalProps extends ModalVisibilityProps {
 
 function EmployerModal({ isOpen, close, prePopulate }: EmployerModalProps) {
   const employerActions = useEmployerActions();
-  const { registerField, onSubmit, isLoading, formError, resetForm } = useForm(
-    employerActions.getEmployerFormInitValues(
-      prePopulate,
-      addEmployerEmptyForm,
-    ),
-    addEmployerValidationCriteria,
-  );
-
-  const [success, setSuccess] = useState(false);
-
-  useEffect(() => {
-    if (success) {
-      let interval = setInterval(() => {
-        close();
-      }, 2000);
-      return () => clearInterval(interval);
-    }
-  }, [success]);
+  const { registerField, onSubmit, isLoading, formError, resetForm, success } =
+    useForm(
+      employerActions.getEmployerFormInitValues(
+        prePopulate,
+        addEmployerEmptyForm,
+      ),
+      addEmployerValidationCriteria,
+    );
 
   async function handleSubmit(formValues: EmployerFormFields) {
     if (prePopulate) {
       await employerActions.editEmployer(prePopulate, formValues);
-      setSuccess(true);
+      setTimeout(() => {
+        close();
+      }, 2000);
     } else {
       await employerActions.createNewEmployer(formValues);
-      setSuccess(true);
+      setTimeout(() => {
+        close();
+      }, 2000);
     }
   }
 
@@ -186,8 +179,7 @@ function EmployerModal({ isOpen, close, prePopulate }: EmployerModalProps) {
           <RequestButtonComponent
             isLoading={isLoading}
             loadingText={content.loadingText}
-            success={success}
-            successText={"Employer Created"}
+            success={{ text: "Employer Created", isSuccessful: success }}
           >
             {content.buttonText}
           </RequestButtonComponent>

@@ -93,8 +93,7 @@ function NameChangeForm({ isOpen, close, employer }: ChangeFormProps) {
             <RequestButtonComponent
               isLoading={isLoading}
               loadingText={"Changing"}
-              success={success}
-              successText={"Name Changed"}
+              success={{ text: "Name Changed", isSuccessful: success }}
             >
               Change Name
             </RequestButtonComponent>

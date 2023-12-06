@@ -127,8 +127,7 @@ export function MergeEmployersModal({
             <RequestButtonComponent
               isLoading={isLoading}
               loadingText={"Merging"}
-              success={success}
-              successText={"Companies Merged"}
+              success={{ text: "Companies Merged", isSuccessful: success }}
             >
               Merge Companies
             </RequestButtonComponent>

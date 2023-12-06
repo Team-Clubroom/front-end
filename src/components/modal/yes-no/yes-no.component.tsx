@@ -22,21 +22,17 @@ export function YesNoModal({
 
   const [success, setSuccess] = useState(false);
 
-  useEffect(() => {
-    if (success) {
-      let interval = setInterval(() => {
-        close();
-      }, 2000);
-      return () => clearInterval(interval);
-    }
-  }, [success]);
-
   const handleConfirm = async () => {
     setIsLoading(true);
     setError("");
     try {
       await onConfirm();
       setSuccess(true);
+      if (success) {
+        setTimeout(() => {
+          close();
+        }, 2000);
+      }
     } catch (e) {
       setError((e as Error).message);
     } finally {
@@ -61,8 +57,7 @@ export function YesNoModal({
               isLoading={isLoading}
               loadingText={"Confirming..."}
               onClick={handleConfirm}
-              success={success}
-              successText={successText}
+              success={{ text: successText, isSuccessful: success }}
             >
               Confirm
             </RequestButtonComponent>
