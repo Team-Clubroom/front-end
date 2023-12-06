@@ -1,7 +1,7 @@
 import { Modal, ModalVisibilityProps } from "../modal.component.tsx";
 import { dashboardRootStyles } from "../../../sharedStyles/dashboard-root.styles.tsx";
 import "../../../sharedStyles/form.styles.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { RequestButtonComponent } from "../../request-button/request-button.component.tsx";
 
 interface YesNoFormProps extends ModalVisibilityProps {
@@ -28,6 +28,7 @@ export function YesNoModal({
     try {
       await onConfirm();
       setSuccess(true);
+      setTimeout(() => setSuccess(false), 2300);
       setTimeout(close, 2000);
     } catch (e) {
       setError((e as Error).message);

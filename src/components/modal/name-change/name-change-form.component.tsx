@@ -14,18 +14,14 @@ import "../../../sharedStyles/form.styles.css";
 import { RequestButtonComponent } from "../../request-button/request-button.component.tsx";
 import { DateComponent } from "../../form/input/date.component.tsx";
 import { InputComponent } from "../../form/input/input.component.tsx";
-import { useState, useEffect } from "react";
 
 interface ChangeFormProps extends ModalVisibilityProps {
   employer: Employer;
 }
 
 function NameChangeForm({ isOpen, close, employer }: ChangeFormProps) {
-  
-  const { registerField, onSubmit, isLoading, formError, resetForm, success } = useForm(
-    nameChangeEmptyForm,
-    nameChangeValidationCriteria,
-  );
+  const { registerField, onSubmit, isLoading, formError, resetForm, success } =
+    useForm(nameChangeEmptyForm, nameChangeValidationCriteria);
   const { customFetch } = useFetch();
 
   async function handleSubmit(formValues: NameChangeFormValues) {
@@ -40,9 +36,7 @@ function NameChangeForm({ isOpen, close, employer }: ChangeFormProps) {
       "POST",
       nameChangeRequest,
     );
-    if (success) {
-      setTimeout(close, 2000);
-    }
+    setTimeout(close, 2000);
   }
 
   return (

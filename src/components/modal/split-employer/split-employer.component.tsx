@@ -20,7 +20,6 @@ import {
   SelectComponent,
   SelectOptions,
 } from "../../form/select/select.component.tsx";
-import { useState, useEffect } from "react";
 
 interface ChangeFormProps extends ModalVisibilityProps {
   employersOptions: SelectOptions;
@@ -33,10 +32,8 @@ export function SplitEmployerModal({
   employer,
   employersOptions,
 }: ChangeFormProps) {
-  const { registerField, onSubmit, isLoading, formError, resetForm, success } = useForm(
-    splitFormEmptyForm,
-    splitFormValidationCriteria,
-  );
+  const { registerField, onSubmit, isLoading, formError, resetForm, success } =
+    useForm(splitFormEmptyForm, splitFormValidationCriteria);
   const { customFetch } = useFetch();
 
   async function handleSubmit(formValues: SplitFormValues) {
@@ -52,9 +49,7 @@ export function SplitEmployerModal({
       "POST",
       splitRelationRequest,
     );
-    if (success) {
-      setTimeout(close, 2000);
-    }
+    setTimeout(close, 2000);
   }
 
   return (

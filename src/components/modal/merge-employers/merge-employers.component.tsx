@@ -20,7 +20,6 @@ import {
   SelectComponent,
   SelectOptions,
 } from "../../form/select/select.component.tsx";
-import { useState, useEffect } from "react";
 
 interface MergeFormProps extends ModalVisibilityProps {
   employersOptions: SelectOptions;
@@ -33,10 +32,8 @@ export function MergeEmployersModal({
   employer,
   employersOptions,
 }: MergeFormProps) {
-  const { registerField, onSubmit, isLoading, formError, resetForm, success } = useForm(
-    mergeFormEmptyForm,
-    mergeFormValidationCriteria,
-  );
+  const { registerField, onSubmit, isLoading, formError, resetForm, success } =
+    useForm(mergeFormEmptyForm, mergeFormValidationCriteria);
 
   const { customFetch } = useFetch();
 
@@ -53,9 +50,7 @@ export function MergeEmployersModal({
       "POST",
       mergeRelationRequest,
     );
-    if (success) {
-      setTimeout(close, 2000);
-    }
+    setTimeout(close, 2000);
   }
 
   return (
