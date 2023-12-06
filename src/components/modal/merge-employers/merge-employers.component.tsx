@@ -33,21 +33,10 @@ export function MergeEmployersModal({
   employer,
   employersOptions,
 }: MergeFormProps) {
-  const { registerField, onSubmit, isLoading, formError, resetForm } = useForm(
+  const { registerField, onSubmit, isLoading, formError, resetForm, success } = useForm(
     mergeFormEmptyForm,
     mergeFormValidationCriteria,
   );
-
-  const [success, setSuccess] = useState(false);
-
-  useEffect(() => {
-    if (success) {
-      let interval = setInterval(() => {
-        close();
-      }, 2000);
-      return () => clearInterval(interval);
-    }
-  }, [success]);
 
   const { customFetch } = useFetch();
 
@@ -64,7 +53,9 @@ export function MergeEmployersModal({
       "POST",
       mergeRelationRequest,
     );
-    setSuccess(true);
+    if (success) {
+      setTimeout(close, 2000);
+    }
   }
 
   return (

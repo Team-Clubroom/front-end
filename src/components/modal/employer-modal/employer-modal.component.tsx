@@ -35,15 +35,10 @@ function EmployerModal({ isOpen, close, prePopulate }: EmployerModalProps) {
   async function handleSubmit(formValues: EmployerFormFields) {
     if (prePopulate) {
       await employerActions.editEmployer(prePopulate, formValues);
-      setTimeout(() => {
-        close();
-      }, 2000);
     } else {
       await employerActions.createNewEmployer(formValues);
-      setTimeout(() => {
-        close();
-      }, 2000);
     }
+    setTimeout(close, 2000);
   }
 
   const content = prePopulate
@@ -51,11 +46,13 @@ function EmployerModal({ isOpen, close, prePopulate }: EmployerModalProps) {
         title: "Edit Employer",
         buttonText: "Edit Employer",
         loadingText: "Editing",
+        successText: "Employer Edited"
       }
     : {
         title: "Create New Employer",
         buttonText: "Create Employer",
         loadingText: "Creating",
+        successText: "Employer Created"
       };
 
   return (
@@ -179,7 +176,7 @@ function EmployerModal({ isOpen, close, prePopulate }: EmployerModalProps) {
           <RequestButtonComponent
             isLoading={isLoading}
             loadingText={content.loadingText}
-            success={{ text: "Employer Created", isSuccessful: success }}
+            success={{ text: content.successText, isSuccessful: success }}
           >
             {content.buttonText}
           </RequestButtonComponent>

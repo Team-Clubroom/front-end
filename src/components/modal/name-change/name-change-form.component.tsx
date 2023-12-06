@@ -21,22 +21,12 @@ interface ChangeFormProps extends ModalVisibilityProps {
 }
 
 function NameChangeForm({ isOpen, close, employer }: ChangeFormProps) {
-  const [success, setSuccess] = useState(false);
-
-  const { registerField, onSubmit, isLoading, formError, resetForm } = useForm(
+  
+  const { registerField, onSubmit, isLoading, formError, resetForm, success } = useForm(
     nameChangeEmptyForm,
     nameChangeValidationCriteria,
   );
   const { customFetch } = useFetch();
-
-  useEffect(() => {
-    if (success) {
-      let interval = setInterval(() => {
-        close();
-      }, 2000);
-      return () => clearInterval(interval);
-    }
-  }, [success]);
 
   async function handleSubmit(formValues: NameChangeFormValues) {
     const nameChangeRequest: NameChangeRequest = {
@@ -50,7 +40,9 @@ function NameChangeForm({ isOpen, close, employer }: ChangeFormProps) {
       "POST",
       nameChangeRequest,
     );
-    setSuccess(true);
+    if (success) {
+      setTimeout(close, 2000);
+    }
   }
 
   return (

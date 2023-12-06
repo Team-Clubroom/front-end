@@ -28,11 +28,7 @@ export function YesNoModal({
     try {
       await onConfirm();
       setSuccess(true);
-      if (success) {
-        setTimeout(() => {
-          close();
-        }, 2000);
-      }
+      setTimeout(close, 2000);
     } catch (e) {
       setError((e as Error).message);
     } finally {

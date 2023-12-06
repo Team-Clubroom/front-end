@@ -33,22 +33,11 @@ export function SplitEmployerModal({
   employer,
   employersOptions,
 }: ChangeFormProps) {
-  const { registerField, onSubmit, isLoading, formError, resetForm } = useForm(
+  const { registerField, onSubmit, isLoading, formError, resetForm, success } = useForm(
     splitFormEmptyForm,
     splitFormValidationCriteria,
   );
   const { customFetch } = useFetch();
-
-  const [success, setSuccess] = useState(false);
-
-  useEffect(() => {
-    if (success) {
-      let interval = setInterval(() => {
-        close();
-      }, 2000);
-      return () => clearInterval(interval);
-    }
-  }, [success]);
 
   async function handleSubmit(formValues: SplitFormValues) {
     const splitRelationRequest: SplitRelationRequest = {
@@ -63,7 +52,9 @@ export function SplitEmployerModal({
       "POST",
       splitRelationRequest,
     );
-    setSuccess(true);
+    if (success) {
+      setTimeout(close, 2000);
+    }
   }
 
   return (
