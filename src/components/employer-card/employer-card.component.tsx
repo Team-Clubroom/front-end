@@ -10,7 +10,7 @@ import { useAuthContext } from "../../contexts/auth/auth.context.tsx";
 
 interface EmployerCardProps {
   employer: Employer;
-  openModalByName: (modalName: ModalNames, employerId: number) => void;
+  openModalByName: (modalName: ModalNames, employerId: string) => void;
 }
 
 export const EmployerCard = ({

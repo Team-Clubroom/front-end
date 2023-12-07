@@ -14,14 +14,20 @@ import { INDUSTRY_SECTOR_CODES } from "../../../data/naics-codes.ts";
 import { US_STATES } from "../../../data/states.ts";
 import { RequestButtonComponent } from "../../request-button/request-button.component.tsx";
 import { useEmployerActions } from "./useEmployerActions.ts";
-import { Employer } from "../../../models/employer.types.ts";
+import { Employer, EmployerAction } from "../../../models/employer.types.ts";
 import { DateComponent } from "../../form/input/date.component.tsx";
 
 interface EmployerModalProps extends ModalVisibilityProps {
   prePopulate?: Employer;
+  employerDispatch: (action: EmployerAction) => unknown;
 }
 
-function EmployerModal({ isOpen, close, prePopulate }: EmployerModalProps) {
+function EmployerModal({
+  isOpen,
+  close,
+  prePopulate,
+  employerDispatch,
+}: EmployerModalProps) {
   const employerActions = useEmployerActions();
   const { registerField, onSubmit, isLoading, formError, resetForm, success } =
     useForm(
@@ -34,9 +40,17 @@ function EmployerModal({ isOpen, close, prePopulate }: EmployerModalProps) {
 
   async function handleSubmit(formValues: EmployerFormFields) {
     if (prePopulate) {
-      await employerActions.editEmployer(prePopulate, formValues);
+      const updatedEmployer = await employerActions.editEmployer(
+        prePopulate,
+        formValues,
+      );
+      employerDispatch({
+        type: "Edit",
+        payload: { updatedEmployer },
+      });
     } else {
-      await employerActions.createNewEmployer(formValues);
+      const newEmployer = await employerActions.createNewEmployer(formValues);
+      employerDispatch({ type: "Add", payload: { newEmployer } });
     }
     setTimeout(close, 2000);
   }
@@ -46,13 +60,13 @@ function EmployerModal({ isOpen, close, prePopulate }: EmployerModalProps) {
         title: "Edit Employer",
         buttonText: "Edit Employer",
         loadingText: "Editing",
-        successText: "Employer Edited"
+        successText: "Employer Edited",
       }
     : {
         title: "Create New Employer",
         buttonText: "Create Employer",
         loadingText: "Creating",
-        successText: "Employer Created"
+        successText: "Employer Created",
       };
 
   return (
