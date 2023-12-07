@@ -11,7 +11,7 @@ import {
 import { Helmet } from "react-helmet";
 import { InputComponent } from "../../components/form/input/input.component.tsx";
 import { MaterialIcon } from "../../utils/icons.ts";
-import { LoadButtonComponent } from "../../components/load-button/load-button.component.tsx";
+import { RequestButtonComponent } from "../../components/request-button/request-button.component.tsx";
 
 function SignupPage() {
   const { register } = useAuthActionContext();
@@ -107,13 +107,13 @@ function SignupPage() {
 
             <span className={signUpStyles.error}>{formError}</span>
             <div className="flex w-full justify-center">
-              <LoadButtonComponent
+              <RequestButtonComponent
                 isLoading={isLoading}
                 loadingText={"Registering"}
                 icon={MaterialIcon.Start}
               >
                 Sign up
-              </LoadButtonComponent>
+              </RequestButtonComponent>
             </div>
           </form>
         </div>

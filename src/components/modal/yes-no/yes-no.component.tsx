@@ -2,11 +2,12 @@ import { Modal, ModalVisibilityProps } from "../modal.component.tsx";
 import { dashboardRootStyles } from "../../../sharedStyles/dashboard-root.styles.tsx";
 import "../../../sharedStyles/form.styles.css";
 import { useState } from "react";
-import { LoadButtonComponent } from "../../load-button/load-button.component.tsx";
+import { RequestButtonComponent } from "../../request-button/request-button.component.tsx";
 
 interface YesNoFormProps extends ModalVisibilityProps {
   onConfirm: () => Promise<void>;
   bodyText: string;
+  successText: string;
 }
 
 export function YesNoModal({
@@ -14,15 +15,21 @@ export function YesNoModal({
   close,
   onConfirm,
   bodyText,
+  successText,
 }: YesNoFormProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+
+  const [success, setSuccess] = useState(false);
 
   const handleConfirm = async () => {
     setIsLoading(true);
     setError("");
     try {
       await onConfirm();
+      setSuccess(true);
+      setTimeout(() => setSuccess(false), 2300);
+      setTimeout(close, 2000);
     } catch (e) {
       setError((e as Error).message);
     } finally {
@@ -43,13 +50,14 @@ export function YesNoModal({
             >
               Cancel
             </button>
-            <LoadButtonComponent
+            <RequestButtonComponent
               isLoading={isLoading}
               loadingText={"Confirming..."}
               onClick={handleConfirm}
+              success={{ text: successText, isSuccessful: success }}
             >
               Confirm
-            </LoadButtonComponent>
+            </RequestButtonComponent>
           </div>
         </div>
       </div>

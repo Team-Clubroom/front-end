@@ -11,7 +11,7 @@ import FooterComponent from "../../components/footer/footer.component.tsx";
 import { Helmet } from "react-helmet";
 import { MaterialIcon } from "../../utils/icons.ts";
 import { InputComponent } from "../../components/form/input/input.component.tsx";
-import { LoadButtonComponent } from "../../components/load-button/load-button.component.tsx";
+import { RequestButtonComponent } from "../../components/request-button/request-button.component.tsx";
 
 function LoginPage() {
   const { registerField, onSubmit, formError, isLoading } = useForm(
@@ -79,13 +79,13 @@ function LoginPage() {
 
               <span className={loginStyles.error}>{formError}</span>
               <div className="flex w-full justify-center">
-                <LoadButtonComponent
+                <RequestButtonComponent
                   isLoading={isLoading}
                   icon={MaterialIcon.Login}
                   loadingText={"Signing in"}
                 >
                   Login
-                </LoadButtonComponent>
+                </RequestButtonComponent>
               </div>
             </form>
           </div>

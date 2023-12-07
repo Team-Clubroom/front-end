@@ -9,7 +9,7 @@ import {
   splitFormValidationCriteria,
   SplitFormValues,
 } from "./split-employer.helpers.ts";
-import { LoadButtonComponent } from "../../load-button/load-button.component.tsx";
+import { RequestButtonComponent } from "../../request-button/request-button.component.tsx";
 import {
   Employer,
   SplitRelationRequest,
@@ -32,10 +32,8 @@ export function SplitEmployerModal({
   employer,
   employersOptions,
 }: ChangeFormProps) {
-  const { registerField, onSubmit, isLoading, formError, resetForm } = useForm(
-    splitFormEmptyForm,
-    splitFormValidationCriteria,
-  );
+  const { registerField, onSubmit, isLoading, formError, resetForm, success } =
+    useForm(splitFormEmptyForm, splitFormValidationCriteria);
   const { customFetch } = useFetch();
 
   async function handleSubmit(formValues: SplitFormValues) {
@@ -51,6 +49,7 @@ export function SplitEmployerModal({
       "POST",
       splitRelationRequest,
     );
+    setTimeout(close, 2000);
   }
 
   return (
@@ -109,12 +108,13 @@ export function SplitEmployerModal({
           </div>
           <span className={dashboardRootStyles.error}>{formError}</span>
           <div className="flex w-full justify-end">
-            <LoadButtonComponent
+            <RequestButtonComponent
               isLoading={isLoading}
               loadingText={"Splitting"}
+              success={{ text: "Companies Split", isSuccessful: success }}
             >
               Split Company
-            </LoadButtonComponent>
+            </RequestButtonComponent>
           </div>
         </form>
       </div>
