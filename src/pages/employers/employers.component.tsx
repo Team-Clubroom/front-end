@@ -20,7 +20,7 @@ function Employers() {
     employer: Employer;
   }>();
 
-  const openModalByName = (modalName: ModalNames, employerId: number) => {
+  const openModalByName = (modalName: ModalNames, employerId: string) => {
     openModal(modalName, {
       employer: employers.find(({ id }) => id === employerId)!,
     });
@@ -29,7 +29,7 @@ function Employers() {
   const { deleteEmployer } = useEmployerActions();
 
   const [search, setSearch] = useState("");
-  const { employers } = useEmployers();
+  const { employers, employerDispatch } = useEmployers();
   const user = useAuthContext();
 
   function compareSearch(employer: Employer) {
@@ -93,6 +93,7 @@ function Employers() {
       <EmployerModal
         isOpen={isModalOpen(ModalNames.AddEmployer)}
         close={closeModal}
+        employerDispatch={employerDispatch}
       />
       {modalData?.employer && (
         <>
@@ -100,11 +101,13 @@ function Employers() {
             isOpen={isModalOpen(ModalNames.EditEmployer)}
             close={closeModal}
             prePopulate={modalData.employer}
+            employerDispatch={employerDispatch}
           />
           <NameChangeModal
             isOpen={isModalOpen(ModalNames.NameChange)}
             close={closeModal}
             employer={modalData.employer}
+            employerDispatch={employerDispatch}
           />
           <SplitEmployerModal
             isOpen={isModalOpen(ModalNames.Split)}
@@ -121,10 +124,13 @@ function Employers() {
           <YesNoModal
             bodyText={`Are you sure you want to remove ${modalData.employer.name}?`}
             isOpen={isModalOpen(ModalNames.YesNo)}
-            close={() => closeModal()}
+            close={closeModal}
             onConfirm={async () => {
               await deleteEmployer(modalData.employer);
-              //closeModal();
+              employerDispatch({
+                type: "Delete",
+                payload: { id: modalData.employer.id.toString() },
+              });
             }}
             successText={"Removed"}
           />
