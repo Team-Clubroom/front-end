@@ -1,0 +1,61 @@
+.landing-page {
+    @apply text-gray-200 overflow-y-scroll
+}
+
+header {
+    background-image: url("./endless-constellation.svg");
+    background-repeat: repeat;
+    background-size: 20rem;
+    min-height: 40rem;
+    @apply flex flex-col items-center justify-center gap-4
+}
+
+h2 {
+    box-shadow: 0 -20px 20px 7px #1e1e1e;
+}
+
+header h1 {
+    max-width: 25ch;
+    @apply text-5xl font-bold text-center
+}
+
+header p {
+    @apply text-2xl text-gray-400
+}
+
+
+.placeholder-img {
+    width: 20rem;
+    height: 15rem;
+    background: grey;
+    border-radius: 2rem;
+}
+
+section {
+    @apply py-12
+}
+
+.section {
+    @apply flex gap-10 justify-center
+}
+
+.section-title {
+    @apply text-2xl font-semibold
+}
+
+.section p {
+    max-width: 40ch;
+}
+
+.relation-widget {
+    @apply flex gap-1 justify-center bg-cyan-600 shadow-2xl px-4 py-3 rounded-full font-bold items-center flex-1
+}
+
+.graphing-feature {
+    max-width: 35ch;
+    @apply flex flex-col bg-neutral-800 gap-2 border border-gray-700 py-3 px-4 rounded-lg
+}
+
+.graphing-feature div {
+    @apply bg-gray-200 w-fit aspect-square flex items-center justify-center p-3 rounded-xl text-gray-500
+}
