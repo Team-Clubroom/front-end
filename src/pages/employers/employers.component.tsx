@@ -80,7 +80,7 @@ function Employers() {
         <div
           style={{
             gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-            paddingInline: "calc(10vw * 0.5rem)",
+            paddingInline: "calc(20vw + 0.5rem)",
           }}
           className="grid gap-3 p-3 overflow-x-hidden overflow-y-scroll"
         >

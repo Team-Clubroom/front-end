@@ -31,7 +31,7 @@ export function Modal({
     <div
       onClick={handleClose}
       className={
-        "fixed w-screen h-screen z-50 grid place-items-center bg-opacity-20 bg-black"
+        "fixed w-screen h-screen z-50 grid place-items-center bg-opacity-40 bg-black"
       }
     >
       {/*  When clicking the modal body it should NOT close so we stop the event propagation */}
