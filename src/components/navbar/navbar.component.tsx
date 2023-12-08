@@ -8,9 +8,12 @@ export const NavbarComponent = () => {
 
   return (
     <nav className={navbarStyles.navbar}>
-      <NavLink className={navbarStyles.logoLink} to="/">
-        CELDV
-      </NavLink>
+      <div className={"flex items-center gap-1"}>
+        <img className={"w-8"} src={"./logo.svg"} alt={"celdv logo"} />
+        <NavLink className={navbarStyles.logoLink} to="/">
+          CELDV
+        </NavLink>
+      </div>
       <div className={navbarStyles.userSection}>
         <div className="flex justify-end items-center relative">
           {isLoggedIn() ? (

@@ -4,6 +4,7 @@ import "./landing.page.css";
 import { Icon } from "../../components/icon.component.tsx";
 import { MaterialIcon } from "../../utils/icons.ts";
 import { MembersListComponent } from "./components/member-card.component.tsx";
+import FooterComponent from "../../components/footer/footer.component.tsx";
 
 function LandingPage() {
   const user = useAuthContext();
@@ -22,7 +23,7 @@ function LandingPage() {
       <h2 className={"text-4xl text-center font-bold text-inherit pb-4"}>
         Features of <span className={"text-indigo-500"}>CELDV</span>
       </h2>
-      <section className={"section"}>
+      <section className={"section-dynamic"}>
         <div className={"placeholder-img"} />
         <div className={"flex flex-col gap-2"}>
           <h3 className={"section-title"}>Beautiful Directed Graphs</h3>
@@ -35,7 +36,7 @@ function LandingPage() {
           </p>
         </div>
       </section>
-      <section className={"section bg-gradient-to-b from-neutral-700"}>
+      <section className={"section-dynamic bg-gradient-to-b from-neutral-700"}>
         <div className={"flex flex-col gap-2"}>
           <h3 className={"section-title text-gray-100"}>
             Easily Create Relationships
@@ -106,10 +107,11 @@ function LandingPage() {
           </div>
         </div>
       </section>
-      <section className={"bg-gradient-to-br from-cyan-500"}>
+      <section className={"bg-gradient-to-br from-cyan-600 to-cyan-800"}>
         <h3 className={"section-title text-center pb-4"}>Our Dev Team</h3>
         <MembersListComponent />
       </section>
+      <FooterComponent />
     </div>
   );
 }

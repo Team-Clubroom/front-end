@@ -35,15 +35,15 @@ section {
     @apply py-12
 }
 
-.section {
-    @apply flex gap-10 justify-center
+.section-dynamic {
+    @apply flex gap-10 justify-center flex-wrap
 }
 
 .section-title {
     @apply text-2xl font-semibold
 }
 
-.section p {
+.section-dynamic p {
     max-width: 40ch;
 }
 
@@ -62,7 +62,9 @@ section {
 
 .member-card {
     max-width: 35ch;
-    @apply flex flex-col shadow-2xl gap-2 items-center rounded-xl border border-gray-400 p-4
+    hyphens: auto;
+    background-color: rgba(255, 255, 255, 0.06);
+    @apply flex flex-col text-center shadow-2xl gap-2 items-center rounded-xl border border-gray-400 p-4
 }
 
 .member-card h4 {
@@ -71,5 +73,8 @@ section {
 
 .member-card img {
     width: 60%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    background-color: #E0DDE5;
     border-radius: 50%;
 }
