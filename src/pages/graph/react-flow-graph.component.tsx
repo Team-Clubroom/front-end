@@ -106,6 +106,8 @@ const FlowGraph = () => {
     );
     setNodes(layoutNodes);
     setEdges(layoutEdges);
+
+    console.log({ layoutNodes, layoutEdges });
   }
 
   useEffect(() => {

@@ -5,6 +5,7 @@ import { Icon } from "../../components/icon.component.tsx";
 import { MaterialIcon } from "../../utils/icons.ts";
 import { MembersListComponent } from "./components/member-card.component.tsx";
 import FooterComponent from "../../components/footer/footer.component.tsx";
+import { DummyGraphComponent } from "./components/dummy-graph.component.tsx";
 
 function LandingPage() {
   const user = useAuthContext();
@@ -36,6 +37,7 @@ function LandingPage() {
           </p>
         </div>
       </section>
+
       <section className={"section-dynamic bg-gradient-to-b from-neutral-700"}>
         <div className={"flex flex-col gap-2"}>
           <h3 className={"section-title text-gray-100"}>
@@ -63,6 +65,18 @@ function LandingPage() {
           </div>
         </div>
         <div className={"placeholder-img"} />
+      </section>
+      <section className={"section-dynamic items-center px-4"}>
+        <div className={"flex flex-col"}>
+          <h3 className={"section-title"}>Give it a try!</h3>
+          <p>
+            Doctus labores maiestatis dicam civibus luptatum causae montes.
+            Morbi sea maluisset impetus quem veniam.
+          </p>
+        </div>
+        <div style={{ aspectRatio: "1", maxWidth: "30rem", width: "100%" }}>
+          <DummyGraphComponent />
+        </div>
       </section>
       <section>
         <h3 className={"section-title text-center text-gray-100 pb-4"}>
