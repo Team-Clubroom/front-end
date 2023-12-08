@@ -53,9 +53,23 @@ section {
 
 .graphing-feature {
     max-width: 35ch;
-    @apply flex flex-col bg-neutral-800 gap-2 border border-gray-700 py-3 px-4 rounded-lg
+    @apply flex flex-col shadow bg-gradient-to-r from-neutral-800 gap-2 border border-gray-700 py-3 px-4 rounded-lg
 }
 
 .graphing-feature div {
     @apply bg-gray-200 w-fit aspect-square flex items-center justify-center p-3 rounded-xl text-gray-500
+}
+
+.member-card {
+    max-width: 35ch;
+    @apply flex flex-col shadow-2xl gap-2 items-center rounded-xl border border-gray-400 p-4
+}
+
+.member-card h4 {
+    @apply font-bold text-lg
+}
+
+.member-card img {
+    width: 60%;
+    border-radius: 50%;
 }

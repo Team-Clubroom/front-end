@@ -3,6 +3,7 @@ import { useAuthContext } from "../../contexts/auth/auth.context.tsx";
 import "./landing.page.css";
 import { Icon } from "../../components/icon.component.tsx";
 import { MaterialIcon } from "../../utils/icons.ts";
+import { MembersListComponent } from "./components/member-card.component.tsx";
 
 function LandingPage() {
   const user = useAuthContext();
@@ -34,7 +35,7 @@ function LandingPage() {
           </p>
         </div>
       </section>
-      <section className={"section bg-neutral-700"}>
+      <section className={"section bg-gradient-to-b from-neutral-700"}>
         <div className={"flex flex-col gap-2"}>
           <h3 className={"section-title text-gray-100"}>
             Easily Create Relationships
@@ -104,6 +105,10 @@ function LandingPage() {
             </p>
           </div>
         </div>
+      </section>
+      <section className={"bg-gradient-to-br from-cyan-500"}>
+        <h3 className={"section-title text-center pb-4"}>Our Dev Team</h3>
+        <MembersListComponent />
       </section>
     </div>
   );
