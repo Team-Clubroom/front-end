@@ -7,12 +7,12 @@ export const dashboardRootStyles = {
   subtitle: "mt-4 text-xl md:text-md text-gray-800",
   form: "mt-4",
   formField: "flex flex-col flex-1",
-  label: "mb-1 text-xs tracking-wide text-gray-600",
+  label: "mb-1 text-xs tracking-wide text-gray-400",
   inputContainer: "relative",
   inputIcon:
-    "material-symbols-outlined pointer-events-none inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400",
+    "material-symbols-outlined pointer-events-none inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-500",
   input:
-    "text-sm placeholder-gray-300 pl-9 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none" +
+    "text-sm placeholder-gray-500 pl-9 pr-4 rounded-lg border border-gray-500 w-full py-2 focus:outline-none" +
     " focus:border-blue-400",
   inputError: "border-red-500 focus:border-red-500",
   error: "text-red-500 text-sm italic flex justify-center font-bold",
@@ -33,4 +33,6 @@ export const dashboardRootStyles = {
   successWrapper:
     "flex flex-col text-center items-center justify-evenly w-100 px-4",
   loginAfterSuccess: "pt-5 text-lg text-blue-500 font-semibold",
+  modal:
+    "flex flex-col bg-gradient-to-br from-neutral-800 to-neutral-900 border border-gray-800 shadow px-8 py-8 rounded-3xl w-50 max-w-md",
 };

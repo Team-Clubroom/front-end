@@ -12,6 +12,7 @@ import { Helmet } from "react-helmet";
 import { MaterialIcon } from "../../utils/icons.ts";
 import { InputComponent } from "../../components/form/input/input.component.tsx";
 import { RequestButtonComponent } from "../../components/request-button/request-button.component.tsx";
+import { dashboardRootStyles } from "../../sharedStyles/dashboard-root.styles.tsx";
 
 function LoginPage() {
   const { registerField, onSubmit, formError, isLoading } = useForm(
@@ -39,63 +40,60 @@ function LoginPage() {
         <title>Log In - CELDV</title>
       </Helmet>
       <div className={loginStyles.container}>
-        <div className={loginStyles.formContainer}>
+        <div className={dashboardRootStyles.modal}>
           <div className={loginStyles.title}>Welcome Back</div>
           <div className={loginStyles.subtitle}>
             Enter your credentials to access your account
           </div>
 
-          <div className={loginStyles.form}>
-            <form
-              noValidate={true}
-              onSubmit={onSubmit(handleSubmit)}
-              className={"flex flex-col gap-2"}
-            >
-              <InputComponent
-                fieldRegistration={registerField("email")}
-                iconName={MaterialIcon.Mail}
-                placeholder={"johndoe@email.com"}
-                id={"email"}
-                label={"Enter Your E-Mail Address"}
-              />
+          <form
+            noValidate={true}
+            onSubmit={onSubmit(handleSubmit)}
+            className={"flex flex-col gap-2"}
+          >
+            <InputComponent
+              fieldRegistration={registerField("email")}
+              iconName={MaterialIcon.Mail}
+              placeholder={"johndoe@email.com"}
+              id={"email"}
+              label={"Enter Your E-Mail Address"}
+            />
 
-              <InputComponent
-                fieldRegistration={registerField("password")}
-                iconName={MaterialIcon.Lock}
-                placeholder={
-                  "\u2022" +
-                  "\u2022" +
-                  "\u2022" +
-                  "\u2022" +
-                  "\u2022" +
-                  "\u2022" +
-                  "\u2022" +
-                  "\u2022"
-                }
-                id={"password"}
-                label={"Enter Your Password"}
-                type="password"
-              />
+            <InputComponent
+              fieldRegistration={registerField("password")}
+              iconName={MaterialIcon.Lock}
+              placeholder={
+                "\u2022" +
+                "\u2022" +
+                "\u2022" +
+                "\u2022" +
+                "\u2022" +
+                "\u2022" +
+                "\u2022" +
+                "\u2022"
+              }
+              id={"password"}
+              label={"Enter Your Password"}
+              type="password"
+            />
 
-              <span className={loginStyles.error}>{formError}</span>
-              <div className="flex w-full justify-center">
-                <RequestButtonComponent
-                  isLoading={isLoading}
-                  icon={MaterialIcon.Login}
-                  loadingText={"Signing in"}
-                >
-                  Login
-                </RequestButtonComponent>
-              </div>
-            </form>
-          </div>
+            <span className={loginStyles.error}>{formError}</span>
+            <div className="flex w-full justify-center">
+              <RequestButtonComponent
+                isLoading={isLoading}
+                icon={MaterialIcon.Login}
+                loadingText={"Signing in"}
+              >
+                Login
+              </RequestButtonComponent>
+            </div>
+          </form>
+
           <div className="flex justify-center items-center mt-6">
-            <NavLink to={"/signup"} className={loginStyles.registerLink}>
-              <div className={loginStyles.registerLinkText}>
+            <NavLink to={"/signup"} className={loginStyles.formLink}>
+              <div className={loginStyles.linkText}>
                 You don't have an account?
-                <span className={loginStyles.registerLinkTextBlue}>
-                  Sign up now
-                </span>
+                <span className={loginStyles.linkUrl}>Sign up now</span>
               </div>
             </NavLink>
           </div>

@@ -12,6 +12,8 @@ import { Helmet } from "react-helmet";
 import { InputComponent } from "../../components/form/input/input.component.tsx";
 import { MaterialIcon } from "../../utils/icons.ts";
 import { RequestButtonComponent } from "../../components/request-button/request-button.component.tsx";
+import { dashboardRootStyles } from "../../sharedStyles/dashboard-root.styles.tsx";
+import { loginStyles } from "../login/login.page.styles.tsx";
 
 function SignupPage() {
   const { register } = useAuthActionContext();
@@ -32,96 +34,95 @@ function SignupPage() {
   const RegistrationForm = () => {
     return (
       <>
-        <div className={signUpStyles.title}>Join us Now</div>
-        <div className={signUpStyles.subtitle}>
+        <div className={loginStyles.title}>Join us Now</div>
+        <div className={loginStyles.subtitle}>
           Enter your credentials to get access to your account
         </div>
 
-        <div className={signUpStyles.form}>
-          <form
-            onSubmit={onSubmit(handleSubmit)}
-            noValidate={true}
-            className={"flex flex-col gap-2"}
-          >
-            <div className="flex justify-center">
-              <InputComponent
-                fieldRegistration={registerField("firstName")}
-                iconName={MaterialIcon.Person}
-                placeholder={"John"}
-                id={"first_name"}
-                label={"Enter Your First Name"}
-              />
-
-              <InputComponent
-                fieldRegistration={registerField("lastName")}
-                iconName={MaterialIcon.Person}
-                placeholder={"Doe"}
-                id={"last_name"}
-                label={"Enter Your Last Name"}
-              />
-            </div>
-
+        <form
+          onSubmit={onSubmit(handleSubmit)}
+          noValidate={true}
+          className={"flex flex-col gap-2"}
+        >
+          <div className="flex justify-center">
             <InputComponent
-              fieldRegistration={registerField("email")}
-              iconName={MaterialIcon.Mail}
-              placeholder={"johndoe@example.com"}
-              id={"email"}
-              label={"Enter Your E-Mail Address"}
+              fieldRegistration={registerField("firstName")}
+              iconName={MaterialIcon.Person}
+              placeholder={"John"}
+              id={"first_name"}
+              label={"Enter Your First Name"}
             />
 
             <InputComponent
-              fieldRegistration={registerField("password")}
-              iconName={MaterialIcon.Lock}
-              placeholder={
-                "\u2022" +
-                "\u2022" +
-                "\u2022" +
-                "\u2022" +
-                "\u2022" +
-                "\u2022" +
-                "\u2022" +
-                "\u2022"
-              }
-              id={"password"}
-              label={"Enter a Password"}
-              type="password"
+              fieldRegistration={registerField("lastName")}
+              iconName={MaterialIcon.Person}
+              placeholder={"Doe"}
+              id={"last_name"}
+              label={"Enter Your Last Name"}
             />
+          </div>
 
-            <InputComponent
-              fieldRegistration={registerField("passwordRepeat")}
-              iconName={MaterialIcon.Lock}
-              placeholder={
-                "\u2022" +
-                "\u2022" +
-                "\u2022" +
-                "\u2022" +
-                "\u2022" +
-                "\u2022" +
-                "\u2022" +
-                "\u2022"
-              }
-              id={"password-repeat"}
-              label={"Repeat the Password"}
-              type="password"
-            />
+          <InputComponent
+            fieldRegistration={registerField("email")}
+            iconName={MaterialIcon.Mail}
+            placeholder={"johndoe@example.com"}
+            id={"email"}
+            label={"Enter Your E-Mail Address"}
+          />
 
-            <span className={signUpStyles.error}>{formError}</span>
-            <div className="flex w-full justify-center">
-              <RequestButtonComponent
-                isLoading={isLoading}
-                loadingText={"Registering"}
-                icon={MaterialIcon.Start}
-              >
-                Sign up
-              </RequestButtonComponent>
-            </div>
-          </form>
-        </div>
+          <InputComponent
+            fieldRegistration={registerField("password")}
+            iconName={MaterialIcon.Lock}
+            placeholder={
+              "\u2022" +
+              "\u2022" +
+              "\u2022" +
+              "\u2022" +
+              "\u2022" +
+              "\u2022" +
+              "\u2022" +
+              "\u2022"
+            }
+            id={"password"}
+            label={"Enter a Password"}
+            type="password"
+          />
+
+          <InputComponent
+            fieldRegistration={registerField("passwordRepeat")}
+            iconName={MaterialIcon.Lock}
+            placeholder={
+              "\u2022" +
+              "\u2022" +
+              "\u2022" +
+              "\u2022" +
+              "\u2022" +
+              "\u2022" +
+              "\u2022" +
+              "\u2022"
+            }
+            id={"password-repeat"}
+            label={"Repeat the Password"}
+            type="password"
+          />
+
+          <span className={signUpStyles.error}>{formError}</span>
+          <div className="flex w-full justify-center">
+            <RequestButtonComponent
+              isLoading={isLoading}
+              loadingText={"Registering"}
+              icon={MaterialIcon.Start}
+            >
+              Sign up
+            </RequestButtonComponent>
+          </div>
+        </form>
+
         <div className="flex justify-center items-center mt-6">
-          <NavLink to={"/login"} className={signUpStyles.loginLink}>
-            <div className={signUpStyles.loginLinkText}>
+          <NavLink to={"/login"} className={loginStyles.formLink}>
+            <div className={loginStyles.linkText}>
               Already have an account?
-              <span className={signUpStyles.loginLinkTextBlue}>Login here</span>
+              <span className={loginStyles.linkUrl}>Login here</span>
             </div>
           </NavLink>
         </div>
@@ -146,7 +147,7 @@ function SignupPage() {
             d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
           />
         </svg>
-        <div className={signUpStyles.title}>Registration Successful</div>
+        <div className={loginStyles.title}>Registration Successful</div>
         <div style={{ color: "grey", marginTop: "0.5rem" }}>
           Please check your email to verify your account
         </div>
@@ -163,7 +164,7 @@ function SignupPage() {
         <title>Sign Up - CELDV</title>
       </Helmet>
       <div className={signUpStyles.container}>
-        <div className={signUpStyles.formContainer}>
+        <div className={dashboardRootStyles.modal}>
           {success ? SuccessPopup() : RegistrationForm()}
         </div>
       </div>
