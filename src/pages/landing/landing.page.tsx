@@ -6,6 +6,7 @@ import { MaterialIcon } from "../../utils/icons.ts";
 import { MembersListComponent } from "./components/member-card.component.tsx";
 import FooterComponent from "../../components/footer/footer.component.tsx";
 import { DummyGraphComponent } from "./components/dummy-graph.component.tsx";
+import { SkillsComponent } from "./components/skills.component.tsx";
 
 function LandingPage() {
   const user = useAuthContext();
@@ -79,7 +80,7 @@ function LandingPage() {
         </div>
       </section>
       <section>
-        <h3 className={"section-title text-center text-gray-100 pb-4"}>
+        <h3 className={"section-title text-center text-gray-100 pb-8"}>
           Graphing Features
         </h3>
         <div className={"flex gap-4 justify-center flex-wrap max-w-2xl m-auto"}>
@@ -120,6 +121,12 @@ function LandingPage() {
             </p>
           </div>
         </div>
+      </section>
+      <section>
+        <h3 className={"section-title text-center"}>
+          Built with Modern Technologies
+        </h3>
+        <SkillsComponent />
       </section>
       <section className={"bg-gradient-to-br from-cyan-600 to-cyan-800"}>
         <h3 className={"section-title text-center pb-4"}>Our Dev Team</h3>

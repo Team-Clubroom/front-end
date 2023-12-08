@@ -78,3 +78,16 @@ section {
     background-color: #E0DDE5;
     border-radius: 50%;
 }
+
+.skill {
+    animation: moveIcons linear infinite;
+}
+
+@keyframes moveIcons {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
