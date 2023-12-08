@@ -44,7 +44,7 @@ export function Modal({
           <button
             onClick={handleClose}
             type={"button"}
-            className={"rounded-full flex hover:bg-gray-300 opacity-50 p-1"}
+            className={"rounded-full flex hover:bg-gray-600 opacity-50 p-1"}
           >
             <span className={`material-symbols-outlined`}>
               {MaterialIcon.Close}

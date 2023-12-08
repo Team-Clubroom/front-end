@@ -10,8 +10,9 @@ header {
     @apply flex flex-col items-center justify-center gap-4
 }
 
-h2 {
+.features-title {
     box-shadow: 0 -20px 20px 7px #1e1e1e;
+    @apply text-4xl text-center font-bold text-inherit pb-4
 }
 
 header h1 {

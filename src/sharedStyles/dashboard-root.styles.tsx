@@ -2,8 +2,8 @@ export const dashboardRootStyles = {
   container:
     "w-full h-full flex flex-col items-center justify-center bg-cool-gray-100",
   formContainer:
-    "flex flex-col bg-white shadow-md px-4 sm:px-6 md:px-8 lg:px-10 py-8 rounded-3xl w-[36rem]",
-  title: "font-normal text-xl sm:text-3xl text-gray-700",
+    "flex flex-col bg-gradient-to-br from-neutral-800 to-neutral-900 shadow px-8 py-8 rounded-3xl w-[36rem]",
+  title: "font-normal text-xl sm:text-3xl text-gray-200",
   subtitle: "mt-4 text-xl md:text-md text-gray-800",
   form: "mt-4",
   formField: "flex flex-col flex-1",

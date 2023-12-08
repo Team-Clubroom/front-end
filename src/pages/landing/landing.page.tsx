@@ -22,7 +22,7 @@ function LandingPage() {
         <h1>Company and Employment Lineage Data and Visualization</h1>
         <p>Easily create and link company entities</p>
       </header>
-      <h2 className={"text-4xl text-center font-bold text-inherit pb-4"}>
+      <h2 className={"features-title"}>
         Features of <span className={"text-indigo-500"}>CELDV</span>
       </h2>
       <section className={"section-dynamic"}>

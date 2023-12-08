@@ -59,7 +59,7 @@ function Employers() {
 
   return (
     <div className={"flex flex-col"} style={{ height: "calc(100% - 65px)" }}>
-      <div className={"bg-gray-400 px-3 py-2 flex justify-center relative"}>
+      <div className={"bg-gray-700 px-3 py-2 flex justify-center relative"}>
         <SearchBoxComponent
           placeholder={"Search employers"}
           onChange={(event) => {
@@ -80,6 +80,7 @@ function Employers() {
         <div
           style={{
             gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+            paddingInline: "calc(10vw * 0.5rem)",
           }}
           className="grid gap-3 p-3 overflow-x-hidden overflow-y-scroll"
         >
