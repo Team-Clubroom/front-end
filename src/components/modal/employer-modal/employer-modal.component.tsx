@@ -77,7 +77,7 @@ function EmployerModal({
       title={content.title}
     >
       <form
-        onSubmit={onSubmit(handleSubmit, !prePopulate)}
+        onSubmit={onSubmit(handleSubmit, {reset: !prePopulate})}
         noValidate={true}
         className={"mt-4"}
       >

@@ -11,7 +11,6 @@ export const useMultiModal = <T>() => {
   const close = () => {
     setOpenedModal(null);
     setData(undefined);
-    console.log("hit close");
   };
 
   const isModalOpen = (modalName: ModalNames) => openedModal === modalName;

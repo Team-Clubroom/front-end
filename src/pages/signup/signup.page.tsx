@@ -40,11 +40,11 @@ function SignupPage() {
         </div>
 
         <form
-          onSubmit={onSubmit(handleSubmit)}
+          onSubmit={onSubmit(handleSubmit, { resetSuccess: false })}
           noValidate={true}
           className={"flex flex-col gap-2"}
         >
-          <div className="flex justify-center">
+          <div className="flex justify-center gap-1">
             <InputComponent
               fieldRegistration={registerField("firstName")}
               iconName={MaterialIcon.Person}

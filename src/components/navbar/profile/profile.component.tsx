@@ -39,7 +39,6 @@ export const ProfileComponent = () => {
       }
       await customFetch(ApiRoutes.RequestAdmin, "POST");
       setAdminPending();
-      console.log("Success");
     } catch (e) {
       setError((e as Error).message);
     } finally {
