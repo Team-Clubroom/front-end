@@ -61,7 +61,7 @@ const MemberCard = ({
   description,
   role,
 }: MemberCardProps) => (
-  <div className="member-card">
+  <div className="member-card bg-gradient-to-br from-cyan-600 to-cyan-900">
     <img src={imgSrc} alt={altText} />
     <div>
       <h4>{name}</h4>
