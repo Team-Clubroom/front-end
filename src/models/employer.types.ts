@@ -1,5 +1,5 @@
 export interface Employer {
-  id: number;
+  id: string;
   name: string;
   address: {
     line1: string;
@@ -10,11 +10,31 @@ export interface Employer {
   };
   foundedDate: string;
   dissolvedDate?: string;
-  bankruptcyDate: string;
+  bankruptcyDate?: string;
   industrySectorCode: number;
   status: string;
   legalStatus: string;
 }
+
+export interface AddEmployerAction {
+  type: "Add";
+  payload: { newEmployer: Employer };
+}
+
+export interface DeleteEmployerAction {
+  type: "Delete";
+  payload: { id: string };
+}
+
+export interface EditEmployerAction {
+  type: "Edit";
+  payload: { updatedEmployer: Employer };
+}
+
+export type EmployerAction =
+  | AddEmployerAction
+  | DeleteEmployerAction
+  | EditEmployerAction;
 
 export interface NewEmployerRequest {
   employer_name: string;
@@ -32,7 +52,7 @@ export interface NewEmployerRequest {
 }
 
 export type EmployerEditRequest = {
-  employer_id: number;
+  employer_id: string;
 } & Partial<NewEmployerRequest>;
 
 export interface NameChangeRequest {
@@ -56,5 +76,5 @@ export interface MergeRelationRequest {
 }
 
 export interface DeleteEmployerRequest {
-  company_name: string;
+  employer_id: string;
 }

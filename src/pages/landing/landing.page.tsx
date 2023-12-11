@@ -28,7 +28,7 @@ function LandingPage() {
         Features of <span className={"text-indigo-500"}>CELDV</span>
       </h2>
       <section className={"section-dynamic"}>
-        <div className={"placeholder-img"} />
+        <img src={"./graph.png"} className={"placeholder-img"} />
         <div className={"flex flex-col gap-2"}>
           <h3 className={"section-title"}>Beautiful Directed Graphs</h3>
           <p>

@@ -1,5 +1,6 @@
 import { EmployerFormFields } from "./employer-modal.helpers.ts";
 import {
+  DeleteEmployerAction,
   DeleteEmployerRequest,
   Employer,
   EmployerEditRequest,
@@ -10,7 +11,9 @@ import { useFetch } from "../../../models/useFetch.ts";
 
 export const useEmployerActions = () => {
   const { customFetch } = useFetch();
-  const createNewEmployer = async (formValues: EmployerFormFields) => {
+  const createNewEmployer = async (
+    formValues: EmployerFormFields,
+  ): Promise<Employer> => {
     const newEmployerRequest: NewEmployerRequest = {
       employer_name: formValues.employer_name.trim(),
       employer_founded_date: formValues.employer_founded_date.trim(),
@@ -38,17 +41,34 @@ export const useEmployerActions = () => {
       newEmployerRequest.employer_bankruptcy_date = bankruptcyDate;
     }
 
-    const response = await customFetch<{ employer_id: string }>(
+    const response = await customFetch<{ employer_id: number | string }>(
       ApiRoutes.Employer,
       "POST",
       newEmployerRequest,
     );
-    console.log(response.data.employer_id);
+
+    return {
+      id: response.data.employer_id.toString(),
+      name: newEmployerRequest.employer_name,
+      industrySectorCode: newEmployerRequest.employer_industry_sector_code,
+      dissolvedDate: newEmployerRequest.employer_dissolved_date,
+      bankruptcyDate: newEmployerRequest.employer_bankruptcy_date,
+      address: {
+        zipCode: newEmployerRequest.employer_addr_zip_code,
+        city: newEmployerRequest.employer_addr_city,
+        state: newEmployerRequest.employer_addr_state,
+        line2: newEmployerRequest.employer_addr_line_2,
+        line1: newEmployerRequest.employer_addr_line_1,
+      },
+      foundedDate: newEmployerRequest.employer_founded_date,
+      status: newEmployerRequest.employer_status,
+      legalStatus: newEmployerRequest.employer_legal_status,
+    };
   };
   const editEmployer = async (
     employer: Employer,
     formValues: EmployerFormFields,
-  ) => {
+  ): Promise<Employer> => {
     const previousFormValues = _employerToForm(employer);
     const editRequest: EmployerEditRequest = { employer_id: employer.id };
 
@@ -63,14 +83,52 @@ export const useEmployerActions = () => {
         editRequest[key] = newValue as unknown as undefined;
       }
     });
-    console.log(editRequest);
     await customFetch(ApiRoutes.Employer, "PATCH", editRequest);
+    return _partialEmployerToEmployer(editRequest, employer);
+  };
+
+  const _partialEmployerToEmployer = (
+    partialEmployer: Partial<NewEmployerRequest>,
+    originalEmployer: Employer,
+  ): Employer => {
+    return {
+      id: originalEmployer.id,
+      name: partialEmployer.employer_name || originalEmployer.name,
+      address: {
+        line1:
+          partialEmployer.employer_addr_line_1 ||
+          originalEmployer.address.line1,
+        line2:
+          partialEmployer.employer_addr_line_2 ||
+          originalEmployer.address.line2,
+        city:
+          partialEmployer.employer_addr_city || originalEmployer.address.city,
+        state:
+          partialEmployer.employer_addr_state || originalEmployer.address.state,
+        zipCode:
+          partialEmployer.employer_addr_zip_code ||
+          originalEmployer.address.zipCode,
+      },
+      foundedDate:
+        partialEmployer.employer_founded_date || originalEmployer.foundedDate,
+      dissolvedDate:
+        partialEmployer.employer_dissolved_date ||
+        originalEmployer.dissolvedDate,
+      bankruptcyDate:
+        partialEmployer.employer_bankruptcy_date ||
+        originalEmployer.bankruptcyDate,
+      industrySectorCode:
+        partialEmployer.employer_industry_sector_code ||
+        originalEmployer.industrySectorCode,
+      status: partialEmployer.employer_status || originalEmployer.status,
+      legalStatus:
+        partialEmployer.employer_legal_status || originalEmployer.legalStatus,
+    };
   };
 
   const deleteEmployer = async (employer: Employer) => {
-    console.log("delete hit");
     const deleteRequest: DeleteEmployerRequest = {
-      company_name: employer.name,
+      employer_id: employer.id
     };
     await customFetch(ApiRoutes.DeleteEmployer, "DELETE", deleteRequest);
   };
