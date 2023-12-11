@@ -82,7 +82,12 @@ export const RequestButtonComponent = ({
   const isDisabled = isLoading || success?.isSuccessful;
 
   return (
-    <button type="submit" className={className} onClick={onClick} disabled={isDisabled}>
+    <button
+      type="submit"
+      className={className}
+      onClick={onClick}
+      disabled={isDisabled}
+    >
       {renderedButton}
     </button>
   );

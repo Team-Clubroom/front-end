@@ -128,7 +128,7 @@ export const useEmployerActions = () => {
 
   const deleteEmployer = async (employer: Employer) => {
     const deleteRequest: DeleteEmployerRequest = {
-      employer_id: employer.id
+      employer_id: employer.id,
     };
     await customFetch(ApiRoutes.DeleteEmployer, "DELETE", deleteRequest);
   };
