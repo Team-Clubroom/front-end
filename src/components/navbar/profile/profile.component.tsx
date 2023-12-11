@@ -9,6 +9,7 @@ import { Icon } from "../../icon.component.tsx";
 import { ApiRoutes } from "../../../models/api.types.ts";
 import { useFetch } from "../../../models/useFetch.ts";
 import { dashboardRootStyles } from "../../../sharedStyles/dashboard-root.styles.tsx";
+import { RequestButtonComponent } from "../../request-button/request-button.component.tsx";
 
 export const ProfileComponent = () => {
   const { logout, setAdminPending } = useAuthActionContext();
@@ -18,6 +19,7 @@ export const ProfileComponent = () => {
 
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
   const handleLogout = () => {
     logout();
   };
@@ -39,7 +41,7 @@ export const ProfileComponent = () => {
       }
       await customFetch(ApiRoutes.RequestAdmin, "POST");
       setAdminPending();
-      console.log("Success");
+      setSuccess(true);
     } catch (e) {
       setError((e as Error).message);
     } finally {
@@ -62,21 +64,20 @@ export const ProfileComponent = () => {
         <p className={"text-xs text-gray-500"}>
           {user.isAdmin ? "Administrator" : "Basic User"}
         </p>
-        {isLoading ? (
-          <span>Requesting...</span>
-        ) : user.adminPending ? (
-          <p>Admin request pending</p>
-        ) : (
-          !user.isAdmin && (
-            <button className={"text-blue-500"} onClick={handleAdminRequest}>
-              Request admin account
-            </button>
-          )
+        {user.isAdmin ?? (
+          <RequestButtonComponent
+            isLoading={isLoading}
+            loadingText={"Requesting..."}
+            onClick={handleAdminRequest}
+            success={{ text: "Admin Requested", isSuccessful: success }}
+          >
+            Request Admin
+          </RequestButtonComponent>
         )}
         {error && <p className={dashboardRootStyles.error}>{error}</p>}
         <button
           className={
-            "text-center w-full border border-blue-500 text-blue-500 rounded py-1 px-8 mt-3 hover:bg-blue-500 hover:text-white font-semibold transition-colors"
+            "text-center w-full border border-blue-500 text-blue-500 rounded-lg py-2 px-8 mt-3 hover:bg-blue-500 hover:text-white transition-colors"
           }
           onClick={handleLogout}
         >
