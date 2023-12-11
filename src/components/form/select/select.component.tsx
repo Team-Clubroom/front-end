@@ -48,7 +48,7 @@ export const SelectComponent = ({
           id={id}
           className={`${dashboardRootStyles.input} ${classIf(
             !value,
-            "text-gray-300",
+            "text-gray-500",
           )} ${classIf(error, dashboardRootStyles.inputError)}`}
           value={constantValue ?? value}
           onChange={onChange}
