@@ -15,7 +15,7 @@ export interface AuthContextProps {
   children: React.ReactNode;
 }
 
-export interface UserAuth {
+export interface UserLoginResponse {
   email: string;
   jwt: string;
   isAdmin: boolean;
@@ -23,11 +23,16 @@ export interface UserAuth {
   lastName: string;
 }
 
+export interface UserAuth extends UserLoginResponse {
+  adminPending: boolean;
+}
+
 export interface AuthActionFuncs {
   register: RegisterFunc;
   login: LoginFunc;
   logout: (timeout?: true) => void;
   isLoggedIn: () => boolean;
+  setAdminPending: () => void;
 }
 
 export type RegisterFunc = (

@@ -10,9 +10,12 @@ import { ContextMenuPayload, ContextMenuState } from "./context-menu.types.ts";
 import { ContextMenuComponent } from "../../components/context-menu/context-menu.component.tsx";
 import "../../components/context-menu/context-menu.styles.css";
 
-export type ShowContextMenuFunction = (contextMenu: ContextMenuPayload) => void;
+export type ContextMenuFunctions = {
+  showContextMenu: (contextMenu: ContextMenuPayload) => void;
+  updateChildren: (children: ReactNode) => void;
+};
 
-const ContextMenuContext = createContext<ShowContextMenuFunction | null>(null);
+const ContextMenuContext = createContext<ContextMenuFunctions | null>(null);
 
 export const useMenuContext = () => useContext(ContextMenuContext)!;
 
@@ -38,8 +41,14 @@ export const ContextMenuProvider = ({ children }: { children: ReactNode }) => {
     const { currentTarget, clientX, clientY } = event;
     setContextMenu({ currentTarget, clientX, clientY, ...props });
   };
+
+  const updateChildren = (children: ReactNode) => {
+    if (contextMenu === null) return;
+    setContextMenu({ ...contextMenu, children });
+  };
+
   return (
-    <ContextMenuContext.Provider value={showContextMenu}>
+    <ContextMenuContext.Provider value={{ showContextMenu, updateChildren }}>
       {children}
       {contextMenu && (
         <div role={"presentation"} className={"context-menu-wrapper"}>
