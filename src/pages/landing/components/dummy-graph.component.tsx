@@ -61,6 +61,8 @@ const FlowGraph = () => {
     [nodes, edges],
   );
 
+  const proOptions = { hideAttribution: true };
+
   return (
     <ReactFlow
       edgeTypes={edgeTypes}
@@ -71,7 +73,8 @@ const FlowGraph = () => {
       onConnect={onConnect}
       nodeTypes={nodeTypes}
       fitView
-      className="border border-gray-400 rounded"
+      proOptions={proOptions}
+      className="border border-cyan-400 rounded"
     >
       <Panel position="top-right">
         <div className="flex rounded bg-cyan-600 overflow-clip shadow">
