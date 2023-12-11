@@ -90,13 +90,12 @@ const FlowGraph = () => {
     });
     // set the edges from the api
     const edgesUpdate = api_edges.map<Edge>((api_edge) => {
-      const { relationType, ...rest } = api_edge;
+      const { relationType, startDate, ...rest } = api_edge;
       return {
         ...rest,
         type: "custom",
         label: (
-          // TODO: provide a real date here once backend is updated to send one
-          <EdgeLabelComponent date={"02-12-1998"} relationName={relationType} />
+          <EdgeLabelComponent date={startDate} relationName={relationType} />
         ),
       };
     });

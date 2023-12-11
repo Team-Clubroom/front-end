@@ -12,6 +12,7 @@ export type API_Employer_Edge = {
   target: string;
   source: string;
   relationType: string;
+  startDate: string;
 };
 
 export type API_Employer_Graph = {
