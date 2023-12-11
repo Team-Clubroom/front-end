@@ -28,6 +28,7 @@ import { getLayoutElements } from "./dagre-functions.ts";
 import { Icon } from "../../components/icon.component.tsx";
 import { MaterialIcon } from "../../utils/icons.ts";
 import { classIf } from "../../utils/tailwind.utils.ts";
+import { Helmet } from "react-helmet";
 
 const edgeTypes = {
   custom: CustomEdge,
@@ -165,7 +166,9 @@ const FlowGraph = () => {
 };
 
 export const ReactFlowGraphComponent = () => (
+  <><Helmet><title>Employer Graph - CELDV</title></Helmet>
   <ReactFlowProvider>
     <FlowGraph />
   </ReactFlowProvider>
+  </>
 );

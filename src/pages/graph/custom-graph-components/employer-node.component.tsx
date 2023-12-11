@@ -18,7 +18,7 @@ export function EmployerNodeComponent({ data }: { data: EmployerNodeProps }) {
     >
       <div className="flex">
         <div className="ml-2">
-          <div className="text-lg font-bold">{data.name}</div>
+          <div className="text-lg font-bold text-gray-700">{data.name}</div>
           <div className="text-gray-500 text-sm">
             <span className={"font-bold"}>Established: </span>
             {data.estDate}

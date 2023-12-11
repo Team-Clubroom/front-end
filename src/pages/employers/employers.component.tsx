@@ -14,6 +14,7 @@ import "./employers.styles.css";
 import { useEmployers } from "../../hooks/useEmployers.ts";
 import { useEmployerActions } from "../../components/modal/employer-modal/useEmployerActions.ts";
 import { YesNoModal } from "../../components/modal/yes-no/yes-no.component.tsx";
+import { Helmet } from "react-helmet";
 
 function Employers() {
   const [isModalOpen, openModal, closeModal, modalData] = useMultiModal<{
@@ -58,6 +59,7 @@ function Employers() {
   }));
 
   return (
+    <><Helmet><title>Employers - CELDV</title></Helmet>
     <div className={"flex flex-col"} style={{ height: "calc(100% - 65px)" }}>
       <div className={"bg-gray-700 px-3 py-2 flex justify-center relative"}>
         <SearchBoxComponent
@@ -132,6 +134,7 @@ function Employers() {
         </>
       )}
     </div>
+    </>
   );
 }
 
