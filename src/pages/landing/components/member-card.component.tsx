@@ -24,7 +24,7 @@ the backend not only functions effectively but aligns seamlessly with business o
   },
   {
     name: "Cory Eheart",
-    imgSrc: "./dako.jpg",
+    imgSrc: "./cory.png",
     role: "Frontend Developer",
     altText: "Cory Eheart picture",
     description: `Cory’s forte is creating intuitive, efficient, and visually appealing frontend architectures. His
