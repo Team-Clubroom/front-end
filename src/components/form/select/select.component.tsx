@@ -57,7 +57,7 @@ export const SelectComponent = ({
           {/* add default empty option at the start */}
           {[{ text: placeholder, value: "" }, ...options].map((option) => (
             <option
-              className={"text-gray-900"}
+              className={"text-gray-300"}
               key={option.value}
               value={option.value}
             >

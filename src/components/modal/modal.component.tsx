@@ -31,7 +31,7 @@ export function Modal({
     <div
       onClick={handleClose}
       className={
-        "fixed w-screen h-screen z-50 grid place-items-center bg-opacity-20 bg-black"
+        "fixed w-screen h-screen z-50 grid place-items-center bg-opacity-40 bg-black"
       }
     >
       {/*  When clicking the modal body it should NOT close so we stop the event propagation */}
@@ -44,7 +44,7 @@ export function Modal({
           <button
             onClick={handleClose}
             type={"button"}
-            className={"rounded-full flex hover:bg-gray-300 opacity-50 p-1"}
+            className={"rounded-full flex hover:bg-gray-600 opacity-50 p-1"}
           >
             <span className={`material-symbols-outlined`}>
               {MaterialIcon.Close}

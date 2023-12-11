@@ -76,7 +76,8 @@ export const ProfileComponent = () => {
         {error && <p className={dashboardRootStyles.error}>{error}</p>}
         <button
           className={
-            "text-center w-full border border-blue-500 text-blue-500 rounded py-1 px-8 mt-3 hover:bg-blue-500 hover:text-white font-semibold transition-colors"
+            "text-center w-full border border-cyan-600 text-cyan-600 rounded py-1 px-8 mt-3 hover:bg-cyan-600" +
+            " hover:text-white font-semibold transition-colors"
           }
           onClick={handleLogout}
         >
@@ -101,7 +102,7 @@ export const ProfileComponent = () => {
     <button
       onClick={handlePopupOpen}
       className={
-        "text-white bg-gray-700 font-bold hover:bg-gray-600 flex rounded-full p-3 transition-colors"
+        "text-white bg-cyan-600 font-bold hover:bg-cyan-700 flex rounded-full p-3 transition-colors"
       }
     >
       <span>{user.firstName[0].toUpperCase()}</span>

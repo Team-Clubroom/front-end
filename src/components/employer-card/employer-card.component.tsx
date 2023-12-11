@@ -61,7 +61,7 @@ export const EmployerCard = ({
     <div className={"employer-card"}>
       <div className={"employer-company-wrapper"}>
         <div className={"flex justify-between items-center"}>
-          <h3 className={"employer-name"}>{employer.name}</h3>
+          <h3 className={"employer-name text-gray-200"}>{employer.name}</h3>
           <div className={"flex gap-1"}>
             <div className={"employer-header-icons"}>
               {user.isAdmin && (
@@ -90,29 +90,25 @@ export const EmployerCard = ({
           <p className={"employer-sector"} style={{ backgroundColor: color }}>
             {shortName}
           </p>
-          <span className={"text-gray-600 italic text-sm"}>
+          <span className={"text-gray-400 italic text-sm"}>
             {employer.status}
           </span>
         </div>
       </div>
-      <p className={"text-sm text-gray-600"}>
-        Auctor utamur verear neque offendit habitant veri. Offendit legere
-        principes signiferumque sapientem. Iaculis felis imperdiet nihil
-      </p>
       <div className={"employer-date-wrapper"}>
         <span>
-          <span className={"font-medium text-gray-700"}>Founded: </span>
-          <span className={"text-gray-500"}>{employer.foundedDate}</span>
+          <span className={"font-medium text-gray-300"}>Founded: </span>
+          <span className={"text-gray-400"}>{employer.foundedDate}</span>
         </span>
         {employer.dissolvedDate && (
           <span>
-            <span className={"font-medium text-gray-700"}>Dissolved: </span>
-            <span className={"text-gray-500"}>{employer.dissolvedDate}</span>
+            <span className={"font-medium text-gray-300"}>Dissolved: </span>
+            <span className={"text-gray-400"}>{employer.dissolvedDate}</span>
           </span>
         )}
       </div>
       <div className={"employer-address-wrapper"}>
-        <p className={"font-medium text-gray-700"}>Address</p>
+        <p className={"font-medium text-gray-400"}>Address</p>
         <p>
           {employer.address.line1}
           {employer.address.line2 && `, ${employer.address.line2}`}

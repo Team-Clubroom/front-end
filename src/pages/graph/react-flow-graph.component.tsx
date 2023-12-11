@@ -4,8 +4,6 @@ import ReactFlow, {
   Connection,
   Controls,
   Edge,
-  MiniMap,
-  Panel,
   Position,
   ReactFlowProvider,
   useEdgesState,
@@ -25,9 +23,9 @@ import { useFetch } from "../../models/useFetch.ts";
 import { ApiRoutes } from "../../models/api.types.ts";
 import { useParams } from "react-router-dom";
 import { getLayoutElements } from "./dagre-functions.ts";
-import { Icon } from "../../components/icon.component.tsx";
-import { MaterialIcon } from "../../utils/icons.ts";
-import { classIf } from "../../utils/tailwind.utils.ts";
+import { Helmet } from "react-helmet";
+import { GraphToggleComponent } from "../../components/graph-toggle/graph-toggle.component.tsx";
+import { EdgeLabelComponent } from "../../components/edge-label/edge-label.component.tsx";
 
 const edgeTypes = {
   custom: CustomEdge,
@@ -96,7 +94,10 @@ const FlowGraph = () => {
       return {
         ...rest,
         type: "custom",
-        label: relationType,
+        label: (
+          // TODO: provide a real date here once backend is updated to send one
+          <EdgeLabelComponent date={"02-12-1998"} relationName={relationType} />
+        ),
       };
     });
     // update the nodes positions using dagre
@@ -106,6 +107,8 @@ const FlowGraph = () => {
     );
     setNodes(layoutNodes);
     setEdges(layoutEdges);
+
+    console.log({ layoutNodes, layoutEdges });
   }
 
   useEffect(() => {
@@ -117,6 +120,7 @@ const FlowGraph = () => {
         setError((request_error as Error).message);
       });
   }, []);
+  const proOptions = { hideAttribution: true };
 
   return error ? (
     <div className={"m-auto text-red-500"}>{error}</div>
@@ -129,41 +133,22 @@ const FlowGraph = () => {
       onEdgesChange={onEdgesChange}
       onConnect={onConnect}
       nodeTypes={nodeTypes}
+      proOptions={proOptions}
       fitView
-      className="bg-teal-50"
     >
-      <Panel position="top-right">
-        <div className="flex rounded bg-gray-300 overflow-clip shadow">
-          <button
-            title={"Vertical layout"}
-            className={`flex flex-grow p-2 transition-colors ${classIf(
-              direction === "TB",
-              "bg-gray-500",
-            )}`}
-            onClick={() => onLayout("TB")}
-          >
-            <Icon name={MaterialIcon.Network} />
-          </button>
-          <button
-            title={"Horizontal layout"}
-            className={`flex flex-grow p-2 transition-colors ${classIf(
-              direction === "LR",
-              "bg-gray-500",
-            )}`}
-            onClick={() => onLayout("LR")}
-          >
-            <Icon name={MaterialIcon.Account_Tree} />
-          </button>
-        </div>
-      </Panel>
-      <MiniMap />
-      <Controls />
+      <GraphToggleComponent direction={direction} onLayout={onLayout} />
+      <Controls style={{ background: "#e3e3e3" }} />
     </ReactFlow>
   );
 };
 
 export const ReactFlowGraphComponent = () => (
-  <ReactFlowProvider>
-    <FlowGraph />
-  </ReactFlowProvider>
+  <>
+    <Helmet>
+      <title>Employer Graph - CELDV</title>
+    </Helmet>
+    <ReactFlowProvider>
+      <FlowGraph />
+    </ReactFlowProvider>
+  </>
 );

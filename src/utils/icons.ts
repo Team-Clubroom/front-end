@@ -25,4 +25,7 @@ export enum MaterialIcon {
   Login = "login",
   Start = "start",
   Add = "add",
+  Gesture_Select = "gesture_select",
+  Info = "info",
+  Menu = "menu",
 }
