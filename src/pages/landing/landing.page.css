@@ -30,6 +30,8 @@ header p {
 	height: 15rem;
 	background: grey;
 	border-radius: 2rem;
+	object-fit: cover;
+	object-position: top;
 }
 
 section {

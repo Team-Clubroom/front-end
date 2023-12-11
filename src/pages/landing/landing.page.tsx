@@ -29,7 +29,7 @@ function LandingPage() {
           Features of <span className={"text-cyan-500"}>CELDV</span>
         </h2>
         <section className={"section-dynamic"}>
-          <div className={"placeholder-img"} />
+          <img className={"placeholder-img"} src={"./illustration-1.jpeg"} />
           <div className={"flex flex-col gap-2"}>
             <h3 className={"section-title"}>Beautiful Directed Graphs</h3>
             <p>

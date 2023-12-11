@@ -1,4 +1,5 @@
 import { Position } from "reactflow";
+import { EdgeLabelComponent } from "../../../components/edge-label/edge-label.component.tsx";
 
 export const GRAPH = {
   nodes: [
@@ -117,35 +118,45 @@ export const GRAPH = {
       source: "15",
       target: "17",
       type: "custom",
-      label: "Subsidiary",
+      label: (
+        <EdgeLabelComponent date={"02-12-1998"} relationName={"Subsidiary"} />
+      ),
     },
     {
       id: "2",
       source: "13",
       target: "14",
       type: "custom",
-      label: "Subsidiary",
+      label: (
+        <EdgeLabelComponent date={"05-22-2001"} relationName={"Subsidiary"} />
+      ),
     },
     {
       id: "3",
       source: "13",
       target: "15",
       type: "custom",
-      label: "Subsidiary",
+      label: (
+        <EdgeLabelComponent date={"12-12-1934"} relationName={"Subsidiary"} />
+      ),
     },
     {
       id: "4",
       source: "16",
       target: "18",
       type: "custom",
-      label: "Subsidiary",
+      label: (
+        <EdgeLabelComponent date={"05-20-2023"} relationName={"Subsidiary"} />
+      ),
     },
     {
       id: "5",
       source: "15",
       target: "16",
       type: "custom",
-      label: "Subsidiary",
+      label: (
+        <EdgeLabelComponent date={"02-12-1998"} relationName={"Subsidiary"} />
+      ),
     },
   ],
 };

@@ -26,6 +26,7 @@ import { useParams } from "react-router-dom";
 import { getLayoutElements } from "./dagre-functions.ts";
 import { Helmet } from "react-helmet";
 import { GraphToggleComponent } from "../../components/graph-toggle/graph-toggle.component.tsx";
+import { EdgeLabelComponent } from "../../components/edge-label/edge-label.component.tsx";
 
 const edgeTypes = {
   custom: CustomEdge,
@@ -94,7 +95,10 @@ const FlowGraph = () => {
       return {
         ...rest,
         type: "custom",
-        label: relationType,
+        label: (
+          // TODO: provide a real date here once backend is updated to send one
+          <EdgeLabelComponent date={"02-12-1998"} relationName={relationType} />
+        ),
       };
     });
     // update the nodes positions using dagre

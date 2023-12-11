@@ -14,7 +14,7 @@ import CustomEdge from "../../graph/custom-graph-components/custom-edge.componen
 import { EmployerNodeComponent } from "../../graph/custom-graph-components/employer-node.component.tsx";
 import { GraphDirection } from "../../graph/graph.types.ts";
 import { getLayoutElements } from "../../graph/dagre-functions.ts";
-import { GRAPH } from "./graph.data.ts";
+import { GRAPH } from "./graph.data.tsx";
 import { GraphToggleComponent } from "../../../components/graph-toggle/graph-toggle.component.tsx";
 
 const edgeTypes = {
