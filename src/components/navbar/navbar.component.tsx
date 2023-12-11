@@ -27,7 +27,7 @@ export const NavbarComponent = () => {
                 Log In
               </NavLink>
               <NavLink
-                className={`${navbarStyles.authLink} bg-blue-500 hover:bg-blue-600`}
+                className={`${navbarStyles.authLink} bg-cyan-600 hover:bg-cyan-700`}
                 to="/signup"
               >
                 Sign Up

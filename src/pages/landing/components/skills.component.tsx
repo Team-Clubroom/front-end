@@ -21,6 +21,7 @@ export const SkillsComponent = () => {
     >
       {ICONS_DATA.map(({ name, path }) => (
         <div
+          key={name}
           className={
             "flex items-center gap-2 px-6 py-2 rounded-full bg-gradient-to-br from-gray-400 to-gray-600 shadow"
           }

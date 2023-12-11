@@ -3,7 +3,6 @@ import ReactFlow, {
   addEdge,
   Connection,
   Edge,
-  Panel,
   ReactFlowProvider,
   useEdgesState,
   useNodesState,
@@ -15,10 +14,8 @@ import CustomEdge from "../../graph/custom-graph-components/custom-edge.componen
 import { EmployerNodeComponent } from "../../graph/custom-graph-components/employer-node.component.tsx";
 import { GraphDirection } from "../../graph/graph.types.ts";
 import { getLayoutElements } from "../../graph/dagre-functions.ts";
-import { classIf } from "../../../utils/tailwind.utils.ts";
-import { Icon } from "../../../components/icon.component.tsx";
-import { MaterialIcon } from "../../../utils/icons.ts";
-import { GRAPH } from "./graph.data.ts";
+import { GRAPH } from "./graph.data.tsx";
+import { GraphToggleComponent } from "../../../components/graph-toggle/graph-toggle.component.tsx";
 
 const edgeTypes = {
   custom: CustomEdge,
@@ -61,6 +58,8 @@ const FlowGraph = () => {
     [nodes, edges],
   );
 
+  const proOptions = { hideAttribution: true };
+
   return (
     <ReactFlow
       edgeTypes={edgeTypes}
@@ -71,32 +70,10 @@ const FlowGraph = () => {
       onConnect={onConnect}
       nodeTypes={nodeTypes}
       fitView
-      className="border border-gray-400 rounded"
+      proOptions={proOptions}
+      className="border border-cyan-400 rounded"
     >
-      <Panel position="top-right">
-        <div className="flex rounded bg-gray-300 overflow-clip shadow">
-          <button
-            title={"Vertical layout"}
-            className={`flex flex-grow p-2 transition-colors ${classIf(
-              direction === "TB",
-              "bg-gray-500",
-            )}`}
-            onClick={() => onLayout("TB")}
-          >
-            <Icon name={MaterialIcon.Network} />
-          </button>
-          <button
-            title={"Horizontal layout"}
-            className={`flex flex-grow p-2 transition-colors ${classIf(
-              direction === "LR",
-              "bg-gray-500",
-            )}`}
-            onClick={() => onLayout("LR")}
-          >
-            <Icon name={MaterialIcon.Account_Tree} />
-          </button>
-        </div>
-      </Panel>
+      <GraphToggleComponent direction={direction} onLayout={onLayout} />
     </ReactFlow>
   );
 };
