@@ -74,12 +74,12 @@ const FlowGraph = () => {
       className="border border-gray-400 rounded"
     >
       <Panel position="top-right">
-        <div className="flex rounded bg-gray-300 overflow-clip shadow">
+        <div className="flex rounded bg-cyan-600 overflow-clip shadow">
           <button
             title={"Vertical layout"}
             className={`flex flex-grow p-2 transition-colors ${classIf(
               direction === "TB",
-              "bg-gray-500",
+              "bg-cyan-700",
             )}`}
             onClick={() => onLayout("TB")}
           >
@@ -89,7 +89,7 @@ const FlowGraph = () => {
             title={"Horizontal layout"}
             className={`flex flex-grow p-2 transition-colors ${classIf(
               direction === "LR",
-              "bg-gray-500",
+              "bg-cyan-700",
             )}`}
             onClick={() => onLayout("LR")}
           >
