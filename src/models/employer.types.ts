@@ -76,5 +76,5 @@ export interface MergeRelationRequest {
 }
 
 export interface DeleteEmployerRequest {
-  company_name: string;
+  employer_id: string;
 }
