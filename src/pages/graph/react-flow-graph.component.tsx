@@ -1,4 +1,10 @@
-import { useCallback, useEffect, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import ReactFlow, {
   addEdge,
   Connection,
@@ -162,8 +168,19 @@ const FlowGraph = () => {
   );
 };
 
+const RelationModalContext = createContext(null);
+const RelationModalProvider = ({ children }: { children: ReactNode }) => {
+  return (
+    <RelationModalContext.Provider value={null}>
+      {children}
+    </RelationModalContext.Provider>
+  );
+};
+
 export const ReactFlowGraphComponent = () => (
-  <ReactFlowProvider>
-    <FlowGraph />
-  </ReactFlowProvider>
+  <RelationModalProvider>
+    <ReactFlowProvider>
+      <FlowGraph />
+    </ReactFlowProvider>
+  </RelationModalProvider>
 );
