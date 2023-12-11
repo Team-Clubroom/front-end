@@ -13,7 +13,7 @@ export const INDUSTRY_SECTOR_CODES: Record<
     shortName: "Mining",
   },
   "22": { name: "Utilities", color: "#0000FF", shortName: "Utilities" },
-  "23": { name: "Construction", color: "#FFFF00", shortName: "Construction" },
+  "23": { name: "Construction", color: "#717101", shortName: "Construction" },
   "31": { name: "Manufacturing", color: "#52804a", shortName: "Manu" },
   "32": { name: "Manufacturing", color: "#52804a", shortName: "Manu" },
   "33": { name: "Manufacturing", color: "#52804a", shortName: "Manu" },
@@ -63,7 +63,7 @@ export const INDUSTRY_SECTOR_CODES: Record<
   },
   "62": {
     name: "Health Care and Social Assistance",
-    color: "#FFFF00",
+    color: "#a3bfff",
     shortName: "Health Care",
   },
   "71": {

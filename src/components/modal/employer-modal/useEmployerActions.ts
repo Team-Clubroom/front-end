@@ -82,6 +82,12 @@ export const useEmployerActions = () => {
         editRequest[key] = newValue as unknown as undefined;
       }
     });
+    if (editRequest.employer_industry_sector_code) {
+      // values from the form come as strings so we have to convert this one to a number
+      editRequest.employer_industry_sector_code = Number(
+        editRequest.employer_industry_sector_code,
+      );
+    }
     await customFetch(ApiRoutes.Employer, "PATCH", editRequest);
     return _partialEmployerToEmployer(editRequest, employer);
   };
