@@ -4,7 +4,6 @@ import ReactFlow, {
   Connection,
   Controls,
   Edge,
-  MiniMap,
   Position,
   ReactFlowProvider,
   useEdgesState,
@@ -121,6 +120,7 @@ const FlowGraph = () => {
         setError((request_error as Error).message);
       });
   }, []);
+  const proOptions = { hideAttribution: true };
 
   return error ? (
     <div className={"m-auto text-red-500"}>{error}</div>
@@ -133,12 +133,11 @@ const FlowGraph = () => {
       onEdgesChange={onEdgesChange}
       onConnect={onConnect}
       nodeTypes={nodeTypes}
+      proOptions={proOptions}
       fitView
-      className="bg-teal-50"
     >
       <GraphToggleComponent direction={direction} onLayout={onLayout} />
-      <MiniMap />
-      <Controls />
+      <Controls style={{ background: "#e3e3e3" }} />
     </ReactFlow>
   );
 };

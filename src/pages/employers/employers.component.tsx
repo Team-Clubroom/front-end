@@ -59,81 +59,84 @@ function Employers() {
   }));
 
   return (
-    <><Helmet><title>Employers - CELDV</title></Helmet>
-    <div className={"flex flex-col"} style={{ height: "calc(100% - 65px)" }}>
-      <div className={"bg-gray-700 px-3 py-2 flex justify-center relative"}>
-        <SearchBoxComponent
-          placeholder={"Search employers"}
-          onChange={(event) => {
-            setSearch(event.target.value);
-          }}
-        />
-        {user.isAdmin && (
-          <button
-            onClick={() => openModal(ModalNames.AddEmployer)}
-            className={"add-employer-btn"}
+    <>
+      <Helmet>
+        <title>Employers - CELDV</title>
+      </Helmet>
+      <div className={"flex flex-col"} style={{ height: "calc(100% - 65px)" }}>
+        <div className={"bg-cyan-700 px-3 py-2 flex justify-center relative"}>
+          <SearchBoxComponent
+            placeholder={"Search employers"}
+            onChange={(event) => {
+              setSearch(event.target.value);
+            }}
+          />
+          {user.isAdmin && (
+            <button
+              onClick={() => openModal(ModalNames.AddEmployer)}
+              className={"add-employer-btn"}
+            >
+              <Icon name={MaterialIcon.Add} />
+              New Employer
+            </button>
+          )}
+        </div>
+        {employerNodes.some((node) => node !== undefined) ? (
+          <div
+            style={{
+              gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+              paddingInline: "calc(20vw + 0.5rem)",
+            }}
+            className="grid gap-3 p-3 overflow-x-hidden overflow-y-scroll"
           >
-            <Icon name={MaterialIcon.Add} />
-            New Employer
-          </button>
+            {employerNodes}
+          </div>
+        ) : (
+          <div className={"text-center pt-72 text-gray-500"}>
+            No employers match the search
+          </div>
+        )}
+        <EmployerModal
+          isOpen={isModalOpen(ModalNames.AddEmployer)}
+          close={closeModal}
+        />
+        {modalData?.employer && (
+          <>
+            <EmployerModal
+              isOpen={isModalOpen(ModalNames.EditEmployer)}
+              close={closeModal}
+              prePopulate={modalData.employer}
+            />
+            <NameChangeModal
+              isOpen={isModalOpen(ModalNames.NameChange)}
+              close={closeModal}
+              employer={modalData.employer}
+            />
+            <SplitEmployerModal
+              isOpen={isModalOpen(ModalNames.Split)}
+              close={closeModal}
+              employer={modalData.employer}
+              employersOptions={employerOptions}
+            />
+            <MergeEmployersModal
+              isOpen={isModalOpen(ModalNames.Merge)}
+              close={closeModal}
+              employer={modalData.employer}
+              employersOptions={employerOptions}
+            />
+            <YesNoModal
+              bodyText={`Are you sure you want to remove ${modalData.employer.name}?`}
+              isOpen={isModalOpen(ModalNames.YesNo)}
+              close={() => closeModal()}
+              onConfirm={async () => {
+                await deleteEmployer(modalData.employer);
+                //closeModal();
+              }}
+              successText={"Removed"}
+            />
+          </>
         )}
       </div>
-      {employerNodes.some((node) => node !== undefined) ? (
-        <div
-          style={{
-            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-            paddingInline: "calc(20vw + 0.5rem)",
-          }}
-          className="grid gap-3 p-3 overflow-x-hidden overflow-y-scroll"
-        >
-          {employerNodes}
-        </div>
-      ) : (
-        <div className={"text-center pt-72 text-gray-500"}>
-          No employers match the search
-        </div>
-      )}
-      <EmployerModal
-        isOpen={isModalOpen(ModalNames.AddEmployer)}
-        close={closeModal}
-      />
-      {modalData?.employer && (
-        <>
-          <EmployerModal
-            isOpen={isModalOpen(ModalNames.EditEmployer)}
-            close={closeModal}
-            prePopulate={modalData.employer}
-          />
-          <NameChangeModal
-            isOpen={isModalOpen(ModalNames.NameChange)}
-            close={closeModal}
-            employer={modalData.employer}
-          />
-          <SplitEmployerModal
-            isOpen={isModalOpen(ModalNames.Split)}
-            close={closeModal}
-            employer={modalData.employer}
-            employersOptions={employerOptions}
-          />
-          <MergeEmployersModal
-            isOpen={isModalOpen(ModalNames.Merge)}
-            close={closeModal}
-            employer={modalData.employer}
-            employersOptions={employerOptions}
-          />
-          <YesNoModal
-            bodyText={`Are you sure you want to remove ${modalData.employer.name}?`}
-            isOpen={isModalOpen(ModalNames.YesNo)}
-            close={() => closeModal()}
-            onConfirm={async () => {
-              await deleteEmployer(modalData.employer);
-              //closeModal();
-            }}
-            successText={"Removed"}
-          />
-        </>
-      )}
-    </div>
     </>
   );
 }

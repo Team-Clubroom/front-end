@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import { navbarStyles } from "./navbar.styles.tsx";
 import { useAuthActionContext } from "../../contexts/auth/auth.context.tsx";
 import { ProfileComponent } from "./profile/profile.component.tsx";
+import LogoPath from "../../../public/logo.svg";
 
 export const NavbarComponent = () => {
   const { isLoggedIn } = useAuthActionContext();
@@ -9,7 +10,7 @@ export const NavbarComponent = () => {
   return (
     <nav className={navbarStyles.navbar}>
       <div className={"flex items-center gap-1"}>
-        <img className={"w-8"} src={"./logo.svg"} alt={"celdv logo"} />
+        <img className={"w-8"} src={LogoPath} alt={"celdv logo"} />
         <NavLink className={navbarStyles.logoLink} to="/">
           CELDV
         </NavLink>

@@ -6,7 +6,7 @@ export const EdgeLabelComponent = ({
   date: string;
 }) => (
   <div className={"flex flex-col"}>
-    <span className={"text-bold"}>{relationName}</span>
-    <span>{date}</span>
+    <span className={"font-bold text-sm"}>{relationName}</span>
+    <span className={"text-xs"}>{date}</span>
   </div>
 );

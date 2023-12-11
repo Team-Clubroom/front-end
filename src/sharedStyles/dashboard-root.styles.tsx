@@ -17,8 +17,8 @@ export const dashboardRootStyles = {
   inputError: "border-red-500 focus:border-red-500",
   error: "text-red-500 text-sm italic flex justify-center font-bold",
   submitButton:
-    "flex mt-2 items-center justify-center gap-2 focus:outline-none text-white text-sm sm:text-base bg-blue-500" +
-    " hover:bg-blue-600 rounded-lg py-2 px-8 transition duration-150 ease-in",
+    "flex mt-2 items-center justify-center gap-2 focus:outline-none text-white text-sm sm:text-base bg-cyan-600" +
+    " hover:bg-cyan-700 rounded-lg py-2 px-8 transition duration-150 ease-in",
   confirmButton:
     "flex mt-2 items-center justify-center gap-2 focus:outline-none text-white text-sm sm:text-base bg-[#4BB543]" +
     " rounded-lg py-2 px-8 transition duration-150 ease-in",
