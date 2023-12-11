@@ -1,44 +1,45 @@
 .context-menu {
-    z-index: 2500;
-    pointer-events: auto;
-    box-shadow: rgba(0, 0, 0, 0.2) 0 5px 5px -3px,
+  z-index: 2500;
+  pointer-events: auto;
+  box-shadow:
+    rgba(0, 0, 0, 0.2) 0 5px 5px -3px,
     rgba(0, 0, 0, 0.14) 0 8px 10px 1px,
     rgba(0, 0, 0, 0.12) 0 3px 14px 2px;
 
-    @apply py-2 absolute flex flex-col bg-white rounded;
+  @apply py-2 absolute flex flex-col bg-white rounded;
 }
 
 .context-menu .context-menu-button {
-    border: none;
-    background-color: white;
-    transition: background-color 150ms;
-    padding: 0.45rem 0.8rem;
-    min-width: 7rem;
-    text-align: start;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    @apply text-sm text-gray-800 font-semibold gap-2;
+  border: none;
+  background-color: white;
+  transition: background-color 150ms;
+  padding: 0.45rem 0.8rem;
+  min-width: 7rem;
+  text-align: start;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  @apply text-sm text-gray-800 font-semibold gap-2;
 }
 
 .context-menu .context-menu-button:hover {
-    @apply bg-gray-200;
+  @apply bg-gray-200;
 }
 
 .context-menu .context-menu-button:active {
-    @apply bg-gray-300;
+  @apply bg-gray-300;
 }
 
 .context-menu-wrapper {
-    z-index: 2000;
-    transition: opacity 250ms;
-    pointer-events: unset;
+  z-index: 2000;
+  transition: opacity 250ms;
+  pointer-events: unset;
 
-    @apply absolute w-full h-full flex justify-center items-center;
+  @apply absolute w-full h-full flex justify-center items-center;
 }
 
 .context-menu-wrapper:empty {
-    visibility: hidden;
-    opacity: 0;
-    pointer-events: none;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
 }

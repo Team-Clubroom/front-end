@@ -9,7 +9,7 @@ import {
   mergeFormValidationCriteria,
   MergeFormValues,
 } from "./merge-employers.helpers.ts";
-import { LoadButtonComponent } from "../../load-button/load-button.component.tsx";
+import { RequestButtonComponent } from "../../request-button/request-button.component.tsx";
 import {
   Employer,
   MergeRelationRequest,
@@ -32,10 +32,8 @@ export function MergeEmployersModal({
   employer,
   employersOptions,
 }: MergeFormProps) {
-  const { registerField, onSubmit, isLoading, formError, resetForm } = useForm(
-    mergeFormEmptyForm,
-    mergeFormValidationCriteria,
-  );
+  const { registerField, onSubmit, isLoading, formError, resetForm, success } =
+    useForm(mergeFormEmptyForm, mergeFormValidationCriteria);
 
   const { customFetch } = useFetch();
 
@@ -52,6 +50,7 @@ export function MergeEmployersModal({
       "POST",
       mergeRelationRequest,
     );
+    setTimeout(close, 2000);
   }
 
   return (
@@ -111,9 +110,13 @@ export function MergeEmployersModal({
           </div>
           <span className={dashboardRootStyles.error}>{formError}</span>
           <div className="flex w-full justify-end">
-            <LoadButtonComponent isLoading={isLoading} loadingText={"Merging"}>
+            <RequestButtonComponent
+              isLoading={isLoading}
+              loadingText={"Merging"}
+              success={{ text: "Companies Merged", isSuccessful: success }}
+            >
               Merge Companies
-            </LoadButtonComponent>
+            </RequestButtonComponent>
           </div>
         </form>
       </div>

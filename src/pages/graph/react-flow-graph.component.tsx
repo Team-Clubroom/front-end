@@ -163,7 +163,7 @@ const FlowGraph = () => {
 };
 
 export const ReactFlowGraphComponent = () => (
-    <ReactFlowProvider>
-        <FlowGraph/>
-    </ReactFlowProvider>
+  <ReactFlowProvider>
+    <FlowGraph />
+  </ReactFlowProvider>
 );

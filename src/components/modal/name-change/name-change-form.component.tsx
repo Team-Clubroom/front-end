@@ -8,22 +8,30 @@ import {
 import { MaterialIcon } from "../../../utils/icons.ts";
 import { dashboardRootStyles } from "../../../sharedStyles/dashboard-root.styles.tsx";
 import { useFetch } from "../../../models/useFetch.ts";
-import { Employer, NameChangeRequest } from "../../../models/employer.types.ts";
+import {
+  Employer,
+  EmployerAction,
+  NameChangeRequest,
+} from "../../../models/employer.types.ts";
 import { ApiRoutes } from "../../../models/api.types.ts";
 import "../../../sharedStyles/form.styles.css";
-import { LoadButtonComponent } from "../../load-button/load-button.component.tsx";
+import { RequestButtonComponent } from "../../request-button/request-button.component.tsx";
 import { DateComponent } from "../../form/input/date.component.tsx";
 import { InputComponent } from "../../form/input/input.component.tsx";
 
 interface ChangeFormProps extends ModalVisibilityProps {
   employer: Employer;
+  employerDispatch: (action: EmployerAction) => unknown;
 }
 
-function NameChangeForm({ isOpen, close, employer }: ChangeFormProps) {
-  const { registerField, onSubmit, isLoading, formError, resetForm } = useForm(
-    nameChangeEmptyForm,
-    nameChangeValidationCriteria,
-  );
+function NameChangeForm({
+  isOpen,
+  close,
+  employer,
+  employerDispatch,
+}: ChangeFormProps) {
+  const { registerField, onSubmit, isLoading, formError, resetForm, success } =
+    useForm(nameChangeEmptyForm, nameChangeValidationCriteria);
   const { customFetch } = useFetch();
 
   async function handleSubmit(formValues: NameChangeFormValues) {
@@ -33,11 +41,16 @@ function NameChangeForm({ isOpen, close, employer }: ChangeFormProps) {
       name_change_effective_date: formValues.changeDate.trim(),
     };
 
-    await customFetch<undefined>(
+    const result = await customFetch<{ newEmployer: Employer }>(
       ApiRoutes.NameChange,
       "POST",
       nameChangeRequest,
     );
+    employerDispatch({
+      type: "Add",
+      payload: { newEmployer: result.data.newEmployer },
+    });
+    setTimeout(close, 2000);
   }
 
   return (
@@ -77,9 +90,13 @@ function NameChangeForm({ isOpen, close, employer }: ChangeFormProps) {
           />
           <span className={dashboardRootStyles.error}>{formError}</span>
           <div className="flex w-full justify-end">
-            <LoadButtonComponent isLoading={isLoading} loadingText={"Changing"}>
+            <RequestButtonComponent
+              isLoading={isLoading}
+              loadingText={"Changing"}
+              success={{ text: "Name Changed", isSuccessful: success }}
+            >
               Change Name
-            </LoadButtonComponent>
+            </RequestButtonComponent>
           </div>
         </form>
       </div>
