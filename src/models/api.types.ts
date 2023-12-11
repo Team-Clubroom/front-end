@@ -8,11 +8,10 @@ export enum ApiRoutes {
   Login = "login",
   Employers = "employers",
   Employer = "employer",
-  NameChange = "/employer/name-change",
+  NameChange = "employer/name-change",
   SplitRelation = "employer/split",
   EmployersGraph = "employers-graph",
   MergeRelation = "employer/merge",
   DeleteEmployer = "employer/delete",
+  RequestAdmin = "request-admin",
 }
-
-
