@@ -35,7 +35,9 @@ export const useEmployers = () => {
         return setEmployers([...employers, action.payload.newEmployer]);
       case "Delete":
         return setEmployers(
-          employers.filter((emp) => emp.id.toString() !== action.payload.id),
+          employers.filter(
+            (emp) => emp.id.toString() !== action.payload.id.toString(),
+          ),
         );
       case "Edit":
         return setEmployers(

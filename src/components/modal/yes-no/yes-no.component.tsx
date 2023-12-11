@@ -8,6 +8,7 @@ interface YesNoFormProps extends ModalVisibilityProps {
   onConfirm: () => Promise<void>;
   bodyText: string;
   successText: string;
+  loadingText: string;
 }
 
 export function YesNoModal({
@@ -16,6 +17,7 @@ export function YesNoModal({
   onConfirm,
   bodyText,
   successText,
+  loadingText,
 }: YesNoFormProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -52,7 +54,7 @@ export function YesNoModal({
             </button>
             <RequestButtonComponent
               isLoading={isLoading}
-              loadingText={"Confirming..."}
+              loadingText={loadingText}
               onClick={handleConfirm}
               success={{ text: successText, isSuccessful: success }}
             >
