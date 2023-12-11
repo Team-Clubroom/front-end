@@ -5,7 +5,6 @@ import ReactFlow, {
   Controls,
   Edge,
   MiniMap,
-  Panel,
   Position,
   ReactFlowProvider,
   useEdgesState,
@@ -25,10 +24,8 @@ import { useFetch } from "../../models/useFetch.ts";
 import { ApiRoutes } from "../../models/api.types.ts";
 import { useParams } from "react-router-dom";
 import { getLayoutElements } from "./dagre-functions.ts";
-import { Icon } from "../../components/icon.component.tsx";
-import { MaterialIcon } from "../../utils/icons.ts";
-import { classIf } from "../../utils/tailwind.utils.ts";
 import { Helmet } from "react-helmet";
+import { GraphToggleComponent } from "../../components/graph-toggle/graph-toggle.component.tsx";
 
 const edgeTypes = {
   custom: CustomEdge,
@@ -135,30 +132,7 @@ const FlowGraph = () => {
       fitView
       className="bg-teal-50"
     >
-      <Panel position="top-right">
-        <div className="flex rounded bg-gray-300 overflow-clip shadow">
-          <button
-            title={"Vertical layout"}
-            className={`flex flex-grow p-2 transition-colors ${classIf(
-              direction === "TB",
-              "bg-gray-500",
-            )}`}
-            onClick={() => onLayout("TB")}
-          >
-            <Icon name={MaterialIcon.Network} />
-          </button>
-          <button
-            title={"Horizontal layout"}
-            className={`flex flex-grow p-2 transition-colors ${classIf(
-              direction === "LR",
-              "bg-gray-500",
-            )}`}
-            onClick={() => onLayout("LR")}
-          >
-            <Icon name={MaterialIcon.Account_Tree} />
-          </button>
-        </div>
-      </Panel>
+      <GraphToggleComponent direction={direction} onLayout={onLayout} />
       <MiniMap />
       <Controls />
     </ReactFlow>
@@ -166,9 +140,12 @@ const FlowGraph = () => {
 };
 
 export const ReactFlowGraphComponent = () => (
-  <><Helmet><title>Employer Graph - CELDV</title></Helmet>
-  <ReactFlowProvider>
-    <FlowGraph />
-  </ReactFlowProvider>
+  <>
+    <Helmet>
+      <title>Employer Graph - CELDV</title>
+    </Helmet>
+    <ReactFlowProvider>
+      <FlowGraph />
+    </ReactFlowProvider>
   </>
 );

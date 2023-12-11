@@ -20,7 +20,7 @@ export default function CustomEdge({
   targetY,
   sourcePosition,
   targetPosition,
-  style = {},
+  style = { stroke: "rgb(165, 243, 252)" },
   markerEnd,
   label,
 }: EdgeProps) {
